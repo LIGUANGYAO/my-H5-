@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "spin": "/pages/components/spin/spin"
+  }
+}

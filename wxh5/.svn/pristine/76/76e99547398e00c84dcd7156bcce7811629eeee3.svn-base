@@ -1,0 +1,7 @@
+<!--pages/my/feedback/feedback.wxml-->
+<view class="feedback-box">
+  <image src="/images/common/logo.png" alt=""/>
+  <view class="text-1">欢迎给我们建议哦</view>
+  <textarea class="form-textarea" bindinput='onInput' placeholder="请输入你的建议"></textarea>
+  <view class="btn btn1" bind:tap='submit'>提交</view>
+</view>

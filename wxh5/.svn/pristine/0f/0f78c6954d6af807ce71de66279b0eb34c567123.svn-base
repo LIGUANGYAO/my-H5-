@@ -1,0 +1,17 @@
+
+Page({
+
+   data:{
+
+   },
+   onLoad: function(){
+    
+     wx.setNavigationBarTitle({
+       title: "体重管理"
+     })
+ 
+   },
+   onReady: function(){
+
+   }
+})

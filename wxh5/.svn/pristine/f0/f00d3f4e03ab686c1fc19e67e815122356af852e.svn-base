@@ -1,0 +1,93 @@
+const formatTime = date => {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const second = date.getSeconds()
+
+  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+}
+
+const formatNumber = n => {
+  n = n.toString()
+  return n[1] ? n : '0' + n
+}
+
+function getQuery(obj) {
+  var str = [];
+
+  for(var k in obj) {
+    str.push(k + '=' + encodeURIComponent(obj[k]));
+  }
+
+  return str.join('&')
+}
+
+function formatDate(input) {
+  var d = new Date(input);
+  var year = d.getFullYear();
+  var month = (d.getMonth() + 1) < 10 ? '0' + (d.getMonth() + 1) : '' + (d.getMonth() + 1);
+  var day = d.getDate() < 10 ? '0' + d.getDate() : '' + d.getDate();
+  var hour = d.getHours();
+  var minutes = d.getMinutes();
+  var seconds = d.getSeconds();
+  return year + '-' + month + '-' + day;
+}
+
+function myInit (app) {
+  // var _to = wx.navigateTo;
+  // Object.defineProperty(wx, 'navigateTo', {
+  //   configurable: true,
+  //   writable: true,
+  //   enumerable: true,
+  // })
+
+
+  // wx.navigateTo = function (obj) {
+  //   wx.setStorage({
+  //     key: 'url',
+  //     data: obj.url,
+  //   })
+  //   _to.apply(wx, arguments);
+  // }
+  wx.onAppRoute(function(e) {
+
+    if (e.openType == 'appLaunch')
+    return;
+
+    wx.setStorage({
+      key: 'url',
+      data: '/' + e.path + '?' + getQuery(e.query),
+    })
+    wx.setStorage({
+      key: 'openType',
+      data: e.openType,
+    })
+  });
+  var obj = wx.getStorage({
+    key: 'url',
+    success: function (res) {
+
+      setTimeout(function () {
+        var openType = wx.getStorageSync('openType')
+
+        if (openType == 'navigateBack') {
+          openType = 'switchTab'
+        }
+        if (wx[openType]) {
+          wx[openType]({
+            url: res.data,
+          })
+        }
+      }, 500)
+    },
+  })
+}
+module.exports = {
+  formatTime: formatTime,
+  myInit: myInit,
+  getQuery: getQuery,
+  formatDate: formatDate
+}
+

@@ -1,0 +1,148 @@
+<!--index.wxml-->
+ <view class="container">
+
+
+
+  <!-- <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto" id="user-motto">{{motto}}</text>
+    
+  </view>
+
+  <view>
+    <text  class="code"><text>openId:</text>{{openid}}</text>
+  </view> -->
+
+  <!--注册弹框-->
+		<view class="registration-model-content" wx:if="{{openRegistration}}">
+				<view class="registrationModel">
+					<view class="registrationModelHeader">
+						<view class="registrationHead"><text class="p">填写下面资料方便我们给你更精确的建议哦</text></view>
+					</view>
+					<view class="registrationModelBody">
+	
+						<view id="sexDom">
+							<view class="boy  gender {{menStaus?'Active':''}}" bindtap='changeSex' data-gender='1'></view>
+							<text class="span">性别</text>
+							<view class="girl gender {{wemStaus?'Active':''}}" bindtap='changeSex' data-gender='2'></view>
+						</view>
+	
+						<view class="stature">
+							<view class="h3">选择身高</view>
+							<view id="JS-stature" class="select">
+               <picker  range='{{heightList}}' bind:change='onHeightChange' value='{{height - 70}}'>
+                  <input type="text" placeholder="" value='{{height}}' disabled/>
+                </picker>
+							</view>
+						</view>
+						<view class="birthdate">
+							<view class="h3">填写您的年龄</view>
+							<view id="JS-year" class="select">
+                 <picker mode='date'  bind:change='onBirthChange' value='{{birth}}' start='1900-01-01' end='{{nowDate}}'>
+                   <input type="text" placeholder="" value='{{birth}}' disabled/>
+                 </picker>
+							</view>
+						</view>
+		
+						<view class="secret-world">点击下划线的内容进行操作</view>
+					</view>
+					<view class="registration-btn-box">
+						<view class="registration-btn"  bindtap="savePersoInfo">确定</view>
+					</view>
+					
+				</view>
+				<view class="mask"></view>
+			</view>
+
+
+
+
+  
+  <!---头部体重动画结构-->
+  <view class="weightBox">
+          <!---体重动画-->
+       <view class="canvasBox">
+            <image class="roundBg" src="../../images/home/roundBg.png"></image> 
+           <view class="weightKg">
+             <text class="weigthNumber">150斤</text>
+             <text class="weightWorld">当前体重</text>
+           </view>
+           <canvas canvas-id="canvas1"  class="canvas1"></canvas>
+           <canvas canvas-id="canvas2"  class="canvas2"></canvas>
+           <image class="round" src="../../images/home/round.png"></image>
+       </view>
+  </view>
+
+ <view class="content">
+
+   <!--广告-->
+		  <view class="homeAd" bindtap='linkAd'>
+				    <image src="{{adImge1}}"></image>
+		  </view> 
+      <view class="hotExperts">
+         <text class="colorF8 hotP">健康专家</text>
+         <view class="expertsLink">
+           <view class="weightManag li" bindtap='toBuild'>
+              <image  src="../../images/home/administer.png"></image>
+           </view>
+           <view class="experiment li" bindtap='toLab'>
+               <image  src="../../images/home/experiment.png"></image>
+           </view>
+           <view class="knowledge li" bindtap='toKnowledge'>
+            <image  src="../../images/home/knowledge.png"></image>
+           </view>
+           <view class="pk li" bindtap='goToPK'>
+             <image  src="../../images/home/pk.png"></image>
+           </view>
+         </view>
+      </view>
+
+      <!--热门推荐-->
+      <view class="hotRecommend">
+         <view class="head">
+           <text class="colorF8">热门推荐</text>
+           <text class="checkAll" bindtap='goToHot'>查看全部</text>
+         </view>
+
+         <view class="hotImg" bindtap='goToHot'>
+            <view class="reducedFat" wx:for-items="{{hotImgData}}" wx:key="id">
+              <view class="innerTitle">
+               <text class="englisth">{{item.mainName}}</text>
+               <text class="china">{{item.mainCname}}</text>
+              </view>
+               <image  src="{{item.picPath}}"></image>
+            </view>
+         </view>
+      </view>
+        
+      <view class="weightRecords">
+        <view class="leftLine"></view>
+        <view  class="rightLing"></view>
+        <view class="checkRecords"></view>
+        <text class="recordsHead">最近体重变化</text>
+      </view>
+
+           <view class="recordsEchart" id="JS-echars">
+           <canvas canvas-id="lineCanvas"  class="canvas"  disable-scroll="true" bindtouchstart="touchHandler" bindtouchmove="moveHandler" bindtouchend="touchEndHandler" style="height:220px;"></canvas>
+        </view> 
+
+ </view>
+	
+</view> 
+
+
+
+
+
+
+
+
+
+
+

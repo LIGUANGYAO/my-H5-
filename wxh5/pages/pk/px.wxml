@@ -1,0 +1,18 @@
+<view class="container">
+ 
+  <view class="content">
+     <view id="isScoll">
+        <view class="recommendUl">
+           <view class="opacity">
+                <view class="recommenInner">
+                  <text class="mainName">dfdfdf</text>
+                  <text class="mainCname">fdfdf</text>
+                </view>
+                <image src=""></image>
+           </view>
+        </view>
+     </view>
+  </view>
+  
+
+</view>

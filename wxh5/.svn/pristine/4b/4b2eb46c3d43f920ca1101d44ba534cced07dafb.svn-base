@@ -1,0 +1,19 @@
+/**app.wxss**/
+ .container {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "SimHei", sans-serif;
+  height: 100%;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box; */
+}  
+
+
+.content{
+   width: 710rpx;
+   margin: 0 auto;
+}
+.colorF8 {
+    color: #f9860b;
+}

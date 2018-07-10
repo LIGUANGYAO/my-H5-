@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "spin": "/pages/components/spin/spin"
+  },
+  "navigationBarTitleText": "个人中心"
+}

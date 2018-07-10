@@ -1,0 +1,242 @@
+/**index.wxss**/
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+
+.code{
+  font-size: 30rpx;
+}
+
+
+.weightBox {
+  position: relative;
+  width: 100%;
+  height: 772rpx;
+}
+.weightBox .canvasBox{
+    width: 360rpx;
+    height: 360rpx;
+    position: absolute;
+    top: 130rpx;
+    left: 195rpx;
+    z-index: 3;
+}
+
+.roundBg{
+      width: 383rpx;
+      height: 376rpx;
+      position: absolute;
+      z-index: 1;
+      top: -8rpx;
+      left: -12rpx;
+      animation: myRotate 8s linear infinite;
+  }
+
+@keyframes myRotate
+{
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+
+.weightKg{
+      width: 180rpx;
+      height: 120rpx;
+      position: absolute;
+      top: 176rpx;
+      left: 98rpx;
+      z-index: 5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+}
+.weightKg .weigthNumber{
+      font-size: 45rpx;
+      color: #f9860b;
+      text-align: center;
+      display: block;
+}
+.weightKg .weightWorld{
+      display: block;
+      font-size: 30rpx;
+      color: #999999;
+      text-align: center;
+}
+  .round{
+      position: absolute;
+      width: 70rpx;
+      height: 70rpx;
+      bottom: -6rpx;
+      left: 148rpx;
+      z-index: 5;
+  }
+.canvas1,.canvas2{
+    width: 360rpx;
+    height: 360rpx;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+}
+.canvas1{
+  z-index: 2;
+}
+.canvas2{
+  z-index: 4;
+}
+
+.homeAd{
+  width: 100%;
+  height: 200rpx;
+  margin-bottom: 36rpx;
+  background-color: red;
+  display: block;
+}
+.homeAd image{
+   width: 100%;
+   height: 200rpx;
+}
+.colorF8 {
+    color: #f9860b;
+}
+.hotExperts .hotP{
+   margin-bottom:18rpx;
+   font-size: 30rpx;
+}
+ .expertsLink{
+     margin-bottom: 38rpx;
+     display: flex;
+     flex-wrap: wrap;
+    justify-content:space-between;
+ }
+ .expertsLink .li{
+      width: 345rpx;
+      height: 230rpx;
+ }
+  .expertsLink .li image{
+      width: 345rpx;
+      height: 230rpx;
+  }
+ .expertsLink .weightManag, .expertsLink .experiment{
+   margin-bottom: 20rpx;
+ }
+
+
+/**热门推荐**/
+.hotRecommend  .head{
+   display: flex;
+   justify-content: space-between;
+   margin-bottom: 20rpx;
+}
+.hotRecommend  .head .colorF8{
+   font-size: 30rpx;
+}
+.checkAll{
+   font-size: 26rpx;
+   color: #999999;
+}
+ .hotRecommend .reducedFat{
+      width:100%;
+      height: 265rpx;
+      margin-bottom: 20rpx;
+      position: relative;
+
+ }
+
+ .hotRecommend .reducedFat .innerTitle{
+        width: 270rpx;
+        height: 116rpx;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        flex-direction:column;
+        align-items: center;
+        top: 75rpx;
+        left: 220rpx;
+        z-index: 2;
+        background: rgba(255,95,0,0.6);
+        font-size: 
+ }
+.reducedFat image{
+      width:100%;
+      height: 265rpx;
+}
+ .reducedFat .innerTitle .englisth{
+        font-size: 22rpx;
+        margin-bottom: 6rpx;
+        color: #ffffff;
+ }
+  .reducedFat .innerTitle .china{
+       color: #ffffff;
+       font-size: 30rpx;
+ }
+
+
+ /** weightRecords*/
+
+ .weightRecords{
+    position: relative;
+    height: 400rpx;
+    margin-bottom: 154rpx;
+    background-color: #999999;
+ }
+
+
+ .leftLine,.rightLing{
+      position: absolute;
+      width: 90rpx;
+      height: 2rpx;
+      background-color: #ffffff;
+      top: 40rpx;
+}
+.leftLine{
+    left: 136rpx;
+}
+.rightLing{
+    right: 136rpx;
+}
+
+.checkRecords{
+      width: 38rpx;
+      height: 38rpx;
+      position: absolute;
+      right: 20rpx;
+      top: 20rpx;
+      z-index: 5;
+}
+
+.recordsHead{
+      position: absolute;
+      width: 100%;
+      height: 36rpx;
+      line-height: 36rpx;
+      text-align: center;
+      color: #ffffff;
+      font-size: 36rpx;
+      top: 23rpx;
+      left: 0;
+}
+
+.hotRecommend .recordsEchart{
+      height: 220rpx;
+      padding-top: 30rpx;
+}
+#JS-echars .canvas {
+
+}

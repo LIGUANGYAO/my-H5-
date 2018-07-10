@@ -1,0 +1,88 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.9.1",
+	"appid": "wxe091ea00e3771f2e",
+	"projectname": "MZJ%20s",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": [
+				{
+					"id": -1,
+					"name": "首页",
+					"pathName": "pages/index/index",
+					"query": "name=1"
+				},
+				{
+					"id": -1,
+					"name": "健康分析",
+					"pathName": "pages/health/health",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "体重管理页面",
+					"pathName": "pages/build/build",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "饮食建议",
+					"pathName": "pages/foodsuggest/foodsuggest",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "运动建议",
+					"pathName": "pages/sportsuggest/sportsuggest",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "热门推荐",
+					"pathName": "pages/recommended/recommended",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "PK榜",
+					"pathName": "pages/pk/pk",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "广告页面",
+					"pathName": "pages/ad/ad",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "广告推荐内页",
+					"pathName": "pages/hotdetail/hotdetail",
+					"query": ""
+				}
+			]
+		}
+	}
+}

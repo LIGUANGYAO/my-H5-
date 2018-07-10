@@ -1,0 +1,11 @@
+<!--pages/knowledge/detail.wxml-->
+<import src="../../js/wxParse/wxParse.wxml"/>
+<view class="artical-box">
+  <view class="title">{{detail.healTitle}}</view>
+
+  <view class="date">{{detail.createTime}}</view>
+
+  <view class="content">
+      <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+  </view>
+</view>

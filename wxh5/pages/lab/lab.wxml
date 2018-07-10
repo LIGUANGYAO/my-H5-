@@ -1,0 +1,31 @@
+<!--pages/lab/lab.wxml-->
+<view class="lab-box">
+    <view class="text-a">实验测评</view>
+    <view class="list">
+      <block wx:for='{{list}}'>
+        <view class="item" bind:tap='toDetail' data-itemid='{{item.evaid}}'>
+            <view class="img-box">
+                <image src='{{item.picPath}}' alt=""/>
+                <view class="text-box">
+                    <view class="text-1">{{level[item.evaLevel]}}测评</view>
+                    <view class="text-2">{{item.evaTitl}}</view>
+                </view>
+            </view>
+            <view class="rate-box">
+                <view class="a">
+                    健康
+                    <block wx:for='{{item.healLevel}}'>
+                      <image src="/images/common/star.png" alt="" />
+                    </block>
+                </view>
+                <view class="a">
+                    效果
+                    <block wx:for='{{item.effect}}'>
+                      <image src="/images/common/star.png" alt=""/>
+                    </block>
+                </view>
+            </view>
+        </view>
+      </block>
+    </view>
+</view>

@@ -1,0 +1,29 @@
+
+const app = getApp()
+
+Page({
+  data: {
+  
+  },
+  onLoad: function(){
+    wx.setNavigationBarTitle({
+      title: "健康分析"
+    })
+
+    wx.showLoading({
+      title: '加载中',
+    })
+
+
+  },
+  onReady: function(){
+
+    setTimeout(function () {
+      wx.hideLoading()
+    }, 500)
+
+    
+  }
+
+
+})

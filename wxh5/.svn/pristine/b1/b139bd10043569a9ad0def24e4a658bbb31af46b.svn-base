@@ -1,0 +1,89 @@
+// pages/knowledge/detail.js
+
+var util = require('../../utils/util.js')
+var api = require('../../js/funs/api.js')
+var WxParse = require('../../js/wxParse/wxParse.js');
+
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    healid: '',
+    detail: {}
+  },
+
+  getDetail: function(id) {
+    var _this = this;
+
+    wx.request({
+      url: api.healthknowledgeId + api._p + '&healid=' + id,
+      success: function(res) {
+        var data = res.data.result.data[0];
+        data.createTime = util.formatDate(data.createTime)
+        WxParse.wxParse('article', 'html', data.healInfo, _this, 5);
+        _this.setData({
+          detail: data
+        });
+      }
+    })
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this.setData({
+      healid: options.id
+    })
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    this.getDetail(this.data.healid)
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+  
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+  
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+  
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+  
+  }
+})

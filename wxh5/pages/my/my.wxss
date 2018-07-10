@@ -1,0 +1,57 @@
+@import '../components/stylesheet.wxss';
+
+view {
+  font-size: #333;
+}
+
+.inviewidual-content {
+  text-align: center;
+}
+.ul {
+  padding-left: 30rpx;
+}
+
+.li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f2f2f2;
+  height: 110rpx;
+}
+
+
+.li .text {
+  font-size: 30rpx;
+  color: #8e8e93;
+}
+
+.li .more-img {
+  width:35rpx;
+  height: 47rpx;
+}
+
+.li .li-right-box{
+    font-size: 28rpx;
+    display: flex;
+    align-items: center;
+    margin-right: 30rpx;
+}
+.head-img {
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 30rpx;
+}
+.head-portrait {
+  height: 160rpx;
+}
+.tips-orange {
+    color: #f9860a;
+    margin: 70rpx auto;
+    font-size: 22rpx;
+}
+.red:after{
+  font-family: 'iconfont';
+  font-weight: 500;
+  font-style: normal;
+  content: '\e7c6';
+}

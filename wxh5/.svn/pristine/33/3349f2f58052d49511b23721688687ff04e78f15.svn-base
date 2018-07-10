@@ -1,0 +1,39 @@
+.foodAd{
+    width:100%;
+    height: 300rpx;
+}
+
+.foodAd image{
+    width:100%;
+    height: 300rpx;
+}
+
+.foodClum{
+   margin-bottom: 25rpx;
+}
+.foodClum .foodTextHead{
+   display: flex;
+   align-items: center;
+   margin-top: 20rpx;
+}
+
+.foodClum .foodTextHead .icon{
+     display: block;
+    width: 20rpx;
+    height: 20rpx;
+    background-color: #f9860b;
+    border-radius: 100%;
+    margin-right: 10rpx;
+}
+
+.foodClum .foodTextHead .p{
+    font-size: 30rpx;
+}
+
+.foodClum .clumT{
+       font-size: 28rpx;
+       margin-top: 25rpx;
+       color: #999999;
+       line-height: 150%;
+       padding-left: 26rpx; 
+   }

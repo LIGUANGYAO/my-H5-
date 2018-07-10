@@ -1,0 +1,77 @@
+/* pages/lab/lab.wxss */
+
+view {
+  box-sizing: border-box;
+}
+
+.lab-box {
+  padding: 20rpx;
+}
+
+.text-a {
+  color: #f9860b;
+  font-size: 34rpx;
+}
+
+.item {
+  margin: 20rpx auto;
+}
+
+.img-box {
+  text-align: center;
+  height: 300rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.img-box	image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.text-box {
+  display: inline-block;
+  min-width: 350rpx;
+  max-width: 640rpx;
+  height: 180rpx;
+  margin: 60rpx auto;
+  padding: 50rpx 12rpx;
+  color: #fff;
+  text-align: center;
+  background: rgba(127, 0, 0, 0.5);
+  position: relative;
+  z-index: 10;
+}
+
+.text-box .text-1 {
+  font-size: 34rpx;
+}
+
+.text-box  .text-2 {
+  font-size: 30rpx;
+  line-height: 60rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rate-box {
+  color: #999;
+  font-size: 28rpx;
+  line-height: 54rpx;
+}
+
+.rate-box	image {
+  width: 20rpx;
+  height: 20rpx;
+}
+
+.rate-box view {
+  display: inline-block;
+  width: 180rpx;
+}

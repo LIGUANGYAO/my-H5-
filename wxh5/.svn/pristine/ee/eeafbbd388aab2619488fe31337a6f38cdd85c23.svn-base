@@ -1,0 +1,28 @@
+<!--pages/lab/detail.wxml-->
+<import src="../../js/wxParse/wxParse.wxml"/>
+<view class="detail-box">
+  <image class='cover' src="{{data.picPath}}" alt="" mode="widthFix"/>
+  <view class="text-1">{{data.evaTitl}}</view>
+  <view class="rate-box">
+    <view class="a">健康
+      <block wx:for='{{data.healLevel}}'>
+        <image src="/images/common/star.png" alt="" />
+      </block>
+    </view>
+    <view class="a">效果
+      <block wx:for='{{data.effect}}'>
+        <image src="/images/common/star.png" alt="" />
+      </block>
+    </view>
+    <view class="a">执行难易
+      <block wx:for='{{data.impLevel}}'>
+        <image src="/images/common/star.png" alt=""/>
+      </block>
+    </view>
+  </view>
+
+  <view class="content">
+    <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+  </view>
+
+</view>

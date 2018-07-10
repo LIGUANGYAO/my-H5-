@@ -1,0 +1,300 @@
+
+const app = getApp()
+var api = require('../../js/funs/api.js');
+var bmi = require('../../js/funs/bmi.js');
+Page({
+  data: {
+    adImge1:null,
+    adImge2:null,
+    adLink1:null,
+    adLink2:null,
+    bmrWorld:null,
+    bmr:null,
+    registeredData:{},
+    homeData:{},
+    standardW: null,
+    BeauBodyW: null,
+    bmr: null,
+    bmrMin:null,
+    bmrMax:null,
+    standard: null,
+    beautBody: null,
+    bodyTypeChinese: null,
+    BMI: null,
+    foodSuggestTitle:null,
+    sportsuggestTitle:null,
+    gapStandard:null,
+    gapBeauBody:null,
+    instructionStaus:false
+  },
+  onLoad: function(){
+
+    wx.setNavigationBarTitle({
+      title: "健康分析"
+    })
+
+    this.getWeight();
+    this.getProfile()
+
+    var _this = this;
+    setTimeout(function () {
+      _this.data.BMI = bmi.toMathBmi(_this.data.homeData.currentWeight, _this.data.registeredData.height);//计算BMI值
+      _this.data.standard = bmi.standMeasur(_this.data.registeredData.height);//计算标准三围
+      _this.data.beautBody = bmi.bodyMeasur(_this.data.registeredData.height);//计算美体三围
+      _this.data.bodyTypeChinese = bmi.getBodyTypeChinese(_this.data.BMI.bmi);
+      _this.data.standardW = bmi.toMathSBW(_this.data.registeredData.gender, _this.data.registeredData.height);
+      _this.data.BeauBodyW = bmi.BeauBody(_this.data.registeredData.height, _this.data.registeredData.gender);
+      _this.data.bmr = bmi.toMathBMR(_this.data.registeredData.gender, _this.data.homeData.currentWeight, _this.data.registeredData.height, _this.data.registeredData.age);
+
+
+      _this.setData({
+        BMI: _this.data.BMI,
+        bodyTypeChinese: _this.data.bodyTypeChinese,
+        standardW: Number(_this.data.standardW.weight).toFixed(1),
+        BeauBodyW: Number(_this.data.BeauBodyW.beautWeight).toFixed(1),
+        beautBody: _this.data.beautBody,
+        standard: _this.data.standard,
+        bmr: _this.data.bmr,
+        bmrMin: _this.data.bmr - (_this.data.bmr*0.1),
+        bmrMax: _this.data.bmr + (_this.data.bmr * 0.1),
+        gapStandard: (Math.abs(parseInt(_this.data.homeData.currentWeight) - parseInt(_this.data.standardW.weight)) * 2).toFixed(1),
+        gapBeauBody: (Math.abs(parseInt(_this.data.BeauBodyW.beautWeight) - parseInt(_this.data.homeData.currentWeight)) * 2).toFixed(1)
+    })
+
+      console.log(_this.data.bodyTypeChinese)
+
+      _this.suggestAdvice();
+      _this.suggestBmr();
+    }, 800)
+
+
+    // wx.showLoading({
+    //   title: '加载中',
+    // })
+
+
+  },
+  onReady: function(){
+
+    this.getAdvertising();
+    
+    // setTimeout(function () {
+    //   wx.hideLoading()
+    // }, 500)
+
+  },
+  //获取体重数据
+  getWeight: function () {
+    var _this = this;
+    wx.request({
+      url: api.getHomeTopDate + '?_p=' + api._p,
+      method: 'GET',
+      success: function (res) {
+
+        _this.setData({
+          homeData: res.data[0]
+        })
+      }
+    })
+  },
+  //获取广告数据
+  getAdvertising: function () {
+    var _this = this;
+    var codes = ['health_1', 'health_2'];
+    wx.request({
+      url: api.getAdvertising + '?_p=' + api._p,
+      method: 'POST',
+      processData: false,
+      data: JSON.stringify(codes),
+      success: function (res) {
+        _this.data.adImgeData = res.data;
+        if (_this.data.adImgeData.result.data) {
+          _this.data.adImge1 = _this.data.adImgeData.result.data[0].path;
+          _this.data.adImge2 = _this.data.adImgeData.result.data[1].path;
+          _this.data.adLink1 = _this.data.adImgeData.result.data[0].adLink;
+          _this.data.adLink2 = _this.data.adImgeData.result.data[1].adLink;
+
+          _this.setData({
+            adImge2: _this.data.adImgeData.result.data[1].path,
+            adLink2: _this.data.adImgeData.result.data[1].adLink,
+            adImge1: _this.data.adImgeData.result.data[0].path,
+            adLink1: _this.data.adImgeData.result.data[0].adLink
+          })
+        }
+      }
+    })
+
+  },
+  //运动建议 饮食建议文字
+  suggestAdvice: function () {
+    var _this = this;
+    if (_this.data.bodyTypeChinese == '偏瘦') {
+
+      this.setData({
+        foodSuggestTitle: '主要保证有足够的热量摄入，能量摄入大于消耗，热量的食入完全来源于饮食',
+        sportsuggestTitle: '1、在健身房做无氧运动，如杠铃卧推、杠铃推举、高位下拉等;2、每周训练3天，每次把全身都练一遍，一小时左右;3、每个动作做1~3组，每组做12~15次;'
+      })
+
+    } else if (_this.data.bodyTypeChinese == '正常') {
+
+      this.setData({
+        foodSuggestTitle: '三大营养素的比例要均衡，碳水化合物55%-65%，蛋白质10%-12%，脂肪20%-30%',
+        sportsuggestTitle: '1、每天运动30mins，如慢跑、跳绳、游泳、骑自行车等;<br>2、运动前要热身;3、运动后要做拉伸运动;'
+      })
+
+    } else if (_this.data.bodyTypeChinese == '偏胖') {
+    
+      _this.setData({
+        foodSuggestTitle: '体型偏重的您，首要做到的是控制总能量的摄入，采取高蛋白质，低碳水化合物，低脂肪的膳食模式....',
+        sportsuggestTitle :'1、锻炼的最佳方式应选择走、游泳、自行车等持续的周期性有氧运动;<br>2、下午4-5点，这是锻炼最好的时候，消耗热量比较快;<br>3、锻炼方式多样交替，慢走——快走——走跑交替——持续慢跑——持续中速跑;'
+      })
+
+    } else if (_this.data.bodyTypeChinese == '肥胖') {
+
+      this.setData({
+        foodSuggestTitle: '针对超重的您，建议开始控制饮食，减少甜食和饮料的摄入，多选择天然的食物.....',
+        sportsuggestTitle: '1、找到自己喜欢的运动并坚持;'+
+        '2、做燃脂类运动以加快减脂进度，每周3-5次，每次20-40分钟，控制好强度;'+
+        '3、第一次十分钟即可，慢慢增加到30分钟左右，完全可以一直保持每周三次，每次只有15分钟的较低运动量;'
+      })
+    }
+
+  },
+  //bmr推荐
+  suggestBmr:function(){
+    var _this = this;
+    if (_this.data.bmr <= 1100) {
+     _this.setData({
+       bmrWorld:'.....'
+     })
+    } else if (_this.data.bmr > 1100 && _this.data.bmr <= 1200) {
+      _this.setData({
+        bmrWorld: '3碗米饭+3只鸡蛋+3盘炒青菜+1个大苹果'
+      })
+
+    } else if (_this.data.bmr > 1200 && _this.data.bmr <= 1300) {
+      _this.setData({
+        bmrWorld: '3碗米饭+3只鸡蛋+3盘炒青菜+1个大苹果+1杯牛奶'
+      })
+
+    } else if (_this.data.bmr > 1300 && _this.data.bmr <= 1400) {
+
+      _this.setData({
+        bmrWorld: '3碗米饭+1只鸡蛋+1份煎牛扒+3盘炒青菜+1个大苹果+1杯牛奶'
+      })
+    } else if (_this.data.bmr > 1400 && _this.data.bmr <= 1500) {
+      _this.setData({
+        bmrWorld: '3碗米饭+1只鸡蛋+2份煎牛扒+3盘炒青菜+1杯牛奶'
+      })
+    } else if (_this.data.bmr > 1500 && _this.data.bmr <= 1600) { 
+      _this.setData({
+        bmrWorld: '3碗米饭+2只鸡蛋+2份煎牛扒+3盘炒青菜+1杯牛奶'
+      })
+
+    } else if (_this.data.bmr > 1600 && _this.data.bmr <= 1700) {
+
+      _this.setData({
+        bmrWorld: '3碗米饭+3只鸡蛋+2份煎牛扒+3盘炒青菜+1个大苹果'
+      })
+
+    } else if (_this.data.bmr > 1700 && _this.data.bmr <= 1800) {
+
+      _this.setData({
+        bmrWorld: '3碗米饭+3份煎牛扒+3盘炒青菜+1个大苹果'
+      })
+
+
+    } else if (_this.data.bmr > 1800 && _this.data.bmr <= 1900) {
+
+      _this.setData({
+        bmrWorld: '3碗米饭+3份煎牛扒+3盘炒青菜+1杯牛奶 +1个大苹果'
+      })
+
+    } else if (_this.data.bmr > 1900 && _this.data.bmr <= 2000) {
+
+      _this.setData({
+        bmrWorld: '3碗米饭+2只鸡蛋+3份煎牛扒+3盘炒青菜+1杯牛奶 +1个大苹果'
+      })
+    } else if (_this.data.bmr > 2000 && _this.data.bmr <= 2100) {
+
+      _this.setData({
+        bmrWorld: '3碗米饭+3只鸡蛋+3份煎牛扒+3盘炒青菜+1杯牛奶 +1个大苹果'
+      })
+
+    } else if (_this.data.bmr > 2100 && _this.data.bmr <= 2200) {
+      _this.setData({
+        bmrWorld: '3碗米饭+3只鸡蛋+3份煎牛扒+4盘炒青菜+1杯牛奶 +1个大苹果'
+      })
+
+    } else if (_this.data.bmr > 2200 && _this.data.bmr <= 2300) {
+
+      _this.setData({
+        bmrWorld: '3碗米饭+3只鸡蛋+3份煎牛扒+4盘炒青菜+2杯牛奶 +1个大苹果'
+      })
+
+    } else if (_this.data.bmr > 2300 && _this.data.bmr <= 2400) {
+
+      _this.setData({
+        bmrWorld: '3碗米饭+4只鸡蛋+3份煎牛扒+4盘炒青菜+2杯牛奶 +1个大苹果'
+      })
+
+    } else if (_this.data.bmr > 2400 && _this.data.bmr <= 2500) {
+
+      _this.setData({
+        bmrWorld: '3碗米饭+3只鸡蛋+3份煎牛扒+4盘炒青菜+2杯牛奶 +2个大苹果'
+      })
+
+    } else {
+      _this.setData({
+        bmrWorld: '.....'
+      })
+    }
+  },
+  toFoodSuggest: function(){
+    wx.navigateTo({
+      url: '/pages/foodsuggest/foodsuggest'
+    });
+  },
+  toSportSuggest:function(){
+    wx.navigateTo({
+      url: '/pages/sportsuggest/sportsuggest'
+    });
+  },
+  toBuild:function(){
+    wx.navigateTo({
+      url: '/pages/build/build'
+    });
+  },
+  openInstruction: function(){
+     this.setData({
+       instructionStaus:true
+     })
+  },
+  closeInstruction:function(){
+    this.setData({
+      instructionStaus: false
+    })
+  },
+  //获取注册信息接口
+  getProfile: function () {
+    var _this = this;
+    wx.request({
+      method: 'POST',
+      url: api.profile + '?_p=' + api._p,
+      dataType: 'json',
+      success: function (res) {
+        if (res.data.result.data) {
+          // _this.registered = res.result.data[0].height;
+          // _this.sexR = res.result.data[0].gender;//注册后的性别
+          // _this.unionid = res.result.data[0].weChatUser.unionid;
+          // _this.data.registeredData = res.result.data[0];
+
+          _this.setData({
+            registeredData: res.data.result.data[0]
+          })
+        }
+      }
+    })
+  },
+
+})

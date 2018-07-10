@@ -1,0 +1,22 @@
+@import "../../js/wxParse/wxParse.wxss";
+#detail p{
+   line-height: 150%;
+        font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "SimHei", sans-serif;
+}
+
+#detail .title{
+   	font-size: 42rpx;
+		color: #333;
+		text-align: center;
+		height: 60rpx;
+		line-height: 60rpx;
+		margin-top: 10rpx;
+}
+
+#detail .date {
+		color: #999;
+		font-size: 26rpx;
+		line-height: 80rpx;
+		border-bottom: 1rpx solid #c7c7cc;
+		text-align: right;
+	}

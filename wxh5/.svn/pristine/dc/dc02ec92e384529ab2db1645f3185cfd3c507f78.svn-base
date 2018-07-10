@@ -1,0 +1,214 @@
+ <view class="container">
+
+  <!--注册弹框-->
+		<view class="registration-model-content">
+				<view class="registrationModel">
+					<view class="registrationModelHeader">
+						<view class="registrationHead"><text class="p">填写下面资料方便我们给你更精确的建议哦</text></view>
+					</view>
+					<view class="registrationModelBody">
+	
+						<view id="sexDom">
+							<view class="boy  gender {{menStaus?'Active':''}}" bindtap='changeSex'></view>
+							<text class="span">性别</text>
+							<view class="girl gender" bindtap='changeSex'></view>
+						</view>
+	
+						<view class="stature">
+							<view class="h3">选择身高</view>
+							<view id="JS-stature" class="select">
+								<input type="text" data-id="150" value="150cm" disabled="disabled" readonly/>
+							</view>
+						</view>
+						<view class="birthdate">
+							<view class="h3">填写您的年龄</view>
+							<view id="JS-year" class="select">
+								<input type="text"  data-year="1990" data-month="10"  data-date="02" value='1990-10-02' disabled="disabled" readonly/>
+							</view>
+						</view>
+		
+						<view class="secret-world">点击下划线的内容进行操作</view>
+					</view>
+					<view class="registration-btn-box">
+						<view class="registration-btn" href="javascript:;" bindtap="savePersoInfo">确定</view>
+					</view>
+					
+				</view>
+				<view class="mask"></view>
+			</view>
+
+   
+
+    
+		<!--用户信息-->
+       <view class="userInfo">
+           <image src="../../images/health/healthHeadBg.png" class="userInfoBg"></image>
+            <view class="headPortrait">
+				    <image src="{{registeredData.headimgurl}}"></image>
+			  </view>
+            <view class="genderM" wx:if="{{registeredData.gender==1}}">
+              <image src="../../images/health/smen.png"></image>
+            </view>
+
+            <view class="genderW" wx:if="{{registeredData.gender==2}}">
+              <image src="../../images/health/swomen.png"></image>
+            </view>
+
+            <view class="registrationUser">
+                <view class="registrationUserBox">
+                <view class="year">
+					<span class="currentYear">{{registeredData.age}}</span>
+                  <span>年龄</span>
+                </view>
+                <view class="weigth">
+					<span class="currentWei">{{((homeData.currentWeight)*2)}}斤</span>
+                    <span>当前体重</span>
+                </view>
+                <view class="height">
+				  <span class="currentHeight">{{registeredData.height}}</span>
+                  <span>身高(cm)</span>
+                </view>
+            </view>
+            </view>
+		</view>
+  
+    <view class="content">
+        <view class="bmiBox">
+              <view class="bmiWorld">
+                  您的--<text class="colorF8">BMI {{BMI.bmi}}</text> <text>{{bodyTypeChinese}}</text> 
+                  <view class="horn" bindtap='openInstruction'>
+                   <image src="../../images/health/question.png"></image>
+                  </view>
+              </view>
+              <text class="bmiIntroduce">BMI:身体质量指数(BMI)是目前国际上常量的衡量人体胖瘦程度以及是否健康的一个标准</text>
+          </view>
+     <!--人物跑动-->
+     <view class="animationBox">
+
+        <view id="peoplAnimat"></view>
+    
+        <view class="progress">
+            <view class="progressIner"></view>
+        </view>
+
+        <view class="bmiNumber">
+            <text class="span1">偏瘦：≤ 18.5</text>
+            <text class="span2">正常：18.5-23.9</text>
+            <text class="span3">偏胖：24-27.9</text>
+            <text>肥胖：≥28</text>
+        </view>
+    </view>
+
+
+           <view class="beautBody">
+             <view class="beautWomen" wx:if="{{registeredData.gender==2}}">
+                <image src="../../images/health/bodyWomen.png"></image>
+             </view>
+              <view class="beautMen" wx:if="{{registeredData.gender==1}}">
+                <image src="../../images/health/bodyMen.png"></image>
+             </view>
+             <view class="beautBodyL">
+               <view class="headTop">您的标准身体指标</view>
+               <view class="standardT">标准体重</view>
+                <view class="standardW">{{(standardW)*2}}(斤)</view>
+                <view class="thirdCirc">标准三围</view>
+                <view class="basic">
+                        
+                            <text>胸围：{{standard.chest}}cm</text>
+                            <text>腰围：{{standard.waist}}cm</text>
+                            <text>臀围：{{standard.hipline}}cm</text>
+                       
+                    </view>
+             </view>
+             <view class="beautBodyR">
+                <view class="headTop">您的标准身体指标</view>
+                <view class="standardT">健美体重</view>
+                <view class="beautW">{{BeauBodyW*2}}(斤)</view>
+                <view class="thirdCirc">美体三围</view>
+                <view class="basic">
+
+                        <text>胸围：{{beautBody.bChest}}cm</text>
+                        <text>腰围：{{beautBody.bWaist}}cm</text>
+                        <text>臀围：{{beautBody.bHipline}}cm</text>
+
+                </view>
+             </view>
+          </view>
+
+
+  <view class="beautBodyTitle">
+        <text class="h4">距离你的标准体重还有{{gapStandard}}斤的差距</text>
+        <text class="p">
+          距离马甲线{{registeredData.gender==1?'男神':'女神'}}还有{{gapBeauBody}}斤 ，你就会成为标准的马甲线{{registeredData.gender==1?'男神':'女神'}}了噢~
+          您目前的基础代谢率是{{bmr}}kcal，为了保证你的健康又能达到较好的减肥效果建议你每天摄入食物的总热量在{{bmrMin}}~{{bmrMax}}kcal之间，相当于{{bmrWorld}}
+        </text>
+    </view>
+    <!--广告-->
+     <view class="healthAd" wx:if="{{adImge2}}">     
+       <image src="{{adImge2}}"></image>
+    </view>
+
+        <view class="foodSuggest"  bindtap='toFoodSuggest'>
+        <view class="foodH">
+        <text class="colorF8 span">饮食建议</text> 
+        <view class="Image">
+          <image src="../../images/health/right.png"></image>
+        </view>
+      </view>
+        <view class="suggestR" id="foodLink">
+          <view class="suggestTitle">
+            <view class="p">{{foodSuggestTitle}}</view>
+          </view>
+          <image src="../../images/health/food.png"></image>
+        </view>
+      </view>
+    
+      <view class="sportSuggest" bindtap='toSportSuggest'>
+      <view class="sportH">
+      <text class="colorF8 span">运动建议</text>
+        <view class="i">
+          <image src="../../images/health/right.png"></image>
+        </view>
+      </view>
+      <view class="suggestR" id="sportLink">
+            <view class="suggestRTitle">
+                <text class="pone">你最佳的燃脂心率 rgregr</text>
+                <text class="pone2">{{sportsuggestTitle}}</text>
+              </view>
+          <image src="../../images/health/sport.png"></image>
+      </view>
+    </view>
+
+     <view class="weightAdminister" bindtap='toBuild'>
+			开始我的体重管理
+		</view>
+
+    </view>
+
+    <!--说明-->
+    <view class="instruction" wx:if="{{instructionStaus}}">
+      <view class="close" bindtap='closeInstruction'>
+        <image src="../../images/health/close.png"></image>
+      </view>
+      <view class="colorF8 h4">说明</view>
+      <view class="instructionInner">
+        <view class="adaption">BMI不适用人群</view>
+        <view class="ul">
+          <text class="li">1、未满18岁；</text>
+          <text class="li">2、是运动员；</text>
+          <text class="li">3、正在做重量训练；</text>
+          <text class="li">4、怀孕或哺乳中；</text>
+          <text class="li">5、身体虚弱或久坐不动的老人。</text>
+        </view>
+            <view class="insTitle">
+        <view class="p"><text class="span">标准体重：</text>反映和衡量一个人健康状况的重要标志之一，过胖和过瘦都不利于健康。</view>
+        <view class="p"><text class="span">基础代谢率</text>：是指人体在清醒而又极端安静的状态下，不受外在和内在的影响时身体所需要的能量代谢量。</view>
+        <view class="p"><text class="span">燃脂心率：</text>进行有氧运动时达到此范围的心率身体脂肪开始燃烧。</view>
+        <view class="p"><text class="span">美体体重：</text>反映一个人的体型是否给人健美感的标志之一，并且达到此体重最容易练出马甲线和人鱼线。</view>
+      </view>
+      </view>
+    </view>
+
+    <view id="instructionMast" wx:if="{{instructionStaus}}"></view>
+
+ </view>

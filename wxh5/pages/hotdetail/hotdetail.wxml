@@ -1,0 +1,22 @@
+<view class="container">
+   <view class="content">
+     <view class="recomm">
+        <view class="opacity li" wx:for="{{queryHotData}}" wx:key="index" data-hotId="{{item.hotId}}"  bindtap='linkto'>
+            <view class="clumLeft">
+               <image src="{{item.picUrl}}"></image>
+            </view>
+
+            <view class="clumR">
+                <view class="p">{{item.titel}}</view>
+                <view class="time"> {{item.createTime}}</view>
+            </view>
+
+        </view>
+         <view class="loding" wx:if="{{lodingStus}}">正在加载中..</view>
+        <view class="noData" wx:if="{{noDataStus}}">我们是有底线的</view>
+
+
+     </view>
+    
+   </view>
+</view>

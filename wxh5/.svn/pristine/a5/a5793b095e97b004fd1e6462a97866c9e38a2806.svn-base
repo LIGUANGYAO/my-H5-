@@ -1,0 +1,72 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/health/health",
+    "pages/health/health2",
+    "pages/mall/mall",
+    "pages/map/map",
+    "pages/recommended/recommended",
+    "pages/pk/pk",
+    "pages/sportsuggest/sportsuggest",
+    "pages/foodsuggest/foodsuggest",
+    "pages/my/my",
+    "pages/my/edit/edit",
+    "pages/lab/lab",
+    "pages/lab/detail",
+    "pages/knowledge/knowledge",
+    "pages/hotdetail/hotdetail",
+    "pages/hotarticles/hotarticles",
+    "pages/ad/ad",
+    "pages/knowledge/detail",
+    "pages/map/detail",
+    "pages/my/feedback/feedback",
+    "pages/my/history/history",
+    "pages/build/build",
+    "pages/build2/build"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "black"
+  },
+    "tabBar": {
+      "color": "",
+      "selectedColor": "#f98b0d",
+      "borderStyle": "",
+      "backgroundColor": "#12151a",
+      "box-shadow": "",
+      "list": [
+        {
+          "pagePath": "pages/index/index",
+          "iconPath": "images/footerBar/index.png",
+          "selectedIconPath": "images/footerBar/active-index.png",
+          "text": "首页"
+        },
+        {
+          "pagePath": "pages/health/health",
+          "iconPath": "images/footerBar/health.png",
+          "selectedIconPath": "images/footerBar/active-health.png",
+          "text": "健康分析"
+        },
+        {
+          "pagePath": "pages/build/build",
+          "iconPath": "images/footerBar/mall.png",
+          "selectedIconPath": "images/footerBar/active-mall.png",
+          "text": "精选"
+        },
+        {
+          "pagePath": "pages/map/map",
+          "iconPath": "images/footerBar/map.png",
+          "selectedIconPath": "images/footerBar/active-map.png",
+          "text": "附件的秤"
+        },
+        {
+          "pagePath": "pages/my/my",
+          "iconPath": "images/footerBar/my.png",
+          "selectedIconPath": "images/footerBar/active-my.png",
+          "text": "我的"
+        }
+      ]
+    }
+}

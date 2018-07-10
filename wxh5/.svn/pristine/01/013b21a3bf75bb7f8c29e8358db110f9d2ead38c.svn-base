@@ -1,0 +1,51 @@
+
+var api = require('../../js/funs/api.js');
+Page({
+  data: {
+    pageCount: 7
+  },
+  onLoad: function () {
+   
+
+
+    wx.setNavigationBarTitle({
+      title: "热门推荐"
+    })
+
+    // wx.showLoading({
+    //   title: '加载中',
+    // })
+
+
+   
+    this.queryHotMain();
+
+  },
+  onReady: function () {
+
+    // setTimeout(function () {
+    //   wx.hideLoading()
+    // }, 500)
+
+
+  },
+  queryHotMain: function(){
+
+    var _this = this;
+    wx.request({
+      url: api.queryHotMain + '?_p=' + api._p,
+      method: 'POST',
+      data: {
+        pageSize:1,
+        pageNum: _this.data.pageCount
+      },
+      async: false,
+      dataType: 'json',
+      success: function (res) {
+        console.log(res)
+      }
+    })
+  }
+
+
+})

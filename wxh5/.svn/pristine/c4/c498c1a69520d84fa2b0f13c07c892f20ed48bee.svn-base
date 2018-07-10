@@ -1,0 +1,11 @@
+<view class="container">
+  
+   <view class="build">
+      <view class="buildAnima">
+                <image src="../../images/mall/build.png"></image>
+      </view>
+      <view class="first p">该栏目正在建设中...</view>
+      <view class="p">更多精彩内容敬请期待</view>
+    </view>
+
+</view>

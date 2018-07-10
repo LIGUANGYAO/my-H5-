@@ -1,0 +1,40 @@
+/* pages/lab/detail.wxss */
+@import "../../js/wxParse/wxParse.wxss";
+
+.detail-box {
+  font-size: 26rpx;
+}
+
+.cover {
+  width: 100%;
+  height: auto;
+  background: orange;
+}
+
+.text-1 {
+  color: #f9860b;
+  font-size: 34rpx;
+  padding: 0 20rpx;
+  line-height: 64rpx;
+}
+
+.content {
+  margin: 50rpx auto 0;
+}
+
+.rate-box {
+  padding: 0 20rpx;
+  color: #999;
+  font-size: 28rpx;
+  line-height: 54rpx;
+}
+
+.rate-box	image {
+  width: 20rpx;
+  height: 20rpx;
+}
+
+.rate-box view {
+  display: inline-block;
+  min-width: 180rpx;
+}

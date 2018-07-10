@@ -1,0 +1,27 @@
+<!--pages/knowledge/knowledge.wxml-->
+<view class="knowledge-box">
+  <view class="nav1">
+    <view class="{{healType == 'at01' ? 'active' : ''}}" data-code='at01' bind:tap='onFirstChange'>健康篇</view>
+    <view class="{{healType == 'at02' ? 'active' : ''}}" data-code='at02' bind:tap='onFirstChange'>养生篇</view>
+    <view class="{{healType == 'at03' ? 'active' : ''}}" data-code='at03' bind:tap='onFirstChange'>营养篇</view>
+  </view>
+  <view class="tag1" wx:if='{{healType == "at03"}}'>
+    <block wx:for='{{secondCats}}'>
+      <view class="{{secondType == item.kind ? 'active':''}}" data-code='{{item.kind}}' bind:tap='onSecondChange'>{{item.kindname}}</view>
+    </block>
+  </view>
+  <view class="list">
+    <block wx:for='{{list}}'>
+      <view class="item" bind:tap='toDetail' data-id='{{item.healid}}'>
+        <view class="img-container">
+          <image src="{{item.picPath}}" alt=""/>
+        </view>
+        <view class="item-detail">
+          <view class="title">{{item.healTitle}}</view>
+          <view class="type">{{item.secendTypeName || ''}}</view>
+          <view class="date">{{item.createTime }}</view>
+        </view>
+      </view>
+  </block>
+  </view>
+</view>

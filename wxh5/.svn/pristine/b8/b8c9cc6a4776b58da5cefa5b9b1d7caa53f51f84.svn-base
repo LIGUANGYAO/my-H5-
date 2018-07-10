@@ -1,0 +1,464 @@
+//index.js
+//获取应用实例
+
+const app = getApp()
+var wxCharts = require('../../utils/wxcharts.js');
+var api = require('../../js/funs/api.js');
+var bmi = require('../../js/funs/bmi.js');
+var util = require('../../utils/util.js')
+Page({
+  data: {
+    userInfo: {},
+    hasUserInfo: false,
+    openid:null,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    d: 0,
+    radian: 60,
+    handle:null,
+    adImgeData:{},
+    adImge1:null,
+    adImge2:null,
+    adLink1:null,
+    adLink2:null,
+    hotImgData:[],
+    heightList: [],
+    height: '150',
+    birth: '1992-02-10',
+    value: '',
+    menStaus: true,
+    wemStaus: false,
+    sex: null,
+    nickname: null,
+    nowDate:null,
+    registeredData: {},
+    homeData: {},
+    standardW: null,
+    BeauBodyW: null,
+    bmr: null,
+    bmrMin: null,
+    bmrMax: null,
+    standard: null,
+    beautBody: null,
+    bodyTypeChinese: null,
+    BMI: null,
+    unionid:null,
+    openRegistration: false,
+    windowWidth:null
+  },
+  onLoad: function () {
+
+    var _this = this;
+    this.getProfile();
+
+    var newDate = new Date().getTime();
+
+    function add0(m) { return m < 10 ? '0' + m : m }
+    function format(shijianchuo) {
+      var time = new Date(shijianchuo);
+      var y = time.getFullYear();
+      var m = time.getMonth() + 1;
+      var d = time.getDate();
+      var h = time.getHours();
+      var mm = time.getMinutes();
+      var s = time.getSeconds();
+      return y + '-' + add0(m) + '-' + add0(d);
+    } 
+
+   
+
+    this.setData({
+      nowDate: format(newDate)
+    })
+
+    
+
+
+    wx.setNavigationBarTitle({
+      title: "共享免费秤"
+    })
+
+    var _this = this;
+    setTimeout(function () {
+
+      _this.setData({
+        openid: app.globalData.openid
+      })
+
+    }, 2000)
+
+
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    } else if (this.data.canIUse){
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        
+
+      }
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+    }
+  },
+
+  onReady:function(){
+
+
+  
+  },
+  onShow: function(){
+
+    var _this = this;
+    this.echart();
+    this.getWeight()
+    this.getAdvertising()
+    this.hotRecommended()
+
+    this.draw1();
+    this.draw2(60 + this.data.radian);
+
+
+    this.setData({
+      height: this.data.height,
+      birth: this.data.birth,
+      sex: 1,
+      heightList: this.getStatureData()
+    })
+
+  },
+  draw1:function(){
+
+    var ctx = wx.createContext();
+    ctx.beginPath();
+    ctx.setStrokeStyle("#1d2228");
+
+    var circle = {
+      x: 80,    //圆心的x轴坐标值
+      y: 75,    //圆心的y轴坐标值
+      r: 60      //圆的半径
+    };
+
+    ctx.arc(circle.x, circle.y, circle.r, 0, 2 * Math.PI);
+    ctx.setLineWidth(20);
+    ctx.stroke();
+    wx.drawCanvas({
+      canvasId: 'canvas1',
+      actions: ctx.getActions()
+    });
+  },
+  draw2: function (weight){
+    var _this = this;
+    clearInterval(_this.data.handle);
+
+    var ctx = wx.createContext();
+
+    this.data.handle = setInterval(function () {
+      ctx.beginPath();
+      ctx.setStrokeStyle("#f9870b");
+      var circle = {
+        x: 80,    //圆心的x轴坐标值
+        y: 75,    //圆心的y轴坐标值
+        r: 60      //圆的半径
+      };
+      var speed = (weight - _this.data.d) / weight;
+      _this.data.d += (1 + speed * 20);
+      if (_this.data.d >= weight) {
+        clearInterval(_this.data.handle);
+      } else {
+        ctx.arc(circle.x, circle.y, circle.r, Math.PI / 2, Math.PI / 2 + (_this.data.d * Math.PI) / 180);
+        ctx.setLineWidth(21);
+        ctx.setLineCap('round');
+        ctx.stroke();
+        wx.drawCanvas({
+          canvasId: 'canvas2',
+          actions: ctx.getActions()
+        });
+      }
+    }, 30);   
+
+  },
+  echart: function(){
+    this.setData({ 
+      windowWidth: wx.getSystemInfoSync().windowWidth
+  }) 
+   var _this = this;
+
+   console.log(_this.data.windowWidth)
+    //图表
+    new wxCharts({
+      canvasId: 'lineCanvas',
+      type: 'line',
+      animation: true,
+      categories: ['2012', '2013', '2014', '2015', '2016', '2017', '2016', '2017', '2016', '2017'],
+      series: [{
+        data: [51, 53, 60, 54, 57, 62, 52, 53, 52, 53],
+        name: '体重变化',
+        format: function (val) {
+          return val.toFixed(1) + '斤';
+        }
+      }],
+      xAxis: {
+        disableGrid: true,
+      },
+      yAxis: {
+        title: '',
+        // format: function (val) {
+        //   return val.toFixed(1) + '斤';
+        // },
+        disabled:true,
+        min: 50,
+        max: 80
+      },
+      width: _this.data.windowWidth-50,
+      height: 220,
+      dataPointShape: true,
+      extra: {
+        lineStyle: 'curve'
+      }
+    });
+
+
+
+  },
+  //获取身高数据
+  getStatureData: function () {
+    var list = []
+    for (var i = 70; i <= 220; i++) {
+      var data = {
+        id: i,
+        value: i
+      }
+      list.push(i);
+    }
+    return list;
+  },
+  onHeightChange: function (e) {
+    this.setData({
+      height: this.data.heightList[e.detail.value]
+    })
+  },
+  onBirthChange: function (e) {
+    this.setData({
+      birth: e.detail.value
+    })
+  },
+  changeSex: function (e) {
+    var gender = e.currentTarget.dataset.gender;
+
+    var _this = this;
+
+    if (gender == 1) {
+      _this.setData({
+        menStaus: true,
+        wemStaus: false,
+        sex: 1
+      })
+    } else {
+      _this.setData({
+        menStaus: false,
+        wemStaus: true,
+        sex: 2
+      })
+    }
+
+  },
+  //获取体重数据
+  getWeight: function () {
+    var _this = this;
+    wx.request({
+      url: api.getHomeTopDate + api._p,
+      method: 'GET',
+      success: function (res) {
+
+        _this.setData({
+          homeData: res.data[0]
+        })
+      }
+    })
+  },
+  //获取注册信息接口
+  getProfile: function () {
+    var _this = this;
+    wx.request({
+      method: 'POST',
+      url: api.profile + api._p,
+      dataType: 'json',
+      success: function (res) {
+        if (res.data.result.data) {
+          _this.setData({
+            registeredData: res.data.result.data[0]
+          })
+
+          _this.setData({
+            unionid: _this.data.registeredData.weChatUser.unionid
+          })
+          
+        }
+      }
+    })
+  },
+  savePersoInfo: function () {
+    var _this = this;
+    var birth = _this.data.birth;
+    birth = birth.replace(/-/g, '');
+
+
+    var data={
+      unionid: _this.data.unionid,
+      gender: _this.data.sex,
+      height: _this.data.height,
+      birthdate: birth
+    }
+
+    wx.request({
+      method: "POST",
+      url: api.updateUserInfo + api._p + '&' + util.getQuery(data),
+      success: function (res) {
+        _this.getProfile();
+
+        _this.setData({
+          openRegistration: false
+        })
+
+        setTimeout(function () {
+          _this.data.BMI = bmi.toMathBmi(_this.data.homeData.currentWeight, _this.data.registeredData.height);//计算BMI值
+          _this.data.standard = bmi.standMeasur(_this.data.registeredData.height);//计算标准三围
+          _this.data.beautBody = bmi.bodyMeasur(_this.data.registeredData.height);//计算美体三围
+          _this.data.bodyTypeChinese = bmi.getBodyTypeChinese(_this.data.BMI.bmi);
+          _this.data.standardW = bmi.toMathSBW(_this.data.registeredData.gender, _this.data.registeredData.height);
+          _this.data.BeauBodyW = bmi.BeauBody(_this.data.registeredData.height, _this.data.registeredData.gender);
+          _this.data.bmr = bmi.toMathBMR(_this.data.registeredData.gender, _this.data.homeData.currentWeight, _this.data.registeredData.height, _this.data.registeredData.age);
+
+          _this.setData({
+            BMI: _this.data.BMI,
+            bodyTypeChinese: _this.data.bodyTypeChinese,
+            standardW: Number(_this.data.standardW.weight).toFixed(1),
+            BeauBodyW: Number(_this.data.BeauBodyW.beautWeight).toFixed(1),
+            beautBody: _this.data.beautBody,
+            standard: _this.data.standard,
+            bmr: _this.data.bmr,
+            bmrMin: _this.data.bmr - (_this.data.bmr * 0.1),
+            bmrMax: _this.data.bmr + (_this.data.bmr * 0.1),
+            gapStandard: (Math.abs(parseInt(_this.data.homeData.currentWeight) - parseInt(_this.data.standardW.weight)) * 2).toFixed(1),
+            gapBeauBody: (Math.abs(parseInt(_this.data.BeauBodyW.beautWeight) - parseInt(_this.data.homeData.currentWeight)) * 2).toFixed(1)
+          })
+
+        }, 600)
+
+        wx.navigateTo({
+          url: '/pages/index/index'
+        });
+
+      }
+    })
+
+  },
+  linkAd: function(){
+    var _this = this;
+    wx.navigateTo({
+      url: '/pages/ad/ad?adLink=' + _this.data.adLink1
+    });  
+
+  },
+  goToHot: function () {
+    
+    wx.navigateTo({
+      url: '/pages/recommended/recommended'
+    });
+  },
+  toBuild:function(){
+    wx.navigateTo({
+      url: '/pages/build/build'
+    });
+  },
+  goToPK: function(){
+    wx.navigateTo({
+      url: '/pages/pk/pk'
+    });
+  },
+  toKnowledge: function(){
+    wx.navigateTo({
+      url: '/pages/knowledge/knowledge'
+    });
+  },
+  getWeight:function(){    
+    wx.request({
+      url: api.getHomeTopDate + api._p,
+      method: 'GET',
+      success: function (res) {
+
+        setTimeout(function () {
+          wx.hideLoading()
+        }, 500)
+      }
+    })
+  },
+  getAdvertising: function(){
+ 
+    var _this = this;
+    var codes = ['hot_1', 'hot_2'];
+
+    wx.request({
+      url: api.getAdvertising + api._p,
+      method: 'POST',
+      processData: false,
+      data: JSON.stringify(codes),
+      success: function (res) {
+        _this.data.adImgeData = res.data;
+        if (_this.data.adImgeData.result.data){
+          _this.data.adImge1 = _this.data.adImgeData.result.data[0].path;
+          _this.data.adImge2 = _this.data.adImgeData.result.data[1].path;
+          _this.data.adLink1 = _this.data.adImgeData.result.data[0].adLink;
+          _this.data.adLink2 = _this.data.adImgeData.result.data[1].adLink;
+
+          _this.setData({
+            adImge1: _this.data.adImgeData.result.data[0].path,
+            adLink1: _this.data.adImgeData.result.data[0].adLink
+          })
+        }
+      }
+    })
+
+  },
+  //热门推荐
+  hotRecommended: function () {
+    var _this = this;
+    wx.request({
+      method: "POST",
+      url: api.hotRecommended + api._p,
+      dataType: 'json',
+      success: function (res) {
+
+        var hotImgDataArry = [];
+        
+        for (var i = 0; i < res.data.result.data.length;i++){
+          hotImgDataArry.push(res.data.result.data[i])
+        }
+
+        _this.setData({
+          hotImgData: hotImgDataArry
+        })
+      }
+    })
+  },
+  getUserInfo: function(e) {
+    console.log(e)
+    app.globalData.userInfo = e.detail.userInfo
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true
+    })
+  }
+})

@@ -1,0 +1,57 @@
+ <view class="map_container" style='height:{{mapHeight}}'>
+  <map class="map" id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" show-location="true" bindmarkertap="onMarkerTap" markers='{{markers}}' controls='{{controls}}' bindcontroltap='onControlTap' bindtap='onMapTap' polyline='{{polyline}}'></map>
+</view> 
+
+<view class="current-dot-footer" wx:if="{{dotModalDisplay}}" >
+  <view class="go" bind:tap="goHere" data-longitude='{{currentDot.longitude}}' data-latitude='{{currentDot.latitude}}'>
+    <view class="go-btn">
+      <image src="/images/map/goHere.png" />
+    </view>
+  </view>
+
+  <view class="dot" bind:tap="openNearbyListDetails" data-id='{{currentDot.id}}' data-distance='{{currentDot.distance}}' data-long='{{currentDot.longitude}}' data-lat='{{currentDot.latitude}}' >
+    <view class="dot-img">
+      <image src="{{currentDot.logUrl ? currentDot.logUrl : '/images/no.jpg'}}" />
+    </view>
+    <view class="dot-address">
+      <view class='h3'>{{currentDot.devicename}}</view>
+      <view class='p'>距离你{{currentDot.distance}}米 | {{currentDot.address}}</view>
+    </view>
+  </view>
+
+  <view class="equipment-status">
+    <view class='status'>设备状态</view>
+    <view class="on-line line a">在线</view>
+    <view class="off-line a">离线</view>
+  </view>
+</view>
+
+
+<view class="nearbyModal" wx:if="{{nearbyModalDisplay}}">
+  <view class="nearbyModal-container">
+    <view class="container-header">
+      <view class="search">
+        <image src='/images/map/search.png'></image>
+        <view class="search-input">
+          <input type="text" bindinput='onSearch' placeholder="搜索附件店名或者地址" />
+          <view class='cancel' bind:tap="closeNearbyModal">取消</view>
+        </view>
+      </view>
+    </view>
+    <view id="JS-container-body" class="container-body">
+      <view wx:if="{{dotData.length > 0}}" class='ul'>
+
+        <view class='li' wx:for="{{dotData}}"  wx:for-item='v' bind:tap="openNearbyListDetails" data-id='{{v.shopId}}' data-distance='{{v.distance}}' data-long='{{v.longitude}}' data-lat='{{v.latitude}}'>
+          <view class="item-content">
+            <view class="h3">
+              <view class="{{v.deviceStatus==1?'on-line':'on-line'}}">{{v.deviceStatus==1?'在线':'在线'}}</view>
+              <view class="adress">{{v.name}}</view>
+            </view>
+            <view class='p2'>距离您{{v.distance}}米 | {{v.address}}</view>
+          </view>
+          <image src="v.logoUrl != '' ? v.logoUrl : ''"/>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,61 @@
+
+var api = require('../../js/funs/api.js');
+var WxParse = require('../../js/wxParse/wxParse.js');
+
+Page({
+   data:{
+     hotId:null,
+     detailsData: '',
+     detailsDataTtile:'',
+     detailsDataCreateTime: ''
+   },
+   onLoad: function (options){
+
+    this.setData({
+      hotId: options.hotId
+    })
+
+     wx.setNavigationBarTitle({
+       title: "热门推荐内容"
+     })
+   },
+   onShow:function(){
+     this.queryHotDetail();
+   },
+   onReady: function(){
+
+   },
+   queryHotDetail: function(){
+     var _this = this;
+
+     wx.request({
+       method: 'POST',
+       url: api.queryHotDetail+api._p,
+       data: {
+         hotId: parseInt(_this.data.hotId)
+       },
+       dataType: 'json',
+       success: function (res) {
+         if (res.data.result.data){
+         _this.setData({
+           detailsData: res.data.result.data[0].details,
+           detailsDataTtile: res.data.result.data[0].titel,
+           detailsDataCreateTime: _this.formatDate(res.data.result.data[0].createTime)
+         })
+
+         WxParse.wxParse('article', 'html', data.detailsData, _this, 5);
+         }
+       }
+     })
+   },
+   formatDate: function (input) {
+     var d = new Date(input);
+     var year = d.getFullYear();
+     var month = (d.getMonth() + 1) < 10 ? '0' + (d.getMonth() + 1) : '' + (d.getMonth() + 1);
+     var day = d.getDate() < 10 ? '0' + d.getDate() : '' + d.getDate();
+     var hour = d.getHours();
+     var minutes = d.getMinutes();
+     var seconds = d.getSeconds();
+     return year + '-' + month + '-' + day;
+   }
+})

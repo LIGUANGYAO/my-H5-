@@ -1,0 +1,861 @@
+//index.js
+//获取应用实例
+
+const app = getApp()
+var wxCharts = require('../../utils/wxcharts.js');
+var api = require('../../js/funs/api.js');
+var bmi = require('../../js/funs/bmi.js');
+var util = require('../../utils/util.js');
+
+var lineChart = null;
+var startPos = null;
+
+Page({
+  data: {
+    userInfo: {},
+    hasUserInfo: false,
+    openid:null,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    handle:null,
+    hotImgData:[],
+    heightList: [],
+    height: '150',
+    birth: '1992-02-10',
+    value: '',
+    menStaus: true,
+    wemStaus: false,
+    sex: null,
+    nickname: null,
+    nowDate:null,
+    registeredData: {},
+    homeData: {},
+    standardW: null,
+    BeauBodyW: null,
+    bmr: null,
+    bmrMin: null,
+    bmrMax: null,
+    standard: null,
+    beautBody: null,
+    bodyTypeChinese: null,
+    BMI: null,
+    unionid:null,
+    openRegistration: false,
+    windowWidth:null,
+    historyWeight:[],
+    historyWeightLength:null,
+    currentWeight:null,
+    weightStr:null,
+    appId:null,
+    bodyFat:{},
+    bon:null,
+    muscle:null,
+    water:null,
+    waterTitle:null,
+    bonTitle:null,
+    muscleTitle:null
+
+  },
+  onLoad: function (options) {
+    var _this = this;
+
+    this.setData({
+      appId: options.appId
+    })
+
+    app.globalData.wechatAppid = _this.data.appId;//获取全局公众号APPidid
+
+    console.log("获取全局公众号:" + app.globalData.wechatAppid)
+
+    if (_this.data.appId) {
+      wx.setStorage({
+        key: "key",
+        data: _this.data.appId
+      })
+    }
+
+ 
+
+    wx.setNavigationBarTitle({
+      title: "共享免费秤"
+    })
+
+  },
+
+  onReady:function(){
+
+  
+  },
+  touchHandler: function (e) {
+    lineChart.scrollStart(e);
+  },
+  moveHandler: function (e) {
+    lineChart.scroll(e);
+  },
+  touchEndHandler: function (e) {
+    lineChart.scrollEnd(e);
+    lineChart.showToolTip(e, {
+      format: function (item, category) {
+        return item.data
+      }
+    });
+  },
+  // 转换日期
+  formatDate: function (date, split, type) {
+    var result;
+    if (type === 1) {
+      return date.toString().substr(0, 8).replace(/(\d{4})(\d{2})(\d{2})/, '$2-$3');
+    } else {
+      var d = new Date(parseInt(date));
+      var year = d.getFullYear();
+      var month = d.getMonth() + 1;
+      var day = d.getDate();
+
+      if (month < 10) {
+        month = '0' + month;
+      }
+      if (day < 10) {
+        day = '0' + day;
+      }
+      split = split || '/';
+
+      result = month + split + day;
+    }
+
+    return result
+  },
+  onShow: function(){
+
+    var _this = this;
+    util.getP(function(){
+      
+      _this.getWeight();
+      
+      _this.hotRecommended();
+      
+      _this.getWeightList();
+
+      _this.getDataFat();//体脂
+
+      setTimeout(function(){
+        _this.getProfile();//获取注册后信息
+      },500)
+      
+    })
+  
+    
+    this.setData({
+      height: this.data.height,
+      birth: this.data.birth,
+      sex: 1,
+      heightList: this.getStatureData()
+    })
+
+  },
+  //称重历史记录
+  getWeightList: function () {
+    var _this = this;
+    wx.request({
+      method: 'GET',
+      url: api.getWeightList+api._p,
+      async: false,
+      dataType: 'json',
+      success: function (res) {
+        if (_this.data.historyWeight.length==0){
+        _this.setData({
+          historyWeight: res.data.result.data,
+          historyWeightLength: res.data.result.data.length
+        })
+        _this.echart();
+      }
+      }
+    })
+  },
+  echart: function(){
+
+    var max;
+    var min;
+
+    this.setData({
+       windowWidth: wx.getSystemInfoSync().windowWidth
+    }) 
+
+   var _this = this;
+
+   setTimeout(function () {
+
+     var categories = [];
+     var timeData = [];
+
+     
+
+     if (_this.data.historyWeight) {
+
+        _this.setData({
+          historyWeight: _this.data.historyWeight.sort(function (a, b) { return a.receiverTime - b.receiverTime })
+        })
+
+         max = _this.data.historyWeightLength == 0 ? 0 : _this.data.historyWeight[0].weight.toFixed(1);
+  
+         min = _this.data.historyWeightLength == 0 ? 0 : _this.data.historyWeight[0].weight.toFixed(1);
+      
+       for (var i = 0; i < _this.data.historyWeight.length; i++) {
+
+    
+         timeData.push(_this.formatDate(_this.data.historyWeight[i].receiverTime, '-', 1))
+   
+         var histwei = (_this.data.historyWeight[i].weight.toFixed(1)) * 2;
+     
+         categories.push(histwei.toFixed(1));
+
+
+         if (_this.data.historyWeight[i].weight.toFixed(1) >= max) {
+           max = _this.data.historyWeight[i].weight.toFixed(1);
+         }
+
+         if (_this.data.historyWeight[i].weight.toFixed(1) < min) {
+           min = _this.data.historyWeight[i].weight.toFixed(1);
+         }
+       }
+
+       var temp = (max - min);
+
+       max -= 0;
+       min -= 0;
+
+       if (temp == 0) {
+         max = parseFloat(max + 12) * 2;
+         min = min - 12 > 0 ? (parseFloat(min - 12) * 2) : min;
+         console.log('相等max:' + max);
+         console.log('相等min:' + min);
+       } else {
+         max = (parseFloat(max + temp / 8) * 2);
+         min = (min - temp / 4) ? (parseFloat(min - temp / 4) * 2) : min;
+         console.log('max:' + max);
+         console.log('min:' + min);
+       }
+     }
+
+     //图表
+     lineChart = new wxCharts({
+       canvasId: 'lineCanvas',
+       type: 'line',
+       animation: true,
+       categories: timeData,
+       background: '#000000',
+       series: [{
+         data: categories,
+         name: '体重变化',
+         format: function (val) {
+           return val + '斤';
+         },
+         color: '#f98a0d'
+       }],
+       xAxis: {
+         disableGrid: true
+       },
+       yAxis: {
+         title: '',
+         // format: function (val) {
+         //   return val.toFixed(1) + '斤';
+         // },
+         disabled: true,
+         min: min,
+         max: max
+       },
+       width: _this.data.windowWidth,
+       height: 200,
+       dataPointShape: true,
+       enableScroll: true,
+       extra: {
+         lineStyle: 'curve',
+         lineColor: 'red'
+       }
+     });
+    
+
+   }, 200)
+  },
+  //获取身高数据
+  getStatureData: function () {
+    var list = []
+    for (var i = 70; i <= 220; i++) {
+      var data = {
+        id: i,
+        value: i
+      }
+      list.push(i);
+    }
+    return list;
+  },
+  onHeightChange: function (e) {
+    this.setData({
+      height: this.data.heightList[e.detail.value]
+    })
+  },
+  onBirthChange: function (e) {
+    this.setData({
+      birth: e.detail.value
+    })
+  },
+  changeSex: function (e) {
+    var gender = e.currentTarget.dataset.gender;
+
+    var _this = this;
+
+    if (gender == 1) {
+      _this.setData({
+        menStaus: true,
+        wemStaus: false,
+        sex: 1
+      })
+    } else {
+      _this.setData({
+        menStaus: false,
+        wemStaus: true,
+        sex: 2
+      })
+    }
+
+  },
+
+  //获取体重数据
+getWeight: function () {
+    var _this = this;
+    wx.request({
+      url: api.getHomeTopDate + api._p,
+      async: false,
+      method: 'GET',
+      success: function (res) {
+
+        _this.setData({
+          homeData: res.data[0],
+          currentWeight: ((res.data[0].currentWeight)*2).toFixed(1),
+          weightStr: ((res.data[0].weightStr) * 2).toFixed(1)
+        })
+
+
+      }
+    })
+  },
+//获取体脂数据
+getDataFat: function () {
+  var _this = this;
+  wx.request({
+    method: 'GET',
+    url: api.bodyFat + api._p,
+    async: false,
+    dataType: 'json',
+    success: function (res) {
+      _this.setData({
+        bodyFat: res.data.result.data[0],
+        water: (parseFloat(res.data.result.data[0].water) * 100).toFixed(1),
+        bon: parseFloat(res.data.result.data[0].bon).toFixed(1),
+        muscle: parseFloat(res.data.result.data[0].muscle).toFixed(1)
+      })
+    }
+  })
+},
+//获取体脂标准
+getStandards:function(sex,year){
+
+
+
+    if(sex==1){
+      //水份
+      if(year<=30){
+        if ((this.data.bodyFat.water * 100).toFixed(1)<37.8){
+          this.setData({
+            waterTitle: '胖'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) >= 37.8 && (this.data.bodyFat.water * 100).toFixed(1)<=50.1){
+          this.setData({
+            waterTitle: '胖'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) >= 50.2 && (this.data.bodyFat.water * 100).toFixed(1) <= 53.5){
+          this.setData({
+            waterTitle: '偏胖'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) >= 53.6 && (this.data.bodyFat.water * 100).toFixed(1) <= 57.0){
+          this.setData({
+            waterTitle: '标准'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) >= 57.1 && (this.data.bodyFat.water * 100).toFixed(1) <= 60.4){
+          this.setData({
+            waterTitle: '偏瘦'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) >= 60.5 && (this.data.bodyFat.water * 100).toFixed(1) <= 66.0){
+          this.setData({
+            waterTitle: '瘦'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) > 66.0){
+          this.setData({
+            waterTitle: '瘦'
+          })
+        }
+      } else if (year > 30){
+
+        if ((this.data.bodyFat.water * 100).toFixed(1) < 37.8) {
+          this.setData({
+            waterTitle: '胖'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) >= 37.8 && (this.data.bodyFat.water * 100).toFixed(1) <= 48.7) {
+          this.setData({
+            waterTitle: '胖'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) >= 48.8 && (this.data.bodyFat.water * 100).toFixed(1) <= 52.5) {
+          this.setData({
+            waterTitle: '偏胖'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) >= 52.3 && (this.data.bodyFat.water * 100).toFixed(1) <= 55.6) {
+          this.setData({
+            waterTitle: '标准'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) >= 55.7 && (this.data.bodyFat.water * 100).toFixed(1) <= 59.0) {
+          this.setData({
+            waterTitle: '偏瘦'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) >= 59.1 && (this.data.bodyFat.water * 100).toFixed(1) <= 66.0) {
+          this.setData({
+            waterTitle: '瘦'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) > 66.0) {
+          this.setData({
+            waterTitle: '瘦'
+          })
+        }
+
+      }
+
+
+
+      //骨量
+      if (year <= 55) {
+        if (this.data.bodyFat.bon <= 2.16) {
+          this.setData({
+            bonTitle: '偏低'
+          })
+        } else if (this.data.bodyFat.bon > 2.16 && this.data.bodyFat.bon <= 2.64) {
+          this.setData({
+            bonTitle: '标准'
+          })
+        } else if (this.data.bodyFat.bon > 2.64) {
+          this.setData({
+            bonTitle: '偏高'
+          })
+        }
+      } else if (year > 55 && year <= 75) {
+        if (this.data.bodyFat.bon <= 2.52) {
+          this.setData({
+            bonTitle: '偏低'
+          })
+        } else if (this.data.bodyFat.bon > 2.52 && this.data.bodyFat.bon <= 3.08) {
+          this.setData({
+            bonTitle: '标准'
+          })
+        } else if (this.data.bodyFat.bon > 3.08) {
+          this.setData({
+            bonTitle: '偏高'
+          })
+        }
+      } else if (year > 75) {
+        if (this.data.bodyFat.bon <= 2.79) {
+          this.setData({
+            bonTitle: '偏低'
+          })
+        } else if (this.data.bodyFat.bon > 2.79 && this.data.bodyFat.bon <= 3.41) {
+          this.setData({
+            bonTitle: '标准'
+          })
+        } else if (this.data.bodyFat.bon > 3.41) {
+          this.setData({
+            bonTitle: '偏高'
+          })
+        }
+      }
+
+      //肌肉率
+      if (this.data.bodyFat.muscle <= 30) {
+        this.setData({
+          muscleTitle: '低'
+        })
+      } else if (this.data.bodyFat.muscle >= 31 && this.data.bodyFat.muscle <= 34) {
+        this.setData({
+          muscleTitle: '标准'
+        })
+      } else if (this.data.bodyFat.muscle >= 35 && this.data.bodyFat.muscle <= 38) {
+        this.setData({
+          muscleTitle: '偏高'
+        })
+      } else if (this.data.bodyFat.muscle >= 39) {
+        this.setData({
+          muscleTitle: '高'
+        })
+      }
+
+
+    }else if(sex==2){
+
+      //水份
+      if (year <= 30) {
+        if ((this.data.bodyFat.water * 100).toFixed(1) < 37.8) {
+          this.setData({
+            waterTitle: '胖'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) >= 37.8 && (this.data.bodyFat.water * 100).toFixed(1) <= 46.0) {
+          this.setData({
+            waterTitle: '胖'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) >= 46.1 && (this.data.bodyFat.water * 100).toFixed(1) <= 49.4) {
+          this.setData({
+            waterTitle: '偏胖'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) >= 49.5 && (this.data.bodyFat.water * 100).toFixed(1) <= 52.9) {
+          this.setData({
+            waterTitle: '标准'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) >= 53.0 && (this.data.bodyFat.water * 100).toFixed(1) <= 56.3) {
+          this.setData({
+            waterTitle: '偏瘦'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) >= 56.4 && (this.data.bodyFat.water * 100).toFixed(1) <= 66.0) {
+          this.setData({
+            waterTitle: '瘦'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) > 66.0) {
+          this.setData({
+            waterTitle: '瘦'
+          })
+        }
+
+      } else if (year > 30) {
+        if ((this.data.bodyFat.water * 100).toFixed(1) < 37.8) {
+          this.setData({
+            waterTitle: '胖'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) >= 37.8 && (this.data.bodyFat.water * 100).toFixed(1) <= 44.6) {
+          this.setData({
+            waterTitle: '胖'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) >= 44.7 && (this.data.bodyFat.water * 100).toFixed(1) <= 48.0) {
+          this.setData({
+            waterTitle: '偏胖'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) >= 48.1 && (this.data.bodyFat.water * 100).toFixed(1) <= 51.5) {
+          this.setData({
+            waterTitle: '标准'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) >= 51.6 && (this.data.bodyFat.water * 100).toFixed(1) <= 54.9) {
+          this.setData({
+            waterTitle: '偏瘦'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) >= 55.0 && (this.data.bodyFat.water * 100).toFixed(1) <= 66.0) {
+          this.setData({
+            waterTitle: '瘦'
+          })
+        } else if ((this.data.bodyFat.water * 100).toFixed(1) > 66.0) {
+          this.setData({
+            waterTitle: '瘦'
+          })
+        }
+
+      }
+
+      //骨量
+      if (year <= 40) {
+        if (this.data.bodyFat.bon <= 1.53) {
+          this.setData({
+            bonTitle: '偏低'
+          })
+        } else if (this.data.bodyFat.bon > 1.53 && this.data.bodyFat.bon <= 1.87) {
+          this.setData({
+            bonTitle: '标准'
+          })
+        } else if (this.data.bodyFat.bon > 1.87) {
+          this.setData({
+            bonTitle: '偏高'
+          })
+        }
+      } else if (year > 40 && year <= 60) {
+        if (this.data.bodyFat.bon <= 1.89) {
+          this.setData({
+            bonTitle: '偏低'
+          })
+        } else if (this.data.bodyFat.bon > 1.89 && this.data.bodyFat.bon <= 2.31) {
+          this.setData({
+            bonTitle: '标准'
+          })
+        } else if (this.data.bodyFat.bon > 2.31) {
+          this.setData({
+            bonTitle: '偏高'
+          })
+        }
+      } else if (year > 60) {
+        if (this.data.bodyFat.bon <= 2.16) {
+          this.setData({
+            bonTitle: '偏低'
+          })
+        } else if (this.data.bodyFat.bon > 2.16 && this.data.bodyFat.bon <= 2.64) {
+          this.setData({
+            bonTitle: '标准'
+          })
+        } else if (this.data.bodyFat.bon > 2.64) {
+          this.setData({
+            bonTitle: '偏高'
+          })
+        }
+      }
+
+      //肌肉率
+      if (this.data.bodyFat.muscle <= 25) {
+        this.setData({
+          muscleTitle: '低'
+        })
+      } else if (this.data.bodyFat.muscle > 25 && this.data.bodyFat.muscle <= 27) {
+        this.setData({
+          muscleTitle: '标准'
+        })
+      } else if (this.data.bodyFat.muscle >= 28 && this.data.bodyFat.muscle <= 29) {
+        this.setData({
+          muscleTitle: '偏高'
+        })
+      } else if (this.data.bodyFat.muscle >= 30) {
+        this.setData({
+          muscleTitle: '高'
+        })
+      }
+
+
+    }
+
+},
+//获取注册信息接口
+getProfile: function () {
+    var _this = this;
+    wx.request({
+      url: api.profile + api._p,
+      async: false,
+      method: 'POST',
+      dataType: 'json',
+      success: function (res) {
+        if (res.data.result.data) {
+          _this.setData({
+            registeredData: res.data.result.data[0]
+          })
+
+          _this.setData({
+            unionid: _this.data.registeredData.weChatUser.unionid
+          })
+
+          if (_this.data.registeredData.height && _this.data.registeredData.gender && _this.data.registeredData.age) {
+
+            console.log("注册")
+
+            _this.data.BMI = bmi.toMathBmi(_this.data.homeData.currentWeight, _this.data.registeredData.height);//计算BMI值
+            _this.data.bodyTypeChinese = bmi.getBodyTypeChinese(_this.data.BMI.bmi);
+
+
+            _this.setData({
+              bodyTypeChinese: _this.data.bodyTypeChinese
+            })
+
+            _this.getStandards(_this.data.registeredData.gender, _this.data.registeredData.age);
+          }
+
+          
+        }
+      }
+    })
+  },
+savePersoInfop: function(){
+  var _this = this;
+  util.getP(function(){
+    _this.savePersoInfo();
+  })
+ },
+  //注册接口
+  savePersoInfo: function () {
+    var _this = this;
+    var birth = _this.data.birth;
+    birth = birth.replace(/-/g, '');
+
+
+    var data={
+      unionid: _this.data.unionid,
+      gender: _this.data.sex,
+      height: _this.data.height,
+      birthdate: birth
+    }
+
+    wx.request({
+      method: "POST",
+      url: api.updateUserInfo + api._p + '&' + util.getQuery(data),
+      success: function (res) {
+
+        _this.setData({
+          openRegistration: false
+        })
+
+        util.getP(function(){
+          _this.getProfile();
+        })
+    
+      }
+    })
+
+  },
+  goRecords:function(){
+    wx.navigateTo({
+      url: '/pages/my/history/history'
+    });  
+  },
+  linkAd: function(){
+    var _this = this;
+
+    wx.navigateTo({
+      url: '/pages/ad/ad'
+    });
+  },
+  goToHot: function () {
+    
+    wx.navigateTo({
+      url: '/pages/recommended/recommended'
+    });
+
+  },
+  //跳转到其他小程序（打开同一公众号下关联的另一个小程序。
+  toWxMin: function(){
+    wx.navigateToMiniProgram({
+      appId: '',
+      path: 'pages/index/index',
+      extraData: {
+      },
+      envVersion: 'release',
+      success(res) {
+        // 打开成功
+        wx.showToast({
+          title: '打开成功',
+          icon: 'success',
+          duration: 1000
+        })
+
+        setTimeout(function(){
+          wx.hideToast()
+        },500)
+      }
+    })
+  },
+  toManagement:function(){
+    wx.navigateTo({
+      url: '/pages/build2/build?Name=体重管理'
+    });
+  },
+  toRun: function () {
+    wx.navigateTo({
+      url: '/pages/build2/build?Name=运动咖'
+    });
+  },
+  toShow:function(){
+    wx.navigateTo({
+      url: '/pages/build2/build?Name=晒身材'
+    });
+  },
+  toLab:function(){
+    wx.navigateTo({
+      url: '/pages/lab/lab'
+    });
+  },
+  goHealth:function(){
+    var _this = this;
+    setTimeout(function () {
+      if (_this.data.registeredData.height && _this.data.registeredData.age && _this.data.registeredData.gender) {
+        wx.navigateTo({
+          url: '/pages/health/health2'
+        });
+      
+      } else {
+
+        _this.setData({
+          openRegistration: true
+        })
+      }
+    }, 500)
+
+  },
+  goToPK: function(){
+
+    var _this =this;
+    setTimeout(function(){
+      if (_this.data.registeredData.height&&_this.data.registeredData.age&&_this.data.registeredData.gender){
+        wx.navigateTo({
+          url: '/pages/pk/pk'
+        });
+        console.log("注册") 
+    
+      }else{
+        _this.setData({
+          openRegistration: true
+        })
+        console.log("未注册") 
+      }
+
+    },500)
+  },
+  toKnowledge: function(){
+    wx.navigateTo({
+      url: '/pages/knowledge/knowledge'
+    });
+  },
+  getAdvertising: function(){
+ 
+    var _this = this;
+    var codes = ['hot_1', 'hot_2'];
+
+    wx.request({
+      url: api.getAdvertising + api._p,
+      method: 'POST',
+      processData: false,
+      data: JSON.stringify(codes),
+      success: function (res) {
+       _this.setData({
+         adImgeData: res.data
+       })
+        if (_this.data.adImgeData.result.data){
+          _this.setData({
+            adImge1: _this.data.adImgeData.result.data[0].path,
+            adLink1: _this.data.adImgeData.result.data[0].adLink
+          })
+        }
+      }
+    })
+
+  },
+  //热门推荐
+  hotRecommended: function () {
+    var _this = this;
+    wx.request({
+      method: "POST",
+      url: api.hotRecommended + api._p,
+      dataType: 'json',
+      success: function (res) {
+
+        var hotImgDataArry = [];
+        
+        for (var i = 0; i < res.data.result.data.length;i++){
+          hotImgDataArry.push(res.data.result.data[i])
+        }
+
+        _this.setData({
+          hotImgData: hotImgDataArry
+        })
+      }
+    })
+  },
+  getUserInfo: function(e) {
+    console.log(e)
+    app.globalData.userInfo = e.detail.userInfo
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true
+    })
+  }
+})

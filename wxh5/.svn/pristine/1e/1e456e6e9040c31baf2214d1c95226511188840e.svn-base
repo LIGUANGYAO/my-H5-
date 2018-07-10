@@ -1,0 +1,83 @@
+<!--pages/pk/pk.wxml-->
+<view class="container">
+ <view class="TopLoding" wx:if="{{TopLodingStuas}}">正加载中..</view>
+   <view class="pkHead">
+                <view class="portrait">
+                     <image src="{{scoreInfor.headimgurl}}"></image>
+                </view>
+                <view class="userName">{{scoreInfor.nickname}}</view>
+                <view class="beat">在本次PK中我打败了{{scorerRank.overcome}}人</view>
+
+                <view class="pkResults">
+                    <text class="score" >体型综合得分：{{scorerRank.score=="null"?'再去称一次':scorerRank.score}}</text>
+                    <text class="part">参加人数：{{scorerRank.size==null?'暂时没有人数':scorerRank.size}}</text>
+                </view>
+            </view>
+
+            <view class="content">
+               <view class="pkCrowd">
+                  <view class="colorF8 nth1">PK人群</view>
+                    <view class="nth2">{{scoreInfor.gender==1?'男':scoreInfor.gender==2?'女':''}} {{scorerRank.ageGroup}}岁 {{scoreInfor.urbanarea=="null"?'':scoreInfor.urbanarea}}</view>
+               </view>
+
+                <view class="pkNave">
+                  <view class="user">用户</view>
+                  <view class="scoreClum">得分</view>
+                  <view class="like">点赞数</view>
+                </view>
+            </view>
+
+          <view class="pkList">
+          
+            <view class="ul">
+             <view class="TopnoData" wx:if="{{TopnoDataStuas}}">数据加载完</view>
+               <view class="li opacity {{item.unionid==meUnionid?'activeBg':'' }}" wx:for="{{showPklistData}}" wx:for-index="index" wx:key="index">
+                  <view class="rightClum">
+                      <view class="i" wx:if="{{item.rank==1}}">
+                          <image src="../../images/pk/one.png"></image>
+                      </view>
+                       <view class="i" wx:if="{{item.rank==2}}">
+                          <image src="../../images/pk/two.png"></image>
+                      </view>
+                        <view class="i" wx:if="{{item.rank==3}}">
+                          <image src="../../images/pk/three.png"></image>
+                      </view>
+                          <view class="i" wx:if="{{item.rank>3}}">
+                          {{item.rank}}
+                      </view>
+
+                       <view class="userPortrait">
+                               <view class="sexMen" wx:if="{{item.gender==1}}">
+                                   <image src="../../images/pk/sexMen.png"></image>
+                               </view>
+                                <view class="sexWomen" wx:if="{{item.gender==2}}">
+                                   <image src="../../images/pk/sexWomen.png"></image>
+                               </view>
+
+                                <image src="{{item.headImgUrl}}"></image>
+                        </view>
+                        <view class="userName">{{item.name}}</view>
+                  </view>
+                   <view class="scoreNumber">{{item.score}}分</view>
+
+                        <view class="leftClum" bindtap="showGood"   data-index='{{index}}' data-unionid="{{item.unionid}}" data-likeSize="{{item.likeSize}}" data-likeStatus="{{item.likeStatus}}">
+                        <view class="pkIcon" wx:if="{{item.likeStatus}}" data-index='{{index}}'>
+                                <image src="../../images/pk/like.png" ></image>
+                        </view>
+                         <view class="pkIcon" wx:if="{{!item.likeStatus}}"  data-index='{{index}}'>
+                                <image src="../../images/pk/no.png"></image>
+                                
+                        </view> 
+                        <text class="goodNumber">{{item.likeSize}}</text>
+                    </view>
+
+               </view>
+                <view class="loading" wx:if="{{loadStuas}}">正在加载中...</view>
+                <view class="noData" wx:if="{{noDataStuas}}">我们是有底线的</view>
+            </view>
+          
+          </view>
+
+
+
+</view>

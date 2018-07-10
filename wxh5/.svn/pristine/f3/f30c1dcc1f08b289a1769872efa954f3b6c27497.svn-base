@@ -1,0 +1,27 @@
+<view class="container">
+   <view class="foodAd">
+           <image src="../../images/health/sportsuggest.png"></image>
+    </view>
+
+
+     <view class="content">
+  
+
+          <view class="foodClum">
+                    <view class="foodTextHead">
+                        <view class="icon"></view><view class="p">运动类型</view>
+                    </view>
+                      <view class="clumT">{{text1}}</view>
+                   </view>
+                   <view class="foodClum">
+                    <view class="foodTextHead">
+                        <view class="icon"></view><view class="p">运动时间</view>
+                    </view>
+                      <view class="clumT">{{text2}}</view>
+               </view>
+
+
+
+     </view>
+
+</view>

@@ -1,0 +1,208 @@
+/* pages/pk/pk.wxss */
+
+.opacity{
+    -webkit-animation: opacity 0.3s linear;
+    animation: opacity 0.3s linear;
+}
+@-webkit-keyframes opacity {
+    0% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+@keyframes opacity {
+    0% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+.loading,.noData,.TopnoData,.TopLoding{
+  text-align: center;
+  font-size: 26rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  color: #999999;
+}
+
+.pkHead{
+   width: 100%;
+   height: 430rpx;
+   background-image: url(http://h5.mzjmedia.com/assets/images/pk/pkbg.png);
+   background-size: 100%  430rpx;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}
+
+.pkHead .portrait{
+    width: 190rpx;
+    height: 190rpx;
+}
+
+.pkHead .portrait image{
+     width: 190rpx;
+     height:  190rpx;
+     border-radius: 100%;
+}
+.pkHead .userName{
+    height: 34rpx;
+    font-size: 30rpx;
+    color: #ffffff;
+    margin: 20rpx 0;
+    text-align: center;
+}
+
+ .pkHead  .beat{
+       font-size: 34rpx;
+       color: #ffffff;
+   }
+.pkResults{
+     width: 100%;
+       margin-top: 40rpx;
+       display: flex;
+       justify-content: space-between;
+       color: #ffffff;
+       font-size: 26rpx;
+}
+.pkResults .score{
+     margin-left: 20rpx;
+}
+
+.pkResults .part{
+     margin-right: 20rpx;
+}
+
+.pkCrowd{
+  margin-top: 20rpx;
+}
+
+.pkCrowd .nth1{
+     font-size: 30rpx;
+     margin-bottom: 20rpx;
+}
+
+.pkCrowd .nth2{
+   font-size: 26rpx;
+   color: #999999;
+}
+
+.pkNave{
+   height: 50rpx;
+    display: flex;
+    align-items: center;
+    margin-top: 30rpx;
+    border-bottom: 1rpx solid #dddddd;
+}
+
+.pkNave .user,.pkNave .scoreClum,.pkNave .like{
+   flex: 1;
+  text-align: center;
+  color: #333333;
+  font-size: 30rpx;
+}
+
+.pkList .activeBg{
+   background: #fff2ec;
+}
+
+.pkList .li{
+    display: flex;
+    height: 120rpx;
+    align-items: center;
+    padding: 0  20rpx;
+     border-bottom: 1rpx solid #dddddd;
+}
+
+.pkList .li .i{
+    width: 80rpx;
+    height: 48rpx;
+    margin-right: 10rpx;
+    font-style: normal;
+    font-size: 40rpx;
+    display: block;
+    text-align: center;
+}
+.pkList .li .i image{
+     width: 37rpx;
+     height: 48rpx; 
+}
+
+.userPortrait{
+    width: 80rpx;
+    height: 80rpx;
+    position: relative;
+    margin-right: 10rpx;
+}
+
+.userPortrait .sexMen,.userPortrait .sexWomen{
+          position: absolute;
+          top: 56rpx;
+          left: 50rpx;
+          z-index: 3;
+          display: block;
+          width: 24rpx;
+          height: 24rpx;
+}
+.userPortrait .sexMen image,.userPortrait .sexWomen image{
+           width: 24rpx;
+          height: 24rpx;
+}
+
+
+ .userPortrait image{
+     width: 80rpx;
+     height: 80rpx;
+     border-radius: 100%; 
+ }
+
+ .rightClum{
+     display: flex;
+     justify-content: flex-start;
+     align-items: center;
+     width: 300rpx;
+     margin-right: 30rpx;
+ }
+
+ .leftClum{
+     width: 140rpx;
+     display: flex;
+     justify-content: center;
+ }
+ .pkList .userName{
+    color: #333333;
+    font-size: 26rpx;
+    width: 120rpx;
+    overflow:hidden; 
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+ .scoreNumber{
+    font-size: 26rpx;
+    width: 150rpx;
+    text-align: left;
+    margin-right: 70rpx;
+}
+
+.pkIcon{
+  width: 34rpx;
+  height: 28rpx;
+ margin-right: 10rpx;
+}
+
+.pkIcon image{
+   width: 34rpx;
+   height: 28rpx; 
+}
+
+ .goodNumber{
+    color: #f9860b;
+    font-size: 26rpx;
+    display:block;
+    padding-top:7rpx;
+}

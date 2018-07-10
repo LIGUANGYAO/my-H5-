@@ -1,0 +1,22 @@
+Page({
+   data:{
+     adLink:null
+   },
+   onLoad: function(options){
+
+     this.setData({
+       adLink: options.adLink
+     })
+
+   },
+   onReady: function(){
+
+   },
+   onShow: function () {
+    
+
+   }
+
+
+
+})

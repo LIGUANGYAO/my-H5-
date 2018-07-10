@@ -1,0 +1,110 @@
+<!--index.wxml-->
+ <view class="container">
+  <!-- <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto" id="user-motto">{{motto}}</text>
+    
+  </view>
+
+  <view>
+    <text  class="code"><text>openId:</text>{{openid}}</text>
+  </view> -->
+
+  
+  <!---头部体重动画结构-->
+  <view class="weightBox">
+          <!---体重动画-->
+       <view class="canvasBox">
+            <image class="roundBg" src="../../images/home/roundBg.png"></image> 
+           <view class="weightKg">
+             <text class="weigthNumber">150斤</text>
+             <text class="weightWorld">当前体重</text>
+           </view>
+           <canvas canvas-id="canvas1"  class="canvas1"></canvas>
+           <canvas canvas-id="canvas2"  class="canvas2"></canvas>
+           <image class="round" src="../../images/home/round.png"></image>
+       </view>
+  </view>
+
+ <view class="content">
+
+   <!--广告-->
+		  <view class="homeAd">
+        <navigator url="{{adLink1}}">
+				    <image src="{{adImge1}}"></image>
+      </navigator>  
+		  </view> 
+      <view class="hotExperts">
+         <text class="colorF8 hotP">健康专家</text>
+         <view class="expertsLink">
+           <view class="weightManag li">
+              <image  src="../../images/home/administer.png"></image>
+           </view>
+           <view class="experiment li">
+               <image  src="../../images/home/experiment.png"></image>
+           </view>
+           <view class="knowledge li">
+            <image  src="../../images/home/knowledge.png"></image>
+           </view>
+           <view class="pk li" bindtap='goToPK'>
+             <image  src="../../images/home/pk.png"></image>
+           </view>
+         </view>
+      </view>
+
+      <!--热门推荐-->
+      <view class="hotRecommend">
+         <view class="head">
+           <text class="colorF8">热门推荐</text>
+           <text class="checkAll">查看全部</text>
+         </view>
+
+         <view class="hotImg" bindtap='goToHot'>
+            <view class="reducedFat">
+              <view class="innerTitle">
+               <text class="englisth">MUSCLE</text>
+               <text class="china">增肌</text>
+              </view>
+               <image  src=""></image>
+            </view>
+         </view>
+      </view>
+        
+      <view class="weightRecords">
+        <view class="leftLine"></view>
+        <view  class="rightLing"></view>
+        <view class="checkRecords"></view>
+        <text class="recordsHead">最近体重变化</text>
+
+        <view class="recordsEchart" id="JS-echars">
+           <canvas canvas-id="lineCanvas"  class="canvas"  style="width:380px;height:220px;"></canvas>
+        </view>
+
+      </view>
+
+ </view>
+	
+
+
+
+
+</view> 
+
+
+
+
+
+
+
+
+
+
+
+
+

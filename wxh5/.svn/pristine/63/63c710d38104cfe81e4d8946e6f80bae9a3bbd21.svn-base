@@ -1,0 +1,67 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/health/health",
+    "pages/mall/mall",
+    "pages/map/map",
+    "pages/recommended/recommended",
+    "pages/pk/pk",
+    "pages/build/build",
+    "pages/sportsuggest/sportsuggest",
+    "pages/foodsuggest/foodsuggest",
+    "pages/my/my",
+    "pages/my/edit/edit",
+    "pages/lab/lab",
+    "pages/lab/detail",
+    "pages/knowledge/knowledge",
+    "pages/knowledge/detail",
+    "pages/hotdetail/hotdetail",
+    "pages/hotarticles/hotarticles",
+    "pages/ad/ad"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "black"
+  },
+    "tabBar": {
+      "color": "",
+      "selectedColor": "",
+      "borderStyle": "",
+      "backgroundColor": "#12151a",
+      "box-shadow": "",
+      "list": [
+        {
+          "pagePath": "pages/index/index",
+          "iconPath": "images/footerBar/index.png",
+          "selectedIconPath": "images/footerBar/active-index.png",
+          "text": ""
+        },
+        {
+          "pagePath": "pages/health/health",
+          "iconPath": "images/footerBar/health.png",
+          "selectedIconPath": "images/footerBar/active-health.png",
+          "text": ""
+        },
+        {
+          "pagePath": "pages/mall/mall",
+          "iconPath": "images/footerBar/mall.png",
+          "selectedIconPath": "images/footerBar/active-mall.png",
+          "text": ""
+        },
+        {
+          "pagePath": "pages/map/map",
+          "iconPath": "images/footerBar/map.png",
+          "selectedIconPath": "images/footerBar/active-map.png",
+          "text": ""
+        },
+        {
+          "pagePath": "pages/my/my",
+          "iconPath": "images/footerBar/my.png",
+          "selectedIconPath": "images/footerBar/active-my.png",
+          "text": ""
+        }
+      ]
+    }
+}

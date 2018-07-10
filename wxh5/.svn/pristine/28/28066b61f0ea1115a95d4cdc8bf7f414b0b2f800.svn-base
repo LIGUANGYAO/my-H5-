@@ -1,0 +1,176 @@
+var amapFile = require('../../js/amap-wx.js')
+var util = require('../../utils/util.js')
+var api = require('../../js/funs/api.js')
+var qqmap = require('../../js/qqmap-wx-jssdk.js')
+Page({
+  data: {
+    markers: [],
+    latitude: 0,
+    longitude: 0,
+    markers: [],
+    controls: [
+      
+    ],
+    mapHeight: '100%',
+
+    currentDot: {},
+    dotModalDisplay: false,
+    nearbyModalDisplay: false,
+    dotData: []
+  },
+  onLoad: function () {
+    var that = this;
+    this.location() 
+
+    var info = wx.getSystemInfoSync();
+    var size = 40;
+    this.setData({
+      controls: [
+        {
+          id: 1,
+          clickable: true,
+          iconPath: '/images/map/location.png',
+          position: {
+            left: 8,
+            top: info.windowHeight - size - 8,
+            width: size,
+            height: size
+          }
+        },
+        {
+          id: 2,
+          clickable: true,
+          iconPath: '/images/map/nearby.png',
+          position: {
+            width: info.widthWidth / 3,
+            height: size,
+            left: info.windowWidth / 3,
+            top: info.windowHeight - size - 8
+          }
+        }
+      ]
+    })
+  },
+  location: function () {
+    var _this = this;
+    wx.getLocation({
+      success: function(res) {
+        _this.setData({
+          latitude: res.latitude,
+          longitude: res.longitude
+        })
+
+        _this.getMarkers()
+        _this.getDotData()
+        
+      },
+    })
+  },
+
+  getMarkers: function() {
+    var _this = this;
+    var data = {
+      longitude: this.data.longitude,
+      latitude: this.data.latitude
+    }
+    wx.request({
+      url: api.getNearWeightScale + api._p + '&' + util.getQuery(data),
+
+      success: function(res) {
+
+        data = res.data.map(function(item) {
+          item.width = 32;
+          item.height = 32;
+          item.iconPath = '/images/map/dot_blue.png'
+          item.desc = item.name
+          item.id = item.shopId
+          return item;
+        })
+        _this.setData({
+          markers: data
+        })
+
+        var myAmapFun = new amapFile.AMapWX({ key: '979b6bb52a7b80d6fd1162328a7e6f38' }); 
+      }
+    })
+  },
+  getDotData: function() {
+    var _this = this;
+    var data = {
+      aname: '',
+      longitude: this.data.longitude,
+      latitude: this.data.latitude
+    }
+    wx.request({
+      url: api.getWeightScaleAddress + api._p + '&' + util.getQuery(data),
+      success: function(res) {
+        var data = res.data;
+
+        _this.setData({
+          dotData: data
+        })
+      }
+    })
+  },
+  onMarkerTap: function(e) {
+    var shopId = e.markerId;
+
+    if (!shopId) {
+      return;
+    }
+
+    this.setData({
+      dotModalDisplay: true,
+      mapHeight: '70%'
+    })
+    var that = {
+      currentDot: {}
+    };
+    var _this = this;
+
+    wx.request({
+      url: api.getBusinessDetails + api._p + '&id=' + shopId,
+      success: function(res) {
+        var data = res.data;
+
+        if (data) {
+          that.currentDot.devicename = data.name || item.name;
+          that.currentDot.address = data.address;
+          that.currentDot.serviceTime = data.serviceStartTime + '-' + data.serviceEndTime; //服务时间
+          that.currentDot.tel = data.telephone; //联系电话
+          that.currentDot.introduce = data.remark; //商家介绍
+          that.currentDot.logUrl = data.imgLogo || '';
+          that.currentDot.envImage1 = data.envImage1 || '';
+          that.currentDot.envImage2 = data.envImage2 || '';
+          //地址不存在则等于空
+          if (typeof that.currentDot.address === 'number') {
+            that.currentDot.address = '  ';
+          }
+
+          _this.setData({
+            currentDot: that.currentDot
+          })
+        }
+      }
+    })
+  },
+
+  onMapTap: function() {
+    this.setData({
+      dotModalDisplay: false,
+      mapHeight: '100%'
+    })    
+  },
+
+  onControlTap: function(e) {
+    var id = e.controlId;
+
+    if (id == 2) {
+      this.setData({
+        nearbyModalDisplay: true,
+        mapHeight: '50%'
+      })
+    }
+  }
+
+})

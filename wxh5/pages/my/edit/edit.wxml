@@ -1,0 +1,29 @@
+<!--pages/my/edit/edit.wxml-->
+<view class="feedback-box">
+  <image src="/images/common/logo.png" alt=""/>
+  <view class="form">
+    <view class="nickname text" wx:if='{{type == "nickname"}}'>
+        <text>昵称</text>
+        <input type="text" placeholder="请输入您的昵称" value='{{nickname}}' bind:blur='onNicknameChange'/>
+    </view>
+    <view class="height text" wx:if='{{type == "height"}}'>
+        <text>身高</text>       
+        <picker range='{{heightList}}' bind:change='onHeightChange' value='{{height - 70}}'>
+          <input type="text" placeholder="请输入您的身高" value='{{height}}' disabled/>
+        </picker>
+    </view>
+    <view class="birth text" wx:if='{{type == "birth"}}'>
+        <text>出生日期</text>
+        <picker mode='date'  bind:change='onBirthChange' value='{{birth}}'>
+        <input type="text" placeholder="请输入您的出生日期" value='{{birth}}' disabled/>
+        </picker>
+    </view>
+    <view class="sex text" wx:if='{{type == "sex"}}'>
+        <text>性别</text>
+        <picker range='{{sexList}}' bind:change='onSexChange' value='{{sexValue}}'>
+          <input type="text" placeholder="请输入您的性别" disabled value='{{sex}}'/>
+        </picker>
+    </view>
+  </view>
+  <view class="btn btn1" bind:tap='updateProfile'>提交</view>
+</view>

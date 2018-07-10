@@ -1,0 +1,33 @@
+<view class="container">
+ 
+  <view class="content">
+      <view id="isScoll">
+
+    
+
+
+        <view class="recommendUl">
+          <view wx:for="{{hotMainData}}"  wx:key="index">
+            <view class="opacity li"  bindtap='linkToHot' data-mainid="{{item.mainid}}">
+                  <view class="recommenInner" >
+                    <text class="mainName">{{item.mainName}}</text>
+                    <text class="mainCname">{{item.mainCname}}</text>
+                  </view>
+                  <image src="{{item.picPath}}"></image>
+            </view>
+
+              <!--广告-->
+            <!-- <view class="homeAd" bindtap='linkAd' wx:if="{{index==2}}">
+                  <image src="{{item.adImge2}}"></image>
+            </view>  -->
+
+
+           </view>
+
+           <view class="loding" wx:if="{{lodingStus}}">正在加载中..</view>
+           <view class="noData" wx:if="{{noDataStus}}">我们是有底线的</view>
+        </view>
+     </view> 
+
+</view>
+</view>

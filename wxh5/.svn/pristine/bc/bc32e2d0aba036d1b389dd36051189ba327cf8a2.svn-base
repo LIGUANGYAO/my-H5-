@@ -1,0 +1,35 @@
+<view class="container">
+  <view class="foodAd">
+            <image src="../../images/health/foodsuggest.png"></image>
+        </view>
+
+
+    <view class="content">
+       <view class="foodHeat">
+       <text class="p">饮食专家建议你每天摄入食物的总热量</text>
+       <text class="colorF8 p">{{bmrMin}}~{{bmrMax}}kcal之间</text>
+       </view>
+
+          <view class="foodClum">
+               <view class="foodTextHead">
+                   <view class="icon"></view><view class="p">{{headTitle1}}</view>
+               </view>
+                <view class="clumT">{{text1}}</view>
+            </view>
+
+             <view class="foodClum">
+               <view class="foodTextHead">
+                   <view class="icon"></view><view class="p">{{headTitle2}}</view>
+               </view>
+                <view class="clumT">{{text2}}</view>
+            </view>
+
+               <view class="foodClum">
+               <view class="foodTextHead">
+                   <view class="icon"></view><view class="p">{{headTitle3}}</view>
+               </view>
+                <view class="clumT">{{text3}}</view>
+            </view>
+    
+    </view>
+</view>

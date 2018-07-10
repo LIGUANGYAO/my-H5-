@@ -1,0 +1,107 @@
+ <view class="container">
+    
+		<!--用户信息-->
+       <view class="userInfo">
+           <image src="../../images/health/healthHeadBg.png" class="userInfoBg"></image>
+            <view class="headPortrait">
+				    <image src="../../images/health/lufei.jpg"></image>
+			  </view>
+            <view class="genderM">
+              <image src="../../images/health/smen.png"></image>
+            </view>
+
+            <view class="registrationUser">
+                <view class="registrationUserBox">
+                <view class="year">
+					<span class="currentYear">20</span>
+                  <span>年龄</span>
+                </view>
+                <view class="weigth">
+					<span class="currentWei">30斤</span>
+                    <span>当前体重</span>
+                </view>
+                <view class="height">
+				  <span class="currentHeight">30</span>
+                  <span>身高(cm)</span>
+                </view>
+            </view>
+            </view>
+		</view>
+  
+    <view class="content">
+        <view class="bmiBox">
+              <view class="bmiWorld">
+                  您的--<text class="colorF8">BMI 54.2</text> <text> 偏胖</text> 
+                  <view class="horn">
+                   <image src="../../images/health/question.png"></image>
+                  </view>
+              </view>
+              <text class="bmiIntroduce">BMI:身体质量指数(BMI)是目前国际上常量的衡量人体胖瘦程度以及是否健康的一个标准</text>
+          </view>
+     <!--人物跑动-->
+     <view class="animationBox">
+
+        <view id="peoplAnimat"></view>
+    
+        <view class="progress">
+            <view class="progressIner"></view>
+        </view>
+
+        <view class="bmiNumber">
+            <text class="span1">偏瘦：≤ 18.5</text>
+            <text class="span2">正常：18.5-23.9</text>
+            <text class="span3">偏胖：24-27.9</text>
+            <text>肥胖：≥28</text>
+        </view>
+    </view>
+
+
+           <view class="beautBody">
+             <view class="beautWomen">
+                <image src="../../images/health/bodyWomen.png"></image>
+             </view>
+             <view class="beautBodyL">
+               <view class="headTop">您的标准身体指标</view>
+               <view class="standardT">标准体重</view>
+                <view class="standardW">67(斤)</view>
+                <view class="thirdCirc">标准三围</view>
+                <view class="basic">
+                        
+                            <text>胸围：45cm</text>
+                            <text>腰围：23cm</text>
+                            <text>臀围：12cm</text>
+                       
+                    </view>
+             </view>
+             <view class="beautBodyR">
+                <view class="headTop">您的标准身体指标</view>
+                <view class="standardT">健美体重</view>
+                <view class="beautW">12(斤)</view>
+                <view class="thirdCirc">美体三围</view>
+                <view class="basic">
+
+                        <text>胸围：12cm</text>
+                        <text>腰围：11cm</text>
+                        <text>臀围：56cm</text>
+
+                </view>
+             </view>
+          </view>
+
+
+  <view class="beautBodyTitle">
+        <text class="h4">距离你的标准体重还有67斤的差距</text>
+        <text class="p">
+          距离马甲线女神还有99斤 ，你就会成为标准的马甲线女神了噢~
+          您目前的基础代谢率是454kcal，为了保证你的健康又能达到较好的减肥效果建议你每天摄入食物的总热量在56767kcal之间，相当于45435
+        </text>
+    </view>
+    <!--广告-->
+     <view class="healthAd" >     
+      <image src="adImge2"></image>
+    </view>
+    
+    </view>
+
+
+ </view>

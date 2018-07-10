@@ -1,0 +1,40 @@
+/* pages/my/feedback/feedback.wxss */
+
+.feedback-box {
+	text-align: center;
+}
+	image {
+		width: 220rpx;
+		height: 200rpx;
+		margin: 90rpx 0 0
+	}
+	.text-1 {
+		font-size: 30rpx;
+		color: #999;
+		line-height: 134rpx;
+	}
+
+	textarea {
+		background: #f2f2f2;
+		border: none;
+		height: 400rpx;
+		width: 630rpx;
+		padding: 20rpx;
+		font-size: 26rpx;
+    display: inline-block;
+    text-align: left;
+	}
+	
+	.btn {
+		display: inline-block;
+		cursor: pointer;
+	}
+	.btn1 {
+		background: #f9860b;
+		color: #fff;
+		line-height: 65rpx;
+		width: 305rpx;
+		height: 65rpx;
+		border-radius: 30rpx;
+		margin: 63rpx auto;
+	}

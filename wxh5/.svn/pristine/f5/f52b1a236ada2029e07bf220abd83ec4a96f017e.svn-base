@@ -1,0 +1,17 @@
+
+Page({
+
+   data:{
+
+   },
+   onLoad: function(){
+    
+     wx.setNavigationBarTitle({
+       title: "建设中"
+     })
+ 
+   },
+   onReady: function(){
+
+   }
+})

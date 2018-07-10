@@ -1,0 +1,54 @@
+
+<view class="inviewidual-content">
+  <view class='ul'>
+    <view class="li head-portrait">
+      <view class='text'>头像</view>
+      <view class="head-portrait-img">
+        <image class='head-img' src='{{profile.weChatUser.headimgurl || profile.headimgurl || "/images/common/user_default.png"}}'></image>
+      </view>
+    </view>
+
+    <view class="li" bind:tap='edit' data-type='nickname' data-value='{{profile.name || profile.weChatUser.nickname}}'>
+      <view class='text'>昵称</view>
+      <view class="li-right-box">
+        <view class="text2">{{profile.name || profile.weChatUser.nickname}}</view>
+        <image src="/images/common/more.svg" class='more-img'></image>
+      </view>
+    </view>
+    <view class="li">
+      <view class='text'>体重</view>
+      <view class="li-right-box">
+        <view class="text2">{{(profile.weight || '')  + ' 斤'}}</view>
+      </view>
+    </view>
+    <view class="li" data-type='height'  bind:tap='edit' data-value='{{profile.height ? profile.height: 150}}'>
+      <view class='text'>身高</view>
+      <view class="li-right-box">
+        <view class="text2">{{profile.height ? profile.height + 'CM' : ''}}</view>
+        <image src="/images/common/more.svg" class='more-img'></image>
+      </view>
+    </view>
+    <view class="li" bind:tap='edit' data-type='birth' data-value='{{profile.birthdate}}'>
+      <view class='text'>年龄</view>
+      <view class="li-right-box">
+        <view class="text2">{{profile.age ? profile.age +'岁': ''}}</view>
+        <image src="/images/common/more.svg" class='more-img'></image>
+      </view>
+    </view>
+    <view class="li"  bind:tap='edit' data-type='sex' data-value='{{profile.gender}}'>
+      <view class='text'>性别</view>
+      <view class="li-right-box">
+        <view class="text2">{{profile.genderStr}}</view>
+        <image src="/images/common/more.svg" class='more-img'></image>
+      </view>
+    </view>
+    <view class="li" bind:tap='toFeedback'>
+      <view class='text'>给我们建议</view>
+      <view class="li-right-box">
+        <view class="text2"></view>
+        <image src="/images/common/more.svg" class='more-img'></image>
+      </view>
+    </view>
+  </view>
+    <view class="tips-orange">* 温馨提示： 个人信息填写得越准确我们给您的健康建议就越精确哦</view>
+</view>

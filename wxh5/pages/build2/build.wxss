@@ -1,0 +1,29 @@
+
+.build{
+    width: 348rpx;
+    height: 402rpx;
+    position: absolute;
+    top: 240rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.build .buildAnima{
+        width: 298rpx;
+        height: 234rpx;
+    }
+
+ .build  .buildAnima  image{
+        width: 298rpx;
+        height: 234rpx;
+ }
+
+ .build   .p{
+    text-align: center;
+    color: #999999;
+    font-size: 34rpx;
+    line-height: 150%;
+}

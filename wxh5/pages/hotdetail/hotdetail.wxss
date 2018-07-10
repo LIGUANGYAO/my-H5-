@@ -1,0 +1,66 @@
+
+.loding,.noData{
+  width: 100%;
+  height: 55rpx;
+  line-height: 55rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color:#b9b9b9;
+}
+
+.opacity{
+    -webkit-animation: opacity 0.3s linear;
+    animation: opacity 0.3s linear;
+}
+
+@-webkit-keyframes opacity {
+    0% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+@keyframes opacity {
+    0% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+
+.recomm .li{
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  display: flex;
+  border-bottom: 1rpx solid #f2f2f2;
+}
+
+.recomm .li .clumLeft{
+  width: 200rpx;
+  height: 160rpx;
+}
+
+.recomm .li .clumLeft image{
+  width: 200rpx;
+  height: 160rpx;
+}
+
+.recomm .li  .clumR{
+     margin-left: 20rpx;
+     position: relative;
+ }
+.recomm .li  .clumR .p{
+    color: #333333;
+    font-size: 26rpx;
+}
+
+.recomm .li  .clumR .time{
+    width: 150rpx;
+    color: #999999;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 24rpx;
+}

@@ -1,0 +1,261 @@
+//index.js
+//获取应用实例
+const app = getApp()
+var wxCharts = require('../../utils/wxcharts.js');
+var api = require('../../js/funs/api.js');
+Page({
+  data: {
+    userInfo: {},
+    hasUserInfo: false,
+    openid:null,
+    msg:null,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    d: 0,
+    radian: 60,
+    handle:null,
+    adImgeData:{},
+    adImge1:null,
+    adImge2:null,
+    adLink1:null,
+    adLink2:null,
+    hotImgData:[]
+  },
+  onLoad: function () {
+
+    var _this = this;
+
+    wx.showLoading({
+      title: '加载中',
+    })
+
+    
+    this.getWeight()
+    this.getAdvertising()
+    this.hotRecommended()
+
+
+    //图表
+    new wxCharts({
+      canvasId: 'lineCanvas',
+      type: 'line',
+      animation: true,
+      categories: ['2012', '2013', '2014', '2015', '2016', '2017', '2016', '2017'],
+      series: [{
+        data: [2, 2, 1, 2, 1, 2, 1, 2],
+        format: function (val) {
+          return val.toFixed(1) + '斤';
+        }
+      }],
+      xAxis: {
+         disableGrid: true
+      },
+      yAxis: {
+        title: '',
+        format: function (val) {
+          return val.toFixed(1)+ '斤';
+        },
+        min: 0.5,
+        max: 5
+      },
+      width: 360,
+      height: 220,
+      dataPointShape: true,
+      extra: {
+        lineStyle: 'curve'
+      }
+    });
+
+
+
+
+    wx.setNavigationBarTitle({
+      title: "共享免费秤"
+    })
+
+    var _this = this;
+    setTimeout(function () {
+
+      _this.setData({
+        openid: app.globalData.openid
+      })
+
+      // setTimeout(function() {
+      //   console.log(_this)
+      //   wx.showToast({
+      //     title:_this.data.openid
+      //   })
+      // },2000)
+
+    }, 2000)
+
+
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    } else if (this.data.canIUse){
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        
+
+      }
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+    }
+  },
+
+  onReady:function(){
+
+    var _this =this;
+
+    this.draw1();
+    this.draw2(60 + this.data.radian);
+
+  
+  },
+  draw1:function(){
+
+    var ctx = wx.createContext();
+    ctx.beginPath();
+    ctx.setStrokeStyle("#1d2228");
+
+    var circle = {
+      x: 80,    //圆心的x轴坐标值
+      y: 75,    //圆心的y轴坐标值
+      r: 60      //圆的半径
+    };
+
+    ctx.arc(circle.x, circle.y, circle.r, 0, 2 * Math.PI);
+    ctx.setLineWidth(20);
+    ctx.stroke();
+    wx.drawCanvas({
+      canvasId: 'canvas1',
+      actions: ctx.getActions()
+    });
+  },
+  draw2: function (weight){
+    var _this = this;
+    clearInterval(_this.data.handle);
+
+    var ctx = wx.createContext();
+
+    this.data.handle = setInterval(function () {
+      ctx.beginPath();
+      ctx.setStrokeStyle("#f9870b");
+      var circle = {
+        x: 80,    //圆心的x轴坐标值
+        y: 75,    //圆心的y轴坐标值
+        r: 60      //圆的半径
+      };
+      var speed = (weight - _this.data.d) / weight;
+      _this.data.d += (1 + speed * 20);
+      if (_this.data.d >= weight) {
+        clearInterval(_this.data.handle);
+      } else {
+        ctx.arc(circle.x, circle.y, circle.r, Math.PI / 2, Math.PI / 2 + (_this.data.d * Math.PI) / 180);
+        ctx.setLineWidth(21);
+        ctx.setLineCap('round');
+        ctx.stroke();
+        wx.drawCanvas({
+          canvasId: 'canvas2',
+          actions: ctx.getActions()
+        });
+      }
+    }, 30);   
+
+  },
+  goToHot: function () {
+    wx.navigateTo({
+      url: '/pages/recommended/recommended'
+    });
+  },
+  toBuild:function(){
+    wx.navigateTo({
+      url: '/pages/build/build'
+    });
+  },
+  goToPK: function(){
+    wx.navigateTo({
+      url: '/pages/pk/pk'
+    });
+  },
+  getWeight:function(){    
+    wx.request({
+      url: api.getHomeTopDate + api._p,
+      method: 'GET',
+      success: function (res) {
+
+        setTimeout(function () {
+          wx.hideLoading()
+        }, 500)
+      }
+    })
+  },
+  getAdvertising: function(){
+ 
+    var _this = this;
+    var codes = ['index_1', 'index_2'];
+
+    wx.request({
+      url: api.getAdvertising + api._p,
+      method: 'POST',
+      processData: false,
+      data: JSON.stringify(codes),
+      success: function (res) {
+        _this.data.adImgeData = res.data;
+        if (_this.data.adImgeData.result.data){
+          _this.data.adImge1 = _this.data.adImgeData.result.data[0].path;
+          _this.data.adImge2 = _this.data.adImgeData.result.data[1].path;
+          _this.data.adLink1 = _this.data.adImgeData.result.data[0].adLink;
+          _this.data.adLink2 = _this.data.adImgeData.result.data[1].adLink;
+
+          _this.setData({
+            adImge1: _this.data.adImgeData.result.data[0].path,
+            adLink1: _this.data.adImgeData.result.data[0].adLink
+          })
+        }
+      }
+    })
+
+  },
+  //热门推荐
+  hotRecommended: function () {
+    var _this = this;
+    wx.request({
+      method: "POST",
+      url: api.hotRecommended + api._p,
+      dataType: 'json',
+      success: function (res) {
+        console.log(res.data);
+        var hotImgDataArry = [];
+        
+        for (var i = 0; i < res.data.result.data.length;i++){
+          hotImgDataArry.push(res.data.result.data[i])
+        }
+
+        _this.setData({
+          hotImgData: hotImgDataArry
+        })
+      }
+    })
+  },
+  getUserInfo: function(e) {
+    console.log(e)
+    app.globalData.userInfo = e.detail.userInfo
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true
+    })
+  }
+})

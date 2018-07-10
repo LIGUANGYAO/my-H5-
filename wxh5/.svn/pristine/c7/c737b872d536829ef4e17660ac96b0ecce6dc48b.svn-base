@@ -1,0 +1,380 @@
+
+.userInfo{
+   width: 100%;
+    height: 400rpx;
+    position: relative;
+}
+.userInfo .userInfoBg{
+   position: absolute;
+   width: 100%;
+   height: 400rpx;
+   z-index: 0;
+   top: 0;
+   left: 0
+}
+.userInfo .headPortrait{
+    width: 160rpx;
+    height: 160rpx;
+    position: absolute;
+    top: 50rpx;
+    left: 294rpx;
+    z-index:2;
+} 
+
+.userInfo .headPortrait image{
+      width: 160rpx;
+      height: 160rpx;
+      border-radius: 100%;
+ }
+
+ .genderM,.genderW{
+      width: 40rpx;
+        height: 40rpx;
+        position: absolute;
+        top: 175rpx;
+        left: 440rpx;
+        z-index: 3;
+ }
+
+ .genderM image,.genderW image{
+        width: 40rpx;
+        height: 40rpx;
+ }
+
+ .registrationUser{
+      width: 100%;
+        height: 80rpx;
+        position: absolute;
+        top: 282rpx;
+        left: 0;
+        z-index: 4;
+        display: flex;
+        justify-content: center;
+ }
+ .registrationUser  .registrationUserBox{
+       display: flex;
+       width: 722rpx;
+       align-items: center;
+ }
+
+ .year,.weigth,.height{
+      width: 240rpx;
+      color: #fee1b9;
+      text-align: center;
+      font-size: 26rpx;
+      display: flex;
+      flex-direction:column;
+ }
+
+ .currentYear,.currentWei,.currentHeight{
+            color: #ffffff;
+            font-size: 28rpx;
+            margin-bottom: 10rpx;
+}
+ .weigth{
+      border-left: 2rpx solid #fee1b9;
+      border-right: 2rpx solid #fee1b9;
+ }
+
+
+.bmiBox{
+  margin-top: 35rpx;
+  text-align: center;
+}
+.bmiBox .bmiWorld{
+   text-align: center;
+  font-size: 30rpx;
+  margin-bottom: 36rpx;
+  position: relative;
+}
+.horn{
+  position: absolute;
+  width: 30rpx;
+  height: 30rpx;
+  right: 40rpx;
+  top: 2rpx;
+}
+.horn image{
+  width: 30rpx;
+  height: 30rpx;
+}
+.bmiIntroduce{
+  padding: 0  20rpx;
+  color: #999999;
+  line-height: 160%;
+  font-size: 30rpx;
+}
+
+.beautBodyTitle{
+   margin-top: 40rpx;
+  margin-bottom: 38rpx;
+  
+}
+.beautBodyTitle .h4{
+   text-align: center;
+   color: #666666;
+   font-size: 35rpx;
+   display: block;
+}
+
+.beautBodyTitle .p{
+   color: #999999;
+  font-size: 28rpx;
+  line-height: 150%;
+}
+.healthAd{
+    width:100%;
+    height: 200rpx;
+    background: red;
+}
+
+.healthAd image{
+    width:100%;
+    height: 200rpx;
+}
+
+.beautBody{
+    height: 620rpx;
+    margin-top: 35rpx;
+    position: relative;
+    background-color: #ffa343
+}
+ .beautWomen,.beautMen{
+        width: 180rpx;
+        height: 480rpx;
+        position: absolute;
+        top: 88rpx;
+        left: 265rpx;
+        z-index: 3;
+}
+ .beautWomen image,.beautMen image{
+    width: 180rpx;
+    height: 480rpx;
+ }
+
+ .beautBodyL,.beautBodyR{
+     width: 278rpx;
+     height: 312rpx;
+     position: absolute;
+     top: 116rpx;
+     z-index: 4;
+     color: #ffffff;
+     text-align: center;
+ }
+ .headTop{
+   font-size: 34rpx;
+    margin-bottom: 19rpx;
+ }
+
+.standardT{
+  font-size: 28rpx;
+  margin-bottom: 20rpx;
+}
+
+.standardW,.beautW{
+      font-size: 30rpx;
+      margin-bottom: 32rpx;
+}
+
+.thirdCirc{
+    font-size: 34rpx;
+    margin-bottom: 19rpx;
+}
+.basic{
+  font-size: 28rpx;
+}
+
+.basic text{
+  margin-bottom: 10rpx;
+  display: block;
+}
+
+.beautBodyL{
+  left: 20rpx;
+}
+.beautBodyR{
+  right: 20rpx;
+ }
+
+ .animationBox{
+    margin-top: 40rpx;
+    margin-bottom: 20rpx;
+    height: 100rpx;
+    padding-top: 110rpx;
+    position: relative;
+ }
+#peoplAnimat{
+   width: 80rpx;
+  height: 90rpx;
+  position: absolute;
+  z-index: 4;
+  top: 2rpx;
+  left: 0;
+  background-size: 80rpx  90rpx;
+}
+
+.men1{
+        background-image: url(http://h5.mzjmedia.com/assets/images/health/men1.gif);
+    }
+    .men2{
+        background-image: url(http://h5.mzjmedia.com/assets/images/health/men2.gif);
+    }
+    .men3{
+        background-image: url(http://h5.mzjmedia.com/assets/images/health/men3.gif);
+    }
+    .men4{
+        background-image: url(http://h5.mzjmedia.com/assets/images/health/men4.gif);
+    }
+
+    .women1{
+        background-image: url(http://h5.mzjmedia.com/assets/images/health/women1.gif);
+    }
+    .women2{
+        background-image: url(http://h5.mzjmedia.com/assets/images/health/women2.gif);
+    }
+    .women3{
+        background-image: url(http://h5.mzjmedia.com/assets/images/health/women3.gif);
+    }
+    .women4{
+        background-image: url(http://h5.mzjmedia.com/assets/images/health/women4.gif);
+    }
+.progress{
+    height: 16rpx;
+    width: 100%;
+    background-color: #999999;
+    border-radius: 10rpx;
+     position: relative;
+}
+
+.progress .progressIner{
+    position: absolute;
+    height: 23rpx;
+    width: 10%;
+    left: 0;
+    top: -4rpx;
+    background-color: #ffa343;
+    border-radius: 20rpx;
+}
+.bmiNumber{
+    margin-top: 26rpx;
+    margin-bottom: 28rpx;
+    font-size: 24rpx;
+    color: #999999;
+}
+.bmiNumber .span1,.bmiNumber .span3{
+  margin-right: 25rpx;
+}
+.bmiNumber .span2{
+   margin-right: 35rpx;
+}
+
+.foodSuggest{
+  margin-top: 40rpx;
+}
+
+.foodSuggest .foodH{
+   margin-bottom: 10rpx;
+   position: relative;
+}
+.foodSuggest .foodH .span{
+   font-size: 30rpx;
+}
+.foodH .Image{
+   display: block;
+   font-style: normal;
+   width: 38rpx;
+   height:  38rpx;
+   position: absolute;
+   top: -2rpx;
+    right: 0;
+}
+.foodH .Image image{
+  width: 38rpx;
+  height: 38rpx;
+}
+
+.suggestR{
+    position: relative;
+    width:100%;
+    height: 380rpx;
+    color: #ffffff;
+}
+.suggestR image{
+    width:100%;
+    height: 380rpx;
+}
+.suggestTitle{
+    width: 100%;
+    height: 100rpx;
+    position: absolute;
+    background: rgba(0,0,0,0.5);
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    color: #ffffff;
+}
+.suggestTitle .p{
+    padding: 20rpx  0   0  20rpx;
+    font-size: 26rpx;
+    line-height: 130%;
+}
+
+.sportSuggest{
+   margin-top: 28rpx;
+}
+
+.sportH{
+  margin-bottom: 10rpx;
+  position: relative;
+}
+.sportH .span{
+  font-size: 30rpx;
+}
+.sportH .i{
+    display: block;
+    font-style: normal;
+    width: 38rpx;
+    height:  38rpx;
+    position: absolute;
+    top: -2rpx;
+    right: 0;
+}
+.sportH .i image{
+   width: 38rpx;
+   height: 38rpx;
+}
+
+.sportSuggest .suggestR{
+      position: relative;
+      width:100%;
+      height: 467rpx;
+}
+.sportSuggest .suggestR .suggestRTitle{
+     position: absolute;
+      width: 590rpx;
+      height: 210rpx;
+      top: 100rpx;
+      left: 67rpx;
+      color: #ffffff;  
+}
+.sportSuggest .suggestR  image{
+     width:100%;
+     height: 467rpx;
+}
+.sportSuggest .suggestR .pone{
+   font-size: 30rpx;
+}
+
+.weightAdminister{
+    height: 100rpx;
+    width: 620rpx;
+    margin: 0 auto;
+    line-height: 100rpx;
+    font-size: 30rpx;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 58rpx;
+    margin-top: 60rpx;
+    background: linear-gradient(#fa9e19,#fb8f11);
+    border-radius: 50rpx;
+}

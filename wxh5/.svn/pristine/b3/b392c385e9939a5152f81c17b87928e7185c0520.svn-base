@@ -1,0 +1,42 @@
+var WxParse = require('../../js/wxParse/wxParse.js');
+
+
+Page({
+   data:{
+     adLink:null,
+     adImge:null,
+     article:''
+   },
+   onLoad: function(options){
+     var _this= this;
+
+     this.setData({
+       adLink: options.adLink,
+       adImge: options.adImge,
+     })
+
+     console.log("广告链接" + this.data.adLink)
+     console.log("图片" + this.data.adImge)
+   
+     this.setData({
+       article: '<a href="' + this.data.adLink + '"><img src="' + this.data.adImge + '"></a>'
+     })
+
+     setTimeout(function(){
+         _this.setData({
+           article: WxParse.wxParse('article', 'html', _this.data.article, _this, 5)
+         })
+     },500)
+
+   },
+   onReady: function(){
+
+   },
+   onShow: function () {
+    
+
+   }
+
+
+
+})

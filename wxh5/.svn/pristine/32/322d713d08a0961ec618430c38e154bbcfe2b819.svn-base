@@ -1,0 +1,605 @@
+
+
+.registrationModel{
+    width: 590rpx;
+    height: 700rpx;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 15;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+}
+
+.registrationModel .registrationModelHeader{
+      margin-bottom: 25rpx;
+}
+.registrationModel .registrationModelHeader .registrationHead{
+       height: 77rpx;
+       margin-bottom: 15rpx;
+      background-image: url(http://h5.mzjmedia.com/assets/images/home/bg.png);
+      background-size: 100%  77rpx; 
+}
+.registrationHead .p{
+     font-size: 26rpx;
+      color: #ffffff;
+      text-align: center;
+      line-height: 77rpx;
+      height: 77rpx;
+      display: block;
+}
+
+#sexDom{
+   height: 158rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+
+#sexDom .span{
+      color: #333333;
+      font-size: 26rpx;
+      padding: 0 30rpx;
+}
+
+#sexDom  .boy{
+      width: 111rpx;
+      height: 144rpx;
+      background-image: url(http://h5.mzjmedia.com/assets/images/home/men.png);
+      background-size: 111rpx  144rpx;
+      background-repeat: no-repeat;
+ }
+ #sexDom .boy.Active{
+      width: 111rpx;
+      height: 158rpx;
+      background-image: url(http://h5.mzjmedia.com/assets/images/home/menActive.png);
+      background-size: 111rpx  158rpx;
+      background-repeat: no-repeat;
+}
+
+#sexDom .girl{
+        width: 111rpx;
+        height: 144rpx;
+        background-image: url(http://h5.mzjmedia.com/assets/images/home/women.png);
+        background-size: 111rpx  144rpx;
+        background-repeat: no-repeat;
+}
+
+#sexDom .girl.Active{
+        width: 111rpx;
+        height: 158rpx;
+        background-image: url(http://h5.mzjmedia.com/assets/images/home/womenActive.png);
+        background-size: 111rpx  158rpx;
+        background-repeat: no-repeat;
+}
+
+.stature,.birthdate{
+  text-align: center;
+}
+
+
+.stature .h3,.birthdate .h3{
+      color: #666666;
+      font-size: 30rpx;
+      font-weight: normal;
+      margin-bottom: 10rpx;
+}
+.stature input,.birthdate input{
+      background: none;
+      border:none;
+      color: #f88409;
+      font-size: 44rpx;
+      height: 50rpx;
+      text-align: center;
+      line-height: 50rpx;
+      border-bottom: 2rpx solid #f88409;
+}
+.stature{
+     margin-bottom: 32rpx;
+}
+.birthdate{
+      margin-bottom: 40rpx;
+ }
+
+ #JS-stature{
+   width: 160rpx;
+    margin: 0 auto; 
+ }
+
+  #JS-stature input{
+     width: 160rpx;
+  }
+
+  #JS-year{
+     width: 260rpx;
+      margin: 0 auto; 
+  }
+
+
+ #JS-year input{
+    width: 260rpx;
+ }
+
+.secret-world{
+    text-align: center;
+    color: #999999;
+    font-size: 22rpx;
+}
+
+.registration-btn-box {
+      display: flex;
+      justify-content: center;
+      margin-top: 25rpx;
+}
+.registration-btn-box .registration-btn{
+      height: 64rpx;
+      width: 302rpx;
+      background: #f9850a;
+      border: 0;
+      border-radius: 50rpx;
+      color: #ffffff;
+      text-align: center;
+      line-height: 64rpx;
+} 
+
+.mask{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: rgba(0,0,0,0.7);
+    top: 0;
+    left: 0;
+    z-index: 12;
+}
+
+.userInfo{
+   width: 100%;
+    height: 400rpx;
+    position: relative;
+}
+.userInfo .userInfoBg{
+   position: absolute;
+   width: 100%;
+   height: 400rpx;
+   z-index: 0;
+   top: 0;
+   left: 0
+}
+.userInfo .headPortrait{
+    width: 160rpx;
+    height: 160rpx;
+    position: absolute;
+    top: 50rpx;
+    left: 294rpx;
+    z-index:2;
+} 
+
+.userInfo .headPortrait image{
+      width: 160rpx;
+      height: 160rpx;
+      border-radius: 100%;
+ }
+
+ .genderM,.genderW{
+      width: 40rpx;
+        height: 40rpx;
+        position: absolute;
+        top: 175rpx;
+        left: 440rpx;
+        z-index: 3;
+ }
+
+ .genderM image,.genderW image{
+        width: 40rpx;
+        height: 40rpx;
+ }
+
+ .registrationUser{
+      width: 100%;
+        height: 80rpx;
+        position: absolute;
+        top: 282rpx;
+        left: 0;
+        z-index: 4;
+        display: flex;
+        justify-content: center;
+ }
+ .registrationUser  .registrationUserBox{
+       display: flex;
+       width: 722rpx;
+       align-items: center;
+ }
+
+ .year,.weigth,.height{
+      width: 240rpx;
+      color: #fee1b9;
+      text-align: center;
+      font-size: 26rpx;
+      display: flex;
+      flex-direction:column;
+ }
+
+ .currentYear,.currentWei,.currentHeight{
+            color: #ffffff;
+            font-size: 28rpx;
+            margin-bottom: 10rpx;
+}
+ .weigth{
+      border-left: 2rpx solid #fee1b9;
+      border-right: 2rpx solid #fee1b9;
+ }
+
+
+.bmiBox{
+  margin-top: 35rpx;
+  text-align: center;
+}
+.bmiBox .bmiWorld{
+   text-align: center;
+  font-size: 30rpx;
+  margin-bottom: 36rpx;
+  position: relative;
+}
+.horn{
+  position: absolute;
+  width: 30rpx;
+  height: 30rpx;
+  right: 40rpx;
+  top: 2rpx;
+}
+.horn image{
+  width: 30rpx;
+  height: 30rpx;
+}
+.bmiIntroduce{
+  padding: 0  20rpx;
+  color: #999999;
+  line-height: 160%;
+  font-size: 30rpx;
+}
+
+.beautBodyTitle{
+   margin-top: 40rpx;
+  margin-bottom: 38rpx;
+  
+}
+.beautBodyTitle .h4{
+   text-align: center;
+   color: #666666;
+   font-size: 35rpx;
+   display: block;
+}
+
+.beautBodyTitle .p{
+   color: #999999;
+  font-size: 28rpx;
+  line-height: 150%;
+}
+.healthAd{
+    width:100%;
+    height: 200rpx;
+    background: red;
+}
+
+.healthAd image{
+    width:100%;
+    height: 200rpx;
+}
+
+.beautBody{
+    height: 620rpx;
+    margin-top: 35rpx;
+    position: relative;
+    background-color: #ffa343
+}
+ .beautWomen,.beautMen{
+        width: 180rpx;
+        height: 480rpx;
+        position: absolute;
+        top: 88rpx;
+        left: 265rpx;
+        z-index: 3;
+}
+ .beautWomen image,.beautMen image{
+    width: 180rpx;
+    height: 480rpx;
+ }
+
+ .beautBodyL,.beautBodyR{
+     width: 278rpx;
+     height: 312rpx;
+     position: absolute;
+     top: 116rpx;
+     z-index: 4;
+     color: #ffffff;
+     text-align: center;
+ }
+ .headTop{
+   font-size: 34rpx;
+    margin-bottom: 19rpx;
+ }
+
+.standardT{
+  font-size: 28rpx;
+  margin-bottom: 20rpx;
+}
+
+.standardW,.beautW{
+      font-size: 30rpx;
+      margin-bottom: 32rpx;
+}
+
+.thirdCirc{
+    font-size: 34rpx;
+    margin-bottom: 19rpx;
+}
+.basic{
+  font-size: 28rpx;
+}
+
+.basic text{
+  margin-bottom: 10rpx;
+  display: block;
+}
+
+.beautBodyL{
+  left: 20rpx;
+}
+.beautBodyR{
+  right: 20rpx;
+ }
+
+ .animationBox{
+    margin-top: 40rpx;
+    margin-bottom: 20rpx;
+    height: 100rpx;
+    padding-top: 110rpx;
+    position: relative;
+ }
+#peoplAnimat{
+   width: 80rpx;
+  height: 90rpx;
+  position: absolute;
+  z-index: 4;
+  top: 2rpx;
+  left: 0;
+  background-size: 80rpx  90rpx;
+}
+
+.men1{
+        background-image: url(http://h5.mzjmedia.com/assets/images/health/men1.gif);
+    }
+    .men2{
+        background-image: url(http://h5.mzjmedia.com/assets/images/health/men2.gif);
+    }
+    .men3{
+        background-image: url(http://h5.mzjmedia.com/assets/images/health/men3.gif);
+    }
+    .men4{
+        background-image: url(http://h5.mzjmedia.com/assets/images/health/men4.gif);
+    }
+
+    .women1{
+        background-image: url(http://h5.mzjmedia.com/assets/images/health/women1.gif);
+    }
+    .women2{
+        background-image: url(http://h5.mzjmedia.com/assets/images/health/women2.gif);
+    }
+    .women3{
+        background-image: url(http://h5.mzjmedia.com/assets/images/health/women3.gif);
+    }
+    .women4{
+        background-image: url(http://h5.mzjmedia.com/assets/images/health/women4.gif);
+    }
+.progress{
+    height: 16rpx;
+    width: 100%;
+    background-color: #999999;
+    border-radius: 10rpx;
+     position: relative;
+}
+
+.progress .progressIner{
+    position: absolute;
+    height: 23rpx;
+    width: 10%;
+    left: 0;
+    top: -4rpx;
+    background-color: #ffa343;
+    border-radius: 20rpx;
+}
+.bmiNumber{
+    margin-top: 26rpx;
+    margin-bottom: 28rpx;
+    font-size: 24rpx;
+    color: #999999;
+}
+.bmiNumber .span1,.bmiNumber .span3{
+  margin-right: 25rpx;
+}
+.bmiNumber .span2{
+   margin-right: 35rpx;
+}
+
+.foodSuggest{
+  margin-top: 40rpx;
+}
+
+.foodSuggest .foodH{
+   margin-bottom: 10rpx;
+   position: relative;
+}
+.foodSuggest .foodH .span{
+   font-size: 30rpx;
+}
+.foodH .Image{
+   display: block;
+   font-style: normal;
+   width: 38rpx;
+   height:  38rpx;
+   position: absolute;
+   top: -2rpx;
+    right: 0;
+}
+.foodH .Image image{
+  width: 38rpx;
+  height: 38rpx;
+}
+
+.suggestR{
+    position: relative;
+    width:100%;
+    height: 380rpx;
+    color: #ffffff;
+}
+.suggestR image{
+    width:100%;
+    height: 380rpx;
+}
+.suggestTitle{
+    width: 100%;
+    height: 100rpx;
+    position: absolute;
+    background: rgba(0,0,0,0.5);
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    color: #ffffff;
+}
+.suggestTitle .p{
+    padding: 20rpx  0   0  20rpx;
+    font-size: 26rpx;
+    line-height: 130%;
+}
+
+.sportSuggest{
+   margin-top: 28rpx;
+}
+
+.sportH{
+  margin-bottom: 10rpx;
+  position: relative;
+}
+.sportH .span{
+  font-size: 30rpx;
+}
+.sportH .i{
+    display: block;
+    font-style: normal;
+    width: 38rpx;
+    height:  38rpx;
+    position: absolute;
+    top: -2rpx;
+    right: 0;
+}
+.sportH .i image{
+   width: 38rpx;
+   height: 38rpx;
+}
+
+.sportSuggest .suggestR{
+      position: relative;
+      width:100%;
+      height: 467rpx;
+}
+.sportSuggest .suggestR .suggestRTitle{
+     position: absolute;
+      width: 590rpx;
+      height: 210rpx;
+      top: 100rpx;
+      left: 67rpx;
+      color: #ffffff;  
+}
+.sportSuggest .suggestR  image{
+     width:100%;
+     height: 467rpx;
+}
+.sportSuggest .suggestR .pone,.sportSuggest .suggestR .pone2{
+   font-size: 30rpx;
+   display: block;
+}
+.sportSuggest .suggestR .pone{
+  margin-bottom: 20rpx;
+}
+
+.weightAdminister{
+    height: 100rpx;
+    width: 620rpx;
+    margin: 0 auto;
+    line-height: 100rpx;
+    font-size: 30rpx;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 58rpx;
+    margin-top: 60rpx;
+    background: linear-gradient(#fa9e19,#fb8f11);
+    border-radius: 50rpx;
+}
+
+#instructionMast{
+    width:100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    position: fixed;
+    top:0;
+    left: 0;
+    z-index: 18;
+    /* display: none; */
+}
+.instruction{
+    width: 507rpx;
+    height: 880rpx;
+    position: fixed;
+    background-color: #ffffff;
+    z-index: 20;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    /* display: none; */
+}
+.instruction  .close{
+        width: 32rpx;
+        height: 32rpx;
+        position: absolute;
+        top: 30rpx;
+        right: 26rpx;
+        cursor: pointer;
+        display: block;
+}
+.instruction  .close image{
+       width: 32rpx;
+        height: 32rpx;
+}
+.instruction  .h4{
+      font-size: 34rpx;
+      text-align: center;
+      padding-top: 30rpx;
+      margin-bottom: 28rpx;
+    }
+.instruction .instructionInner{
+    padding: 0  36rpx  0  32rpx;
+    color: #666666;
+    font-size: 28rpx;
+}
+
+.instructionInner .adaption{
+      margin-bottom: 10rpx;
+      color: #333333;
+}
+.instructionInner .ul{
+  margin-bottom: 30rpx;
+}
+
+.instructionInner .ul .li{
+      line-height: 120%;
+      display: block;
+}
+.instructionInner .insTitle .span{
+    color: #333333;
+ }
+
+ .instructionInner .insTitle .p{
+   margin-bottom: 10rpx;
+   line-height: 120%;
+ }

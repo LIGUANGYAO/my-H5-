@@ -1,0 +1,15 @@
+<!--pages/my/history/history.wxml-->
+<scroll-view class="history-box" bindscrolltolower='onScroll' scroll-y='true'>
+  <view class="rows">
+    <view class="card" wx:for='{{list}}' wx:key='*this'>
+      <view class="date">{{item.receiverTime}}</view>
+      <view class="text-1">您的体重</view>
+      <view class="text-2">
+        <view class="number">{{item.weight}}</view> 斤
+      </view>
+      <view class="address">{{(item.shopProvince + item.shopCity + item.shopDirect + item.shopAddress) || ''}}</view>
+    </view>
+  </view>
+  <spin wx:if='{{isLoading}}'></spin>
+  <view class="over" wx:if='{{isEnd}}'>我们是有底线的</view>
+</scroll-view>

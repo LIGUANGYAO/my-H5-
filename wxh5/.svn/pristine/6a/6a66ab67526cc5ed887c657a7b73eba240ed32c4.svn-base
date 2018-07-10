@@ -1,0 +1,53 @@
+/* pages/my/edit/edit.wxss */
+.feedback-box {
+	text-align: center;
+
+}
+image {
+  width: 220rpx;
+  height: 220rpx;
+  margin: 90rpx auto 0;
+  display: block;
+}
+.text-1 {
+  font-size: 30rpx;
+  color: #999;
+  line-height: 134rpx;
+}
+.form {
+  margin: 168rpx auto 0;
+  font-size: 34rpx;
+}
+text {
+  color: #f9860b;
+  vertical-align: middle;
+  display: inline-block;
+}
+picker {
+  display: inline-block;
+}
+input {
+  border: none;
+  border-bottom: 2rpx solid #f9860b;
+  margin: 0 0 0 15rpx;
+  outline: none;
+  text-align: center;
+  width: 380rpx;
+  display: inline-block;
+  vertical-align: middle;
+}
+.btn {
+  display: inline-block;
+  cursor: pointer;
+  clear: left;
+}
+
+.btn1 {
+  background: #f9860b;
+  color: #fff;
+  line-height: 65rpx;
+  width: 305rpx;
+  height: 65rpx;
+  border-radius: 30rpx;
+  margin: 63rpx auto;
+}
