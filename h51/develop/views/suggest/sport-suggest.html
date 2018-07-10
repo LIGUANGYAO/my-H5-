@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>运动建议</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css?v=time">
+    <link rel="stylesheet" type="text/css" href="./style.css?v=time">
+    <script type="text/javascript">
+        !function (a, b) { function c() { var b = f.getBoundingClientRect().width; b / i > 960 && (b = 960 * i); var c = b / 10; f.style.fontSize = c + "px", k.rem = a.rem = c } var d, e = a.document, f = e.documentElement, g = e.querySelector('meta[name="viewport"]'), h = e.querySelector('meta[name="flexible"]'), i = 0, j = 0, k = b.flexible || (b.flexible = {}); if (g) { console.warn("将根据已有的meta标签来设置缩放比例"); var l = g.getAttribute("content").match(/initial\-scale=([\d\.]+)/); l && (j = parseFloat(l[1]), i = parseInt(1 / j)) } else if (h) { var m = h.getAttribute("content"); if (m) { var n = m.match(/initial\-dpr=([\d\.]+)/), o = m.match(/maximum\-dpr=([\d\.]+)/); n && (i = parseFloat(n[1]), j = parseFloat((1 / i).toFixed(2))), o && (i = parseFloat(o[1]), j = parseFloat((1 / i).toFixed(2))) } } if (!i && !j) { var p = (a.navigator.appVersion.match(/android/gi), a.navigator.appVersion.match(/iphone/gi)), q = a.devicePixelRatio; i = p ? q >= 3 && (!i || i >= 3) ? 3 : q >= 2 && (!i || i >= 2) ? 2 : 1 : 1, j = 1 / i } if (f.setAttribute("data-dpr", i), !g) if (g = e.createElement("meta"), g.setAttribute("name", "viewport"), g.setAttribute("content", "initial-scale=" + j + ", maximum-scale=" + j + ", minimum-scale=" + j + ", user-scalable=no"), f.firstElementChild) f.firstElementChild.appendChild(g); else { var r = e.createElement("div"); r.appendChild(g), e.write(r.innerHTML) } a.addEventListener("resize", function () { clearTimeout(d), d = setTimeout(c, 300) }, !1), a.addEventListener("pageshow", function (a) { a.persisted && (clearTimeout(d), d = setTimeout(c, 300)) }, !1), "complete" === e.readyState ? e.body.style.fontSize = 14 * i + "px" : e.addEventListener("DOMContentLoaded", function () { e.body.style.fontSize = 14 * i + "px" }, !1), c(), k.dpr = a.dpr = i, k.refreshRem = c, k.rem2px = function (a) { var b = parseFloat(a) * this.rem; return "string" == typeof a && a.match(/rem$/) && (b += "px"), b }, k.px2rem = function (a) { var b = parseFloat(a) / this.rem; return "string" == typeof a && a.match(/px$/) && (b += "rem"), b } }(window, window.lib || (window.lib = {}));
+    </script>
+</head>
+
+<body>
+
+
+    <div id="app" class="container" v-cloak>
+        <loading :isloading="topData===null"></loading>
+        <div class="sport-content">
+            <!--运动建议-->
+            <div class="sport-content-top flex">
+                <p class="food-size">您的运动建议</p>
+                <p v-if="bodyTypeChinese=='偏轻'" class="sport-tips">
+                        建议您加强体育锻炼，尤其是负重锻炼，注重负重和有氧运动的结合，以负重练习为主，有氧练习不要太多。<br> 如：慢跑、负重跑步等。
+                </p>
+                <p v-if="bodyTypeChinese=='正常'" class="sport-tips">
+                    建议您平时可以保持适量的运动为主，<br>若期望拥有更完美身材，<br>建议您每周做5次以上中低强度的无氧运动。<br>如：跑步、深蹲、仰卧起座、平板撑等。
+                </p>
+                <p v-if="bodyTypeChinese=='偏重'" class="sport-tips">
+                    建议您每周做5次以上中低强度的有氧运动，<br>每次运40-50分钟，或是每周做3次以上高强度的有氧运动，<br>每次运动20分钟-30分钟，最好是全身性运动。<br> 如：跑步、游泳、健身操等。
+                </p>
+                <p v-if="bodyTypeChinese=='超重'" class="sport-tips">
+                    建议您每周应保证有5天进行至少40-50分钟的中等强度有氧运动，<br>或是每周3天进行至少20分钟的高强度有氧运动。 <br>如：跑步、游泳、健身操等。
+                </p>
+            </div>
+            <!--能量消耗计算-->
+            <div class="sport-content-bottom flex">
+                <div class="sport-suggest-calories">
+                    <p class="sport-suggest-hot" v-if="bodyTypeChinese=='偏轻'">
+                        为了保证您的健康又能达到较好的负重锻炼，您每周的运动消耗建议控制在{{bmr-200}}~{{bmr-100}}千卡路里，相当于：
+                    </p>
+                    <p class="sport-suggest-hot" v-if="bodyTypeChinese=='正常'">
+                        为了保证您的健康又能达到较好健美效果，您每周的运动消耗建议控制在{{bmr}}千卡路里，相当于：
+                    </p>
+                    <p class="sport-suggest-hot" v-if="bodyTypeChinese=='偏重'">
+                        为了保证您的健康又能达到较好的减重效果，您每周的运动消耗建议控制在{{bmr+300}}~{{bmr+400}}千卡路里，相当于：
+                    </p>
+                    <p class="sport-suggest-hot" v-if="bodyTypeChinese=='超重'">
+                        为了保证您的健康又能达到较好的减重效果，您每周的运动消耗建议控制在{{bmr+400}}~{{bmr+500}}千卡路里，相当于：
+                    </p>
+                    <ul v-if="bodyTypeChinese=='偏轻'">
+                            <li v-if="bmr-200>667"><span></span>散步{{((bmr-200-100-300)/167).toFixed(0)}}小时（每小时=167千卡）</li>
+                            <li v-if="bmr-200<=667"><span></span>散步{{((bmr-200-100)/167).toFixed(0)}}小时（每小时=167千卡）</li>
+                            <li><span></span>慢跑半小时（每小时=200千卡）</li>
+                            <li :style="{display:(bmr-200)>667?'flex':'none'}"><span></span>跑步半小时（每小时=300千卡）</li>
+                    </ul>
+                    <ul v-if="bodyTypeChinese=='正常'">
+                            <li v-if="bmr>667"><span></span>散步{{((bmr-300-200)/167).toFixed(0)}}小时（每小时=167千卡）</li>
+                            <li v-if="bmr<=667"><span></span>散步{{((bmr-200)/167).toFixed(0)}}小时（每小时=167千卡）</li>
+                            <li><span></span>慢跑半小时（每小时=200千卡）</li>
+                            <li :style="{display:bmr>667?'flex':'none'}"><span></span>跑步半小时（每小时=300千卡）</li>
+                    </ul>
+                    <ul v-if="bodyTypeChinese=='偏重'">
+                            <li v-if="bmr+300>667"><span></span>散步{{((bmr-200-300+400)/167).toFixed(0)}}小时（每小时=167千卡）</li>
+                            <li v-if="bmr+300<=667"><span></span>散步{{((bmr-200+400)/167).toFixed(0)}}小时（每小时=167千卡）</li>
+                            <li><span></span>慢跑半小时（每小时=200千卡）</li>
+                            <li :style="{display:(bmr+300)>667?'flex':'none'}"><span></span>跑步半小时（每小时=300千卡）</li>
+                    </ul>
+                    <ul v-if="bodyTypeChinese=='超重'">
+                            <li v-if="bmr+400>667"><span></span>散步{{((bmr-200-300+500)/167).toFixed(0)}}小时（每小时=167千卡）</li>
+                            <li v-if="bmr+400<=667"><span></span>散步{{((bmr-200+500)/167).toFixed(0)}}小时（每小时=167千卡）</li>
+                            <li><span></span>慢跑半小时（每小时=200千卡）</li>
+                            <li :style="{display:(bmr+400)>667?'flex':'none'}"><span></span>跑步半小时（每小时=300千卡）</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../../assets/js/require.js?v=time"></script>
+    <script src="../../assets/js/config.js?v=time"></script>
+    <script src="./sport.js?v=time"></script>
+</body>
+
+</html>

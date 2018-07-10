@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<title>共享免费秤</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="../../assets/css/iconfont.css?v=time">
+	<link rel="stylesheet" type="text/css" href="../../assets/css/iosSelect.css?v=time">
+	<link rel="stylesheet" type="text/css" href="./style.css?v=time">
+	<script type="text/javascript">
+		!function (a, b) { function c() { var b = f.getBoundingClientRect().width; b / i > 960 && (b = 960 * i); var c = b / 10; f.style.fontSize = c + "px", k.rem = a.rem = c } var d, e = a.document, f = e.documentElement, g = e.querySelector('meta[name="viewport"]'), h = e.querySelector('meta[name="flexible"]'), i = 0, j = 0, k = b.flexible || (b.flexible = {}); if (g) { console.warn("将根据已有的meta标签来设置缩放比例"); var l = g.getAttribute("content").match(/initial\-scale=([\d\.]+)/); l && (j = parseFloat(l[1]), i = parseInt(1 / j)) } else if (h) { var m = h.getAttribute("content"); if (m) { var n = m.match(/initial\-dpr=([\d\.]+)/), o = m.match(/maximum\-dpr=([\d\.]+)/); n && (i = parseFloat(n[1]), j = parseFloat((1 / i).toFixed(2))), o && (i = parseFloat(o[1]), j = parseFloat((1 / i).toFixed(2))) } } if (!i && !j) { var p = (a.navigator.appVersion.match(/android/gi), a.navigator.appVersion.match(/iphone/gi)), q = a.devicePixelRatio; i = p ? q >= 3 && (!i || i >= 3) ? 3 : q >= 2 && (!i || i >= 2) ? 2 : 1 : 1, j = 1 / i } if (f.setAttribute("data-dpr", i), !g) if (g = e.createElement("meta"), g.setAttribute("name", "viewport"), g.setAttribute("content", "initial-scale=" + j + ", maximum-scale=" + j + ", minimum-scale=" + j + ", user-scalable=no"), f.firstElementChild) f.firstElementChild.appendChild(g); else { var r = e.createElement("div"); r.appendChild(g), e.write(r.innerHTML) } a.addEventListener("resize", function () { clearTimeout(d), d = setTimeout(c, 300) }, !1), a.addEventListener("pageshow", function (a) { a.persisted && (clearTimeout(d), d = setTimeout(c, 300)) }, !1), "complete" === e.readyState ? e.body.style.fontSize = 14 * i + "px" : e.addEventListener("DOMContentLoaded", function () { e.body.style.fontSize = 14 * i + "px" }, !1), c(), k.dpr = a.dpr = i, k.refreshRem = c, k.rem2px = function (a) { var b = parseFloat(a) * this.rem; return "string" == typeof a && a.match(/rem$/) && (b += "px"), b }, k.px2rem = function (a) { var b = parseFloat(a) / this.rem; return "string" == typeof a && a.match(/px$/) && (b += "rem"), b } }(window, window.lib || (window.lib = {}));
+	</script>
+	<script>  
+		var _hmt = _hmt || [];
+		_hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+	</script>
+</head>
+
+<body>
+
+
+	<div id="app" class="container" v-cloak>
+
+		<loading :isloading="topData==null"></loading>
+
+        <!--注册弹框-->
+		<div class="registration-model-content">
+				<div class="registration-model">
+					<div class="registration-model-header">
+							参与pk榜，请先完善个人资料
+					</div>
+					<div class="registration-model-body">
+						<div class="stature">
+							<h3>你的身高</h3>
+							<div id="JS-stature" class="select">
+								<input type="text" data-id="150" value="150cm" disabled="disabled" readonly/>
+							</div>
+						</div>
+						<div class="birthdate">
+							<h3>您的年龄</h3>
+							<div id="JS-year" class="select">
+								<input type="text" data-id="20" value="20岁" disabled="disabled" readonly/>
+							</div>
+						</div>
+	
+						<p class="secret-world"><span>*</span>仅用作PK榜排行，我们会帮你保密</p>
+					</div>
+					<button class="registration-btn" @click="toRegister" :disabled="disabledStatus">{{disabledStatus ? '请稍后...' : '确定'}}</button>
+				</div>
+				<div class="mask"></div>
+			</div>
+
+
+		<div class="content info-index">
+			<div id="JS-dashboard" class="dashboard"></div>
+			<!--用户注册身高 年龄-->
+			<div class="weight_content" v-if="topData.userinfo.updateState==1">
+				<div class="weight_content_box">
+					<div class="weight_circles">
+						<p class="current_world">{{betweenWeight>0 ? "上升":"下降"}}</p>
+						<div class="current_weight">{{Math.abs(betweenWeight)}}kg</div>
+						<p :class="[betweenWeight>0 ? 'up_icon':'down_icon']"></p>
+					</div>
+					<div class="weight_content_left">上一次{{(topData.newestWeight-betweenWeight).toFixed(1)}}kg</div>
+					<div class="weight_content_right">{{bodyTypeChinese}}</div>
+				</div>
+				<p class="weight_range">标准范围{{sbw.weight_min}}~{{sbw.weight_max}}kg</p>
+			</div>
+
+			<div class="title_world" v-if="topData.userinfo.updateState==0">
+				<p>哈喽，欢迎<span>{{userinfo.nickname}}</span></p>
+				<p>想知道你的身材打败多少人吗~~</p>
+			</div>
+			<div class="check_bnt">
+				<span class="check_title">{{topData.userinfo.updateState==1 ? "查看健康分析" : "查看我的体型"}}</span><span><img src="../../assets/images/1/icon_forwa.png"></span>
+			</div>
+			<!--广告-->
+			<div class="home_ad" @click="_hmt.push(['_trackEvent','首页','广告1','广告1点击']);" id="home_ad">
+				<a href="javascript:;">
+					<img  src="../../assets/images/1/adup.jpg" alt="ad1">
+				</a>
+			</div>
+			<!--表头-->
+			<div class="title__head">
+				<img class="title__head__img" src="../../assets/images/5/title.png" alt="load">
+				<div class="title__head__info">
+					<div>最近体重变化</div>
+					<p>W E I G H T</p>
+				</div>
+			</div>
+
+			<!-- 体重图表数据 -->
+			<div class="weight-tab">
+				<span v-bind:class="[('item-' + v.active), {'active': weightTabActive == v.active}]" @click="weightTab(v.active);" v-for="v in weightTabArr">{{v.name}}</span>
+				<span class="share" @click="shareWeight();_hmt.push(['_trackEvent','首页','生成小卡片','生成小卡片按钮']);" v-show="initData != null && !noDataStatus">
+						生成体重小卡片<i class="iconfont icon-fenxiang"></i>
+				</span>
+			</div>
+
+			<div class="echars-box">
+				<span v-show="tipdisplayStatus">数据加载中....</span>
+				<span v-show="noDataStatus && !tipdisplayStatus">没有数据</span>
+				<div class="boxshadow echars-content">
+					<div id="JS_echars" class="change-report__echars"></div>
+					<div class="echars-tip" v-show="initData != null && !noDataStatus">提示：左右拖动可查看更多称重数据</div>
+				</div>
+			</div>
+
+
+			<!--广告-->
+			<div class="home_ad"   @click="_hmt.push(['_trackEvent', '首页', '广告2点击', '广告2'])">
+				<a href="javascript:;">
+					<img src="../../assets/images/1/dowmap.jpg" alt="ad2">
+				</a>
+			</div>
+			<!--首页入口-->
+			<div class="home-links">
+				<ul>
+					<li class="health-link">
+						<a href="javascript:;">
+							<img  src="../../assets/images/1/icon_health.png">
+							<span>健康小常识</span>
+						</a>
+					</li>
+					<li class="weight-link">
+						<a href="javascript:;">
+							<img src="../../assets/images/1/icon_pk.png">
+							<span>体重PK</span>
+						</a>
+					</li>
+					<li class="about-link">
+						<a href="javascript:;">
+							<img src="../../assets/images/1/icon_about.png">
+							<span>关于我们</span>
+						</a>
+					</li>
+					<li class="my-link">
+						<a href="javascript:;">
+							<img src="../../assets/images/1/icon_user.png">
+							<span>个人中心</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<!--弹窗 -->
+			<div class="modal" v-show="openModalStatus">
+				<div class="modal-mask"></div>
+				<div class="modal-body">
+					<div id="JS-modalContent" class="modal-body-content">
+						<div id="JS-generate-pictures" class="generate-pictures"></div>
+						<div class="modal-body-content-header">
+							<img id="JS-imageurl" :src="avatar" />
+							<span class="name">{{nickname}}</span>
+						</div>
+						<div class="wind-resistance">
+							<p class="friend-world">老铁，称完之后扎心了！</p>
+							<div class="wind-resistance-title">
+								<p class="wind-number">原来<span>{{nickname}}</span> 的体重属于{{shareWeigthWorld.windType}}</p>
+								<p class="weigth-idiom">{{shareWeigthWorld.windIdiom}}</p>
+							</div>
+							<div class="rabbit-image">
+								<img :src="shareImage" alt="load">
+							</div>
+							<div class="know-wind">
+								想知道你的体重属于几级抗风型吗？
+							</div>
+						</div>
+						<div class="code">
+							<div class="code-img">
+								<img :src="accountQRCode" />
+								<span>体重随时知</span>
+							</div>
+							<div class="code-introduce">
+								<h3>美至简智能体重秤</h3>
+								<p class="p1">全国各大城市数千台设备免费任您用</p>
+								<p class="p2">快捷称重 · 微信管理 · 健康数据 · 一看便知</p>
+							</div>
+						</div>
+					</div>
+					<div class="modal-body-footer">
+						<p>长按图片保存到相册，分享您的体重更多人知</p>
+						<a @click="closeShareModal"><i class="iconfont icon-guanbi"></i></a>
+					</div>
+				</div>
+			</div>
+
+			<footer-bar :index="0"></footer-bar>
+		</div>
+	</div>
+</body>
+
+<script src="../../assets/js/require.js?v=time"></script>
+<script src="../../assets/js/config.js?v=time"></script>
+<script src="./index.js?v=time"></script>
+
+</html>

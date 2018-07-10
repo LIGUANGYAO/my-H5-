@@ -1,0 +1,150 @@
+@import "../../assets/sass/_entry.scss";//引入sass mixin function等
+
+.food-content,.sport-content{
+    .flex{
+        display: flex;
+        justify-content: center;
+        position: relative;
+    }
+    width:100%;
+    background-image:url(../../assets/images/1/indexBg.png);
+    background-position-y: top;
+    background-size: 100% _(1298);
+    background-repeat: no-repeat;
+    background-color:#212123;
+
+    .food-content-top,.sport-content-top{
+        width:100%;
+        height: _(690);
+        background-image: url(../../assets/images/3/suggest-top.png);
+        background-position-y: top;
+        background-size: 100% _(690);
+        background-repeat: no-repeat;
+        .calories-tips{
+            width: _(455);
+            height: _(350);
+            margin-top: _(246);
+            color:#ffffff;
+            font-size: _(26);
+            p{
+                line-height: 170%;
+                text-align: center;
+            }
+        }
+        .food-size{
+          width: _(356);
+          height: _(34);
+          font-size: _(34);
+          color: #ff9500; 
+          position: absolute;
+          background-image: url(../../assets/images/3/topHeadBg.png);
+          background-repeat: no-repeat;
+          background-size: 100% _(18);
+          background-position: center;
+          top: _(168);
+          left: _(190);
+          text-align: center;
+        }
+        .sport-tips{
+            width: _(455);
+            height: _(350);
+            margin-top: _(246);
+            color:#ffffff;
+            font-size: _(26);
+            line-height: 170%;
+            text-align: center;
+        }
+    }
+    .food-content-bottom{
+        background-size: 100% _(672);
+        height: _(672);
+        background-image: url(../../assets/images/3/suggest-bottom.png);
+    }
+    .sport-content-bottom{
+        background-size: 100% _(756);
+        height: _(756);
+        background-image: url(../../assets/images/3/suggest-bottom2.png);
+    }
+    .food-content-bottom,.sport-content-bottom{
+        width:100%;
+        background-position-y: top;
+        background-repeat: no-repeat;
+
+        .sport-suggest-world,.food-suggest-world{
+            width: _(210);
+            height: _(34);
+            font-size: _(34);
+            color: #ffffff; 
+            position: absolute;
+            top: _(64);
+            left: _(270);
+        }
+
+        .food-suggest-calories,.sport-suggest-calories{
+            width: _(496);
+            margin: 0 auto;
+            margin-top: _(136);
+            .food-suggest-hot,.sport-suggest-hot{
+                font-size: _(26);
+                color: #20c8c2;
+                line-height: 170%;
+                text-align: center;
+            }
+            ul{
+                width: _(450);
+                margin:0 auto;
+                padding-top: _(30);
+                li{
+                    display: flex;
+                    align-items: center;
+                    color: #ffffff;
+                    font-size: _(24);
+                    height: _(50);
+                    span{
+                        display: block;
+                        width: _(10);
+                        height: _(10);
+                        background-color: #20c8c2;
+                        border-radius: 50%;
+                        margin-right: _(12);
+                    }
+                }
+            }
+           
+        }
+    }
+
+    .drink-suggest{
+        width:100%;
+        height: _(78);
+        background-image: url(../../assets/images/3/line.png);
+        background-position-y: top;
+        background-size: 100% _(78);
+        background-repeat: no-repeat;
+        margin-top: _(50);
+        p{
+            font-size: _(34);
+            color:#ffffff;
+            
+        }
+    }
+    .drink-suggest-box{
+        width: _(690);
+        margin: 0 auto;
+        p{
+            color: #20c8c2;
+            font-size: _(26);
+            line-height: 160%;
+        }
+        .water-num{
+            margin-top: _(40);
+            min-height: _(200);
+            padding-bottom: _(20);
+            img{
+                width: _(66);
+                height: _(122);
+                margin:0 _(10)  _(10) 0;
+            }
+        }
+    }
+}

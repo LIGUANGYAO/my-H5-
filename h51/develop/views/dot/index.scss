@@ -1,0 +1,426 @@
+@import "../../assets/sass/_entry.scss"; //引入sass mixin function等
+
+ img {
+  		max-width: none;  
+  	}
+
+$name: "my";
+
+.#{$name} {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+ .go-back{
+      position: absolute;
+      width:_(95);
+      height:_(95);
+      top:_(40);
+      left:_(40);
+      z-index: 5;
+      text-align: center;
+      line-height:_(95);
+      border-radius: 50%;
+      color:#ffffff;
+      background:rgba(0,0,0,0.4);
+      .icon-fanhui{
+        font-size:_(42);
+      }
+    }
+    .map {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+    }
+    .amap-icon img,
+    .markerlnglat {
+        width: _(66);
+        height: _(74);
+    }
+    .footer {
+        width: 100%;
+        position: absolute;
+        background: none;
+        bottom: 0;
+    }
+    .footer-content {
+        display: flex;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        justify-content: space-between;
+        -webkit-justify-content: space-between;
+        align-items: flex-end;
+        -webkit-align-items: flex-end;
+        flex-basis: 100%;
+        padding: 0 20px 20px 20px;
+        
+        .item {
+            display: block;
+        }
+        .item-location,
+        .item-refresh {
+            width: _(95);
+            height: _(95);
+            line-height: _(95);
+            text-align: center;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 1px 1px 10px #000000;
+            
+            i {
+                font-size: _(40);
+            }
+        }
+        .item-location {
+            .icon-leidatance {
+                font-size: _(55);
+                color: #7C7C7C;
+            }
+        }
+        .item-nearby-equipment {
+            height: _(95);
+            line-height: _(90);
+            background: #000000;
+            color: #ffffff;
+            font-size: _(40);
+            padding: 0 15px;
+            text-align: center;
+            border-radius: 50px;
+            box-shadow: 1px 1px 10px #ffffff;
+            
+            .icon-activity {
+                position: relative;
+                top: _(4);
+                margin-right: 6px;
+                font-size: _(46);
+            }
+        }        
+    }
+    
+    //当前网点点击查看信息
+    .current-dot-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        flex: 1;
+        width: 100%;
+        background: #1F2231;
+        
+        .go {
+            position: absolute;
+            top: _(-57);
+            width: 100%;
+            text-align: right;
+            
+            &-btn {
+                position: relative;
+                display: inline-block;
+                width: _(110);
+                height: _(110);
+                background: #36D2C7;
+                border-radius: 50%;
+                margin-right: _(60);
+                box-shadow: 1px 1px 3px #cccccc;
+                text-align: center;
+                color: #ffffff;
+                
+                .icon-quzheli {
+                    display: inline-block;
+                    padding-top: _(10);
+                    color: #ffffff;
+                    font-size: _(40);
+                }
+                
+                span {
+                   position: absolute;
+                   left: _(16);
+                   bottom: _(20);
+                   font-size: _(28)
+                }
+            }            
+        }
+        
+        .dot {
+            display: flex;
+            margin-top: _(30);
+            margin-left: _(30);
+            margin-right: _(30);
+            padding-bottom: _(30);
+            border-bottom: 1px solid #353946;
+            
+            &-img {
+                width: _(108);
+                height: _(108);
+                
+                img {
+                    max-width: _(108);
+                    height: _(108);
+                    border-radius: 50%;
+                }
+            }
+            &-address {
+                width: 100%;
+                padding-left: _(30);
+                
+                h3 {
+                    @include ellipsisLn(1);
+                    font-size: _(32);
+                    height: _(46);
+                    line-height: _(46);
+                    color: #ffffff;
+                    height: _(40);
+                }
+                p {
+                    @include ellipsisLn(2);
+                    color: #686B72;
+                    font-size: _(26);
+                    padding-top: _(8);
+                }
+            }
+        }
+        
+        .equipment-status {
+            padding: _(30);          
+                       
+            span {                
+                font-size: _(36);
+                font-weight: bold;
+                display: inline-block;
+                border-right: 1px solid #353946;
+                padding-right: _(40);
+                height: _(60);
+                line-height: _(60);
+                color: #686B72;
+            }
+            a {
+                width: _(150);
+                height: _(50);
+                line-height: _(50);
+                font-size: _(26);
+                display: inline-block;
+                margin-left: _(30);
+                padding-bottom: _(10);
+                text-align: center;
+                border-radius: 6px;                
+            }
+            .on-line,
+            .off-line {
+                color: #686B72;
+                border: 1px solid #686B72;                          
+            }
+            .off-line {
+               position: absolute;
+               right: 0;
+               margin-top: _(8);
+               margin-right: _(30);
+            }            
+            .line {
+                color: #36D2C7;
+                border: 1px solid #36D2C7;
+            }
+        }        
+    }
+        
+    //覆盖百度地图
+    .markTop {
+        margin:0.1rem 0;
+    }
+    .markTop > div {
+        padding: 0.1rem 0;
+        position: relative;
+    }
+    .markTop > div > i {
+        width: 20px;
+        height:23px;
+        display: inline-block;
+        position: absolute;
+        left:0;
+        top: 50%;
+        margin-top: -10px;
+        background-size: 90% 70%;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    .markTop > div > i.startLogo {
+        background-image:url('../../assets/images/startlogo.png');
+    }
+    .markTop > div > i.endLogo{
+        background-image:url('../../assets/images/endlogo.png');
+    }
+    .word {
+        padding-left: 0.4rem;
+    }
+    .markBottom {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-top:1px solid #eee;
+    }
+    .markBottom > div {
+        flex: 1;
+        text-align: center;
+        padding:0.1rem 0 0 0;
+        border-right: 1px solid #eee;
+    }
+    .markBottom > div:last-child {
+        border-right: none;
+    } 
+    
+    //附近网点列表弹窗
+    .nearbyModal {
+        width:  _(750);
+        height: 100%;
+        position: absolute;
+        top: 0;
+        z-index: 9996;
+        overflow-y: auto;
+        
+        &-mask {
+            background: #000000;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: 9998;
+            opacity: .6;
+        }
+        &-container {
+            position: fixed;
+            top: 40px;
+            z-index: 9999;
+            background: #232733;
+            height: 100%;
+            
+            .container-header {
+                position: fixed;
+                z-index: 9999;
+                width: _(750);
+                background: #232733;
+                padding: _(30);
+                border-bottom: 1px solid #353946;
+                
+                .search {
+                    position: relative;
+                    
+                    .icon-sousuo {
+                        position: absolute;
+                        top: 7px;
+                        left: 10px;
+                        color: #C5C5C5;
+                    }
+                    
+                    &-input {
+                        display: flex;
+                        
+                        input {
+                            height: 34px;
+                            line-height: 34px;
+                            padding-left: _(70);
+                            border: none;
+                            flex: 1;
+                            background: #7A7D86;
+                            border-radius: 6px;
+                            font-size: _(26);
+                            color: #C5C5C5;
+                        }
+                        a {
+                            display: inline-block;                       
+                            color: #8F959B;
+                            font-size: _(34);
+                            height: 34px;
+                            line-height: 34px;
+                            margin-left: _(15); 
+                            padding-left: _(15);                  
+                        }                        
+                    }                     
+                } 
+            }
+            .container-body {
+                height: 100%;
+                padding-top: _(142);              
+                overflow-y: auto;                
+                padding-left: _(30);
+                padding-right: _(30);
+                padding-bottom: _(70);
+                -webkit-overflow-scrolling: touch; 
+                .tip {
+                    width: _(690);
+                    padding-top: _(30);
+                    text-align: center;
+                    color: #ffffff;
+                }
+                
+                ul li {
+                    display: flex;
+                    align-items: center;
+                    padding-top: _(36);
+                    padding-bottom: _(36);
+                    border-bottom: 1px solid #353946;
+                    
+                    .item-content {
+                        width: _(582);
+                        padding-right: _(30);
+                                                
+                        h3 {
+                            display: flex;
+                            align-items: center;
+                            font-size: _(30);                          
+                            color: #ffffff;
+                            
+                            .on-line {
+                        
+                                display: inline-block;
+                                background: #35D2C7;
+                                color: #ffffff;
+                                border-radius: 3px;
+                                padding: _(4);
+                                margin-right: _(12);
+                                font-size: _(20);
+                                font-weight: normal;
+                            }
+                            .off-line {
+
+                                display: inline-block;
+                                background: #E86775;
+                                color: #ffffff;
+                                border-radius: 3px;
+                                padding: _(4);
+                                margin-right: _(12);
+                                font-size: _(20);
+                                font-weight: normal;
+                            }                                                         
+                        }
+                        p {
+                            @include text_wrap();
+                            @include ellipsisLn(2);
+                            font-size: _(26);
+                            padding-top: _(20);
+                            color: #707077;
+                        }
+                    }
+                    
+                    img {
+                        width: _(108);
+                        height: _(108);
+                        border-radius: 50%;
+                    }
+                }
+                
+                .load {
+                    margin-top: _(30);
+                    text-align: center;
+                    color: #ffffff;
+                    
+                }
+            }            
+        }               
+    }
+    .anchorBL {
+        display: none;
+    }   
+}

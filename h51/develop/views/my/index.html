@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title>个人中心</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css?v=time">
+	<link rel="stylesheet" type="text/css" href="../../assets/css/iosSelect.css?v=time">
+	<link rel="stylesheet" type="text/css" href="./style.css?v=time">
+	<script type="text/javascript">
+		! function (a, b) {
+			function c() {
+				var b = f.getBoundingClientRect().width;
+				b / i > 960 && (b = 960 * i);
+				var c = b / 10;
+				f.style.fontSize = c + "px", k.rem = a.rem = c
+			}
+			var d, e = a.document,
+				f = e.documentElement,
+				g = e.querySelector('meta[name="viewport"]'),
+				h = e.querySelector('meta[name="flexible"]'),
+				i = 0,
+				j = 0,
+				k = b.flexible || (b.flexible = {});
+			if (g) {
+				console.warn("将根据已有的meta标签来设置缩放比例");
+				var l = g.getAttribute("content").match(/initial\-scale=([\d\.]+)/);
+				l && (j = parseFloat(l[1]), i = parseInt(1 / j))
+			} else if (h) {
+				var m = h.getAttribute("content");
+				if (m) {
+					var n = m.match(/initial\-dpr=([\d\.]+)/),
+						o = m.match(/maximum\-dpr=([\d\.]+)/);
+					n && (i = parseFloat(n[1]), j = parseFloat((1 / i).toFixed(2))), o && (i = parseFloat(o[1]), j = parseFloat((1 / i).toFixed(2)))
+				}
+			}
+			if (!i && !j) {
+				var p = (a.navigator.appVersion.match(/android/gi), a.navigator.appVersion.match(/iphone/gi)),
+					q = a.devicePixelRatio;
+				i = p ? q >= 3 && (!i || i >= 3) ? 3 : q >= 2 && (!i || i >= 2) ? 2 : 1 : 1, j = 1 / i
+			}
+			if (f.setAttribute("data-dpr", i), !g)
+				if (g = e.createElement("meta"), g.setAttribute("name", "viewport"), g.setAttribute("content", "initial-scale=" + j + ", maximum-scale=" + j + ", minimum-scale=" + j + ", user-scalable=no"), f.firstElementChild) f.firstElementChild.appendChild(g);
+				else {
+					var r = e.createElement("div");
+					r.appendChild(g), e.write(r.innerHTML)
+				}
+			a.addEventListener("resize", function () {
+				clearTimeout(d), d = setTimeout(c, 300)
+			}, !1), a.addEventListener("pageshow", function (a) {
+				a.persisted && (clearTimeout(d), d = setTimeout(c, 300))
+			}, !1), "complete" === e.readyState ? e.body.style.fontSize = 14 * i + "px" : e.addEventListener("DOMContentLoaded", function () {
+				e.body.style.fontSize = 14 * i + "px"
+			}, !1), c(), k.dpr = a.dpr = i, k.refreshRem = c, k.rem2px = function (a) {
+				var b = parseFloat(a) * this.rem;
+				return "string" == typeof a && a.match(/rem$/) && (b += "px"), b
+			}, k.px2rem = function (a) {
+				var b = parseFloat(a) / this.rem;
+				return "string" == typeof a && a.match(/px$/) && (b += "rem"), b
+			}
+		}(window, window.lib || (window.lib = {}));
+	</script>
+</head>
+
+<body>
+	<div id="app" class="container" v-cloak>
+		<!--注册-->
+		<div class="individual-content">
+			<ul>
+				<li class="head-portrait">
+					<span>头像</span>
+					<div class="head-portrait-img">
+						<img :src="topData.userinfo.user.imageurl" alt="user">
+					</div>
+				</li>
+				<li class="individual-name" @click="modificationName">
+					<span>昵称</span>
+					<div class="li-right-box openBtn">
+						<input type="text" value="" id="nicknameInput">
+						<span class="individual-name-span"></span>
+						<img src="../../assets/images/more.svg">
+					</div>
+				</li>
+				<li>
+					<span>性别</span>
+					<div class="li-right-box">
+						<div id="JS-sex" class="select">
+							<input type="text" data-id="1" value="男" disabled="disabled" readonly/>
+						</div>
+						<img src="../../assets/images/more.svg">
+					</div>
+				</li>
+				<li>
+					<span>年龄</span>
+					<div class="li-right-box">
+						<div id="JS-year" class="select">
+							<input type="text" data-id="22" value="2岁" disabled="disabled" readonly/>
+						</div>
+						<img src="../../assets/images/more.svg">
+					</div>
+				</li>
+				<li>
+					<span>身高</span>
+					<div class="li-right-box">
+						<div id="JS-height" class="select">
+							<input type="text" data-id="150" value="150CM" disabled="disabled" readonly/>
+						</div>
+						<img src="../../assets/images/more.svg">
+					</div>
+				</li>
+				<li class="li-weigth">
+					<span>体重</span>
+					<div class="li-right-box">
+						<span class="user-weight">{{topData.newestWeight}}KG</span>
+					</div>
+				</li>
+				<li class="li-feedback" @click="retroactionInfor">
+					<span>用户反馈</span>
+					<div class="li-right-box">
+						<img src="../../assets/images/more.svg">
+					</div>
+				</li>
+			</ul>
+			<button class="add-btn" :disabled="disabledStatus" @click="toRegister">{{disabledStatus ? '请稍后...' : '确定修改'}}</button>
+		</div>
+		<!--反馈弹框-->
+		<div class="retroaction-model">
+			
+			<div class="user-name-infor">
+				<textarea class="textarea" rows="5" placeholder="请输入您要反馈的内容"></textarea>
+			</div>
+			<div class="btn-box">
+				<p class="cancel-btn" @click="cancelModl">取消</p>
+				<p class="save-btn" @click="informationFeedBack">反馈</p>
+			</div>
+		</div>
+		<div id="mask"></div>
+		<!--反馈信息提示成功弹框-->
+		<div class="tips-infor">反馈成功</div>
+	</div>
+
+	<script src="../../assets/js/require.js?v=time"></script>
+	<script src="../../assets/js/config.js?v=time"></script>
+	<script src="./index.js?v=time"></script>
+</body>
+
+</html>

@@ -1,0 +1,342 @@
+//@see 有背景的loading框
+function openLoading(msg) {
+    var loadingBox = document.createElement('div');
+    loadingBox.id = 'loadingBox';
+    loadingBox.style.cssText = "width:100%;height:100%;background-color: white;position:fixed;top:0;left:0;z-index:9999";
+    var loading = document.createElement('div');
+    loading.id = 'loading';
+    loading.style.cssText = "display:-webkit-box;-webkit-box-align:center; -webkit-box-pack: center;-webkit-box-orient: vertical; width:8em;height:7em;color:#ffffff;text-shadow: none; background:#000; opacity:0.4; border-radius:5px; position:fixed; top:50%; left:50%; margin-top:-3.5em;margin-left:-4em;z-index:9999";
+    var loadingImg = document.createElement('div');
+    loadingImg.id = 'loadingImg';
+    loadingImg.style.cssText = "width:5em;;height:4.5em;background-image:url('../../assets/images/logo.gif');background-size:65%;background-position:center;background-repeat:no-repeat;";
+    var loadingText = document.createElement('div');
+    loadingText.id = 'loadingText';
+    loadingText.innerHTML = msg
+    loadingText.style.cssText = "-webkit-box-flex:1;font-family:Microsoft Yahei;font-size:1.1em;color: rgb(153,207,22);"
+    loading.appendChild(loadingImg);
+    loading.appendChild(loadingText);
+    loadingBox.appendChild(loading);
+    document.getElementsByTagName('body')[0].appendChild(loadingBox);
+}
+//@see 关闭有背景的loading框
+function closeLoading() {
+    $("div#loadingBox").remove();
+}
+
+openLoading("加载中......");//在require加载模块js之前显示loading
+
+require(['jquery', 'Vue', 'FooterBar', 'common', 'api', 'bmi', 'bmr', 'Loading', 'sbw', 'bhr' ,'IScroll', 'iosSelect'], function ($, Vue, FooterBar, common, api, bmi, bmr, Loading, sbw, bhr, IScroll, iosSelect) {
+    $(function () {
+        //wx.hideOptionMenu();
+        common.globalAjax();//开始全局ajax监听
+        common.hideOptionMenu();//禁用分享等按钮
+        var FooterBar_vue = FooterBar.init();
+        var Loading_vue = Loading.init();
+
+        // settimeout 防止页面假死
+        setTimeout(function () {
+            new Vue({
+                el: '#app',
+                data: {
+                    stature: null, //身高
+                    statureArr: [], //身高数组
+                    isLoading: false,
+                    year: null,
+                    yearArr: [],
+                    topData: null,
+                    womenClass:'women',
+                    menClass:'men',
+                    dietTips:{
+                        thin: "根据您的称重数据，健康管家给出适合您的饮食建议：建议您有规律地进餐，定时定量，可形成条件反射，有......",
+                        standard: "根据您的称重数据，健康管家给出适合您的饮食建议：建议您平时可以舒缓身体，保持身材为主。清淡饮食，......",
+                        fatLv1: "建议您饮食清淡，少油盐，不要吃太油腻的东西，餐前吃绿色产品来分解脂肪，正餐和小吃都要均衡的搭配，......",
+                        superFat: "根据您的称重数据，健康管家给出适合您的饮食建议：建议您尽量以『蒸、煮、卤、拌、烤』五大不用油的方......"
+                    },
+                    sportTips:{
+                        thin: "根据您的称重数据，健康管家给出适合您的运动建议：建议您加强体育锻炼，尤其是负重锻炼，注重负重和有......",
+                        standard: "根据您的称重数据，健康管家给出适合您的运动建议：建议您平时可以保持适量的运动为主，若期望拥有更完......",
+                        fatLv1: "根据您的称重数据，健康管家给出适合您的运动建议：建议您每周做5次以上中低强度的有氧运动，每次运动......",
+                        superFat: "根据您的称重数据，健康管家给出适合您的运动建议：建议您每周应保证有5天进行至少40-50分钟的中等强......"
+                    },
+                    bmi:null,
+                    bmr: null,
+                    bhr:null,
+                    bodyTypeChinese: null,
+                    isLoading: false,
+                    disabledStatus: false,
+                    standartWeight: null,
+                    initRecord: null,
+                    modifyYear:null,
+                    age:null
+                },
+                components: {
+                    'footer-bar': FooterBar_vue,
+                    'loading': Loading_vue
+                },
+                created: function () {
+                    
+                    this.getHometTopData();
+                    this.bmi = bmi.toMath( this.topData.newestWeight ,this.topData.userinfo.height);
+                    if(this.topData.userinfo.updateState==0){
+                        this.stature=150;
+                        this.year=20;
+                        this.age=this.getAge(20);
+                        this.bhr=null;
+                        this.bmr=null;
+                    }else if(this.topData.userinfo.updateState==1){
+                        var stringYear = this.topData.userinfo.birthDate.toString();//计算1990 之前的年龄
+                        if(stringYear.length==4){
+                           this.modifyYear = this.getAge(this.topData.userinfo.birthDate);
+                           this.year= this.getAge(this.topData.userinfo.birthDate);
+                        }else{
+                            this.modifyYear = this.topData.userinfo.birthDate;
+                            this.year = this.topData.userinfo.birthDate;
+                        }
+                        //this.age = this.modifyYear;
+                        this.bhr = bhr.toMath(this.modifyYear);
+                        this.bmr = bmr.toMath(this.topData.userinfo.sex, this.topData.newestWeight, this.topData.userinfo.height, this.modifyYear);
+                    }
+                    this.bodyTypeChinese = bmi.getBodyTypeChinese( this.bmi.bmi);
+                    this.standartWeight = sbw.toMath(this.topData.userinfo.sex, this.topData.userinfo.height).weight;
+                    this.getPresentWeightRecord(1);
+                },
+                mounted: function () {
+
+                    this.init();
+                },
+                methods: {
+                     //初始化
+                     init: function () {
+                        this.statureSelect();
+                        this.yearSelect();
+                        this.linkTo();
+                        this.figuresAnimation();
+                    },
+                    //年龄计算
+                    getAge: function (param) {
+                        var myDate = new Date();
+                        var year = myDate.getFullYear(); //获取当前年份
+                        return year - param;
+                    },
+                    //页面滚动到底部执行指针和人物滑动
+                    figuresAnimation: function(){
+                        var _this = this;
+                        var offsetTop=$(".health-wolrd").offset().top;
+                        $(window).on('scroll.myScroll',function(){
+                            var scrollHeight=$(window).scrollTop();
+                            if(scrollHeight>=offsetTop+50){
+                                _this.indicator();
+                                $(window).off(".myScroll");
+                            }
+                        });
+                    },
+                                /*
+                    * 统计广告点击次数
+                    * @author Sea
+                    * @param {string} adId   广告唯一标识
+                    * @param {string} adName 广告名字
+                    * @param {int} adType  广告类型  1,首页；2，PK榜页；3,附近的秤；4，推荐页；5，我的中心页
+                    * @param {string} adUrl 广告连接
+                    * @date 2017-09-30
+                    * @return void
+                    */
+                    addAdCount: function(adId, adName, adType) {
+                        $.ajax({
+                            type: "POST",
+                            url: api.getClickADCount,
+                            data: {
+                                _p: common.getRequest()._p,
+                                adId: adId,
+                                name: adName,
+                                type: adType
+                            },
+                            success: function(response) {
+                                if(response.retcode == 1) {
+
+                                } else {
+                                    console.log(response);
+                                }
+                            }
+                        });
+                    },
+                    //建议页面跳转
+                    linkTo: function(){
+                        $(".diet-suggest").click(function(){
+                            common.linkTo2('../suggest/food-suggest.html');
+                            _czc.push(['_trackEvent', '健康分析','饮食建议','饮食建议跳转']);
+                        });
+                        $(".sports-suggest").click(function(){
+                            common.linkTo2('../suggest/sport-suggest.html');
+                            _czc.push(['_trackEvent', '健康分析','饮食建议','运动建议跳转']);
+                        });
+                    },
+                    //获取身高数据
+                    getStatureData: function () {
+                        for (var i = 1; i <= 200; i++) {
+                            var data = {
+                                id: i,
+                                value: i
+                            }
+                            this.statureArr.push(data);
+                        }
+                        return this.statureArr;
+                    },
+                    //获取年龄数据
+                    getYearData: function () {
+                        for (var i = 1; i <= 100; i++) {
+                            var data = {
+                                id: i,
+                                value: i
+                            }
+                            this.yearArr.push(data);
+                        }
+                        return this.yearArr;
+                    },
+                    //身高下拉选择弹窗事件
+                    statureSelect: function () {
+                        var that = this;
+                        $('#JS-stature').click(function () {
+                            var dom = $(this);
+                            var bankId = dom.find('input').attr('data-id');
+                            var bankSelect = new iosSelect(1, [that.getStatureData()], {
+                                itemHeight: 50,
+                                itemShowCount: 5,
+                                oneLevelId: bankId,
+                                callback: function (obj) {
+                                    that.stature = obj.value;
+                                    dom.find('input').val(obj.value + 'cm');
+                                    dom.find('input').attr('data-id', obj.id);
+                                }
+                            });
+                        });
+                    },
+                    //年龄下拉选择弹窗事件
+                    yearSelect: function () {
+                        var that = this;
+                        $('#JS-year').click(function () {
+                            var dom = $(this);
+                            var bankId = dom.find('input').attr('data-id');
+                            var bankSelect = new iosSelect(1, [that.getYearData()], {
+                                itemHeight: 50,
+                                itemShowCount: 5,
+                                oneLevelId: bankId,
+                                callback: function (obj) {
+                                    that.year = obj.value;
+                                    that.age = that.getAge(obj.value);
+                                    dom.find('input').val(obj.value + '岁');
+                                    dom.find('input').attr('data-id', obj.id);
+                                }
+                            });
+                        });
+                    },
+                    //提交注册
+                    toRegister: function () {
+                        var _this = this;
+                        if(!_this.isLoading){
+                            $.ajax({
+                                type: "POST",
+			            		url: api.updateOrSavePersoInfo,
+			            		data: {
+                                    _p: common.getRequest()._p,
+                                    sex: _this.topData.userinfo.user.sex,
+			            			height: _this.stature,
+                                    birthDate: _this.age,
+                                    updateState: '1',
+                                    nickname: _this.topData.userinfo.user.nickname
+                                },
+                                beforeSend: function(){
+                                    _this.isLoading = true;
+			            			_this.disabledStatus = true;
+                                },
+                                success: function(response){
+                                    if(response.retcode == 1){
+                                       // $(".registration-model-content").hide();
+                                        window.location.reload();
+                                    }else{
+                                        alert(response.retmsg);
+                                    }
+                                },
+                                complete: function(){
+                                    _this.isLoading = false;
+			            			_this.disabledStatus = false;
+                                }
+                            })
+                        }
+                    },
+                    //获取用户数据
+                    getHometTopData: function() {
+                        var _this = this;
+                        if(!_this.isLoading){
+                            $.ajax({
+                                type: "get",
+                                async: false,
+                                data: {
+                                    _p: common.getRequest()._p
+                                },
+                                url: api.getHomeTopDate,
+                                success: function (response) {
+                                     closeLoading();//关闭loading页面
+                                    if (response.retcode==1) {
+                                        _this.topData = response;                                
+                                    }
+                                }
+                            })
+                        }
+                    },
+                    indicator: function(){
+                        //指针位置
+                        var bmi = this.bmi.bmi;
+                        var bmiValue = this.bmi.bmiValue;
+                        var leftValue = 0;
+                        if( bmi <= bmiValue.thin ){//偏瘦
+                            leftValue = (bmi/bmiValue.thin)*20;
+                            if(bmi<=10){leftValue=4;};
+                        }else if( bmi >= bmiValue.standard && bmi < bmiValue.fat_lv1 ){//正常
+                            leftValue = ((bmi-bmiValue.standard)/(bmiValue.fat_lv1-bmiValue.standard))*20+25;
+                        }else if( bmi >= bmiValue.fat_lv1 && bmi <= bmiValue.super_fat ){//偏胖
+                            leftValue = ((bmi-bmiValue.fat_lv1)/(bmiValue.super_fat-bmiValue.fat_lv1))*20+50;
+                        }else if(bmi>=bmiValue.super_fat){//肥胖
+                            leftValue = (bmi/bmiValue.super_fat)*20+60;
+                            if(bmi>=42){leftValue=96;};
+                        }
+                        //男生女生人物跑动
+                        $(".men").stop().animate({"left":leftValue+"%"},2500,"swing",function(){
+                            $(".men").css({
+                              "background-image":"url(../../assets/images/menStop.png)"
+                            })
+                        });
+                        $(".women").stop().animate({"left":leftValue+"%"},2500,"swing",function(){
+                            $(".women").css({
+                            "background-image":"url(../../assets/images/womenStop.png)"
+                            })
+                        });
+                    $('#indicator_target').animate({"left":leftValue+"%"},2500,"swing");
+                    
+                    },
+                    //获取目前的体重记录
+                    getPresentWeightRecord: function(type){
+                        var _this = this;
+                        $.ajax({
+                            type: "POST",
+							async: false,
+							url: api.getPresentWeightRecord,
+							data: {
+                                _p: common.getRequest()._p,
+                                type: type
+							},
+							beforeSend: function() {
+
+                            },
+                            success: function(response){
+                                closeLoading();
+                                if(response.retcode == 1){
+                                    _this.initRecord = response.historyRecords.length;
+                                }
+                            }
+                        })
+                    }
+                }
+            })
+        }, 50)
+    });
+});

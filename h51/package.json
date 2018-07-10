@@ -1,0 +1,32 @@
+{
+  "name": "wapmzj",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "getpass": "^0.1.7",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-imagemin": "^3.3.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-postcss": "^7.0.0",
+    "gulp-rev-append": "^0.1.8",
+    "gulp-sass": "^3.1.0",
+    "gulp-sequence": "^0.4.6",
+    "gulp-uglify": "^3.0.0",
+    "gulp-watch": "^4.3.11",
+    "node-sass": "^4.5.3",
+    "source-map": "^0.5.7",
+    "vue-style-loader": "^3.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,202 @@
+@import '../../assets/sass/_entry.scss'; //引入sass mixin function等
+
+$name: 'my';
+$Blue: #36D2C7; //字体边框主颜色
+$bodyBack: #2c303e; //网页背景色
+$divBack: #1F2231; //DIV背景颜色
+$gray: #B3B3B7;
+
+.#{$name} {
+	background: $bodyBack;
+	position:relative;
+	 .go-back{
+	      position: absolute;
+	      width:_(95);
+	      height:_(95);
+	      top:_(40);
+	      left:_(40);
+	      z-index: 5;
+	      text-align: center;
+	      line-height:_(95);
+	      border-radius: 50%;
+	      color:#ffffff;
+	      display:block;
+	      background:rgba(0,0,0,0.4);
+      .icon-fanhui{
+       	  font-size:_(42);
+      }
+    }
+	
+	img {
+		border-style: none;
+	}
+	
+	.banner {
+		position: relative;
+
+        .go {
+            position: absolute;
+            bottom: _(-50);
+            width: 100%;
+            text-align: right;
+            z-index: 9999;
+            
+            &-btn {
+                position: relative;
+                display: inline-block;
+                width: _(110);
+                height: _(110);
+                background: #36D2C7;
+                border-radius: 50%;
+                margin-right: _(60);
+                box-shadow: 1px 1px 3px #cccccc;
+                text-align: center;
+                color: #ffffff;
+                
+                .icon-quzheli {
+                    display: inline-block;
+                    padding-top: _(10);
+                    color: #ffffff;
+                    font-size: _(40);
+                }
+                
+                span {
+                   position: absolute;
+                   left: _(16);
+                   bottom: _(20);
+                   font-size: _(28)
+                }
+            }            
+        }
+        		
+		img,
+		.swiper-slide img {
+			width: _(750);
+			height: _(400);
+		}
+	}
+	.dot-title {
+		height: _(90);
+		line-height: _(90);
+		padding-left: _(30);
+		padding-right: _(30);
+		background: $divBack;
+		
+		h3 {
+		    @include ellipsisLn(1);
+			font-size: _(34);
+			color: $Blue;
+		}
+	}
+	.merchant-information {
+		margin-top: _(16);
+		background: $divBack;
+		padding-left: _(30);
+		padding-right: _(30);
+		padding-bottom: _(30);
+		
+		h3 {
+			color: $gray;
+			height: _(80);
+			line-height: _(80);
+			border-bottom: 1px solid #353946;
+			font-size: _(26);
+		}
+		ul {
+			margin-top: _(30);
+			
+			li {
+                display: flex;
+                align-items: center;
+				color: $gray;
+				font-size: _(26);
+				margin-top: _(30);
+				
+				i {
+					color: $Blue;
+					border-radius: 50%;
+					margin-right: _(15);
+				}
+				img {
+				    width: _(34);
+				    height: _(34);
+				    margin-right: _(20);
+				}
+			}
+			.address {				
+				p {
+				    @include ellipsisLn(2);
+				    font-size: _(26);
+				}
+			}
+		}
+	}
+	.business-introduction {
+		margin-top: _(16);
+		background: $divBack;
+		padding-left: _(30);
+		padding-right: _(30);
+		padding-bottom: _(30);
+		
+		h3 {
+			color: $gray;
+			height: _(80);
+			line-height: _(80);
+			border-bottom: 1px solid #353946;
+			font-size: _(26);
+		}
+		p {
+		    
+			margin-top: _(20);
+			color: $gray;
+			line-height: _(36);
+			font-size: _(26);
+		}			
+	}
+	.equipment-status {
+		margin-top: _(16);
+		background: $divBack;
+		padding-left: _(30);
+		padding-right: _(30);
+		padding-bottom: _(30);
+		
+		span {
+		    font-size: _(24);
+		}
+		
+		h3 {
+		    font-size: _(24);
+			color: $gray;
+			height: _(80);
+			line-height: _(80);
+			border-bottom: 1px solid #353946;
+		}
+		.status-btn {
+			margin-top: _(30);
+			display: flex;
+			justify-content: space-between;
+			
+			a {
+                width: _(150);
+                height: _(50);			    
+                font-size: _(26);
+                display: inline-block;
+                padding-top: _(10);
+                border-radius: 6px;
+                text-align: center;		
+			}
+            .on-line,
+            .off-line {
+                color: #686B72;
+                border: 1px solid #686B72;                   
+            }
+            .off-line {
+               float: right;  
+            }            
+            .line {
+                color: #36D2C7;
+                border: 1px solid #36D2C7;
+            }		
+		}			
+	}
+}

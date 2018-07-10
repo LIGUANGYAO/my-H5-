@@ -1,0 +1,99 @@
+define(['jquery', 'count','cnzz'], function($, Count) {
+    'use strict';
+    //执行统计插件
+	Count.init();
+	
+    var exportsObj = {};
+
+    
+
+    exportsObj.globalAjax = function(){
+        //全局ajax
+        $(document).ajaxStart(function(){
+
+        }).ajaxSend(function(){
+
+        }).ajaxSuccess(function(evt, request, settings ,response){
+            if(response.retcode==-2001){
+                //未完善个人基本信息【需跳转至完善信息页面】
+                console.warn(response.retmsg);
+               // exportsObj.linkTo( '../register/index.html' );
+            }else if(response.retcode==-1){
+                console.warn(response.retmsg+response.retcode);
+            }else if(response.retcode==-1002){
+                console.warn(response.retmsg+response.retcode);
+            }else if(response.retcode==-2000){
+                console.warn(response.retmsg+response.retcode);
+            }
+        }).ajaxError(function(evt, request, settings ,response){
+            alert('网络错误' + request.status +'，请重试');
+            
+        }).ajaxComplete(function(){
+
+        }).ajaxStop(function(){
+
+        });
+    }
+
+    /**=======获取url参数=======*/
+    exportsObj.getRequest = function(){
+      var url = location.search; //获取url中"?"符后的字串
+      var theRequest = new Object();
+      if (url.indexOf("?") != -1) {
+        var str = url.substr(1);
+        var strs = str.split("&");
+        for(var i = 0; i < strs.length; i ++) {
+           theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
+        }
+      }
+      return theRequest;
+    }
+
+    //跳转
+    exportsObj.linkTo = function(url,par){
+        if(par){
+            window.location.href = url + '?' + par;
+        }else{
+            window.location.href = url + window.location.search;
+        }
+          if(typeof(Storage)!=="undefined"){
+              sessionStorage.siteUrl=window.location.href; 
+          }
+    }
+    //跳转
+    exportsObj.replaceTo = function(url,par){
+        if(par){
+            window.location.replace(url + '?' + par);
+        }else{
+            window.location.replace(url + window.location.search);
+        }
+    }
+	//对象转URL参数
+	exportsObj.jsonToQueryString = function(json) {
+	    return '?' + 
+	        Object.keys(json).map(function(key) {
+	            return encodeURIComponent(key) + '=' +
+	                encodeURIComponent(json[key]);
+	        }).join('&');		
+	}
+    //隐藏分享按钮
+    exportsObj.hideOptionMenu = function(){
+        function onBridgeReady(){
+            WeixinJSBridge.call('hideOptionMenu');
+        }
+        if (typeof WeixinJSBridge == "undefined"){
+            if( document.addEventListener ){
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+            }else if (document.attachEvent){
+                document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+            }
+        }else{
+            onBridgeReady();
+        }
+    	//wx.hideOptionMenu();
+    };
+
+    return exportsObj;
+
+});

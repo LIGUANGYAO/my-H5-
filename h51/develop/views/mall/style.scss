@@ -1,0 +1,39 @@
+@import "../../assets/sass/_entry.scss";//引入sass mixin function等
+@import "../../component/FooterBar/_index.scss";
+
+.mall-content{
+    width: 100%;
+    height: 100%;
+    background-image:url(../../assets/images/1/indexBg.png);
+    background-position-y: top;
+    background-size: 100% _(1298);
+    background-repeat: no-repeat;
+    background-color:#212123;
+    .build-box{
+        width:100%;
+        height: _(340);
+        position: absolute;
+        top: _(234);
+        left: 0;
+        display: flex;
+        align-content: center;
+        flex-direction: column;
+        .build-image{
+            width: _(298);
+            height: _(234);
+            margin:0 auto  _(65) auto;
+            img{
+                width: _(298);
+                height: _(234);
+            }
+        }
+        p{
+            color: #ff9500;
+            font-size: _(34);
+            text-align: center;
+            height: _(60);
+            line-height: _(60);
+        }
+    }
+   
+}

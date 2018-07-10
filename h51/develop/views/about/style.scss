@@ -1,0 +1,149 @@
+@import "../../assets/sass/_entry.scss";//引入sass mixin function等
+
+
+.about-content{
+    background-color: #ffffff;
+    width:100%;
+    height:100%;
+    .about-header{
+        width:100%;
+        height: _(820);
+        img{
+            width:100%;
+            height: _(820);
+        }
+    } 
+    .abut-administer{
+        text-align: center;
+        background-color: #f7f8fa;
+        padding-top: _(60);
+        h3{
+            color: #333;
+            font-size: _(30);
+            margin-bottom: _(60);
+        }
+        .abut-benefits-title{
+            width: _(260);
+            height: _(30);
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            color: #0154a4;
+            font-size: _(30);
+            font-weight: bold;
+            span{
+                width: _(30);
+                height: _(30);
+                background-color: #0154a4;
+                margin-right: _(12);
+            }
+        }
+
+        .health-img-list{
+            padding-top: _(74);
+            .clear{
+                clear: both;
+                content: '';
+                width:100%;
+                height: 0;
+            }
+            ul{
+                padding:0 _(80);
+                padding-bottom: _(60);
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                li:nth-child(1){
+                    margin-right: _(15);
+                    margin-bottom: _(10);
+                }
+                li:nth-child(3){
+                    margin-right: _(15);
+                }
+                li{
+                    width: _(270);
+                    height: _(380);
+                    img{
+                        width: _(220);
+                        height: _(220);
+                        margin-bottom: _(24);
+                    }
+                    h4{
+                        color: #333333;
+                        font-size: _(26);
+                        margin-bottom: _(15);
+                    }
+                    p{
+                        color: #9898a2;
+                        font-size: _(22);
+                        line-height: 150%;
+                    }
+                }
+            }
+        }
+        .advantage{
+            width:100%;
+            background-color:#ffffff;
+            padding-top: _(50); 
+            .introduction{
+                padding-top: _(20);
+                ul{
+                    padding: _(30)  _(26)  0  _(26);
+                    height: _(260);
+                    li:nth-child(2n){
+                        margin-right:0;
+                    }
+                    li{
+                       width: _(330);
+                       height: _(80);
+                       float: left;
+                       display: flex;
+                       justify-content: left;
+                       margin-bottom: _(20);
+                       margin-right: _(10);
+                       img{
+                           width: _(54);
+                           height: _(54);
+                           margin-right: _(18);
+                       }
+                       .introduction-content{
+                         text-align: left;
+                         h4{
+                             font-size: _(22);
+                             color: #333333;
+                             margin-bottom: _(10);
+                         }
+                         p{
+                             font-size: _(22);
+                             color: #9898a2;
+                         }
+                       }
+                    }
+                }
+            }
+            #swiper-content{
+                width: _(650);
+                margin:0 auto;
+                height: _(560);
+                padding-top: _(60);
+                .swiper-slide{
+                    height: _(440);
+                    img{
+                        width: _(440);
+                        height: _(440);
+                    }
+                }
+                
+            }
+        }
+        .about-footer{
+            width:100%;
+            height: _(375);
+            background: #282828;
+            img{
+                width:100%;
+                height: _(347);  
+            }
+        }
+    }
+}

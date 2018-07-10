@@ -1,0 +1,186 @@
+@import "../../assets/sass/_entry.scss";//引入sass mixin function等
+
+.individual-content{
+    width:100%;
+    height:100%;
+    background-image:url(../../assets/images/1/indexBg.png);
+    background-position-y: top;
+    background-size: 100% _(1298);
+    background-repeat: no-repeat;
+    background-color:#212123;
+    text-align: center;
+    .add-btn{
+        width: _(400);
+        height: _(80);
+        line-height: _(80);
+        text-align: center;
+        font-size: _(35);
+        color: #ffffff;
+        background-color: #ff9500;
+        margin:0 auto;
+        border-radius: _(50);
+        margin-top: _(140);
+        display: none;
+        border:0;
+    }
+    ul{
+       padding-left: _(30);
+        li.head-portrait{
+            height: _(160);
+            .head-portrait-img{
+                width: _(120);
+                height: _(120);
+                margin-right: _(30);
+                img{
+                    width: _(120);
+                    height: _(120);
+                    border-radius: _(10); 
+                }
+            }
+        }
+        li{
+            width: 100%;
+            height: _(110);
+            @include borderBottomAfter($color: #3a3b3d,$dpr:2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            span{
+                color: #8e8e93;
+                font-size: _(28);
+            }
+            .li-right-box{
+                font-size: _(28);
+                display: flex;
+                align-items: center;
+                margin-right: _(30);
+                img{
+                    width: _(35);
+                    height: _(47);
+                }
+                input{
+                    background: none;
+                    border:none;
+                    color: #ffffff;
+                    width: _(112);
+                    text-align: right;
+                    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "SimHei", sans-serif;
+                }
+                .individual-name-span{
+                    color: #ffffff;
+                    display: block;
+                }
+                input#nicknameInput{
+                    width: _(200);
+                    height: _(35);
+                    line-height: _(35);
+                    color:#ffffff;
+                    display: none;
+                    
+                }
+                #nicknameInput:focus{
+                    outline: none;
+                }
+                .user-weight{
+                    color: #ffffff;
+                    margin-right: _(35);
+                }
+            }
+            
+        }
+    }
+}
+.tips-infor{
+    width: _(350);
+    height: _(100);
+    text-align: center;
+    color: #ffffff;
+    font-size: _(26);
+    line-height: _(100);
+    border-radius: _(10);
+    background: rgba(0,0,0,0.5);
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 15;
+    display: none;
+}
+.retroaction-model,.user-name-model{
+    display: none;
+    width: 100%;
+    height: _(400);
+    background-color: #221d21;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    .user-name-infor{
+        position: relative;
+        .clear-button{
+            position: absolute;
+            width: _(32);
+            height: _(32);
+            right: _(30);
+            top: _(44);
+            z-index: 4;
+            img{
+                width: _(32);
+                height: _(32);
+            }
+        }
+    }
+}
+#mask{
+    position: fixed;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.5);
+    top: 0;
+    left: 0;
+    z-index: 8;
+    display: none;
+}
+.retroaction-model{
+  
+    textarea{
+        width:100%;
+        height: _(140);
+        margin-top: _(20);
+        border:0;
+        text-indent: _(10);
+        padding: _(10);
+        font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "SimHei", sans-serif;
+    }
+    textarea:focus{
+        outline: none;
+    }
+}
+.user-name-model{
+    input{
+        width:100%;
+        height: _(88);
+        margin-top: _(20);
+        border:0;
+        text-indent: _(10);
+    }
+}
+
+.user-name-model,.retroaction-model{
+    .btn-box{
+        display: flex;
+        justify-content: center;
+        margin-top: _(40);
+    .save-btn,.cancel-btn{
+        width: _(300);
+        height: _(90);
+        background-color: #ff9500;
+        margin:0 auto;
+        border-radius: _(10);
+        font-size: _(40);
+        color: #ffffff;
+        text-align: center;
+        line-height: _(90);
+    }
+ }
+}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<title>饮食建议</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css?v=time">
+	<link rel="stylesheet" type="text/css" href="./style.css?v=time">
+	<script type="text/javascript">
+		!function (a, b) { function c() { var b = f.getBoundingClientRect().width; b / i > 960 && (b = 960 * i); var c = b / 10; f.style.fontSize = c + "px", k.rem = a.rem = c } var d, e = a.document, f = e.documentElement, g = e.querySelector('meta[name="viewport"]'), h = e.querySelector('meta[name="flexible"]'), i = 0, j = 0, k = b.flexible || (b.flexible = {}); if (g) { console.warn("将根据已有的meta标签来设置缩放比例"); var l = g.getAttribute("content").match(/initial\-scale=([\d\.]+)/); l && (j = parseFloat(l[1]), i = parseInt(1 / j)) } else if (h) { var m = h.getAttribute("content"); if (m) { var n = m.match(/initial\-dpr=([\d\.]+)/), o = m.match(/maximum\-dpr=([\d\.]+)/); n && (i = parseFloat(n[1]), j = parseFloat((1 / i).toFixed(2))), o && (i = parseFloat(o[1]), j = parseFloat((1 / i).toFixed(2))) } } if (!i && !j) { var p = (a.navigator.appVersion.match(/android/gi), a.navigator.appVersion.match(/iphone/gi)), q = a.devicePixelRatio; i = p ? q >= 3 && (!i || i >= 3) ? 3 : q >= 2 && (!i || i >= 2) ? 2 : 1 : 1, j = 1 / i } if (f.setAttribute("data-dpr", i), !g) if (g = e.createElement("meta"), g.setAttribute("name", "viewport"), g.setAttribute("content", "initial-scale=" + j + ", maximum-scale=" + j + ", minimum-scale=" + j + ", user-scalable=no"), f.firstElementChild) f.firstElementChild.appendChild(g); else { var r = e.createElement("div"); r.appendChild(g), e.write(r.innerHTML) } a.addEventListener("resize", function () { clearTimeout(d), d = setTimeout(c, 300) }, !1), a.addEventListener("pageshow", function (a) { a.persisted && (clearTimeout(d), d = setTimeout(c, 300)) }, !1), "complete" === e.readyState ? e.body.style.fontSize = 14 * i + "px" : e.addEventListener("DOMContentLoaded", function () { e.body.style.fontSize = 14 * i + "px" }, !1), c(), k.dpr = a.dpr = i, k.refreshRem = c, k.rem2px = function (a) { var b = parseFloat(a) * this.rem; return "string" == typeof a && a.match(/rem$/) && (b += "px"), b }, k.px2rem = function (a) { var b = parseFloat(a) / this.rem; return "string" == typeof a && a.match(/px$/) && (b += "rem"), b } }(window, window.lib || (window.lib = {}));
+	</script>
+</head>
+
+<body>
+
+
+	<div id="app" class="container" v-cloak>
+
+		<loading :isloading="topData===null"></loading>
+
+		<div class="food-content">
+			<!--体重建议-->
+			<div class="food-content-top flex">
+				<p class="food-size">针对体重{{bodyTypeChinese}}的您</p>
+				<div class="calories-tips">
+					<p v-if="bodyTypeChinese=='偏轻'">
+						建议您有规律地进餐，定时定量，可形成条件反射，<br>有助于消化腺的分泌，更利于胃肠的吸收，从而达到食物增重的目的，<br>1.多吃蔬果，2.多补充维生素C，3.少吃油炸食物。
+					</p>
+					<p v-if="bodyTypeChinese=='正常'">
+						建议您平时可以舒缓身体，保持身材为主。<br>清淡饮食，主食粗细搭配，多吃蔬果，拒绝宵夜，少吃甜食饮料。<br>保持愉快的心情和充足的睡眠，只要继续保持以往的习惯就行。
+					</p>
+					<p v-if="bodyTypeChinese=='偏重'">
+						建议您尽量以『蒸、煮、卤、拌、烤』五大不用油的方式烹调食物，避免摄入过多高热量食物，1.多补充蔬果、益生菌，2.少糖少油少吃肉，3.不暴饮暴食。多吃纤维食物（增加饱足感）
+					</p>
+					<p v-if="bodyTypeChinese=='超重'">
+						建议您饮食清淡，少油盐，少糖，不要吃太油腻的东西，<br>餐前吃绿色产品来分解脂肪，正餐和小吃都要均衡的搭配，<br>饮食中均衡补充维生素、蛋白质等，少补充脂肪和热量。
+					</p>
+				</div>
+			</div>
+			<!--饮食建议-->
+			<div class="food-content-bottom flex">
+				<p class="food-suggest-world">您的饮食建议</p>
+				<div class="food-suggest-calories">
+					<p class="food-suggest-hot" v-if="bodyTypeChinese=='偏轻'">
+						为了保证您的健康又能继续保持身材，您每天的饮食摄入热量建议控制在{{bmr+300}}~{{bmr+500}}大卡之间，相当于：
+					</p>
+					<p class="food-suggest-hot" v-if="bodyTypeChinese=='正常'">
+						为了保证您的健康又能继续保持身材，您每天的饮食摄入热量建议控制在{{bmr}}大卡之间，相当于：
+					</p>
+					<p class="food-suggest-hot" v-if="bodyTypeChinese=='偏重'">
+						为了保证您的健康又能继续保持身材，您每天的饮食摄入热量建议控制在{{bmr-500}}~{{bmr-300}}大卡之间，相当于：
+					</p>
+					<p class="food-suggest-hot" v-if="bodyTypeChinese=='超重'">
+						为了保证您的健康又能继续保持身材，您每天的饮食摄入热量建议控制在{{bmr-600}}~{{bmr-400}}大卡之间，相当于：
+					</p>
+					<ul v-if="bodyTypeChinese=='偏轻'">
+						<li v-if="(bmr+300)>800"><span></span>{{((bmr-105-100-215-260+500)/120).toFixed(0)}}碗米饭（120千卡）</li>
+						<li v-if="(bmr+300)<=800"><span></span>{{((bmr-105-100-215+500)/120).toFixed(0)}}碗米饭（120千卡）</li>
+						<li v-if="(bmr+300)<=465"><span></span>{{((bmr-105-100+500)/120).toFixed(0)}}碗米饭（120千卡）</li>
+						<li><span></span>1个苹果（105千卡）</li>
+						<li><span></span>1个煎蛋（100千卡）</li>
+						<li :style="{display:(bmr+300)>465?'flex':'none'}"><span></span>1瓶牛奶（215千卡）</li>
+						<li :style="{display:(bmr+300)>800?'flex':'none'}"><span></span>1个玉米（260千卡）</li>
+					</ul>
+					<ul v-if="bodyTypeChinese=='正常'">
+							<li v-if="bmr>800"><span></span>{{((bmr-105-100-215-260)/120).toFixed(0)}}碗米饭（120千卡）</li>
+							<li v-if="bmr<=800"><span></span>{{((bmr-105-100-215)/120).toFixed(0)}}碗米饭（120千卡）</li>
+							<li v-if="bmr<=465"><span></span>{{((bmr-105-100)/120).toFixed(0)}}碗米饭（120千卡）</li>
+							<li><span></span>1个苹果（105千卡）</li>
+							<li><span></span>1个煎蛋（100千卡）</li>
+							<li :style="{display:bmr>465?'flex':'none'}"><span></span>1瓶牛奶（215千卡）</li>
+							<li :style="{display:bmr>800?'flex':'none'}"><span></span>1个玉米（260千卡）</li>
+					</ul>
+					<ul v-if="bodyTypeChinese=='偏重'">
+							<li v-if="(bmr-500)>800"><span></span>{{((bmr-105-100-215-260-300)/120).toFixed(0)}}碗米饭（120千卡）</li>
+							<li v-if="(bmr-500)<=800"><span></span>{{((bmr-105-100-215-300)/120).toFixed(0)}}碗米饭（120千卡）</li>
+							<li v-if="(bmr-500)<=465"><span></span>{{((bmr-105-100-300)/120).toFixed(0)}}碗米饭（120千卡）</li>
+							<li><span></span>1个苹果（105千卡）</li>
+							<li><span></span>1个煎蛋（100千卡）</li>
+							<li :style="{display:(bmr-500)>465?'flex':'none'}"><span></span>1瓶牛奶（215千卡）</li>
+							<li :style="{display:(bmr-500)>800?'flex':'none'}"><span></span>1个玉米（260千卡）</li>
+					</ul>
+					<ul v-if="bodyTypeChinese=='超重'">
+							<li v-if="(bmr-600)>800"><span></span>{{((bmr-105-100-215-260-400)/120).toFixed(0)}}碗米饭（120千卡）</li>
+							<li v-if="(bmr-600)<=800"><span></span>{{((bmr-105-100-215-400)/120).toFixed(0)}}碗米饭（120千卡）</li>
+							<li v-if="(bmr-600)<=465"><span></span>{{((bmr-105-100-400)/120).toFixed(0)}}碗米饭（120千卡）</li>
+							<li><span></span>1个苹果（105千卡）</li>
+							<li><span></span>1个煎蛋（100千卡）</li>
+							<li :style="{display:(bmr-600)>465?'flex':'none'}"><span></span>1瓶牛奶（215千卡）</li>
+							<li :style="{display:(bmr-600)>800?'flex':'none'}"><span></span>1个玉米（260千卡）</li>
+					</ul>
+				</div>
+			</div>
+			<!--饮水建议-->
+			<div class="drink-suggest flex">
+				<p>您的饮水量建议</p>
+			</div>
+			<!--饮水数量计算-->
+			<div class="drink-suggest-box">
+				<p>建议您每日喝水{{(topData.newestWeight*30).toFixed(0)}}ml~{{(topData.newestWeight*35).toFixed(0)}}ml，以帮助身体新陈谢，平均每天{{cup}}杯水，每杯水平均200ml。</p>
+				<div class="water-num">
+					<img src="../../assets/images/3/water.png" v-for="item in waterNum">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="../../assets/js/require.js?v=time"></script>
+	<script src="../../assets/js/config.js?v=time"></script>
+	<script src="./food.js?v=time"></script>
+</body>
+
+</html>

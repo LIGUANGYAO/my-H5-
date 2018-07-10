@@ -1,0 +1,252 @@
+html, body, .container {
+  background-color: #f8f8f8;
+  max-width: 960px;
+  height: 100%;
+  margin: 0 auto; }
+
+body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "SimHei", sans-serif;
+  overflow-x: hidden;
+  font-size: 14px !important; }
+
+ul, li {
+  list-style: none; }
+
+img {
+  max-width: 100%; }
+
+a {
+  text-decoration: none; }
+
+.clearfix:after {
+  clear: both;
+  content: '.';
+  display: block;
+  height: 0;
+  line-height: 0;
+  overflow: hidden; }
+
+*, :after, :before {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent; }
+
+input[type="tel"], input[type="text"], input[type="password"], textarea {
+  -webkit-appearance: none;
+  border-radius: 0; }
+
+[v-cloak] {
+  display: none; }
+
+body {
+  font-weight: 300; }
+
+.ellipsis {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal; }
+
+.ellipsisLn2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.ellipsisLn3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.freeLine {
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 1.2rem;
+  overflow: hidden;
+  z-index: 10;
+  background-color: #222; }
+  .bar + .content {
+    padding-bottom: 1.2rem; }
+
+.content {
+  min-height: 100%;
+  overflow: hidden; }
+
+.background--blue {
+  background-color: #1d2232; }
+
+.background--black {
+  background-color: #19181e; }
+
+.background--white {
+  background-color: white; }
+
+.background--grey {
+  background-color: #f1f1f1; }
+
+.fs24 {
+  font-size: 0.32rem; }
+
+.fs26 {
+  font-size: 0.34667rem; }
+
+.fs28 {
+  font-size: 0.37333rem; }
+
+.fs30 {
+  font-size: 0.4rem; }
+
+.fs36 {
+  font-size: 0.48rem; }
+
+.fs38 {
+  font-size: 0.50667rem; }
+
+.food-content, .sport-content {
+  width: 100%;
+  background-image: url(../../assets/images/1/indexBg.png);
+  background-position-y: top;
+  background-size: 100% 17.30667rem;
+  background-repeat: no-repeat;
+  background-color: #212123; }
+  .food-content .flex, .sport-content .flex {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    position: relative; }
+  .food-content .food-content-top, .food-content .sport-content-top, .sport-content .food-content-top, .sport-content .sport-content-top {
+    width: 100%;
+    height: 9.2rem;
+    background-image: url(../../assets/images/3/suggest-top.png);
+    background-position-y: top;
+    background-size: 100% 9.2rem;
+    background-repeat: no-repeat; }
+    .food-content .food-content-top .calories-tips, .food-content .sport-content-top .calories-tips, .sport-content .food-content-top .calories-tips, .sport-content .sport-content-top .calories-tips {
+      width: 6.06667rem;
+      height: 4.66667rem;
+      margin-top: 3.28rem;
+      color: #ffffff;
+      font-size: 0.34667rem; }
+      .food-content .food-content-top .calories-tips p, .food-content .sport-content-top .calories-tips p, .sport-content .food-content-top .calories-tips p, .sport-content .sport-content-top .calories-tips p {
+        line-height: 170%;
+        text-align: center; }
+    .food-content .food-content-top .food-size, .food-content .sport-content-top .food-size, .sport-content .food-content-top .food-size, .sport-content .sport-content-top .food-size {
+      width: 4.74667rem;
+      height: 0.45333rem;
+      font-size: 0.45333rem;
+      color: #ff9500;
+      position: absolute;
+      background-image: url(../../assets/images/3/topHeadBg.png);
+      background-repeat: no-repeat;
+      background-size: 100% 0.24rem;
+      background-position: center;
+      top: 2.24rem;
+      left: 2.53333rem;
+      text-align: center; }
+    .food-content .food-content-top .sport-tips, .food-content .sport-content-top .sport-tips, .sport-content .food-content-top .sport-tips, .sport-content .sport-content-top .sport-tips {
+      width: 6.06667rem;
+      height: 4.66667rem;
+      margin-top: 3.28rem;
+      color: #ffffff;
+      font-size: 0.34667rem;
+      line-height: 170%;
+      text-align: center; }
+  .food-content .food-content-bottom, .sport-content .food-content-bottom {
+    background-size: 100% 8.96rem;
+    height: 8.96rem;
+    background-image: url(../../assets/images/3/suggest-bottom.png); }
+  .food-content .sport-content-bottom, .sport-content .sport-content-bottom {
+    background-size: 100% 10.08rem;
+    height: 10.08rem;
+    background-image: url(../../assets/images/3/suggest-bottom2.png); }
+  .food-content .food-content-bottom, .food-content .sport-content-bottom, .sport-content .food-content-bottom, .sport-content .sport-content-bottom {
+    width: 100%;
+    background-position-y: top;
+    background-repeat: no-repeat; }
+    .food-content .food-content-bottom .sport-suggest-world, .food-content .food-content-bottom .food-suggest-world, .food-content .sport-content-bottom .sport-suggest-world, .food-content .sport-content-bottom .food-suggest-world, .sport-content .food-content-bottom .sport-suggest-world, .sport-content .food-content-bottom .food-suggest-world, .sport-content .sport-content-bottom .sport-suggest-world, .sport-content .sport-content-bottom .food-suggest-world {
+      width: 2.8rem;
+      height: 0.45333rem;
+      font-size: 0.45333rem;
+      color: #ffffff;
+      position: absolute;
+      top: 0.85333rem;
+      left: 3.6rem; }
+    .food-content .food-content-bottom .food-suggest-calories, .food-content .food-content-bottom .sport-suggest-calories, .food-content .sport-content-bottom .food-suggest-calories, .food-content .sport-content-bottom .sport-suggest-calories, .sport-content .food-content-bottom .food-suggest-calories, .sport-content .food-content-bottom .sport-suggest-calories, .sport-content .sport-content-bottom .food-suggest-calories, .sport-content .sport-content-bottom .sport-suggest-calories {
+      width: 6.61333rem;
+      margin: 0 auto;
+      margin-top: 1.81333rem; }
+      .food-content .food-content-bottom .food-suggest-calories .food-suggest-hot, .food-content .food-content-bottom .food-suggest-calories .sport-suggest-hot, .food-content .food-content-bottom .sport-suggest-calories .food-suggest-hot, .food-content .food-content-bottom .sport-suggest-calories .sport-suggest-hot, .food-content .sport-content-bottom .food-suggest-calories .food-suggest-hot, .food-content .sport-content-bottom .food-suggest-calories .sport-suggest-hot, .food-content .sport-content-bottom .sport-suggest-calories .food-suggest-hot, .food-content .sport-content-bottom .sport-suggest-calories .sport-suggest-hot, .sport-content .food-content-bottom .food-suggest-calories .food-suggest-hot, .sport-content .food-content-bottom .food-suggest-calories .sport-suggest-hot, .sport-content .food-content-bottom .sport-suggest-calories .food-suggest-hot, .sport-content .food-content-bottom .sport-suggest-calories .sport-suggest-hot, .sport-content .sport-content-bottom .food-suggest-calories .food-suggest-hot, .sport-content .sport-content-bottom .food-suggest-calories .sport-suggest-hot, .sport-content .sport-content-bottom .sport-suggest-calories .food-suggest-hot, .sport-content .sport-content-bottom .sport-suggest-calories .sport-suggest-hot {
+        font-size: 0.34667rem;
+        color: #20c8c2;
+        line-height: 170%;
+        text-align: center; }
+      .food-content .food-content-bottom .food-suggest-calories ul, .food-content .food-content-bottom .sport-suggest-calories ul, .food-content .sport-content-bottom .food-suggest-calories ul, .food-content .sport-content-bottom .sport-suggest-calories ul, .sport-content .food-content-bottom .food-suggest-calories ul, .sport-content .food-content-bottom .sport-suggest-calories ul, .sport-content .sport-content-bottom .food-suggest-calories ul, .sport-content .sport-content-bottom .sport-suggest-calories ul {
+        width: 6rem;
+        margin: 0 auto;
+        padding-top: 0.4rem; }
+        .food-content .food-content-bottom .food-suggest-calories ul li, .food-content .food-content-bottom .sport-suggest-calories ul li, .food-content .sport-content-bottom .food-suggest-calories ul li, .food-content .sport-content-bottom .sport-suggest-calories ul li, .sport-content .food-content-bottom .food-suggest-calories ul li, .sport-content .food-content-bottom .sport-suggest-calories ul li, .sport-content .sport-content-bottom .food-suggest-calories ul li, .sport-content .sport-content-bottom .sport-suggest-calories ul li {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-align: center;
+              -ms-flex-align: center;
+                  align-items: center;
+          color: #ffffff;
+          font-size: 0.32rem;
+          height: 0.66667rem; }
+          .food-content .food-content-bottom .food-suggest-calories ul li span, .food-content .food-content-bottom .sport-suggest-calories ul li span, .food-content .sport-content-bottom .food-suggest-calories ul li span, .food-content .sport-content-bottom .sport-suggest-calories ul li span, .sport-content .food-content-bottom .food-suggest-calories ul li span, .sport-content .food-content-bottom .sport-suggest-calories ul li span, .sport-content .sport-content-bottom .food-suggest-calories ul li span, .sport-content .sport-content-bottom .sport-suggest-calories ul li span {
+            display: block;
+            width: 0.13333rem;
+            height: 0.13333rem;
+            background-color: #20c8c2;
+            border-radius: 50%;
+            margin-right: 0.16rem; }
+  .food-content .drink-suggest, .sport-content .drink-suggest {
+    width: 100%;
+    height: 1.04rem;
+    background-image: url(../../assets/images/3/line.png);
+    background-position-y: top;
+    background-size: 100% 1.04rem;
+    background-repeat: no-repeat;
+    margin-top: 0.66667rem; }
+    .food-content .drink-suggest p, .sport-content .drink-suggest p {
+      font-size: 0.45333rem;
+      color: #ffffff; }
+  .food-content .drink-suggest-box, .sport-content .drink-suggest-box {
+    width: 9.2rem;
+    margin: 0 auto; }
+    .food-content .drink-suggest-box p, .sport-content .drink-suggest-box p {
+      color: #20c8c2;
+      font-size: 0.34667rem;
+      line-height: 160%; }
+    .food-content .drink-suggest-box .water-num, .sport-content .drink-suggest-box .water-num {
+      margin-top: 0.53333rem;
+      min-height: 2.66667rem;
+      padding-bottom: 0.26667rem; }
+      .food-content .drink-suggest-box .water-num img, .sport-content .drink-suggest-box .water-num img {
+        width: 0.88rem;
+        height: 1.62667rem;
+        margin: 0 0.13333rem 0.13333rem 0; }

@@ -1,0 +1,31 @@
+开发目录：develop
+生产目录：src
+
+
+
+
+提交SVN注意事项
+1.API接口JS不能加本地IP地址
+
+
+
+
+gulp使用命令
+1.开发执行命令：gulp dev
+2.生产发布执行命令： gulp build
+
+
+
+
+每次打包修改跨域域名 var baseUrl = 'http://192.168.1.234:8080/grg-web-scale';
+
+
+
+
+文件名加时间戳模块修改gulp-rev-append
+1.var FILE_DECL = /(?:href=|src=|url\()['|"]([^\s>"']+?)\?v=([^\s>"']+?)['|"]/gi;
+2.line = line.replace(groups[2], Date.parse(new Date()));
+
+
+
+require.js改源码

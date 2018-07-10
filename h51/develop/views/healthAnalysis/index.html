@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<title>健康分析</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css?v=time">
+	<link rel="stylesheet" type="text/css" href="../../assets/css/iosSelect.css?v=time">
+	<link rel="stylesheet" type="text/css" href="./style.css?v=time">
+	<script type="text/javascript">
+		!function (a, b) { function c() { var b = f.getBoundingClientRect().width; b / i > 960 && (b = 960 * i); var c = b / 10; f.style.fontSize = c + "px", k.rem = a.rem = c } var d, e = a.document, f = e.documentElement, g = e.querySelector('meta[name="viewport"]'), h = e.querySelector('meta[name="flexible"]'), i = 0, j = 0, k = b.flexible || (b.flexible = {}); if (g) { console.warn("将根据已有的meta标签来设置缩放比例"); var l = g.getAttribute("content").match(/initial\-scale=([\d\.]+)/); l && (j = parseFloat(l[1]), i = parseInt(1 / j)) } else if (h) { var m = h.getAttribute("content"); if (m) { var n = m.match(/initial\-dpr=([\d\.]+)/), o = m.match(/maximum\-dpr=([\d\.]+)/); n && (i = parseFloat(n[1]), j = parseFloat((1 / i).toFixed(2))), o && (i = parseFloat(o[1]), j = parseFloat((1 / i).toFixed(2))) } } if (!i && !j) { var p = (a.navigator.appVersion.match(/android/gi), a.navigator.appVersion.match(/iphone/gi)), q = a.devicePixelRatio; i = p ? q >= 3 && (!i || i >= 3) ? 3 : q >= 2 && (!i || i >= 2) ? 2 : 1 : 1, j = 1 / i } if (f.setAttribute("data-dpr", i), !g) if (g = e.createElement("meta"), g.setAttribute("name", "viewport"), g.setAttribute("content", "initial-scale=" + j + ", maximum-scale=" + j + ", minimum-scale=" + j + ", user-scalable=no"), f.firstElementChild) f.firstElementChild.appendChild(g); else { var r = e.createElement("div"); r.appendChild(g), e.write(r.innerHTML) } a.addEventListener("resize", function () { clearTimeout(d), d = setTimeout(c, 300) }, !1), a.addEventListener("pageshow", function (a) { a.persisted && (clearTimeout(d), d = setTimeout(c, 300)) }, !1), "complete" === e.readyState ? e.body.style.fontSize = 14 * i + "px" : e.addEventListener("DOMContentLoaded", function () { e.body.style.fontSize = 14 * i + "px" }, !1), c(), k.dpr = a.dpr = i, k.refreshRem = c, k.rem2px = function (a) { var b = parseFloat(a) * this.rem; return "string" == typeof a && a.match(/rem$/) && (b += "px"), b }, k.px2rem = function (a) { var b = parseFloat(a) / this.rem; return "string" == typeof a && a.match(/px$/) && (b += "rem"), b } }(window, window.lib || (window.lib = {}));
+	</script>
+	<script>  
+	   //声明_czc对象:
+	   var _czc = _czc || [];
+        //绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+       _czc.push(["_setAccount", "1265179904"]);
+  </script>
+</head>
+
+<body>
+
+
+	<div id="app" class="container" v-cloak>
+
+		<loading :isloading="topData==null"></loading>
+
+		<!--注册弹框-->
+		<div class="registration-model-content" v-show="topData.userinfo.updateState==0">
+			<div class="registration-model">
+				<div class="registration-model-header">
+					填写下面资料方便我们给你更精确的建议哦！
+				</div>
+				<div class="registration-model-body">
+					<div class="stature">
+						<h3>你的身高</h3>
+						<div id="JS-stature" class="select">
+							<input type="text" data-id="150" value="150cm" disabled="disabled" readonly/>
+						</div>
+					</div>
+					<div class="birthdate">
+						<h3>您的年龄</h3>
+						<div id="JS-year" class="select">
+							<input type="text" data-id="20" value="20岁" disabled="disabled" readonly/>
+						</div>
+					</div>
+					<p class="secret-world"><span>*</span>仅用作综合体质测试，我们会帮你保密</p>
+				</div>
+				<button class="registration-btn" @click="toRegister" :disabled="disabledStatus">{{disabledStatus ? '请稍后...' : '确定'}}</button>
+			</div>
+			<div class="mask"></div>
+		</div>
+
+
+
+		<div class="health-analysis">
+			<div class="health-header">
+				<div class="current-weigth-box flex">
+					<p>{{topData.newestWeight}}kg</p>
+					<span>当前体重</span>
+				</div>
+				<div class="sex-box flex">
+					<p>{{topData.userinfo.sex== "2" ? "女":"男" }}</p>
+					<span>性别</span>
+				</div>
+				<div class="height-box flex">
+					<p>{{topData.userinfo.height}}cm</p>
+					<span>身高</span>
+				</div>
+			</div>
+			<!--健康分析文字-->
+			<div class="health-wolrd">
+				<p class="bmi-title">您的- <span>BMI{{bmi.bmi}}</span>{{bodyTypeChinese}}</p>
+				<p class="ideal-weigth-title" v-if="bodyTypeChinese=='偏轻'">您的当前体重是{{topData.newestWeight}}kg，理想体重是{{standartWeight}}kg，<br>体型{{bodyTypeChinese}}。可以恰当的再长些肉，以达到理想的体型~</p>
+				<p class="ideal-weigth-title" v-if="bodyTypeChinese=='正常'">您的当前体重是{{topData.newestWeight}}kg，理想体重是{{standartWeight}}kg，<br>体型{{bodyTypeChinese}}。这是魔鬼的身材，关注度很高。<br>身材理想，请继续保持~</p>
+				<p class="ideal-weigth-title" v-if="bodyTypeChinese=='偏重'">您的当前体重是{{topData.newestWeight}}kg，理想体重是{{standartWeight}}kg，<br>您的体重超出标准重量<span>{{(topData.newestWeight-standartWeight).toFixed(1)}}kg</span>，<br>身材过重对个人形象会减分哦~</p>
+				<p class="ideal-weigth-title" v-if="bodyTypeChinese=='超重'">您的当前体重是{{topData.newestWeight}}kg，理想体重是{{standartWeight}}kg，<br>您的体重超出标准重量<span>{{(topData.newestWeight-standartWeight).toFixed(1)}}kg</span>，<br>积极减重，合理的饮食和运动能帮你健康减重~</p>
+				<p class="next-wight" v-if="initRecord==1">
+					下一次称重，我们为您分析更多健康数据，<br>称重次数越多，健康数据越精准哦~~
+				</p>
+				<p class="next-wight" v-if="initRecord==2">
+					体重管家已帮您保存了本次称重和<br>上次称重的称重记录，可对比查看体重变化。
+				</p>
+				<p class="next-wight" v-if="initRecord>=3">
+					体重管家已帮您保存了所有称重记录，<br>体重变化随时查看。<br>已综合分析了您的身体状况，<br>方便您更好的了解自己的健康状态。
+				</p>
+				<p class="wight-range">正常范围：{{bmi.bmiValue.standard}}～{{bmi.bmiValue.fat_lv1}}</p>
+			</div>
+
+			<div class="bmi-box">
+				<div class="bmi-box_calculate">
+					<img src="../../assets/images/3/BMI.png">
+				</div>
+				<div class="bmi-box__wrap">
+					<!--发光 线&点-->
+					<div class="bmi-box__line">
+						<span :data-num="bmi.weight.standard+'kg'"></span>
+						<span :data-num="bmi.weight.fat_lv1+'kg'"></span>
+						<span :data-num="bmi.weight.fat_lv2+'kg'"></span>
+					</div>
+					<!--临界体重-->
+					<div class="bmi-box__four">
+						<div class="thin line_width">
+							<p>偏轻</p>
+						</div>
+						<div class="standard line_width">
+							<p>正常</p>
+						</div>
+						<div class="fat_lv1 line_width">
+							<p>偏重</p>
+						</div>
+						<div class="super_fat line_width">
+							<p>超重</p>
+						</div>
+					</div>
+					<!--进度指针-->
+					<div class="bmi-box__text--top">
+						<div id="indicator_target"></div>
+						<div class="bmi-box__text--top__indicator" id="JS_indicator" :class="[topData.userinfo.sex==2?womenClass:topData.userinfo.sex==1?menClass:'']">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--基础代谢 燃烧率-->
+			<div class="metabolic-box">
+				<div class="metabolic-rate" v-if="bmr">
+					<p>您的基础代谢率为<span class="colorf9">{{bmr}}千卡/天</span>，相当于：{{((bmr-100-105-260-215)/120).toFixed(0)}}碗米饭+1个煎蛋+1个苹果+1瓶牛奶+1个玉米
+						<span v-if="bodyTypeChinese=='偏重' || bodyTypeChinese=='超重'">（减肥最佳摄入热量 + 基础代谢率= 耗能 - 500）</span></p>
+				</div>
+				<div class="heart-rate" v-if="bhr">
+					<p>您的燃烧心率为<span class="colorf9">{{bhr.bhr_min}}~{{bhr.bhr_max}}次/天</span>，(您的有氧运动时心率在此范围内较易消耗脂肪，做该心率范围内有氧运动，燃脂效果最好)</p>
+				</div>
+			</div>
+			<!--广告位-->
+			<div class="heath-ad" @click="_czc.push(['_trackEvent', '健康分析页', '健康饮食', '广告'])">
+				<a href="http://ty.jbfvip.com/">
+					<img src="../../assets/images/1/adthin.png" alt="ad">
+			    </a>
+			</div>
+			<!--建议-->
+			<div class="health-suggest">
+				<div class="diet-suggest">
+					<p class="diet-suggest-header">
+						<span>饮食建议</span>
+						<img src="../../assets/images/3/right.png">
+					</p>
+					<div class="suggest-world">
+						<p>	
+							{{bodyTypeChinese=="偏轻"? dietTips.thin:bodyTypeChinese=="正常"? dietTips.standard:bodyTypeChinese=="偏重"? dietTips.fatLv1:bodyTypeChinese=="超重"?
+							dietTips.superFat:''}}
+						</p>
+					</div>
+				</div>
+				<div class="sports-suggest">
+					<p class="sports-suggest-header">
+						<span>运动建议</span>
+						<img src="../../assets/images/3/right.png">
+					</p>
+					<div class="suggest-world">
+						<p>
+							{{bodyTypeChinese=="偏轻"? sportTips.thin:bodyTypeChinese=="正常"? sportTips.standard:bodyTypeChinese=="偏重"? sportTips.fatLv1:bodyTypeChinese=="超重"?
+							sportTips.superFat:''}}
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer-bar :index="1"></footer-bar>
+	</div>
+
+	<script src="../../assets/js/require.js?v=time"></script>
+	<script src="../../assets/js/config.js?v=time"></script>
+	<script src="./index.js?v=time"></script>
+</body>
+
+</html>

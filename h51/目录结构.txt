@@ -1,0 +1,349 @@
+│
+├─assets ----------------------------------------------------------------------------------------静态资源目录
+│  ├─css
+│  │      normalize.css
+│  │      swiper-3.4.2.min.css
+│  │      
+│  ├─images
+│  │  │  default.svg
+│  │  │  heart.svg
+│  │  │  loading-bars.svg
+│  │  │  
+│  │  ├─1
+│  │  │      1_PxCook.png
+│  │  │      BG.png
+│  │  │      BG2.png
+│  │  │      circle_normal.png
+│  │  │      circle_seleted.png
+│  │  │      clock.png
+│  │  │      index_icon_arrow.png
+│  │  │      index_icon_range.png
+│  │  │      index_icon_shape.png
+│  │  │      index_icon_standard.png
+│  │  │      index_icon_summary.png
+│  │  │      index_icon_weight.png
+│  │  │      index_p.png
+│  │  │      index_p_box.png
+│  │  │      
+│  │  ├─10
+│  │  │  │  10p_spot.png
+│  │  │  │  10p_square.png
+│  │  │  │  10_03.png
+│  │  │  │  10_PxCook.png
+│  │  │  │  
+│  │  │  ├─1
+│  │  │  │      1.png
+│  │  │  │      2.png
+│  │  │  │      3.png
+│  │  │  │      4.png
+│  │  │  │      5.png
+│  │  │  │      
+│  │  │  ├─2
+│  │  │  │      1.png
+│  │  │  │      2.png
+│  │  │  │      3.png
+│  │  │  │      4.png
+│  │  │  │      5.png
+│  │  │  │      
+│  │  │  ├─3
+│  │  │  │      1.gif
+│  │  │  │      2.gif
+│  │  │  │      3.gif
+│  │  │  │      4.gif
+│  │  │  │      5.gif
+│  │  │  │      6.gif
+│  │  │  │      
+│  │  │  └─4
+│  │  │          k.mp4
+│  │  │          
+│  │  ├─2
+│  │  │      2_PxCook.png
+│  │  │      mask.png
+│  │  │      pk_banner.png
+│  │  │      pk_icon_body.png
+│  │  │      pk_icon_p.png
+│  │  │      pk_icon_percentage.png
+│  │  │      pk_icon_ranking.png
+│  │  │      pk_icon_top.png
+│  │  │      pk_man_big.png
+│  │  │      pk_men_small.png
+│  │  │      pk_ranking_1.png
+│  │  │      pk_ranking_2.png
+│  │  │      pk_ranking_3.png
+│  │  │      pk_share.png
+│  │  │      pk_women_big.png
+│  │  │      pk_women_small.png
+│  │  │      praise_nomall.png
+│  │  │      praise_selected.png
+│  │  │      
+│  │  ├─3
+│  │  │      3 (2)_PxCook.png
+│  │  │      3_consume.png
+│  │  │      3_heat.png
+│  │  │      fat1.png
+│  │  │      fat2.png
+│  │  │      standard.png
+│  │  │      thin1.png
+│  │  │      thin2.png
+│  │  │      tips1.png
+│  │  │      tips2.png
+│  │  │      tips2_backup.png
+│  │  │      tips3.png
+│  │  │      tips4.png
+│  │  │      
+│  │  ├─4
+│  │  │      444_PxCook.png
+│  │  │      4p_man_nomal.png
+│  │  │      4p_men_seleted.png
+│  │  │      4p_result.png
+│  │  │      4p_woman_nomal.png
+│  │  │      4p_women_seleted.png
+│  │  │      4_BG.png
+│  │  │      4_BG2.png
+│  │  │      4_text.png
+│  │  │      
+│  │  ├─5
+│  │  │      a.png
+│  │  │      c.png
+│  │  │      dot.png
+│  │  │      line.png
+│  │  │      page5_line.png
+│  │  │      page5_title_box.png
+│  │  │      title.png
+│  │  │      yinhao1.png
+│  │  │      yinhao2.png
+│  │  │      
+│  │  ├─6
+│  │  │      66_PxCook.png
+│  │  │      drop.png
+│  │  │      page6_box1.png
+│  │  │      page6_box2.png
+│  │  │      page6_green_bg.png
+│  │  │      page6_green_bg2.png
+│  │  │      page6_number_bg.png
+│  │  │      page6_title_decorate1.png
+│  │  │      page6_title_decorate1_w.png
+│  │  │      page6_title_decorate2.png
+│  │  │      page6_title_decorate2_w.png
+│  │  │      page6_top.png
+│  │  │      
+│  │  ├─7
+│  │  │      10_PxCook.png
+│  │  │      7p_icon_bean.png
+│  │  │      7p_icon_drinks.png
+│  │  │      7p_icon_meat.png
+│  │  │      7p_icon_snacks.png
+│  │  │      7p_icon_staple.png
+│  │  │      
+│  │  ├─8
+│  │  │      10_PxCook.png
+│  │  │      8p_go.png
+│  │  │      8p_run.png
+│  │  │      8p_sport.png
+│  │  │      8p_swimming.png
+│  │  │      
+│  │  ├─9
+│  │  │      9p_bg.png
+│  │  │      9p_btn.png
+│  │  │      9p_man_nomal.png
+│  │  │      9p_men_seleted.png
+│  │  │      9p_women_nomal.png
+│  │  │      9p_women_seleted.png
+│  │  │      9_PxCook.png
+│  │  │      sex_bg.png
+│  │  │      
+│  │  ├─demo
+│  │  │      code.png
+│  │  │      timg.jpeg
+│  │  │      
+│  │  └─tab_bar_icon
+│  │          icon_idex_nomal.png
+│  │          icon_idex_nomal_back.png
+│  │          icon_idex_selected.png
+│  │          icon_idex_selected_back.png
+│  │          icon_my_nomal.png
+│  │          icon_my_nomal_back.png
+│  │          icon_my_selected.png
+│  │          icon_my_selected_back.png
+│  │          icon_pk_nomal.png
+│  │          icon_pk_nomal_back.png
+│  │          icon_pk_selected.png
+│  │          icon_pk_selected_back.png
+│  │          icon_report_nomal.png
+│  │          icon_report_nomal_back.png
+│  │          icon_report_selected.png
+│  │          icon_report_selected_back.png
+│  │          seleted_line.png
+│  │          
+│  ├─js
+│  │  │  config.js
+│  │  │  require.js
+│  │  │  
+│  │  ├─funs
+│  │  │      api.js
+│  │  │      bhr.js
+│  │  │      bmi.js
+│  │  │      bmr.js
+│  │  │      common.js
+│  │  │      sbw.js
+│  │  │      wechat.js
+│  │  │      
+│  │  └─lib
+│  │      │  echarts.js
+│  │      │  echarts.min.js
+│  │      │  jquery.min.js
+│  │      │  lodash.min.js
+│  │      │  swiper-3.4.2.jquery.min.js
+│  │      │  template.js
+│  │      │  vue.min.js
+│  │      │  zepto-1.2.0.js
+│  │      │  
+│  │      └─.cache
+│  │          └─dialog
+│  │                  dialog.js
+│  │                  
+│  └─sass
+│      │  _entry.scss
+│      │  
+│      ├─base
+│      │  │  _fn.scss
+│      │  │  
+│      │  ├─function
+│      │  │      _pxTorem.scss
+│      │  │      
+│      │  ├─mixin
+│      │  │      _background.scss
+│      │  │      _image.scss
+│      │  │      _mobile.scss
+│      │  │      _position.scss
+│      │  │      _setArrow.scss
+│      │  │      _setOnepx.scss
+│      │  │      _setTriangular.scss
+│      │  │      _text.scss
+│      │  │      
+│      │  ├─reset
+│      │  │      _reset.scss
+│      │  │      
+│      │  └─variable
+│      │          _global.scss
+│      │          
+│      ├─common
+│      │      _border.scss
+│      │      _cell.scss
+│      │      _common.scss
+│      │      
+│      └─widget
+│              _alert.scss
+│              
+├─component -----------------------------------------------------------------------------------//组件目录
+│  ├─FooterBar
+│  │      footerBar.js
+│  │      _index.scss
+│  │      
+│  ├─Loading
+│  │      loading.js
+│  │      
+│  └─MyCharts
+│          myCharts.js
+│          _index.scss
+│          
+├─sui
+│  ├─css
+│  │      sm-extend.css
+│  │      sm-extend.min.css
+│  │      sm.css
+│  │      sm.min.css
+│  │      
+│  └─js
+│          sm-city-picker.js
+│          sm-city-picker.min.js
+│          sm-extend.js
+│          sm-extend.min.js
+│          sm.js
+│          sm.min.js
+│          
+└─views ----------------------------------------------------------------------------------------模板目录
+    ├─heat
+    │      food.html
+    │      food.js
+    │      sport.html
+    │      sport.js
+    │      style.css
+    │      style.scss
+    │      
+    ├─home ------------------------------------------------------------------------------------------ 首页
+    │      index.html
+    │      index.js
+    │      logo.gif
+    │      logo2.gif
+    │      style.css
+    │      style.scss
+    │      
+    ├─jssdk
+    │      index.html
+    │      index.js
+    │      style.css
+    │      style.scss
+    │      
+    ├─my ------------------------------------------------------------------------------------------ 我的中心页
+    │      index.html
+    │      index.js
+    │      logo.gif
+    │      logo2.gif
+    │      style.css
+    │      style.scss
+    │      
+    ├─pk ------------------------------------------------------------------------------------------ PK页
+    │      index.html
+    │      index.js
+    │      logo.gif
+    │      logo2.gif
+    │      pk_share.html
+    │      style.css
+    │      style.scss
+    │      
+    ├─register ------------------------------------------------------------------------------------------ 注册
+    │      index.html
+    │      index.js
+    │      style.css
+    │      style.scss
+    │      update.html
+    │      update.js
+    │       
+    ├─reportList ------------------------------------------------------------------------------------------ 推荐页
+    │      index.html
+    │      index.js
+    │      logo.gif
+    │      logo2.gif
+    │      style.css
+    │      style.scss
+    │      
+    ├─report_black
+    │      fat_1.html
+    │      fat_2.html
+    │      index.html
+    │      index.js
+    │      style.css
+    │      style.scss
+    │      thin_1.html
+    │      thin_2.html
+    │      
+    ├─report_white
+    │      fat_1.html
+    │      fat_2.html
+    │      index.html
+    │      index.js
+    │      style.css
+    │      style.scss
+    │      thin_1.html
+    │      thin_2.html
+    │      
+    └─tips
+            gymnastics.html
+            index.js
+            shala.html
+            sinew.html
+            style.css
+            style.scss
+            waist.html
+            

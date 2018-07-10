@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<title>得分列表</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css?v=time">
+	<link rel="stylesheet" type="text/css" href="../../assets/css/iconfont.css?v=time">
+	<link rel="stylesheet" type="text/css" href="./style.css?v=time">
+	<script type="text/javascript">
+		//http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/flexible.js
+		!function (a, b) { function c() { var b = f.getBoundingClientRect().width; b / i > 960 && (b = 960 * i); var c = b / 10; f.style.fontSize = c + "px", k.rem = a.rem = c } var d, e = a.document, f = e.documentElement, g = e.querySelector('meta[name="viewport"]'), h = e.querySelector('meta[name="flexible"]'), i = 0, j = 0, k = b.flexible || (b.flexible = {}); if (g) { console.warn("将根据已有的meta标签来设置缩放比例"); var l = g.getAttribute("content").match(/initial\-scale=([\d\.]+)/); l && (j = parseFloat(l[1]), i = parseInt(1 / j)) } else if (h) { var m = h.getAttribute("content"); if (m) { var n = m.match(/initial\-dpr=([\d\.]+)/), o = m.match(/maximum\-dpr=([\d\.]+)/); n && (i = parseFloat(n[1]), j = parseFloat((1 / i).toFixed(2))), o && (i = parseFloat(o[1]), j = parseFloat((1 / i).toFixed(2))) } } if (!i && !j) { var p = (a.navigator.appVersion.match(/android/gi), a.navigator.appVersion.match(/iphone/gi)), q = a.devicePixelRatio; i = p ? q >= 3 && (!i || i >= 3) ? 3 : q >= 2 && (!i || i >= 2) ? 2 : 1 : 1, j = 1 / i } if (f.setAttribute("data-dpr", i), !g) if (g = e.createElement("meta"), g.setAttribute("name", "viewport"), g.setAttribute("content", "initial-scale=" + j + ", maximum-scale=" + j + ", minimum-scale=" + j + ", user-scalable=no"), f.firstElementChild) f.firstElementChild.appendChild(g); else { var r = e.createElement("div"); r.appendChild(g), e.write(r.innerHTML) } a.addEventListener("resize", function () { clearTimeout(d), d = setTimeout(c, 300) }, !1), a.addEventListener("pageshow", function (a) { a.persisted && (clearTimeout(d), d = setTimeout(c, 300)) }, !1), "complete" === e.readyState ? e.body.style.fontSize = 14 * i + "px" : e.addEventListener("DOMContentLoaded", function () { e.body.style.fontSize = 14 * i + "px" }, !1), c(), k.dpr = a.dpr = i, k.refreshRem = c, k.rem2px = function (a) { var b = parseFloat(a) * this.rem; return "string" == typeof a && a.match(/rem$/) && (b += "px"), b }, k.px2rem = function (a) { var b = parseFloat(a) / this.rem; return "string" == typeof a && a.match(/px$/) && (b += "rem"), b } }(window, window.lib || (window.lib = {}));
+	</script>
+</head>
+
+<body>
+	<div id="app" class="container" v-cloak>
+
+		<div class="score-content">
+			<div class="content-list" id="J-content-list">
+				<!--得分列表页-->
+				<ul>
+					<li v-for="(item,index) in orderList" key="index">
+						
+							<i class="score-user-infor-num" v-if="index==0">
+                        		<img src="../../assets/images/2/pk_ranking_1.png" alt="load">
+                   			</i>
+							<i class="score-user-infor-num" v-if="index==1">
+                        		<img src="../../assets/images/2/pk_ranking_2.png" alt="load">
+                   			</i>
+							<i class="score-user-infor-num" v-if="index==2">
+                        		<img src="../../assets/images/2/pk_ranking_3.png" alt="load">
+                   			</i>
+							<i class="score-user-infor-num" v-if="index>2">{{index+1}}</i>
+							<div class="user-portrait">
+								<img :src="item.imageUrl" alt="load">
+						  </div>
+							<div class="score-user-infor">
+							<div class="user-name">{{item.nickName}}</div>
+							<i class="user-sex" v-if="item.sex==1">
+                   				 <img src="../../assets/images/2/pk_men_small.png" alt="load" >
+                   			</i>
+							<i class="user-sex" v-if="item.sex==2">
+                      			<img src="../../assets/images/2/pk_Female_small.png" alt="load" >
+                   			</i>
+						</div>
+
+						<div class="score-cloum">
+							{{(item.weightScore.toFixed(2))}}分
+						</div>
+						<div class="score-good">
+							<!-- 红心，点击之后取消关注 -->
+							<span class="good-image" v-if="item.gId" @click.stop="toLike(item.openId,'cancelGood',item.gId,index)"><img src="../../assets/images/2/praise_selected.png" alt="load"></span>
+							<!-- 空心，点击之后关注 -->
+							<span class="good-image" v-if="!item.gId" @click.stop="toLike(item.openId,'putGood',false,index)"><img src="../../assets/images/2/praise_nomall.png" alt="load"></span>
+							<span class="good-num">{{item.goodNum}}</span>
+						</div>
+					</li>
+					<div  id="noLoading" class="lodeing">
+						<div class="load-cont" >没有更多数据</div>
+					</div>
+					<div id="loading-more" class="lodeing">
+						 <div class="loading-more-box">
+							<img src="../../assets/images/more.gif">
+						   <span class="load-cont" >正在加载数据...</span>
+						</div>
+					   </div>
+				</ul>
+				<p class="list-length">暂时没有数据</p> 
+			</div>
+		</div>
+
+		
+		
+	</div>
+
+	<script src="../../assets/js/require.js?v=time"></script>
+	<script src="../../assets/js/config.js?v=time"></script>
+	<script src="./score.js?v=time"></script>
+</body>
+
+</html>

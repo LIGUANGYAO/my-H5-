@@ -1,0 +1,119 @@
+@import "../../assets/sass/_entry.scss";//引入sass mixin function等
+
+$name: "my";
+
+.#{$name} {
+    background-position-y: top;
+    background-size: 100% auto;
+    background-color: #1d2232;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    
+    .map {
+        width: 100%;
+        height: 80%;
+    }
+    .footer {
+        position: relative;
+        flex: 1;
+        width: 100%;
+        background: #1F2231;
+        
+        .go {
+            position: absolute;
+            top: _(-57);
+            width: 100%;
+            text-align: right;
+            
+            &-btn {
+                position: relative;
+                display: inline-block;
+                width: _(110);
+                height: _(110);
+                background: #36D2C7;
+                border-radius: 50%;
+                margin-right: _(60);
+                box-shadow: 1px 1px 3px #cccccc;
+                text-align: center;
+                color: #ffffff;
+                
+                .icon-skip {
+                    display: inline-block;
+                    padding-top: _(10);
+                    color: #ffffff;
+                }
+                
+                span {
+                   position: absolute;
+                   left: _(16);
+                   bottom: _(20);
+                   font-size: _(28)
+                }
+            }            
+        }
+        
+        .dot {
+            display: flex;
+            margin-top: _(30);
+            margin-left: _(30);
+            margin-right: _(30);
+            border-bottom: 1px solid #686B72;
+            
+            &-img {
+                width: _(160);
+                height: _(160);
+            }
+            &-address {
+                width: 100%;
+                padding-left: _(30);
+                height: _(130);
+                
+                h3 {
+                    font-size: _(42);
+                    color: #ffffff;
+                }
+                p {
+                    color: #686B72;
+                    font-size: _(32);
+                    padding-top: _(10);
+                }
+            }
+        }
+        
+        .equipment-status {
+            padding: _(30);
+                       
+            span {
+                font-size: _(36);
+                display: inline-block;
+                border-right: 1px solid #686B72;
+                padding-right: _(40);
+                height: _(60);
+                line-height: _(60);
+                color: #686B72;
+            }
+            a {
+                font-size: _(36);
+                display: inline-block;
+                margin-left: _(30);
+                padding-top: _(10);
+                padding-bottom: _(10);
+                padding-left: _(60);
+                padding-right: _(60);
+                border-radius: 6px;                
+            }
+            .on-line {
+                border: 1px solid #36D2C7;
+                color: #36D2C7;
+            }
+            .off-line {
+                font-size: _(36);
+                color: #686B72;
+                border: 1px solid #686B72;
+                padding-top: _(10);
+                float: right;              
+            }
+        }        
+    }
+}

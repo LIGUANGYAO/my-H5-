@@ -1,0 +1,253 @@
+html, body, .container {
+  background-color: #f8f8f8;
+  max-width: 960px;
+  height: 100%;
+  margin: 0 auto; }
+
+body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "SimHei", sans-serif;
+  overflow-x: hidden;
+  font-size: 14px !important; }
+
+ul, li {
+  list-style: none; }
+
+img {
+  max-width: 100%; }
+
+a {
+  text-decoration: none; }
+
+.clearfix:after {
+  clear: both;
+  content: '.';
+  display: block;
+  height: 0;
+  line-height: 0;
+  overflow: hidden; }
+
+*, :after, :before {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent; }
+
+input[type="tel"], input[type="text"], input[type="password"], textarea {
+  -webkit-appearance: none;
+  border-radius: 0; }
+
+[v-cloak] {
+  display: none; }
+
+body {
+  font-weight: 300; }
+
+.ellipsis {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal; }
+
+.ellipsisLn2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.ellipsisLn3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.freeLine {
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 1.2rem;
+  overflow: hidden;
+  z-index: 10;
+  background-color: #222; }
+  .bar + .content {
+    padding-bottom: 1.2rem; }
+
+.content {
+  min-height: 100%;
+  overflow: hidden; }
+
+.background--blue {
+  background-color: #1d2232; }
+
+.background--black {
+  background-color: #19181e; }
+
+.background--white {
+  background-color: white; }
+
+.background--grey {
+  background-color: #f1f1f1; }
+
+.fs24 {
+  font-size: 0.32rem; }
+
+.fs26 {
+  font-size: 0.34667rem; }
+
+.fs28 {
+  font-size: 0.37333rem; }
+
+.fs30 {
+  font-size: 0.4rem; }
+
+.fs36 {
+  font-size: 0.48rem; }
+
+.fs38 {
+  font-size: 0.50667rem; }
+
+.about-content {
+  background-color: #ffffff;
+  width: 100%;
+  height: 100%; }
+  .about-content .about-header {
+    width: 100%;
+    height: 10.93333rem; }
+    .about-content .about-header img {
+      width: 100%;
+      height: 10.93333rem; }
+  .about-content .abut-administer {
+    text-align: center;
+    background-color: #f7f8fa;
+    padding-top: 0.8rem; }
+    .about-content .abut-administer h3 {
+      color: #333;
+      font-size: 0.4rem;
+      margin-bottom: 0.8rem; }
+    .about-content .abut-administer .abut-benefits-title {
+      width: 3.46667rem;
+      height: 0.4rem;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: left;
+          -ms-flex-pack: left;
+              justify-content: left;
+      color: #0154a4;
+      font-size: 0.4rem;
+      font-weight: bold; }
+      .about-content .abut-administer .abut-benefits-title span {
+        width: 0.4rem;
+        height: 0.4rem;
+        background-color: #0154a4;
+        margin-right: 0.16rem; }
+    .about-content .abut-administer .health-img-list {
+      padding-top: 0.98667rem; }
+      .about-content .abut-administer .health-img-list .clear {
+        clear: both;
+        content: '';
+        width: 100%;
+        height: 0; }
+      .about-content .abut-administer .health-img-list ul {
+        padding: 0 1.06667rem;
+        padding-bottom: 0.8rem;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap; }
+        .about-content .abut-administer .health-img-list ul li:nth-child(1) {
+          margin-right: 0.2rem;
+          margin-bottom: 0.13333rem; }
+        .about-content .abut-administer .health-img-list ul li:nth-child(3) {
+          margin-right: 0.2rem; }
+        .about-content .abut-administer .health-img-list ul li {
+          width: 3.6rem;
+          height: 5.06667rem; }
+          .about-content .abut-administer .health-img-list ul li img {
+            width: 2.93333rem;
+            height: 2.93333rem;
+            margin-bottom: 0.32rem; }
+          .about-content .abut-administer .health-img-list ul li h4 {
+            color: #333333;
+            font-size: 0.34667rem;
+            margin-bottom: 0.2rem; }
+          .about-content .abut-administer .health-img-list ul li p {
+            color: #9898a2;
+            font-size: 0.29333rem;
+            line-height: 150%; }
+    .about-content .abut-administer .advantage {
+      width: 100%;
+      background-color: #ffffff;
+      padding-top: 0.66667rem; }
+      .about-content .abut-administer .advantage .introduction {
+        padding-top: 0.26667rem; }
+        .about-content .abut-administer .advantage .introduction ul {
+          padding: 0.4rem 0.34667rem 0 0.34667rem;
+          height: 3.46667rem; }
+          .about-content .abut-administer .advantage .introduction ul li:nth-child(2n) {
+            margin-right: 0; }
+          .about-content .abut-administer .advantage .introduction ul li {
+            width: 4.4rem;
+            height: 1.06667rem;
+            float: left;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: left;
+                -ms-flex-pack: left;
+                    justify-content: left;
+            margin-bottom: 0.26667rem;
+            margin-right: 0.13333rem; }
+            .about-content .abut-administer .advantage .introduction ul li img {
+              width: 0.72rem;
+              height: 0.72rem;
+              margin-right: 0.24rem; }
+            .about-content .abut-administer .advantage .introduction ul li .introduction-content {
+              text-align: left; }
+              .about-content .abut-administer .advantage .introduction ul li .introduction-content h4 {
+                font-size: 0.29333rem;
+                color: #333333;
+                margin-bottom: 0.13333rem; }
+              .about-content .abut-administer .advantage .introduction ul li .introduction-content p {
+                font-size: 0.29333rem;
+                color: #9898a2; }
+      .about-content .abut-administer .advantage #swiper-content {
+        width: 8.66667rem;
+        margin: 0 auto;
+        height: 7.46667rem;
+        padding-top: 0.8rem; }
+        .about-content .abut-administer .advantage #swiper-content .swiper-slide {
+          height: 5.86667rem; }
+          .about-content .abut-administer .advantage #swiper-content .swiper-slide img {
+            width: 5.86667rem;
+            height: 5.86667rem; }
+    .about-content .abut-administer .about-footer {
+      width: 100%;
+      height: 5rem;
+      background: #282828; }
+      .about-content .abut-administer .about-footer img {
+        width: 100%;
+        height: 4.62667rem; }

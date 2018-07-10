@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title>附近网点</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- 避免IE使用兼容模式 -->
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="../../assets/css/iconfont.css?v=time">
+	<link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css?v=time">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/swiper-3.4.2.min.css?v=time">	
+	<link rel="stylesheet" type="text/css" href="./dot_details.css?v=time">
+	<script type="text/javascript">
+	  //http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/flexible.js
+	  !function(a,b){function c(){var b=f.getBoundingClientRect().width;b/i>960&&(b=960*i);var c=b/10;f.style.fontSize=c+"px",k.rem=a.rem=c}var d,e=a.document,f=e.documentElement,g=e.querySelector('meta[name="viewport"]'),h=e.querySelector('meta[name="flexible"]'),i=0,j=0,k=b.flexible||(b.flexible={});if(g){console.warn("将根据已有的meta标签来设置缩放比例");var l=g.getAttribute("content").match(/initial\-scale=([\d\.]+)/);l&&(j=parseFloat(l[1]),i=parseInt(1/j))}else if(h){var m=h.getAttribute("content");if(m){var n=m.match(/initial\-dpr=([\d\.]+)/),o=m.match(/maximum\-dpr=([\d\.]+)/);n&&(i=parseFloat(n[1]),j=parseFloat((1/i).toFixed(2))),o&&(i=parseFloat(o[1]),j=parseFloat((1/i).toFixed(2)))}}if(!i&&!j){var p=(a.navigator.appVersion.match(/android/gi),a.navigator.appVersion.match(/iphone/gi)),q=a.devicePixelRatio;i=p?q>=3&&(!i||i>=3)?3:q>=2&&(!i||i>=2)?2:1:1,j=1/i}if(f.setAttribute("data-dpr",i),!g)if(g=e.createElement("meta"),g.setAttribute("name","viewport"),g.setAttribute("content","initial-scale="+j+", maximum-scale="+j+", minimum-scale="+j+", user-scalable=no"),f.firstElementChild)f.firstElementChild.appendChild(g);else{var r=e.createElement("div");r.appendChild(g),e.write(r.innerHTML)}a.addEventListener("resize",function(){clearTimeout(d),d=setTimeout(c,300)},!1),a.addEventListener("pageshow",function(a){a.persisted&&(clearTimeout(d),d=setTimeout(c,300))},!1),"complete"===e.readyState?e.body.style.fontSize=14*i+"px":e.addEventListener("DOMContentLoaded",function(){e.body.style.fontSize=14*i+"px"},!1),c(),k.dpr=a.dpr=i,k.refreshRem=c,k.rem2px=function(a){var b=parseFloat(a)*this.rem;return"string"==typeof a&&a.match(/rem$/)&&(b+="px"),b},k.px2rem=function(a){var b=parseFloat(a)/this.rem;return"string"==typeof a&&a.match(/px$/)&&(b+="rem"),b}}(window,window.lib||(window.lib={}));
+	</script>
+</head>
+<body>	
+	<div id="app" class="container" v-cloak>	
+		<div class="content my">
+			<p class="go-back" @click="goNearMap">
+			 <i class="iconfont icon-fanhui"></i>
+			</p>
+			<!-- banner -->
+			<div class="banner">
+				<div class="go" @click="returnHome">
+					<div class="go-btn">
+						<i class="iconfont icon-quzheli"></i>
+						<span>去这里</span>
+					</div>
+				</div>
+				<!-- Swiper -->
+				<div class="swiper-container" v-if="imgData.length > 0">
+				    <div class="swiper-wrapper">
+						<div class="swiper-slide" v-for="v in imgData"><img v-bind:src="v.imgurl" /></div>
+				    </div>
+				    <!-- Add Pagination -->
+				    <div class="swiper-pagination"></div>
+				</div>
+				
+				<img v-if="imgData.length == 0" src="../../../src/assets/images/test5.jpg" />
+			</div>
+			
+			<!-- 商家名称 -->
+			<div class="dot-title">
+				<h3>{{devicename}}</h3>
+			</div>
+			
+			<!-- 商家信息 -->
+			<div class="merchant-information">
+				<h3>商家信息</h3>
+				<ul>
+					<li class="address">
+						<img src="../../assets/images/dot_location.png" />
+						<p>距离你{{distance}}米 | {{address}}</p>
+					</li>
+					<li>
+						<img src="../../assets/images/dot_time.png" />
+						营业时间：{{serviceTime}}</li>
+					<li>
+						<img src="../../assets/images/dot_tal.png" />
+						服务电话：{{tel}}</li>
+				</ul>
+			</div>
+			
+			<!-- 商家介绍 -->
+			<div class="business-introduction">
+				<h3>商家介绍</h3>
+				<p>{{introduce}}</p>
+			</div>
+			
+			<!-- 设备状态 -->
+			<div class="equipment-status">
+				<h3>设备状态</h3>
+				<div class="status-btn">
+					<a class="on-line" :class="{'line': appstatu == 1}">在线</a>
+					<a class="off-line" :class="{'line': appstatu != 1}">离线</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="../../assets/js/require.js?v=time"></script>
+	<script src="../../assets/js/config.js?v=time"></script>
+	<script src="./dot_details.js?v=time"></script>
+</body>
+</html>	

@@ -1,0 +1,10 @@
+@import "../../assets/sass/base/_fn.scss";//引入sass mixin function等
+
+.change-report__echars{
+    z-index: 1;
+    position: relative;
+    display: block;
+    height: _(410);
+    margin: _(60) auto _(120) auto;
+    background-color: transparent;
+}
