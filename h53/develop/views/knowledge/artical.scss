@@ -1,0 +1,35 @@
+
+@import "../../assets/sass/base/function/_pxTorem.scss";
+@import "../../assets/sass/common/_common.scss";
+
+#app {
+}
+.artical-box {
+	padding: _(30) _(20);
+	@include marginBottom;
+	.title {
+		font-size: _(42);
+		color: #333;
+		text-align: center;
+		height: _(60);
+		line-height: _(60);
+		margin-top: _(10);
+	}
+
+	.date {
+		color: #999;
+		font-size: _(26);
+		line-height: _(80);
+		border-bottom: 1px solid #c7c7cc;
+		text-align: right;
+	}
+
+	.content {
+		color: #666;
+		font-size: _(30);
+		line-height: _(48);
+		padding: _(24) 0;
+		white-space: pre-line;
+	}
+}
+

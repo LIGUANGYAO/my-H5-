@@ -1,0 +1,68 @@
+@import "../../assets/sass/base/_fn.scss";//引入sass mixin function等
+
+$barName: "bar";
+.#{$barName}{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 10;
+    width: 100%;
+    height: _(98);
+    background-color:#ffffff;
+    position: fixed;
+    border-top: 1px solid #e5e5ea;
+    bottom: 0;
+    left: 0;
+    &>a{
+        position: relative;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: _(73);
+        background-image:url("../../assets/images/footerBar/nav.png");
+        background-size: _(258)  _(73);
+        &.barIndex{
+                width: _(44);          
+        }
+        &.barHealth{
+                width: _(79);
+                background-position: _(-46) 0;
+        }
+        &.barDod{
+                width: _(78);
+                background-position: _(-200) 0;
+        }
+        &.barMall{
+                width: _(45);
+                background-position: _(-131) 0;
+        }
+        &.barMy{
+                width: _(80);
+                background-position: _(-178) 0;
+        }
+    }
+    &>a.#{$barName}-active{
+        background-image:url("../../assets/images/footerBar/navActive.png");
+        background-size: _(258)  _(73);
+        &.barIndex{
+                width: _(44);   
+        }
+        &.barHealth{
+                width: _(79);
+                background-position: _(-46) 0;
+        }
+        &.barDod{
+                width: _(98);
+                background-position: _(-198) 0;
+        }
+        &.barMall{
+                width: _(45);
+                background-position: _(-131) 0;
+        }
+        &.barMy{
+                width: _(80);
+                background-position: _(-178) 0;  
+        }
+    }
+}

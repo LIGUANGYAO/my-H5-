@@ -1,0 +1,242 @@
+html, body, .container {
+  background-color: #ffffff;
+  max-width: 960px;
+  margin: 0 auto; }
+
+body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "SimHei", sans-serif;
+  overflow-x: hidden;
+  font-size: 14px !important; }
+
+ul, li {
+  list-style: none; }
+
+img {
+  max-width: 100%; }
+
+a {
+  text-decoration: none; }
+
+.clearfix:after {
+  clear: both;
+  content: '.';
+  display: block;
+  height: 0;
+  line-height: 0;
+  overflow: hidden; }
+
+*, :after, :before {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent; }
+
+input[type="tel"], input[type="text"], input[type="password"], textarea {
+  -webkit-appearance: none;
+  border-radius: 0; }
+
+[v-cloak] {
+  display: none !important; }
+
+.ellipsis {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal; }
+
+.ellipsisLn2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.ellipsisLn3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.freeLine {
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.content {
+  width: 9.46667rem;
+  margin: 0 auto;
+  min-height: 100%;
+  overflow: hidden; }
+
+.colorF8 {
+  color: #f9860b; }
+
+.background--blue {
+  background-color: #1d2232; }
+
+.background--black {
+  background-color: #19181e; }
+
+.ios-select-widget-box header.iosselect-header {
+  background: #f9860a;
+  border: none; }
+
+.ios-select-widget-box header.iosselect-header a {
+  color: #fff; }
+
+.ios-select-widget-box.olay > div {
+  background: #fff; }
+
+.ios-select-widget-box ul li.at {
+  color: #f9860a; }
+
+.hidden {
+  visibility: hidden; }
+
+.my {
+  background: #ffffff;
+  position: relative; }
+  .my .go-back {
+    position: absolute;
+    width: 1.26667rem;
+    height: 1.26667rem;
+    top: 0.53333rem;
+    left: 0.53333rem;
+    z-index: 5;
+    text-align: center;
+    line-height: 1.26667rem;
+    border-radius: 50%;
+    color: #ffffff;
+    display: block;
+    background: rgba(0, 0, 0, 0.4); }
+    .my .go-back .icon-fanhui {
+      font-size: 0.56rem; }
+  .my img {
+    border-style: none; }
+  .my .banner {
+    position: relative;
+    height: 5.33333rem; }
+    .my .banner .go-btn {
+      position: absolute;
+      width: 1.2rem;
+      height: 1.2rem;
+      right: 0.4rem;
+      bottom: -0.61333rem;
+      z-index: 4; }
+      .my .banner .go-btn img {
+        width: 1.2rem;
+        height: 1.2rem; }
+    .my .banner .swiper-slide img {
+      width: 10rem;
+      height: 5.33333rem; }
+  .my .dot-title {
+    height: 0.93333rem;
+    line-height: 0.93333rem;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+    background: #f9860b; }
+    .my .dot-title h3 {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      word-wrap: break-word;
+      word-break: break-all;
+      font-size: 0.42667rem;
+      color: #ffffff; }
+  .my .merchant-information {
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid #f2f2f2; }
+    .my .merchant-information h3 {
+      color: #333333;
+      height: 1.06667rem;
+      line-height: 1.06667rem;
+      font-size: 0.4rem;
+      font-weight: normal; }
+    .my .merchant-information ul li {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      color: #666666;
+      font-size: 0.37333rem;
+      margin-top: 0.4rem; }
+      .my .merchant-information ul li i {
+        color: #36D2C7;
+        border-radius: 50%;
+        margin-right: 0.2rem; }
+      .my .merchant-information ul li img {
+        width: 0.45333rem;
+        height: 0.45333rem;
+        margin-right: 0.26667rem; }
+    .my .merchant-information ul .address p {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      word-wrap: break-word;
+      word-break: break-all;
+      font-size: 0.34667rem; }
+  .my .business-introduction {
+    margin-top: 0.21333rem;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+    padding-bottom: 0.4rem; }
+    .my .business-introduction h3 {
+      color: #333333;
+      font-weight: normal;
+      height: 1.06667rem;
+      line-height: 1.06667rem;
+      font-size: 0.4rem; }
+    .my .business-introduction p {
+      margin-top: 0.26667rem;
+      color: #666666;
+      line-height: 150%;
+      font-size: 0.34667rem; }
+  .my .equipment-status {
+    position: fixed;
+    width: 100%;
+    height: 1.2rem;
+    left: 0;
+    bottom: 0;
+    background-color: #f2f2f2;
+    border-top: 0.02667rem solid #d1d1d1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: left;
+        -ms-flex-pack: left;
+            justify-content: left;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; }
+    .my .equipment-status .equipment {
+      color: #999999;
+      margin-left: 0.26667rem;
+      margin-right: 0.50667rem; }
+    .my .equipment-status a {
+      width: 1.81333rem;
+      height: 0.74667rem;
+      font-size: 0.34667rem;
+      text-align: center;
+      line-height: 0.74667rem;
+      border-radius: 0.06667rem; }
+    .my .equipment-status .off-line {
+      border: 0.02667rem solid #999999;
+      color: #999999; }
+    .my .equipment-status .on-line {
+      border: 0.02667rem solid #f9860b;
+      color: #f9860b;
+      margin-right: 0.8rem; }

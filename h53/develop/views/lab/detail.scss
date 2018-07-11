@@ -1,0 +1,55 @@
+
+@import "../../assets/sass/base/function/_pxTorem.scss";
+@import "../../assets/sass/common/_common.scss";
+
+#app {
+}
+.detail-box {
+	font-size: _(26);
+	@include marginBottom;
+	 
+	> img {
+		width: 100%;
+		height: auto;
+		background: orange;
+	}
+	.text-1 {
+		color: #f9860b;
+		font-size: _(34);
+		padding: 0 _(20);
+		line-height: _(64);
+	}
+	.content {
+		margin: _(50) auto 0;
+	}
+	.box-1 {
+		padding: 0 _(20);
+		margin: _(30) auto;
+		line-height: _(40);
+		.title-1 {
+			color: #333;
+			font-size: _(30);
+		}
+		.title-2 {
+			color: #f9860b;
+		}
+		.content-1 {
+			color: #999;
+			font-size: _(30);
+		}
+	}
+	.rate-box {
+		padding: 0 _(20);
+		color: #999;
+		font-size: _(28);
+		line-height: _(54);
+		img {
+			width: _(20);
+			height: _(20);
+		}
+		> span {
+			display: inline-block;
+			min-width: _(180);
+		}
+	}
+}

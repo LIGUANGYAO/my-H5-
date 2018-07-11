@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta charset='utf-8'/>
+
+    <title>我的健康报表</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css">
+
+    <link rel="stylesheet" type="text/css" href="./report.css">
+    <script type="text/javascript" src="../../assets/js/lib/flexible.js"></script>
+    <script>
+    var _hmt = _hmt || [];
+    _hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+    </script>
+</head>
+
+<body>
+    <div id="app" class="container" v-cloak>
+        <div class="report-box">
+            <ul class="report-list" v-if='list && list.length'>
+                <li v-for='item in list' @click='toDetail(item.id,item.reportId)' :class='{gray: item.readcount > 0}'>
+                    <div class="title">{{item.reportNper}}</div>
+                    <div class="content2">{{item.overview}}</div>
+                    <div class="date">{{item.createTime | formatDate}}</div>
+                </li>
+            </ul>
+ 
+            <div class="empty-list" v-if='list && !list.length'>
+                <div class="a1">您的健康报表暂未生成，快去称体重
+</div>
+                <div class="a2">称重3次(一天内连续称只算一次)</div>
+                <div class="a2">7天后就可以获得健康报表了哦!</div>
+            </div>
+        </div> 
+        <footer-bar :index="5"></footer-bar>
+    </div>
+    <script type="text/javascript" src="../../assets/js/require.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="./report.js"></script>
+</body>
+
+</html>

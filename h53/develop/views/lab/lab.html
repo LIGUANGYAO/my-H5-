@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta charset='utf-8'/>
+
+    <title>实验室</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css">
+
+    <link rel="stylesheet" type="text/css" href="./lab.css">
+    <script type="text/javascript" src="../../assets/js/lib/flexible.js"></script>
+    <script>
+    var _hmt = _hmt || [];
+    _hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+    </script>
+</head>
+
+<body>
+    <div id="app" class="container" v-cloak>
+    <page-load :loadstage="!loaded"></page-load>
+    <div v-cloak v-show="loaded">
+        <div class="lab-box">
+            <div class="text-a">实验测评</div>
+            <div class="list">
+                <div class="item" @click='toDetail(item.evaid)' v-for='item in list'>
+                    <div class="img-box">
+                        <img :src="item.picPath" alt="">
+                        <div class="text-box">
+                            <div class="text-1">{{level[item.evaLevel]}}测评</div>
+                            <div class="text-2">{{item.evaTitl}}</div>
+                        </div>
+                    </div>
+                    <div class="rate-box">
+                        <span class="a">
+                            健康
+                            <img src="../../assets/images/common/star.png" alt="" v-for='i in item.healLevel'>
+<!--                             <img src="../../assets/images/common/star.png" alt="">
+                            <img src="../../assets/images/common/star.png" alt=""> -->
+                        </span>
+                        <span class="a">
+                            效果
+                            <img src="../../assets/images/common/star.png" alt="" v-for='i in item.effect'>
+<!--                             <img src="../../assets/images/common/star.png" alt="">
+                            <img src="../../assets/images/common/star.png" alt=""> -->
+                        </span>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+
+        </div>
+        <footer-bar :index="0"></footer-bar>
+    </div>
+    <script type="text/javascript" src="../../assets/js/require.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="./lab.js"></script>
+</body>
+
+</html>

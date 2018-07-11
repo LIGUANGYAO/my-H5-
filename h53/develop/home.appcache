@@ -1,0 +1,9 @@
+CACHE MANIFEST
+# 2017-01-01 v1.0.0
+style.css
+index.js
+
+NETWORK:
+*
+
+FALLBACK:

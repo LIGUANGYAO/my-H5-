@@ -1,0 +1,124 @@
+html, body, .container {
+  background-color: #ffffff;
+  max-width: 960px;
+  margin: 0 auto; }
+
+body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "SimHei", sans-serif;
+  overflow-x: hidden;
+  font-size: 14px !important; }
+
+ul, li {
+  list-style: none; }
+
+img {
+  max-width: 100%; }
+
+a {
+  text-decoration: none; }
+
+.clearfix:after {
+  clear: both;
+  content: '.';
+  display: block;
+  height: 0;
+  line-height: 0;
+  overflow: hidden; }
+
+*, :after, :before {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent; }
+
+input[type="tel"], input[type="text"], input[type="password"], textarea {
+  -webkit-appearance: none;
+  border-radius: 0; }
+
+[v-cloak] {
+  display: none !important; }
+
+.ellipsis {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal; }
+
+.ellipsisLn2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.ellipsisLn3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.freeLine {
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.content {
+  width: 9.46667rem;
+  margin: 0 auto;
+  min-height: 100%;
+  overflow: hidden; }
+
+.colorF8 {
+  color: #f9860b; }
+
+.background--blue {
+  background-color: #1d2232; }
+
+.background--black {
+  background-color: #19181e; }
+
+.ios-select-widget-box header.iosselect-header {
+  background: #f9860a;
+  border: none; }
+
+.ios-select-widget-box header.iosselect-header a {
+  color: #fff; }
+
+.ios-select-widget-box.olay > div {
+  background: #fff; }
+
+.ios-select-widget-box ul li.at {
+  color: #f9860a; }
+
+.hidden {
+  visibility: hidden; }
+
+body {
+  font-size: 2.18667rem; }
+
+.btn-box {
+  text-align: center; }
+
+.btn {
+  display: inline-block;
+  cursor: pointer;
+  text-align: center; }
+
+.btn1 {
+  background: #f9860b;
+  color: #fff;
+  line-height: 0.86667rem;
+  width: 4.06667rem;
+  height: 0.86667rem;
+  border-radius: 0.4rem;
+  margin: 0.84rem auto; }
+
+.qr-img {
+  width: 4.66667rem;
+  margin: 1.70667rem auto; }

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<title>评论</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css?v=10.0">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css?v=10.0">
+	<link rel="stylesheet" type="text/css" href="./comment.css?v=10.0">
+	<script  type="text/javascript" src="../../assets/js/lib/flexible.js?v=10.0" async></script>
+</head>
+
+<body>
+
+    <div id="app" class="container">
+      <div class="contentInfor">
+         <ul v-cloak>
+             <li v-for="v in picdomInfo">
+                 <div class="me">
+                     <div class="portrait">
+                         <img :src="v.userInfo.headimgurl?v.userInfo.headimgurl:portrait">
+                     </div>
+                     <div class="comments">
+                         <div class="userName">{{v.userInfo.name}}</div>
+                         <p class="time">{{(v.createTime).substr(0,10)}}</p>
+                         <div class="myInfro">{{v.commInfo}}</div>
+
+                         <div class="reply" v-if="v.nickname||v.pic_url">
+                             <div class="tr"></div>
+                             <p class="replyInfor">
+                                    <span class="replyName">我的美图：</span>
+                                    {{v.pic_name}}
+                                </p> 
+                             <img :src="v.pic_url" @click="preview(v.pic_url)" v-if="v.pic_url">
+                            
+                         </div>
+                     </div>
+                 </div>
+             </li>
+         </ul>
+      </div>
+    </div>
+    <script src="../../assets/js/lib/jweixin-1.0.0.js?v=10.0"></script>
+    <script type="text/javascript" src="../../assets/js/require.js?v=10.0"></script>
+    <script src="../../assets/js/config.js?v=10.0"></script>
+    <script src="./comment.js?v=10.0"></script>
+
+</body>
+</html>

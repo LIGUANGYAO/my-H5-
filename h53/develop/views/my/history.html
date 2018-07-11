@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta charset='utf-8' />
+    <title>称重历史记录</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css">
+
+    <link rel="stylesheet" type="text/css" href="./history.css">
+    <script type="text/javascript" src="../../assets/js/lib/flexible.js"></script>
+    <script>
+    var _hmt = _hmt || [];
+    _hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+    </script>
+</head>
+
+<body>
+    <div id="app" class="container" v-cloak>
+        <div class="history-box">
+            <div class="rows">
+                <div class="card" v-for='(item, index) in list' :class='{green: !item.fat}'>
+                    <div class="date">{{item.receiverTime | formatDate2}}</div>
+                    <div class="text-1">您的体重</div>
+                    <div class="text-2">
+                        <span class="number">{{item.weight ? ((item.weight-0).toFixed(1)*2).toFixed(1): ''}}</span> 斤
+                    </div>
+                    <!--                     <div class="address">{{(item.shopProvince + item.shopCity + item.shopDirect + item.shopAddress) || ''}}</div> -->
+                    <div class="text-1 a2" v-if='item.fat'>您的体脂</div>
+                    <div class="item" v-if='item.fat'>
+                        <div class="bodyFat">
+                            <ul>
+                                <li>
+                                    <span class="headerTitle">脂肪率</span>
+                                    <span class="percentage">{{item.fat?(item.fat*100).toFixed(1)+'%':''}}</span>
+                                    <span class="titleColor">{{item.fatRateTitle}}</span>
+                                </li>
+                                <li>
+                                    <span class="headerTitle">水分</span>
+                                    <span class="percentage">{{item.water?(item.water*100).toFixed(1)+'%':''}}</span>
+                                    <span class="titleColor">{{item.waterTitle}}</span>
+                                </li>
+                                <li>
+                                    <span class="headerTitle">骨量</span>
+                                    <span class="percentage">{{item.bon?(item.bon).toFixed(1)+'公斤':''}}</span>
+                                    <span class="titleColor">{{item.bonTitle}}</span>
+                                </li>
+                                <li>
+                                    <span class="headerTitle">肌肉率</span>
+                                    <span class="percentage">{{item.muscle?(item.muscle).toFixed(1)+'%':''}}</span>
+                                    <span class="titleColor">{{item.muscleTitle}}</span>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <span class="headerTitle">蛋白质</span>
+                                    <span class="percentage">{{item.protein?(item.protein).toFixed(1):''}}</span>
+                                    <span class="titleColor">{{item.proteinTitle}}</span>
+                                </li>
+                                <li>
+                                    <span class="headerTitle">内脏脂</span>
+                                    <span class="percentage">{{item.visceralFat?(item.visceralFat).toFixed(1)+'%':''}}</span>
+                                    <span class="titleColor">{{item.fatWeightTitle}}</span>
+                                </li>
+                                <li>
+                                    <span class="headerTitle">体型</span>
+                                    <span class="percentage">{{item.bodyTypeNum?item.bodyTypeNum+'分':''}}</span>
+                                    <span class="titleColor">{{item.bodyTypeTitle}}</span>
+                                </li>
+                                <li v2-if="item.fatWeight">
+                                    <span class="headerTitle">脂肪重量</span>
+                                    <span class="percentage">{{item.fatWeight?(item.fatWeight).toFixed(1)+'公斤':''}}</span>
+                                    <!-- <span class="titleColor">{{item.fatRateTitle}}</span> -->
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <span class="headerTitle">身体年龄</span>
+                                    <span class="percentage">{{item.bodyAge?item.bodyAge+'岁':''}}</span>
+                                    <!-- <span class="titleColor">{{item.fatRateTitle}}</span> -->
+                                </li>
+                                <li>
+                                    <span class="headerTitle">BMI</span>
+                                    <span class="percentage">{{item.BMI.bmi}}</span>
+                                    <span class="titleColor">{{item.bodyTypeChinese}}</span>
+                                </li>
+                                <li>
+                                    <span class="headerTitle">肥胖等级</span>
+                                    <span class="titleColor">{{item.fatLevelTitle}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <spin :isloading='isloading' :onScroll='onScroll'></spin>
+                <div class="over" v-show='!isloading && list.length'>我们是有底线的</div>
+                <div class="over" v-show='!list.length'>还没有历史记录哦</div>
+            </div>
+            <footer-bar :index="0"></footer-bar>
+        </div>
+        <script type="text/javascript" src="../../assets/js/require.js"></script>
+        <script src="../../assets/js/config.js"></script>
+        <script src="./history.js"></script>
+</body>
+
+</html>

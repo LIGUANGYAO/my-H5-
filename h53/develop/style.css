@@ -1,0 +1,577 @@
+.webChat {
+  height: 0.8rem;
+  width: 100%;
+  background-color: #fbcd9d; }
+  .webChat p {
+    height: 0.8rem;
+    line-height: 0.8rem;
+    font-size: 0.32rem;
+    text-align: center;
+    color: #04040f; }
+
+.container {
+  background-color: #fff !important;
+  background-image: url(./assets/images/home/homebg.png);
+  background-size: 10rem 15.42667rem;
+  background-repeat: no-repeat;
+  background-position: top center; }
+
+.swiper-pagination-bullet-active {
+  opacity: 0.8;
+  background: #f9860b; }
+
+.registration-model-content {
+  display: none; }
+
+.opacity {
+  -webkit-animation: opacity 0.4s linear;
+  animation: opacity 0.4s linear; }
+
+@-webkit-keyframes opacity {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes opacity {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+.floatAd {
+  width: 1.73333rem;
+  height: 1.73333rem;
+  position: fixed;
+  bottom: 15%;
+  right: 2%;
+  z-index: 12; }
+  .floatAd img {
+    width: 1.73333rem;
+    height: 1.73333rem;
+    border-radius: 50%; }
+
+.registrationModel {
+  width: 7.86667rem;
+  height: 10rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 15;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: #ffffff; }
+  .registrationModel .registrationModelHeader {
+    margin-bottom: 0.13333rem; }
+    .registrationModel .registrationModelHeader .registrationHead {
+      height: 1.02667rem;
+      margin-bottom: 0.2rem;
+      background-image: url(./assets/images/home/bg.png);
+      background-size: 100% 1.02667rem; }
+      .registrationModel .registrationModelHeader .registrationHead p {
+        font-size: 0.34667rem;
+        color: #ffffff;
+        text-align: center;
+        line-height: 1.02667rem;
+        height: 1.02667rem; }
+  .registrationModel #sexDom {
+    height: 2.8rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin-bottom: 0.2rem; }
+    .registrationModel #sexDom .menBox, .registrationModel #sexDom .womenBox {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column; }
+      .registrationModel #sexDom .menBox span, .registrationModel #sexDom .womenBox span {
+        margin-top: 0.06667rem;
+        font-size: 0.32rem; }
+    .registrationModel #sexDom span.sexTitle {
+      color: #333333;
+      font-size: 0.34667rem;
+      padding: 0 0.66667rem; }
+    .registrationModel #sexDom .boy {
+      width: 1.48rem;
+      height: 1.92rem;
+      background-image: url(./assets/images/home/men.png);
+      background-size: 1.48rem 1.92rem;
+      background-repeat: no-repeat; }
+    .registrationModel #sexDom .boy.Active {
+      width: 1.48rem;
+      height: 2.10667rem;
+      background-image: url(./assets/images/home/menActive.png);
+      background-size: 1.48rem 2.10667rem;
+      background-repeat: no-repeat; }
+    .registrationModel #sexDom .girl {
+      width: 1.48rem;
+      height: 1.92rem;
+      background-image: url(./assets/images/home/women.png);
+      background-size: 1.48rem 1.92rem;
+      background-repeat: no-repeat; }
+    .registrationModel #sexDom .girl.Active {
+      width: 1.48rem;
+      height: 2.10667rem;
+      background-image: url(./assets/images/home/womenActive.png);
+      background-size: 1.48rem 2.10667rem;
+      background-repeat: no-repeat; }
+  .registrationModel .stature, .registrationModel .birthdate {
+    text-align: center; }
+    .registrationModel .stature h3, .registrationModel .birthdate h3 {
+      color: #666666;
+      font-size: 0.4rem;
+      font-weight: normal;
+      margin-bottom: 0.13333rem; }
+    .registrationModel .stature input, .registrationModel .birthdate input {
+      background: none;
+      border: none;
+      color: #f88409;
+      font-size: 0.58667rem;
+      height: 0.66667rem;
+      text-align: center;
+      line-height: 0.66667rem;
+      border-bottom: 0.02667rem solid #f88409; }
+  .registrationModel .stature {
+    margin-bottom: 0.42667rem; }
+  .registrationModel .birthdate {
+    margin-bottom: 0.53333rem; }
+  .registrationModel #JS-stature {
+    margin: 0 auto; }
+    .registrationModel #JS-stature input {
+      width: 2.13333rem; }
+  .registrationModel #JS-year {
+    margin: 0 auto; }
+    .registrationModel #JS-year input {
+      width: 3.46667rem; }
+  .registrationModel .secret-world {
+    text-align: center;
+    color: #999999;
+    font-size: 0.29333rem; }
+  .registrationModel .registration-btn-box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    margin-top: 0.33333rem; }
+    .registrationModel .registration-btn-box .registration-btn {
+      height: 0.85333rem;
+      width: 4.02667rem;
+      background: #f9850a;
+      border: 0;
+      border-radius: 0.66667rem;
+      color: #ffffff;
+      text-align: center;
+      line-height: 0.85333rem; }
+
+.mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  z-index: 12; }
+
+#instrument {
+  width: 100%;
+  height: 6.37333rem;
+  position: relative;
+  margin-bottom: 0.53333rem; }
+  #instrument .judgment {
+    position: absolute;
+    width: 6.4rem;
+    height: 5.42667rem;
+    background-image: url(./assets/images/home/ctxbg.png);
+    background-repeat: no-repeat;
+    background-size: 6.4rem 5.42667rem;
+    left: 50%;
+    top: 0;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    z-index: 2;
+    display: none; }
+  #instrument .analysis {
+    position: absolute;
+    width: 4.16rem;
+    height: 0.88rem;
+    left: 50%;
+    top: 5.66667rem;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    z-index: 5;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; }
+    #instrument .analysis .progress {
+      width: 2.93333rem;
+      height: 0.26667rem;
+      background-color: #e5e5ea;
+      border-radius: 0.13333rem;
+      margin: 0 0.10667rem;
+      position: relative; }
+      #instrument .analysis .progress .analysisIcon {
+        width: 0.77333rem;
+        height: 0.88rem;
+        position: absolute;
+        top: -0.93333rem;
+        left: 0%;
+        z-index: 6;
+        background-image: url(./assets/images/home/analysisIcon.png);
+        background-size: 0.77333rem 0.88rem;
+        background-repeat: no-repeat; }
+        #instrument .analysis .progress .analysisIcon span {
+          color: #fff;
+          width: 0.74667rem;
+          height: 0.85333rem;
+          line-height: 0.85333rem;
+          display: block;
+          text-align: center;
+          font-size: 0.18667rem; }
+      #instrument .analysis .progress .innerProgress {
+        width: 0%;
+        height: 0.26667rem;
+        border-radius: 0.13333rem;
+        background-color: #f9860b; }
+    #instrument .analysis .leftPeople, #instrument .analysis .rightPeople {
+      height: 0.82667rem; }
+    #instrument .analysis .leftPeople {
+      width: 0.37333rem; }
+      #instrument .analysis .leftPeople img {
+        height: 0.82667rem; }
+    #instrument .analysis .rightPeople {
+      width: 0.45333rem; }
+      #instrument .analysis .rightPeople img {
+        height: 0.82667rem; }
+  #instrument .ctxActive {
+    width: 100%;
+    height: 2.72rem;
+    position: absolute;
+    left: 0;
+    top: 1.54667rem;
+    z-index: 6; }
+    #instrument .ctxActive .centerBox {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column; }
+      #instrument .ctxActive .centerBox .currentWeight {
+        text-align: center;
+        margin-bottom: 0.08rem; }
+        #instrument .ctxActive .centerBox .currentWeight p {
+          color: #f9860b;
+          font-size: 1.46667rem;
+          height: 1.6rem; }
+          #instrument .ctxActive .centerBox .currentWeight p span {
+            font-size: 0.45333rem; }
+        #instrument .ctxActive .centerBox .currentWeight span.currentWeightSpan {
+          font-size: 0.4rem;
+          color: #8e8e93; }
+      #instrument .ctxActive .centerBox .prvWeight {
+        height: 0.42667rem;
+        line-height: 0.42667rem;
+        font-size: 0.4rem;
+        color: #8e8e93;
+        margin-bottom: 0.13333rem; }
+      #instrument .ctxActive .centerBox .difference {
+        color: #8e8e93;
+        font-size: 0.4rem;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center; }
+        #instrument .ctxActive .centerBox .difference .icon {
+          width: 0.26667rem;
+          height: 0.32rem;
+          margin-right: 0.06667rem; }
+        #instrument .ctxActive .centerBox .difference .down {
+          background-image: url(./assets/images/home/down.png);
+          background-size: 0.26667rem 0.32rem;
+          background-repeat: no-repeat; }
+        #instrument .ctxActive .centerBox .difference .up {
+          background-image: url(./assets/images/home/down.png);
+          background-size: 0.26667rem 0.32rem;
+          background-repeat: no-repeat;
+          -webkit-transform: rotate(180deg);
+                  transform: rotate(180deg); }
+  #instrument #myCanvas, #instrument #myCanvas2 {
+    position: absolute;
+    width: 6.4rem;
+    height: 6.4rem;
+    left: 50%;
+    top: 0;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    z-index: 4; }
+  #instrument #myCanvas2 {
+    z-index: 3; }
+
+.btnHealth {
+  width: 3.73333rem;
+  height: 0.90667rem;
+  line-height: 0.90667rem;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 0.66667rem;
+  font-size: 0.45333rem;
+  color: #fff;
+  background-color: #f9860b;
+  margin-bottom: 0.6rem; }
+
+.bodyFat {
+  margin-bottom: 0.50667rem; }
+  .bodyFat ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    padding-top: 0.53333rem; }
+    .bodyFat ul li.moreHeath span:nth-child(1) {
+      height: 0.53333rem;
+      line-height: 0.53333rem; }
+      .bodyFat ul li.moreHeath span:nth-child(1) img {
+        width: 0.48rem;
+        height: 0.2rem; }
+    .bodyFat ul li {
+      text-align: center; }
+      .bodyFat ul li span.colorff9 {
+        color: #04040f;
+        margin-bottom: 0.21333rem;
+        font-size: 0.45333rem;
+        font-weight: bold;
+        display: block; }
+      .bodyFat ul li span:nth-child(2) {
+        display: block;
+        color: #8e8e93;
+        font-size: 0.29333rem; }
+
+.homeLink {
+  padding: 0 0.26667rem;
+  margin-bottom: 0.50667rem; }
+  .homeLink ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+        justify-content: space-around; }
+    .homeLink ul li {
+      width: 25%;
+      text-align: center; }
+      .homeLink ul li img {
+        width: 1.06667rem;
+        height: 1.06667rem; }
+      .homeLink ul li span {
+        display: block;
+        font-size: 0.34667rem;
+        color: #04040f;
+        margin-top: 0.18667rem; }
+
+.homeAd {
+  height: 2.4rem;
+  margin-bottom: 0.48rem; }
+  .homeAd img {
+    width: 100%;
+    height: 2.4rem; }
+
+.hotExperts {
+  margin-bottom: 0.26667rem; }
+  .hotExperts ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    margin-bottom: 0.37333rem; }
+    .hotExperts ul li {
+      width: 4.4rem;
+      height: 3.33333rem; }
+
+.hotRecommend .head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 0.4rem; }
+  .hotRecommend .head span {
+    font-size: 0.45333rem;
+    color: #04040f; }
+  .hotRecommend .head .checkAll {
+    font-size: 0.32rem;
+    color: #ffffff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; }
+    .hotRecommend .head .checkAll .moreT {
+      font-size: 0.32rem;
+      color: #8e8e93;
+      margin-right: 0.13333rem; }
+    .hotRecommend .head .checkAll img {
+      width: 0.21333rem;
+      height: 0.37333rem; }
+
+.hotRecommend .reducedFat {
+  height: 3.53333rem;
+  margin-bottom: 0.26667rem;
+  position: relative; }
+  .hotRecommend .reducedFat .innerTitle {
+    width: 3.6rem;
+    height: 1.54667rem;
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    top: 1rem;
+    left: 2.93333rem;
+    z-index: 2; }
+    .hotRecommend .reducedFat .innerTitle span {
+      color: #ffffff;
+      text-shadow: 2px 2px 6px #151516; }
+    .hotRecommend .reducedFat .innerTitle span:nth-child(1) {
+      font-size: 0.45333rem;
+      margin-bottom: 0.08rem; }
+    .hotRecommend .reducedFat .innerTitle span:nth-child(2) {
+      font-size: 0.26667rem; }
+  .hotRecommend .reducedFat img {
+    width: 100%;
+    height: 3.33333rem; }
+
+.hotRecommend .recommendAd {
+  height: 2.72rem;
+  margin-bottom: 0.24rem; }
+
+.hotRecommend .weightRecords {
+  width: 100%;
+  height: 6.50667rem;
+  margin-bottom: 2.05333rem; }
+  .hotRecommend .weightRecords .recordsHead {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    width: 100%;
+    margin-bottom: 0.37333rem; }
+    .hotRecommend .weightRecords .recordsHead .weightTitle {
+      color: #04040f;
+      font-size: 0.45333rem; }
+    .hotRecommend .weightRecords .recordsHead .checkAll {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center; }
+      .hotRecommend .weightRecords .recordsHead .checkAll span {
+        color: #8e8e93;
+        font-size: 0.32rem;
+        margin-right: 0.10667rem; }
+      .hotRecommend .weightRecords .recordsHead .checkAll img {
+        width: 0.21333rem;
+        height: 0.37333rem; }
+  .hotRecommend .weightRecords .recordContent {
+    width: 100%;
+    height: 6rem;
+    background-image: url(./assets/images/home/echartbg.png);
+    background-repeat: no-repeat;
+    background-size: 9.2rem 5.33333rem;
+    background-position: center 1.06667rem;
+    background-color: #f9f9fe;
+    position: relative; }
+    .hotRecommend .weightRecords .recordContent .recordTab {
+      position: absolute;
+      width: 8.4rem;
+      height: 0.78667rem;
+      border: 0.02667rem solid #f9860b;
+      top: 0.16rem;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+              transform: translateX(-50%);
+      z-index: 2;
+      border-radius: 0.08rem;
+      -webkit-box-sizing: border-box;
+              box-sizing: border-box; }
+      .hotRecommend .weightRecords .recordContent .recordTab ul {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center; }
+        .hotRecommend .weightRecords .recordContent .recordTab ul li {
+          -webkit-box-flex: 1;
+              -ms-flex: 1;
+                  flex: 1;
+          text-align: center;
+          width: 50%;
+          height: 0.74667rem;
+          line-height: 0.74667rem;
+          font-size: 0.34667rem;
+          color: #f9860b; }
+        .hotRecommend .weightRecords .recordContent .recordTab ul li.active {
+          background-color: #f9860b;
+          color: #fff; }
+    .hotRecommend .weightRecords .recordContent .recordsEchart {
+      height: 5.33333rem;
+      padding-top: 0.74667rem; }

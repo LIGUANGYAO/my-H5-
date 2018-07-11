@@ -1,0 +1,197 @@
+
+@import "../../assets/sass/base/function/_pxTorem.scss";
+
+@import "../../component/Spin/_index.scss";//底部导航样式
+
+#app {
+}
+
+.over{ 
+    height: _(80);
+    line-height: _(80);
+    font-size: _(26);
+    text-align: center;
+    color: #999999;   
+}
+html, body, .container {
+	height: 100%;
+	background: #f9f9fe !important;
+}
+
+.trend-box {
+	padding-bottom: _(98);
+	.c1 {
+		background: #fff;
+		position: relative;
+		height: _(238);
+		padding: _(10) _(30) 0;
+		box-shadow: 0 1px 5px #ccc;
+
+		.guide {
+			background: url(../../assets/images/my/guide.png) left center no-repeat;
+			height: _(150);
+			background-size: contain;
+		}
+
+		.tab1 {
+			margin: _(33) 0 0;
+			position: absolute;
+			bottom: 0;
+			div {
+				display: inline-block;
+				font-size: _(28);
+				margin: 0 _(30) 0 0;
+				padding-bottom: _(16);
+				color: #8e8e93;
+
+				&.active {
+					color:#f9860b;
+					border-bottom: _(4) solid #f9860b;
+				}
+			}
+		}
+
+
+	}
+
+	.c2 {
+		text-align: center;
+		.tab2 {
+			position: relative;
+			z-index: 1;
+			margin: _(29) 0 _(0);
+			li {
+				display: inline-block;
+				border: _(2) solid #f9860b;
+				border-right: none;
+				color: #f9860b;
+				font-size: _(30);
+				margin-left: _(-12);
+				line-height: _(58);
+				padding: 0 _(30);
+				min-width: _(173);
+
+				b {
+					font-weight: normal;
+					font-size: _(25);
+				}
+
+				i {
+					font-size: _(16);
+					display: inline-block;
+					font-style: normal;
+					// transform: scale(.75)
+				}
+				
+
+				&:first-child {
+					border-top-left-radius: _(8);
+					border-bottom-left-radius: _(8);
+
+				}
+				&:last-child {
+					border-right: _(2) solid #f9860b;
+					border-top-right-radius: _(8);
+					border-bottom-right-radius: _(8);
+				}
+
+				&.active {
+					background: #f9860b;
+					color: #fff;
+				}
+			}
+		}
+
+
+	}
+	#JS-echars {
+	    height: _(400);
+	    padding-top: _(0);
+	    margin-top: _(-46);
+
+	}
+
+	.c3 {
+		background: #f9860b url(../../assets/images/my/arrow.png) _(704) center no-repeat;
+		background-size: _(17) auto;
+		// position: absolute;
+		// margin: _(190) 0 0;
+		bottom: _(98);
+		height: _(90);
+		color: #fff;
+		width: 100%;
+		line-height: _(90);
+		text-indent: _(31); 
+		font-size: _(29);
+	}
+
+	.c25 {
+		margin: _(10) 0 0;
+		.title {
+
+			span {
+				z-index: 3;
+				position: relative;	
+				background: #f9f9fe;			
+			}
+			font-size: _(34);
+			color: #8e8e93;
+			text-align: center;
+
+
+			&:after {
+				content: '.';
+				text-indent: '-9999px';
+				height: _(2);
+				width: 100%;
+				position: absolute;
+				background: #d1d1d6;
+				left: 0;
+				margin-top: _(17);
+				z-index: 2;
+			}
+		}
+
+		.list {
+			margin: _(30) 0 0;
+			.item {
+				clear: both;
+				.date {
+					background: #e5e5ea;
+					display: inline-block;
+					line-height: _(44);
+					height: _(44);
+					padding: 0 _(25);
+					font-size: _(27);
+					border-top-right-radius: _(25);
+					border-bottom-right-radius: _(25);
+					color: #8e8e93;
+				}
+
+				.data {
+					margin: _(25) 0;
+					position: relative;
+					overflow: hidden;
+					color: #04040f;
+					font-size: _(29);
+					padding: _(0) _(30);
+
+					.value {
+						float: left;
+					}
+
+					.word {
+						float: right;
+
+						&.warning {
+							color:#f9a15c 
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+

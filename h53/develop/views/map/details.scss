@@ -1,0 +1,162 @@
+@import "../../assets/sass/_entry.scss";//引入sass mixin function等
+
+$name: 'my';
+$Blue: #36D2C7; //字体边框主颜色
+$bodyBack: #2c303e; //网页背景色
+$divBack: #1F2231; //DIV背景颜色
+$gray: #B3B3B7;
+
+.#{$name} {
+	background: #ffffff;
+	position:relative;
+	 .go-back{
+	      position: absolute;
+	      width:_(95);
+	      height:_(95);
+	      top:_(40);
+	      left:_(40);
+	      z-index: 5;
+	      text-align: center;
+	      line-height:_(95);
+	      border-radius: 50%;
+	      color:#ffffff;
+	      display:block;
+	      background:rgba(0,0,0,0.4);
+      .icon-fanhui{
+       	  font-size:_(42);
+      }
+    }
+	
+	img {
+		border-style: none;
+	}
+	
+	.banner {
+        position: relative;
+        height: _(400);
+        .go-btn{
+            position: absolute;
+            width: _(90);
+            height: _(90);
+            right: _(30);
+            bottom: _(-46);
+            z-index: 4;
+                img{
+                    width: _(90);
+                    height: _(90);
+                }
+            }            	
+		.swiper-slide img {
+			width: _(750);
+			height: _(400);
+		}
+	}
+	.dot-title {
+		height: _(70);
+		line-height: _(70);
+		padding-left: _(30);
+		padding-right: _(30);
+		background: #f9860b;
+		
+		h3 {
+		    @include ellipsisLn(1);
+			font-size: _(32);
+			color: #ffffff;
+		}
+	}
+	.merchant-information {
+		padding-left: _(30);
+		padding-right: _(30);
+        padding-bottom: _(30);
+        border-bottom: 1px solid #f2f2f2;
+		h3 {
+			color: #333333;
+			height: _(80);
+			line-height: _(80);
+            font-size: _(30);
+            font-weight: normal;
+		}
+		ul {
+			li {
+                display: flex;
+                align-items: center;
+				color: #666666;
+				font-size: _(28);
+                margin-top: _(30);
+				i {
+					color: $Blue;
+					border-radius: 50%;
+					margin-right: _(15);
+				}
+				img {
+				    width: _(34);
+				    height: _(34);
+				    margin-right: _(20);
+				}
+			}
+			.address {				
+				p {
+				    @include ellipsisLn(2);
+				    font-size: _(26);
+				}
+			}
+		}
+	}
+	.business-introduction {
+		margin-top: _(16);
+		padding-left: _(30);
+		padding-right: _(30);
+		padding-bottom: _(30);
+		
+		h3 {
+            color: #333333;
+            font-weight: normal;
+			height: _(80);
+			line-height: _(80);
+			font-size: _(30);
+		}
+		p {
+		    
+			margin-top: _(20);
+			color: #666666;
+			line-height: 150%;
+			font-size: _(26);
+		}			
+	}
+	.equipment-status {
+        position: fixed;
+        width: 100%;
+        height: _(90);
+        left: 0;
+        bottom: 0;
+        background-color: #f2f2f2;
+        border-top: _(2) solid #d1d1d1;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        .equipment{
+            color: #999999;
+            margin-left: _(20);
+            margin-right: _(38);
+        }
+			a {
+                width: _(136);
+                height: _(56);			    
+                font-size: _(26);
+                text-align: center;
+                line-height: _(56);
+                border-radius: _(5);		
+			}
+            .off-line {
+                border: _(2) solid #999999;  
+                color: #999999;  
+                            
+            }
+            .on-line{
+                border: _(2) solid #f9860b;  
+                color: #f9860b; 
+                margin-right: _(60);
+            }
+		
+	}
+}

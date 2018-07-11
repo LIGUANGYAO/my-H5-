@@ -1,0 +1,92 @@
+
+@import "../../assets/sass/base/function/_pxTorem.scss";//引入sass mixin function等
+
+[v-cloak] {
+    display: none !important; 
+  }
+
+.contentInfor{
+    
+    ul{
+        padding: 0;
+        li{
+            padding: 0  _(25);
+            border-bottom: 1px solid #e5e5ea;
+            margin-top: _(28);
+            padding-bottom: _(28);
+            list-style: none;
+            .me{
+                display: flex;
+                justify-content: space-between;
+                .portrait{
+                    width: _(80);
+                    height: _(80);
+                    margin-right: _(16);
+                    img{
+                        width: _(80);
+                        height: _(80);
+                        border-radius: 100%;
+                    }
+                }
+                .comments{
+                    width: _(590);
+                    position:relative;
+                    .userName{
+                        font-size: _(26);
+                        color: #04040f;
+                    }
+                    .feedBackTime{
+                        position: absolute;
+                        top: 2%;
+                        right: 4%;
+                        font-size: _(26);
+                        color: #8e8e93;
+                    }
+                    .time{
+                        font-size: _(20);
+                        color: #8e8e93;
+                        margin: _(10) 0  _(16) 0;
+                    }
+                    .myInfro{
+                        font-size: _(28);
+                        color: #04040f;
+                    }
+                    .reply{
+                        background-color: #f9f9fe;
+                        padding: _(20);
+                        box-sizing:content-box;
+                        margin-top: _(20);
+                        position: relative;
+                        img{
+                            width: 50%;
+                        }
+                        .tr{
+                            position: absolute;
+                            top: _(-35);
+                            left: _(40);
+                            z-index: 2;
+                            width: 0px;
+                            height: 0px;
+                            border-top: _(18) solid transparent;
+                            border-right: _(18) solid transparent;
+                            border-bottom: _(18) solid #f9f9fe;
+                            border-left: _(18) solid transparent;
+                        }
+                        .replyInfor{
+                            color: #8e8e93;
+                            font-size: _(26);
+                            margin-bottom: _(15);
+                            img{
+                              width: 50%;
+                            }
+                            .replyName{
+                                color: #f9860b;
+                                line-height: 150%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

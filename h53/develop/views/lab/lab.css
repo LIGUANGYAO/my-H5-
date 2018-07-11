@@ -1,0 +1,110 @@
+.ellipsis {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal; }
+
+.ellipsisLn2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.ellipsisLn3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.freeLine {
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.content {
+  width: 9.46667rem;
+  margin: 0 auto;
+  min-height: 100%;
+  overflow: hidden; }
+
+.colorF8 {
+  color: #f9860b; }
+
+.background--blue {
+  background-color: #1d2232; }
+
+.background--black {
+  background-color: #19181e; }
+
+.ios-select-widget-box header.iosselect-header {
+  background: #f9860a;
+  border: none; }
+
+.ios-select-widget-box header.iosselect-header a {
+  color: #fff; }
+
+.ios-select-widget-box.olay > div {
+  background: #fff; }
+
+.ios-select-widget-box ul li.at {
+  color: #f9860a; }
+
+.hidden {
+  visibility: hidden; }
+
+.lab-box {
+  padding: 0.26667rem;
+  margin-bottom: 1.70667rem; }
+  .lab-box > .text-a {
+    color: #f9860b;
+    font-size: 0.45333rem; }
+  .lab-box .item {
+    margin: 0.26667rem auto; }
+    .lab-box .item .img-box {
+      text-align: center;
+      height: 4rem;
+      position: relative;
+      overflow: hidden; }
+      .lab-box .item .img-box img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%; }
+      .lab-box .item .img-box .text-box {
+        display: inline-block;
+        min-width: 4.66667rem;
+        max-width: 8.53333rem;
+        height: 2.4rem;
+        margin: 0.8rem auto;
+        padding: 0.66667rem 0.16rem;
+        color: #fff;
+        text-align: center;
+        background: rgba(127, 0, 0, 0.5);
+        position: relative;
+        z-index: 10; }
+        .lab-box .item .img-box .text-box .text-1 {
+          font-size: 0.45333rem; }
+        .lab-box .item .img-box .text-box .text-2 {
+          font-size: 0.4rem;
+          line-height: 0.8rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis; }
+    .lab-box .item .rate-box {
+      color: #999;
+      font-size: 0.37333rem;
+      line-height: 0.72rem; }
+      .lab-box .item .rate-box img {
+        width: 0.26667rem;
+        height: 0.26667rem; }
+      .lab-box .item .rate-box > span {
+        display: inline-block;
+        width: 2.4rem; }

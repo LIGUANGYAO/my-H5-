@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta charset='utf-8'/>
+    <title>历史记录</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css?v=10.0">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css">
+    <link rel="stylesheet" type="text/css" href="./detail.css?v=10.0">
+    <script type="text/javascript" src="../../assets/js/lib/flexible.js?v=10.0"></script>
+    <script>
+    var _hmt = _hmt || [];
+    _hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+    </script>
+</head>
+
+<body>
+    <div id="app" class="container" v-cloak>
+        <div class="detail" >
+            <div class="top" v-show='loaded'>
+                <div class="title">{{data.type != 2 ? '建议': problemMap[data.problemId] }}</div>
+                <div class="date">{{data.createTime | formatDate}}</div>
+                <div class="content">{{data.proposal}}</div>
+                <img :src="data.imgUrl" alt="" v-if='data.imgUrl' @click='preview(data.imgUrl)'>
+            </div>
+            <div class="reply">
+                <div class="item" v-for='(item,index) in reply'>
+                    <img :src="loaded && (item.unionid ? (profile.weChatUser.headimgurl || profile.headimgurl || '../../assets/images/common/logo.png') : '../../assets/images/common/logo.png')" alt="">
+                    <span class="s1">
+                        <span class="a1">
+                            <span class="name">{{item.unionid ? (profile.name):'小仙女'}}</span>回复
+                        </span>
+                        <span class="a2">{{item.proposal}}</span>
+                        <span class="a3">
+                            <span class="date">{{item.createTime | formatDate}}</span>
+                            <span class="icon" v-if='!item.unionid && item.state == 0' @click='showInput(item.id, item.parentId)'></span>
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="input">
+                <input type="text" @blur='onBlur' ref='reply'>
+                <span class="btn-send" @click='send()'>提交</span>
+            </div>
+        </div>
+        <footer-bar :index="0"></footer-bar>
+    </div>
+
+    <script src="../../assets/js/lib/jweixin-1.0.0.js?v=10.0"></script>
+
+    <script type="text/javascript" src="../../assets/js/require.js?v=10.0"></script>
+    <script src="../../assets/js/config.js?v=10.0"></script>
+
+    <script src="./detail.js?v=10.0"></script>
+</body>
+
+</html>

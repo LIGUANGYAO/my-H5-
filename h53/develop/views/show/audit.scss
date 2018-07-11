@@ -1,0 +1,48 @@
+
+@import "../../assets/sass/base/function/_pxTorem.scss";
+
+#app {
+	> :first-child {
+		> :last-child {
+			margin-bottom: _(0)
+		}		
+	}
+}
+.audit-box {
+	text-align: center;
+	
+	.fail {
+		display: none;
+	}
+
+	&.fail .fail {
+		display: block;
+	}
+	&.fail .progress {
+		display: none;
+	}	
+	img {
+		height: _(210);
+		margin: _(314) auto 0;
+	}
+
+	.text {
+		color: #999;
+		margin: _(41) 0 0;
+	}
+
+	.btn {
+		display: inline-block;
+		cursor: pointer;
+	}
+	.btn1 {
+		background: #f9860b;
+		color: #fff;
+		line-height: _(65);
+		width: _(305);
+		height: _(65);
+		border-radius: _(30);
+		margin: _(128) auto;
+	}
+}
+

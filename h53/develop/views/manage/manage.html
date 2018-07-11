@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta charset='utf-8'/>
+
+	<title>体重管理</title>
+	<link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css?v=10.0">
+	<link rel="stylesheet" type="text/css" href="../../component/component.css?v=10.0">
+	<link rel="stylesheet" type="text/css" href="./manage.css">
+	<link rel="stylesheet" type="text/css" href="../../assets/css/swiper-3.4.2.min.css?v=10.0">	
+	<script  type="text/javascript" src="../../assets/js/lib/flexible.js?v=10.0" defer></script>
+    <script>  
+			var _hmt = _hmt || [];
+			_hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+	</script>
+</head>
+
+<body>
+
+    <div id="app" class="container">
+
+		<page-load :loadstage="!pageLoad"></page-load>
+
+
+		<div v-cloak v-show="pageLoad">
+
+         <div id="punchModel" style="display:none;">
+		  <div class="layout"></div>
+		 
+		   <div class="siassModel">
+              <span class="close" @click="close">
+				  <img src="../../assets/images/manage/close.png">
+			  </span>
+			  <div class="mark">
+				 <p v-cloak>{{CardVoIs.gold==null?5:CardVoIs.gold}}</p>
+				 <span>积分</span>
+			  </div>
+
+			  <div class="success">打卡成功</div>
+			  <p class="nextMakr" v-cloak>下次打卡可获得{{CardVoIs.gold==null?6:CardVoIs.gold+1}}积分</p>
+			  <p class="jifen">积分用途：</p>
+			  <ul>
+				<li>1.精选商城现金抵扣</li>
+				<li>2.营养师咨询抵扣咨询费</li>
+				<li>3.专家咨询抵扣服务费</li>
+			  </ul>
+			  <p class="explain">(积分为系统积分)</p>
+		   </div>
+ 
+		 </div>
+		 <page-load :loadstage="!pageLoad"></page-load>
+		 <div v-cloak v-show="pageLoad">
+        
+		<div class="manage">
+			<div class="topB">
+				<b>我的目标: <span v-cloak>{{targetType==1?'减脂':targetType==2?'塑型':targetType==3?'健身增肌':''}}</span></b>
+				<b> <span v-cloak>第{{ManagementVo.stage?ManagementVo.stage:''}}个阶段14天</span></b>
+				<span class="btn1 btn-orange" @click="changManage">去更改</span>
+			</div>
+
+			<div class="cardC">
+				<div class="btn-circle" id="btn-card"></div>
+                <div class="btn-circle" id="over-card">未打卡</div>
+				 <!-- Swiper -->
+				 <div id="Swiper" v-cloak>
+				<div class="days swiper-container"  id="swiper-container" >
+					
+					<ul class="swiper-wrapper" >
+						<li    class="swiper-slide" v-for="(v,index) in listData"  :data-time="v"  :class="v==curentStamp?'today':''"  :data-index="index+1"  :data-sate="v==curentStamp?'true':'false'">第{{index+1}}天</li>
+					</ul>
+					
+
+				</div>
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
+			</div>
+			</div>
+
+			<div class="solutionD">
+				<div class="t1">今日预算摄入热量 <span class="num" v-cloak>{{allCalorie?Number(allCalorie).toFixed(0):''}}千卡</span></div>
+				<p class="legumes">豆肉类、蔬菌类均为原材料</p>
+
+				<div class="breakfast">
+					<div class="top-a">
+						<ul>
+							<li class="active"  data-name="早餐">早餐</li>
+							<li data-name="午餐">午餐</li>
+							<li data-name="下午加餐">下午加餐</li>
+							<li data-name="晚餐">晚餐</li>
+						</ul>
+						<div class="change">
+								<input type="button" class="top-a-btn2" style="display:block;" @click="changeTime(bnt1,1)" value="换一换" id="bnt1">
+								<input type="button" class="top-a-btn2" @click="changeTime(bnt2,2)" value="换一换" id="bnt2">
+								<input type="button" class="top-a-btn2" @click="changeTime(bnt4,4)" value="换一换" id="bnt4">
+								<input type="button" class="top-a-btn2" @click="changeTime(bnt3,3)" value="换一换" id="bnt3">
+						</div>
+					</div>
+					<!--早餐-->
+					<div class="middle-b" style="display:block;">
+						<div class="middleBg">
+								<span class="suo">
+										<img src="../../assets/images/manage/suo.png">
+									</span>
+							<p>第<span></span>天未打卡</p>
+						</div>
+						<ul class="menu">
+							<li v-for="v in breakfast" class="opacity" v-cloak>
+									<img :src="v.mykallUrl" alt="" class="pic">
+								<span class="menu-a">
+									<span class="name" v-cloak>{{v.mykallName}}</span>
+									<span class="total" v-cloak>{{Math.round(v.intake/10)*10}}克</span>
+								</span>
+								<span class="menu-b">
+									<span class="energy" v-cloak>{{(v.kllTotal).toFixed(0)}}千卡</span>
+								</span>
+							</li>
+							
+						</ul>
+						<p class="explainTitle">7:00-9:00完成，要想身体好,早餐要吃好。</p>
+					</div>
+					<!--午餐-->
+					<div class="middle-b">
+							<div class="middleBg">
+								<span class="suo">
+									<img src="../../assets/images/manage/suo.png">
+								</span>
+									<p>第<span></span>天未打卡</p>
+							</div>
+							<ul class="menu">
+								<li v-for="v in lunch" class="opacity" v-cloak>
+										<img :src="v.mykallUrl" alt="" class="pic">
+									<span class="menu-a">
+										<span class="name" v-cloak>{{v.mykallName}}</span>
+										<span class="total" v-cloak>{{Math.round(v.intake/10)*10}}克</span>
+									</span>
+									<span class="menu-b">
+										<span class="energy" v-cloak>{{(v.kllTotal).toFixed(0)}}千卡</span>
+									</span>
+								</li>
+								
+							</ul>
+							<p class="explainTitle">午餐：12:00-13:00完成，午餐要营养，抵抗力满满。</p>
+						</div>
+
+					<!--下班加餐-->
+					<div class="middle-b">
+							<div class="middleBg">
+									<span class="suo">
+											<img src="../../assets/images/manage/suo.png">
+										</span>
+									<p>第<span></span>天未打卡</p>
+							</div>
+							<ul class="menu">
+								<li v-for="v in addFood" class="opacity" v-cloak>
+										<img :src="v.mykallUrl" alt="" class="pic">
+									<span class="menu-a">
+											<span class="name" v-cloak>{{v.mykallName}}</span>
+											<span class="total" v-cloak>{{Math.round(v.intake/10)*10}}克</span>
+									</span>
+									<span class="menu-b">
+											<span class="energy" v-cloak>{{(v.kllTotal).toFixed(0)}}千卡</span>
+									</span>
+								</li>
+							</ul>
+
+							<p class="explainTitle">下午15：00加餐，可以增加饱腹感，保持体力噢！</p>
+						</div>
+
+						
+					<!--晚餐-->
+					<div class="middle-b">
+							<div class="middleBg">
+								<span class="suo">
+									<img src="../../assets/images/manage/suo.png">
+								</span>
+									<p>第<span></span>天未打卡</p>
+							</div>
+							<ul class="menu">
+								<li v-for="v in dinner" class="opacity" v-cloak>
+									<img :src="v.mykallUrl" alt="" class="pic">
+									<span class="menu-a">
+											<span class="name" v-cloak>{{v.mykallName}}</span>
+											<span class="total" v-cloak>{{Math.round(v.intake/10)*10}}克</span>
+									</span>
+									<span class="menu-b">
+											<span class="energy" v-cloak>{{(v.kllTotal).toFixed(0)}}千卡</span>
+									</span>
+								</li>
+								
+							</ul>
+							<p class="explainTitle">记得晚餐时间为17：30~19：00，按时就餐，饭后运动，更容易促进消化。</p>
+						</div>
+
+
+				</div>
+
+				<!--广告-->
+				 <div class="homeAd opacity swiper-container" v-if='adImgeData1' id="swiper-container2" v-cloak>
+					 <ul class="swiper-wrapper">
+						 <li v-for="(v,index) in adImgeData1"  class="swiper-slide"  v-on:click="getAdCount(v.id,v.spaceId,轮播广告+index)">
+								<a :href="v.adLink">
+										<img :src="v.path">
+								   </a>
+						 </li>
+					 </ul>
+					 <div class="swiper-pagination"></div>
+				 </div>
+
+				 <div class="sport">
+				 	<div class="top-a">
+				 		<span class="top-a-text">运动
+				 		<span class="top-a-text2">任意选择一种</span>
+				 		</span>
+				 		<input  type="button" class="top-a-btn" @click="changeTime(bnt5,5)" value="换一换" id="bnt5">
+				 	</div>
+				 	<div class="middle-b2">
+				 		<ul class="menu">
+				 			<li v-for="v in sport" class="opacity" v-cloak>
+									<img :src="v.mykallUrl" alt="" class="pic">
+				 				<span class="menu-a">
+				 					<span class="name" v-cloak>{{v.mykallName}}</span>
+				 					<span class="total" v-cloak>{{v.intake}}分钟</span>
+				 				</span>
+				 				<span class="menu-b">
+				 					<span class="energy" v-cloak>{{(v.kllTotal).toFixed(0)}}千卡</span>
+				 				</span>
+				 			</li>
+				 		</ul>
+				 	</div>
+				 </div>
+			</div>
+
+			<div class="intro" v-cloak>
+				{{progInfo==null?'':progInfo}}
+			</div>
+            <!-- 以上方案建议仅供参考 -->
+			<div class="intro-2">
+				提醒：此参考方案仅适用于18~60周岁正常人群。若您属于孕妇、儿童、老年人、慢病以及术后患者等特殊人群，<span class="clickS" @click="goTo()">点击</span>查看小tips~
+			</div>
+		</div>
+		<footer-bar :index='1'></footer-bar>
+	</div>
+</div>
+    </div>
+    <script type="text/javascript" src="../../assets/js/require.js?v=10.0"></script>
+    <script src="../../assets/js/config.js?v=10.0"></script>
+    <script src="./manage.js?v=10.0"></script>
+
+</body>
+</html>

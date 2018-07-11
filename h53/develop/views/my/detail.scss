@@ -1,0 +1,122 @@
+@import "../../assets/sass/base/function/_pxTorem.scss";
+
+
+[v-cloak] {
+  display: none;
+}
+
+.detail {
+  .top {
+    padding: _(30) _(30);
+    border-bottom: _(2) solid #e5e5ea;
+
+    .title {
+      font-size: _(28);
+      color: #333;
+      font-weight: bold;
+    }
+    .date {
+      font-size: _(20);
+      color: #999;
+      margin: _(10) 0 0;
+    }
+    .content {
+      font-size: _(24);
+      color: #8e8e93;
+      margin: _(20) 0 0;
+    }
+
+    img {
+      margin: _(30) 0;
+
+      max-width: _(500);
+    }
+  }
+
+  .reply {
+    padding: 0 0 _(98);
+    .item {
+      padding: _(40) _(30);
+      border-bottom: _(1) solid #e5e5ea;
+      position: relative;
+      img {
+        width: _(80);
+        height: _(80); 
+        vertical-align: top;   
+        border-radius: 50%;  
+      }
+
+      .s1 {
+        display: inline-block;
+        margin: 0 0 0 _(20);
+        vertical-align: middle;
+        width: 80%;
+        > * {
+          display: block;
+        }
+
+        .a1 {
+          font-size: _(26);
+          .name {
+            color: #f9860b;
+          }
+        }
+
+        .a2 {
+          margin: _(10) 0 0;
+          font-size: _(28);
+        }
+
+        .a3 {
+          margin: _(22) 0 0;
+          color: #999;
+          font-size: _(20);
+
+          .icon {
+            position: absolute;
+            display: inline-block;
+            width: _(30);
+            height: _(30);
+            background: url(../../assets/images/my/comment.png) center center no-repeat;
+            background-size: contain;
+            right: 30px;
+          }
+        }
+      }
+    }
+  }
+
+  .input {
+    position: fixed;
+    bottom: _(98);
+    height: _(98);
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: #f9f9fe;
+    border-top: _(1) solid #e5e5ea;
+    display: none;
+
+    input {
+      height: _(68);
+      border: _(1) solid #e5e5ea;
+      margin: 0 _(12);
+      flex: 1;
+      padding: 0 _(24);
+      font-size: _(30);
+    }
+
+    .btn-send {
+      background: #f9860b;
+      color: #fff;
+      display: inline-block;
+      height: _(58);
+      padding: 0 _(12);
+      line-height: _(58);
+      border-radius: _(8);
+      flex-basis: _(100);
+      text-align: center;
+      margin: 0 _(12)
+    }
+  }
+}

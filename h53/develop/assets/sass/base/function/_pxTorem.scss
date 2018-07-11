@@ -1,0 +1,8 @@
+
+@import '../variable/_global';
+
+$_designPlane : ($designPlane / 10);//10rem===100%宽度
+
+@function _($px) {
+  @return $px / $_designPlane * 1rem;
+}

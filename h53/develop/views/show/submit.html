@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta charset='utf-8'/>
+    <title>发布美图</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css">
+
+    <link rel="stylesheet" type="text/css" href="./submit.css">
+    <script type="text/javascript" src="../../assets/js/lib/flexible.js"></script>
+    <script>
+    var _hmt = _hmt || [];
+    _hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+    </script>
+</head>
+
+<body>
+
+<script type='text/x-template' id='item'>
+  <div class="item">
+    <p class="parent">
+      <img :src="img" alt="">
+    </p>
+    <span class="delete-btn" @click='remove'></span>
+  </div>
+</script>
+    <div id="app" class="container" v-cloak>
+      <div class="submit-box">
+
+        <!-- 头部 -->
+<!--<div class="header">
+          <div class="buttons">
+            <span class="btn-cancel" @click='cancel'>取消</span>
+            <span class="btn-publish" @click='publish'>发布</span>
+          </div>
+          <p class="title">浏览</p>
+        </div> -->
+
+        <!-- 输入框-->
+        <div class="form">
+          <textarea v-model='content' name="" id="" cols="30" rows="10" placeholder="记录最美的你，说两句呗，最多可输入50字。
+" 
+          class="my-text"></textarea>
+        </div>
+        
+        <!-- 上传图片-->
+        <div class="upload-item">
+          <div class="for">
+
+            <Item v-for='(i,index) in items' :img='i.img' @remove='removePhoto' :index='index'></Item>
+
+            <div class="new-btn" v-if='!items.length'>
+              <span class="icon"></span>
+              <input type="file" accept='image/*' @change='onUpload'/>
+            </div>
+          </div>
+        </div>
+
+        <div class="l-box">
+          <div class="t1">您的标签</div>
+          <div class="b1 ck">
+            <span code='2'>女神</span>
+            <span code='1'>男神</span>
+          </div>
+        </div>
+
+        <div class="submit" @click='publish'>发布</div>
+
+        <div class="rule">规则：<br/>
+1、发布的图片含有广告、网址、色情的内容，将不予通过。<br/>
+2、图片模糊不清的，明显含有其他网站logo、水印的，将不予通过。<br/>
+3、涉及肖像权/版权及其他不适宜内容图片，将不予通过哦。</div>
+      </div>
+      <footer-bar :index="0"></footer-bar>
+
+    </div>
+    <script type="text/javascript" src="../../assets/js/require.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="./submit.js"></script>
+</body>
+
+</html>

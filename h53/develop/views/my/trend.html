@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta charset='utf-8' />
+    <title>称重历史记录</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css">
+
+    <link rel="stylesheet" type="text/css" href="./trend.css">
+    <script type="text/javascript" src="../../assets/js/lib/flexible.js"></script>
+    <script>
+    var _hmt = _hmt || [];
+    _hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+    </script>
+</head>
+
+<body>
+    <div id="app" class="container" v-cloak>
+        <div class="trend-box">
+            <div class="c1">
+                <div class="guide"></div>
+                <div class="tab1" v-tab>
+                    <div :class="dateNum==1?'active':''" @click="switchWeight(1,week)">最近一周</div>
+                    <div :class="dateNum==2?'active':''" @click="switchWeight(2,month)">最近一个月</div>
+                    <div :class="dateNum==3?'active':''" @click="switchWeight(3,year)">最近一年</div>
+                </div>
+            </div>
+
+            <div class="c2">
+                <ul class="tab2" v-tab>
+                    <li :class="typeNum==1?'active':''" @click="switchType(1)"><b>体重</b><i></i></li>
+                    <li :class="typeNum==2?'active':''" @click="switchType(2)"><b>脂肪率</b><i></i></li>
+                    <li :class="typeNum==3?'active':''" @click="switchType(3)"><b>水分率</b><i></i></li>
+                    <li :class="typeNum==4?'active':''" @click="switchType(4)"><b>肌肉率</b><i></i></li>
+                </ul>
+
+                <div id="JS-echars"></div>
+            </div>
+
+            <div class="c25">
+                <div class="title">
+                <span>测量记录</span>
+                </div>
+                <div class="list">
+                    <div class="item" v-for='(item, index) in records'>
+                        <div class="date">{{item.receiverTime | formatDate2}}</div>
+                        <div class="data">
+                            <span class="value">{{item.value}}</span>
+                            <span class="word">{{item.word}}</span>
+                        </div>
+                    </div>
+<!--                     <div class="item">
+                        <div class="date">2018/4/11 11:22</div>
+                        <div class="data">
+                            <span class="value">111.2 斤</span>
+                            <span class="word warning">超胖</span>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="c3" @click='goHistory'>全部记录</div>
+
+            <footer-bar :index="0"></footer-bar>
+        </div>
+    </div>
+        <script type="text/javascript" src="../../assets/js/require.js"></script>
+        <script src="../../assets/js/config.js"></script>
+        <script src="./trend.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta charset='utf-8'/>
+    <title>晒身材</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css">
+
+    <link rel="stylesheet" type="text/css" href="../../assets/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" type="text/css" href="./show.css">
+    <script type="text/javascript" src="../../assets/js/lib/flexible.js" async></script>
+</head>
+
+<body>
+    <div id="app" class="container" >
+    <!-- <Loading :isloading='showLoading'></Loading> -->
+
+    <page-load :loadstage="!loaded"></page-load>
+    <div v-cloak v-show="loaded">
+        <div class="show-box">
+            <!--晒一晒按钮-->
+            <div class="add-box" @click='go'>
+                <span class="btn-add"></span>
+            </div>
+            <!--幻灯片-->
+            <div class="slider-box">
+                <div class="head">
+                    <span class="subtitle">我的美图</span>
+                    <span class="go" @click='goMyPhoto'></span>
+                </div>
+                <!-- Swiper -->
+                <div class="guide" v-if='images != null && !images.length' v-cloak @click='go'>
+                  <div class="box" >
+                    <img v-if='profile.gender == 1' src="../../assets/images/show/man.png" alt="">
+                    <img v-if='profile.gender == 2' src="../../assets/images/show/woman.png" alt="">
+                    <div class="text" v-if='profile.gender == 1'>厉害了，你击败了 {{scorerRank.overcome || 0}} 型男，快晒出肌肉/马甲线，秀一秀~</div>
+                    <div class="text" v-if='profile.gender == 2'>厉害了，魔鬼一样的身材，为你打call，
+        快秀S女神线，猎取专属粉丝~</div>
+                  </div>
+                </div>
+
+                 <div class="swiper-container" v-if='images && images.length' v-cloak id="swiper-container1">
+                   <div class="swiper-wrapper">
+                           <div class="swiper-slide" @click='toDetail(data["hot"][index].picid)' :style="{background: 'url(' + img + '?x-oss-process=image/resize,w_300/auto-orient,1)'}" v-for='(img,index) in images'></div>
+                   </div>
+                   <!-- Add Pagination -->
+                   <div class="swiper-pagination"></div>
+                 </div>
+
+            </div>
+
+             <!--广告-->
+              <div class="homeAd swiper-container" v-if='adImgeData1'  id="swiper-container2" v-cloak>
+                  <ul class="swiper-wrapper">
+                      <li  class="swiper-slide"  v-for="(v,index) in adImgeData1" @click="getAdCount(v.id,v.spaceId,'轮播广告位 - ' + index)">
+                            <a :href="v.adLink">
+                                    <img :src="v.path" alt=''>
+                                </a>
+                      </li>
+                  </ul>
+                  <div class="swiper-pagination"></div>
+              </div>
+             
+              <!--展示标签页-->
+              <div class="tab2" v-tab>
+                  <ul>
+                      <li>热门</li>
+                      <li>男神</li>
+                      <li>女神</li>
+                  </ul>
+                  <div class="contents">
+                      <div>
+                          <ul>
+                              <li v-for='(img,index) in typeImgs[0]' v-cloak>
+                                  <div><div :style='{"background-image": "url(" + img + "?x-oss-process=image/resize,w_300/auto-orient,1)"}' alt="" @click='toDetail(data[0][index].picid)'></div>
+                                    <div class="bot">
+                                      <span class="eye">{{data[0][index].browseSum}}</span>
+                                      <span class="favorite" :class='{active: data[0][index].active}'
+                                      @click.stop='like(0, data[0][index])'></span>
+                                    </div>
+                                  </div>
+                              </li>                     
+                          </ul>
+                          <spin :isloading='true' :onscroll='onScroll' :prevent='data[0].prevent || type != 0' ></spin>
+                      </div>
+                      <div>
+                          <ul>
+                              <li v-for='(img,index) in typeImgs[1]' v-cloak>
+                                  <div><div :style='{"background-image": "url(" + img + "?x-oss-process=image/resize,w_300/auto-orient,1)"}' alt="" @click='toDetail(data[1][index].picid)'></div>
+                                    <div class="bot">
+                                      <span class="eye">{{data[1][index].browseSum}}</span>
+                                      <span class="favorite" :class='{active: data[1][index].active}'
+                                      @click.stop='like(1, data[1][index])'></span>
+                                    </div>
+                                  </div>
+                              </li>                     
+                          </ul>
+
+                          <spin :isloading='true' :onscroll='onScroll' :prevent='data[1].prevent || type != 1'></spin>
+                      </div>
+                      <div>
+                          <ul>
+                              <li v-for='(img,index) in typeImgs[2]' v-cloak>
+                                  <div><div :style='{"background-image": "url(" + img + "?x-oss-process=image/resize,w_300/auto-orient,1)"}' alt="" @click='toDetail(data[2][index].picid)'></div>
+                                    <div class="bot">
+                                      <span class="eye">{{data[2][index].browseSum}}</span>
+                                      <span class="favorite" :class='{active: data[2][index].active}'
+                                      @click.stop='like(2, data[2][index])'></span>
+                                    </div>
+                                  </div>
+                              </li>   
+
+                              <spin :isloading='true' :onscroll='onScroll' :prevent='data[2].prevent || type != 2'></spin>                  
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+        <footer-bar :index="1"></footer-bar>
+    </div>
+    <script type="text/javascript" src="../../assets/js/require.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="./show.js"></script>
+</body>
+
+</html>

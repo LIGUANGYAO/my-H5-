@@ -1,0 +1,51 @@
+
+@import "../../assets/sass/base/function/_pxTorem.scss";//引入sass mixin function等
+
+.header{
+    width:100%;
+    height: _(300);
+    margin-top: _(132);
+    margin-bottom: _(50);
+    display: flex;
+    justify-content: center;
+    .authorizeGif{
+        width: _(260);
+        height: _(280);
+        img{
+            width: _(260);
+            height: _(280);
+        }
+    } 
+}
+
+
+.authorizeTitle{
+    color: #8e8e93;
+    font-size: _(30);
+    text-align: center;
+    margin-bottom: _(140);
+}
+
+.authorizeBtn{
+    width: _(356);
+    height: _(66);
+    line-height: _(66);
+    text-align: center;
+    color: #f9860b;
+    font-size: _(32);
+    margin: 0 auto;
+    border: _(2) solid #f9860b;
+    border-radius: _(5);
+}
+
+.footerTitle{
+    width: 100%;
+    height: _(30);
+    color: #8e8e93;
+    font-size: _(24);
+    text-align: center;
+    position: absolute;
+    left: 0;
+    bottom: 3%;
+    z-index: 5;
+}

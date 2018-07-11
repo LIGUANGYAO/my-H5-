@@ -1,0 +1,71 @@
+
+@import "../../assets/sass/base/function/_pxTorem.scss";
+@import "../../assets/sass/common/_common.scss";
+
+#app {
+}
+.lab-box {
+	padding: _(20);
+	@include marginBottom;
+	> .text-a {
+		color: #f9860b;
+		font-size: _(34);
+	} 
+
+	.item {
+		margin: _(20) auto;
+		.img-box {
+			text-align: center;
+			height: _(300);
+			position: relative;
+			overflow: hidden;
+			img {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				width: 100%;
+		
+			}
+			.text-box {
+				display: inline-block;
+				min-width: _(350);
+				max-width: _(640);
+
+				height: _(180);
+				margin: _(60) auto;
+				padding: _(50) _(12);
+				color: #fff;
+				text-align: center;
+				background: rgba(127, 0, 0, .5);
+				position: relative;
+				z-index: 10;
+				.text-1 {
+					font-size: _(34);					
+				}
+				.text-2 {
+					font-size: _(30);
+					line-height: _(60);
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+			}
+		}
+
+		.rate-box {
+			color: #999;
+			font-size: _(28);
+			line-height: _(54);
+			img {
+				width: _(20);
+				height: _(20);
+			}
+			> span {
+				display: inline-block;
+				width: _(180);
+			}
+		}
+	}
+}

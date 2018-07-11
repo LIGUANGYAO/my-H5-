@@ -1,0 +1,23 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "SimHei", sans-serif;
+  overflow-x: hidden;
+  font-size: 14px !important; }
+
+#detail p {
+  line-height: 150%;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "SimHei", sans-serif; }
+
+#detail .title {
+  font-size: 0.56rem;
+  color: #333;
+  text-align: center;
+  height: 0.8rem;
+  line-height: 0.8rem;
+  margin-top: 0.13333rem; }
+
+#detail .date {
+  color: #999;
+  font-size: 0.34667rem;
+  line-height: 1.06667rem;
+  border-bottom: 1px solid #c7c7cc;
+  text-align: right; }

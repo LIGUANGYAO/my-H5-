@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<title>健康分析</title>
+	<link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css?v=10.0">
+	<link rel="stylesheet" type="text/css" href="../../assets/css/swiper-3.4.2.min.css?v=10.0">
+	<link rel="stylesheet" type="text/css" href="../../component/component.css?v=10.0">
+	<link rel="stylesheet" type="text/css" href="./style.css?v=10.0">
+	<script  type="text/javascript" src="../../assets/js/lib/flexible.js?v=10.0" async></script>
+	<script>  
+		var _hmt = _hmt || [];
+		_hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+</script>
+</head>
+<body>
+	<div id="app" class="container">
+			
+		<page-load :loadstage="!pageLoad"></page-load>
+
+
+		<div v-cloak v-show="pageLoad">
+
+		<!--用户信息-->
+        <div class="userInfo">
+            <div class="registrationUser">
+                <div class="registrationUserBox">
+                <div class="year">
+					<span class="currentYear" v-cloak>{{registeredData.age}}岁</span>
+                  <span>年龄</span>
+                </div>
+                <div class="weigth">
+					<span class="currentWei" v-cloak>{{((homeData.currentWeight)*2).toFixed(1)}}斤</span>
+                    <span>当前体重</span>
+                </div>
+                <div class="height" @click="linkToMy()">
+				  <span class="currentHeight" v-cloak>{{registeredData.height+'cm'}}</span>
+                  <span>身高(cm)</span>
+                </div>
+            </div>
+            </div>
+		</div>
+		
+		<!--说明-->
+		<div class="instruction">
+			<span class="close"></span>
+			<h4 class="colorF8">说明</h4>
+			<div class="instructionInner">
+				<p class="adaption">BMI不适用人群</p>
+				<ul>
+					<li>1、未满18岁；</li>
+					<li>2、是运动员；</li>
+					<li>3、正在做重量训练；</li>
+					<li>4、怀孕或哺乳中；</li>
+					<li>5、身体虚弱或久坐不动的老人。</li>
+				</ul>
+                <div class="insTitle">
+				<p><span>标准体重：</span>反映和衡量一个人健康状况的重要标志之一，过胖和过瘦都不利于健康。</p>
+				<p><span>基础代谢率</span>：是指人体在清醒而又极端安静的状态下，不受外在和内在的影响时身体所需要的能量代谢量。</p>
+				<p><span>燃脂心率：</span>进行有氧运动时达到此范围的心率身体脂肪开始燃烧。</p>
+				<p><span>美体体重：</span>反映一个人的体型是否给人健美感的标志之一，并且达到此体重最容易练出马甲线和人鱼线。</p>
+			</div>
+			</div>
+		</div>
+
+		<div id="instructionMast"></div>
+
+		<div class="content">
+		  <!--体脂指标-->
+		  <p class="bodyFatTitle"  v-if="bodyFat.fat&&bodyFat.water&&bodyFat.bon&&bodyFat.muscle&&bodyFat.protein" v-cloak>您的<span>10项</span>体脂指标</p>
+		  <div class="bodyFat"  v-if="bodyFat.fat&&bodyFat.water&&bodyFat.bon&&bodyFat.muscle&&bodyFat.protein" v-cloak>
+            <ul>
+				<li v-if="bodyFat.fat">
+					
+					<span class="headerTitle">脂肪率</span>
+					<span class="percentage" >({{FatData?(FatData*100).toFixed(1)+'%':''}})</span>
+					<span class="titleColor" >{{fatRateTitle?fatRateTitle:''}}</span>
+				</li>
+				<li v-if="bodyFat.water" >
+						<span class="headerTitle">水分</span>
+						<span class="percentage" >({{bodyFat.water?(bodyFat.water*100).toFixed(1)+'%':''}})</span>
+						<span class="titleColor">{{waterTitle?waterTitle:''}}</span>
+				</li>
+				<li v-if="bodyFat.bon">
+						<span class="headerTitle">骨量</span>
+						<span class="percentage">({{bodyFat.bon?(bodyFat.bon).toFixed(1)+'公斤':''}})</span>
+						<span class="titleColor">{{bonTitle?bonTitle:''}}</span>
+				</li>
+				<li v-if="bodyFat.muscle" >
+						<span class="headerTitle">肌肉率</span>
+						<span class="percentage">({{bodyFat.muscle?(bodyFat.muscle).toFixed(1)+'%':''}})</span>
+						<span class="titleColor">{{muscleTitle?muscleTitle:''}}</span>
+				</li>
+			</ul>
+
+			<ul>
+				<li v-if="bodyFat.protein">
+					
+					<span class="headerTitle">蛋白质</span>
+					<span class="percentage" >({{bodyFat.protein?(bodyFat.protein).toFixed(1):''}})</span>
+					<span class="titleColor">{{proteinTitle?proteinTitle:''}}</span>
+				</li>
+			
+
+				<li v-if="bodyFat.visceralFat">
+						
+						<span class="headerTitle">内脏脂肪</span>
+						<span class="percentage">({{bodyFat.visceralFat?(bodyFat.visceralFat).toFixed(1)+'%':''}})</span>
+						<span class="titleColor">{{fatWeightTitle?fatWeightTitle:''}}</span>
+					</li>
+
+				
+			
+				<li v-if="bodyTypeNum">
+					
+					<span class="headerTitle">体型</span>
+					<span class="percentage" >{{bodyTypeNum?bodyTypeNum+'分':''}}</span>
+					<span class="titleColor" >{{bodyTypeTitle?bodyTypeTitle:''}}</span>
+				</li>
+				<li v-if="bodyFat.fatWeight">
+					<span class="headerTitle">脂肪重量</span>
+					<span class="percentage" >({{bodyFat.fatWeight?(bodyFat.fatWeight).toFixed(1)+'公斤':''}})</span>
+				</li>
+				</ul>
+
+				<ul>		
+				<li v-if="bodyFat.bodyAge">
+						<span class="headerTitle">身体年龄</span>
+						<span class="percentage">({{bodyFat.bodyAge?bodyFat.bodyAge+'岁':''}})</span>
+					</li>
+
+					<li v-if="bodyFat.fat">
+							<span class="headerTitle">肥胖等级</span>
+							<span class="titleColor">{{fatLevelTitle?fatLevelTitle:''}}</span>
+						</li>
+				</ul>
+	
+
+		 </div>
+		  
+		  <div class="bmiBox">
+			  <div class="bmiWorld">
+				  您的--<span class="colorF8" v-cloak>BMI {{BMI.bmi}}</span> <span v-cloak>{{bodyTypeChinese}}</span> 
+				  <span class="horn"></span>
+			  </div>
+			  <p class="bmiIntroduce">BMI:身体质量指数(BMI)是目前国际上常量的衡量人体<br>胖瘦程度以及是否健康的一个标准</p>
+		  </div>
+
+
+		  <div class="animationBox">
+
+			<div class="animationName" v-cloak>{{registeredData.name}}</div>
+
+			<div id="peoplAnimat"></div>
+    
+           <div class="progress">
+			   <div class="line"></div>
+			   <div class="line"></div>
+			   <div class="line"></div>
+			   <div class="line"></div>
+			   <div class="progressIner"></div>
+		   </div>
+
+		   <div class="bmiNumber">
+			   <span>偏瘦：&lt;18.5</span>
+			   <span>正常：18.5-23.9</span>
+			   <span>偏胖：24-27.9</span>
+			   <span>肥胖：≥28</span>
+		   </div>
+		  </div>
+
+		  <div class="healthAd opacity swiper-container" v-if="adImgeData1" id="swiper-container" v-cloak>
+				<ul class="swiper-wrapper">
+					<li v-for="(v,index) in adImgeData1" @click="getAdCount(v.id,v.spaceId,'轮播广告位一'+index)" class="swiper-slide">
+						  <a :href="v.adLink">
+								<img :src="v.path">
+						 </a>
+					</li>
+				</ul>
+				<div class="swiper-pagination"></div>
+			</div>
+
+		  <div class="beautBody">
+			 <div :class="[sexR==1?'beautMen':sexR==2?'beautWomen':'beautMen']" v-cloak></div>
+			 <div class="beautBodyL">
+			   <p class="headTop">您的标准身体指标</p>
+			   <p class="standardT">标准体重</p>
+				<p class="standardW" v-cloak>{{((standardW.weight)*2).toFixed(1)}}(斤)</p>
+				<p class="thirdCirc">标准三围</p>
+				<div class="basic">
+						<ul>
+							<li v-cloak>胸围：{{standard.chest}}cm</li>
+							<li v-cloak>腰围：{{standard.waist}}cm</li>
+							<li v-cloak>臀围：{{standard.hipline}}cm</li>
+						</ul>
+					</div>
+			 </div>
+			 <div class="beautBodyR">
+				<p class="headTop">您的标准身体指标</p>
+				<p class="standardT">健美体重</p>
+				<p class="beautW" v-cloak>{{((BeauBodyW.beautWeight)*2).toFixed(1)}}(斤)</p>
+				<p class="thirdCirc">美体三围</p>
+				<div class="basic">
+					<ul>
+						<li v-cloak>胸围：{{beautBody.bChest}}cm</li>
+						<li v-cloak>腰围：{{beautBody.bWaist}}cm</li>
+						<li v-cloak>臀围：{{beautBody.bHipline}}cm</li>
+					</ul>
+				</div>
+			 </div>
+		  </div>
+		  
+		  <div class="beautBodyTitle">
+			  <h4 v-cloak>距离你的标准体重还有{{(Math.abs(parseInt(homeData.currentWeight)-parseInt(standardW.weight))*2).toFixed(1)}}斤的差距</h4>
+			  <p v-cloak>
+				距离马甲线{{sexR==1?'男神':'女神'}}还有{{(Math.abs(parseInt(BeauBodyW.beautWeight)-parseInt(homeData.currentWeight))*2).toFixed(1)}}斤 ，你就会成为标准的马甲线{{sexR==1?'男神':'女神'}}了噢~
+			  </p>
+			  <p v-cloak>
+				您目前的基础代谢率是{{bmr}}kcal，为了保证你的健康又能达到较好的减肥效果建议你每天摄入食物的总热量在{{bmr-(bmr*0.1)}}~{{bmr+(bmr*0.1)}}kcal之间，相当于{{bmrWorld}}
+			  </p>
+		  </div>
+
+		  <div class="healthAd opacity swiper-container" v-if="adImgeData2" id="swiper-container2" v-cloak>
+			  <ul class="swiper-wrapper">
+				  <li v-for="(v,index) in adImgeData2" @click="getAdCount(v.id,v.spaceId,'轮播广告位二'+index)" class="swiper-slide">
+						<a :href="v.adLink">
+							<img :src="v.path">
+						</a>
+				  </li>
+			  </ul>
+			  <div class="swiper-pagination"></div>
+		  </div>
+
+		  <div class="foodSuggest">
+			  <p class="foodH"><span class="colorF8">饮食建议</span> 
+				<i>
+					<img src="../../assets/images/health/right.png">
+				</i>
+			</p>
+			  <div class="suggestR" id="foodLink">
+				  <div class="suggestTitle">
+					  <p v-cloak>{{foodSuggestTitle}}</p>
+				  </div>
+                <a href="javascript:;">
+					<img src="../../assets/images/health/food.png">
+				</a>
+			  </div>
+		  </div>
+
+		  <div class="sportSuggest">
+			<p class="sportH"><span class="colorF8">运动建议</span>
+				<i>
+					<img src="../../assets/images/health/right.png">
+				</i>
+			</p>
+			<div class="suggestR" id="sportLink">
+						<div class="suggestRTitle">
+								<p v-cloak>你最佳的燃脂心率 {{((220-registeredData.age)*0.6).toFixed(1)}}-{{((220-registeredData.age)*0.8).toFixed(1)}}</p>
+								<p v-html="sportsuggestTitle"></p>
+							</div>
+					<img src="../../assets/images/health/sport.png">
+			
+			</div>
+		</div>
+		 
+		<div class="weightAdminister">
+			开始我的体重管理
+		</div>
+		</div>
+		<footer-bar :index="2"></footer-bar>
+	</div>
+	</div>
+
+	<script type="text/javascript" src="../../assets/js/require.js?v=10.0"></script>
+	<script src="../../assets/js/config.js?v=10.0"></script>
+	<script src="./index.js?v=10.0"></script>
+</body>
+</html>

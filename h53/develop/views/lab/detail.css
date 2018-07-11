@@ -1,0 +1,97 @@
+.ellipsis {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal; }
+
+.ellipsisLn2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.ellipsisLn3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.freeLine {
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.content {
+  width: 9.46667rem;
+  margin: 0 auto;
+  min-height: 100%;
+  overflow: hidden; }
+
+.colorF8 {
+  color: #f9860b; }
+
+.background--blue {
+  background-color: #1d2232; }
+
+.background--black {
+  background-color: #19181e; }
+
+.ios-select-widget-box header.iosselect-header {
+  background: #f9860a;
+  border: none; }
+
+.ios-select-widget-box header.iosselect-header a {
+  color: #fff; }
+
+.ios-select-widget-box.olay > div {
+  background: #fff; }
+
+.ios-select-widget-box ul li.at {
+  color: #f9860a; }
+
+.hidden {
+  visibility: hidden; }
+
+.detail-box {
+  font-size: 0.34667rem;
+  margin-bottom: 1.70667rem; }
+  .detail-box > img {
+    width: 100%;
+    height: auto;
+    background: orange; }
+  .detail-box .text-1 {
+    color: #f9860b;
+    font-size: 0.45333rem;
+    padding: 0 0.26667rem;
+    line-height: 0.85333rem; }
+  .detail-box .content {
+    margin: 0.66667rem auto 0; }
+  .detail-box .box-1 {
+    padding: 0 0.26667rem;
+    margin: 0.4rem auto;
+    line-height: 0.53333rem; }
+    .detail-box .box-1 .title-1 {
+      color: #333;
+      font-size: 0.4rem; }
+    .detail-box .box-1 .title-2 {
+      color: #f9860b; }
+    .detail-box .box-1 .content-1 {
+      color: #999;
+      font-size: 0.4rem; }
+  .detail-box .rate-box {
+    padding: 0 0.26667rem;
+    color: #999;
+    font-size: 0.37333rem;
+    line-height: 0.72rem; }
+    .detail-box .rate-box img {
+      width: 0.26667rem;
+      height: 0.26667rem; }
+    .detail-box .rate-box > span {
+      display: inline-block;
+      min-width: 2.4rem; }

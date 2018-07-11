@@ -1,0 +1,62 @@
+@import '../base/_fn.scss';
+
+
+
+.ellipsis{
+    @include ellipsis(100%);
+}
+.ellipsisLn2{
+    @include ellipsisLn(2);
+}
+.ellipsisLn3{
+    @include ellipsisLn(3);
+}
+
+//强制断句
+.freeLine{
+    @include text_wrap();
+}
+
+.content{
+    width: _(710);
+    margin: 0 auto;
+    min-height: 100%;
+    overflow: hidden;
+}
+.colorF8{
+    color: #f9860b;
+}
+.background--blue{
+    background-color: $bgColor_blue;
+}
+
+.background--black{
+    background-color: $bgColor_black;
+}
+
+@mixin marginBottom($value: 128) {
+    margin-bottom: _($value);
+}
+
+.ios-select-widget-box header.iosselect-header {
+    background: #f9860a;
+    border: none;
+}
+
+.ios-select-widget-box header.iosselect-header a {
+    color: #fff;    
+}
+
+.ios-select-widget-box.olay > div {
+    background: #fff;
+}
+
+.ios-select-widget-box ul li.at {
+    color: #f9860a
+}
+
+
+
+.hidden {
+    visibility: hidden;
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta charset='utf-8'/>
+
+    <title>我的健康报表</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css">
+
+    <link rel="stylesheet" type="text/css" href="./detail.css">
+    <script type="text/javascript" src="../../assets/js/lib/flexible.js"></script>
+    <script>
+    var _hmt = _hmt || [];
+    _hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+    </script>
+</head>
+
+<body>
+    <div id="app" class="container" v-cloak>
+        <div class="detail-box">
+            <div class="title">{{data.title}}</div>
+
+            <div class="content">
+                 <div class="weightRecords">
+                    <span class="leftLine"></span>
+                    <span class="rightLing"></span>
+                    <span class="checkRecords"></span>
+                   <p class="recordsHead">最近体重变化</p>
+                   
+                   <div class="recordsEchart" id="JS-echars">
+
+                   </div>
+                 </div>
+
+                 <div class="text-box">
+                     {{data.content}}
+
+                 </div>
+            </div>
+        </div>
+        <footer-bar :index="5"></footer-bar>
+    </div>
+    <script type="text/javascript" src="../../assets/js/require.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="./detail.js"></script>
+</body>
+
+</html>

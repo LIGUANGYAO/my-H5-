@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta charset='utf-8'/>
+    <title>健康知识库</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css">
+    <link rel="stylesheet" type="text/css" href="./knowledge.css">
+    <script type="text/javascript" src="../../assets/js/lib/flexible.js" async></script>
+</head>
+
+<body>
+    <div id="app" class="container" >
+    <page-load :loadstage="!loaded"></page-load>
+    <div v-cloak v-show="loaded">
+        <div class="knowledge-box">
+            <div class="nav1 abcf" v-tab.first >
+                <li class="" code='at01'>健康篇</li>
+                <li code='at02'>养生篇</li>
+                <li code='at03'>营养篇</li>
+            </div>
+            <div class="tag1" v-tab.second v-if='showSecond' v-cloak>
+                <span :class1="{active: !index}" v-for='(item,index) in secondCats' :code='item.kind'>{{item.kindname}}</span>
+            </div>
+            <div class="list">
+                <div class="item" @click='toArtical(item.healid)' v-for='item in list' v-cloak>
+                    <div class="img-container" >
+                        <img :src="item.picPath" alt="">
+                    </div>
+                    <div class="item-detail">
+                        <div class="title" v-cloak>{{item.healTitle}}</div>
+                        <span class="type" v-cloak>{{item.secendTypeName}}</span>
+                        <span class="date" v-cloak>{{item.createTime | formatDate}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+        <footer-bar :index="0"></footer-bar>
+    </div>
+    <script type="text/javascript" src="../../assets/js/require.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="./knowledge.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,213 @@
+@import "../../assets/sass/base/function/_pxTorem.scss";
+
+html, body {
+  background: #f9f9fe;
+}
+
+#app {
+  background: #f9f9fe;
+  .main {
+    .top {
+      background:#fff;
+      padding: _(40) _(30) 0;
+      
+      > * {
+        vertical-align: middle;
+        display: inline-block;
+      }
+      img {
+        width: _(120);
+        height: _(120);
+        border-radius: 50%;
+        margin: 0  _(20) 0 0;
+      }
+
+      .s1 {
+        > * {
+          display: block;
+        }
+
+        .name {
+          color: #04040f;
+          font-size: _(30);
+        }
+
+        .id {
+          color: #8e8e93;
+          font-size: _(26);
+        }
+      }
+
+      .btn-edit {
+        width: _(120);
+        font-size: _(22);
+        color: #f9860b;
+        border: _(2) solid #f9860b;
+        height: _(50);
+        line-height: _(50);
+        text-align: center;
+        border-radius: _(5);
+        float: right;
+        margin: _(40) 0 0;
+      }
+    }
+
+    .l1 {
+      padding: _(60) 0 _(50);
+      display: flex;
+      text-align: center;
+      background:#fff;
+      > span {
+        flex: 1;
+
+        > * {
+          display: block;
+        }
+
+        .s1 {
+          color: #04040f;
+          font-size: _(28);
+          height: _(16);
+
+        }
+        .s2 {
+          margin: _(20) 0 0;
+          color: #8e8e93;
+          font-size: _(22);
+        }
+      }
+    }
+
+    .box {
+      margin: _(20) 0 0;
+      text-align: center;
+      .row {
+        
+        font-size: 0;
+        .cell {
+          background: #fff;
+          width: 49%;
+          height: _(140);
+          display: inline-block;
+          font-size: _(30);
+          
+          &:first-child {
+            margin: 0 1% 0 0;
+          }
+          .dot {
+            display: inline-block;
+            width: _(36);
+            height: _(36);
+            border-radius: 50%;
+            background: #ff3b30;
+            color: #fff;
+            line-height: _(36);
+          }
+        }
+        &.r1 {
+          line-height: _(140);
+          color: #04040f;
+
+          .dot {
+            // top: _(50);
+            position: relative;
+            top: _(-1);
+          }
+        }
+
+        &.r2 {
+          .cell {
+            padding: _(90) 0 0;
+            color: #8e8e93;
+            font-size: _(26);
+            position: relative;
+
+            &.msg {
+              background: #fff url(../../assets/images/my/msg.png) center _(30) no-repeat;
+              background-size: auto _(45);
+
+              .dot {
+                position: absolute;
+                top: _(10);
+                left: _(190);
+              }
+            }
+
+            &.advice {
+              background: #fff url(../../assets/images/my/face.png) center _(30) no-repeat;
+              background-size: auto _(50);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .profile {
+    background: #fff;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    .t1 {
+      margin: _(30) 0;
+      font-size: _(24);
+      color: #f9860b;
+      text-align: center;
+    }
+
+    ul {
+      padding: _(0) _(30);
+      li {
+        line-height: _(110);
+        height: _(110);
+        border-bottom: _(2) solid #e5e5ea;
+        clear: right;
+        
+        &.avatar {
+          height: _(150);
+          line-height: _(150);
+          .r {
+            background: none;
+          }
+          img {
+            width: _(120);
+            height: _(120);
+            border-radius: 50%;
+          }
+        }
+        .l {
+          color: #8e8e93;
+          font-size: _(30);
+        }
+
+        .r {
+
+          &.input {
+            border: none;
+            text-align: right;
+            outline: none;
+          }
+          color: #04040f;
+          float: right;
+          font-size: _(30);
+          padding: 0 _(40) 0 0;
+          background: url(../../assets/images/my/arrow_gray.png) right center no-repeat;
+          background-size:_(18) auto;
+          height: _(110)
+        }
+      }
+    }
+
+    .btn-save {
+      margin: _(60) _(30);
+      width: _(690);
+      height: _(88);
+      background: #f9860b;
+      border-radius: _(10);
+      color: #fff;
+      text-align: center;
+      font-size: _(36);
+      line-height: _(88);
+    }
+  }
+}

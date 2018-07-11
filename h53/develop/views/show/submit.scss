@@ -1,0 +1,172 @@
+
+@import "../../assets/sass/base/function/_pxTorem.scss";
+
+
+#app {
+	> :first-child {
+		> :last-child {
+			margin-bottom: _(0)
+		}		
+	}
+}
+.submit-box {
+	padding: _(30);
+	.header {
+		.buttons {
+			font-size: _(26);
+			color: #999;
+			.btn-cancel {
+				float: left;
+			}
+			.btn-publish {
+				color: #f9860b;
+				float: right;
+			}
+		}
+
+		.title {
+			color: #999;
+			text-align: center;
+			font-size: _(34);
+		}
+	}
+
+	.form {
+		.my-text {
+			margin: _(0) auto 0;
+			background: #fff;
+			padding: _(0);
+			border: none;
+			width: 100%;
+			height: _(210);
+			&::-webkit-input-placeholder {
+				color: #ccc;
+				font-size: _(30);
+				line-height: _(45);
+			}
+		}
+	}
+
+	.upload-item {
+		margin: _(30) 0;
+		position: relative;
+		min-height: _(160);
+		.for {
+			.item {
+				&:first-child {
+					margin: 0 0 0 0;
+				}
+				float: left;
+				width: _(215);
+				height: _(220);
+				position: relative;
+				margin: 0 0 0 _(0);
+
+				.parent {
+					overflow: hidden;
+					width: 100%;
+					height: 100%;
+					img {
+						max-width: initial;
+						height: 100%;
+						width: 100%;
+					}
+				}
+
+				.delete-btn {
+					position: absolute;
+					right: _(-20);
+					top: _(-20);
+					display: inline-block;
+					width: _(40);
+					height: _(40);
+					background: transparent url(../../assets/images/common/delete.png) center center no-repeat;
+					background-size: contain;
+				}
+			}
+
+
+			.new-btn {
+				float: left;
+				width: _(200);
+				height: _(200);
+				position: relative;
+				text-align: center;
+				// border: _(2) dashed #666;
+				margin: 0 0 0 _(0);
+				background: #efeff4 url(../../assets/images/show/publish.png) center center no-repeat;
+				background-size: _(70);
+				input {
+					position: absolute;
+					top: 0;
+					left: 0;
+					height: 100%;
+					width: 100%;
+					opacity: 0;
+				}
+				.icon {
+					
+				}
+			}
+
+
+		}
+	}
+
+	.l-box {
+		margin: _(80) 0 _(50);
+
+		.t1 {
+			color: #a9a9a9;
+			font-size: _(26)
+		}
+
+		.ck { 
+			span {
+				background: url(../../assets/images/show/uncheck.png) left center no-repeat;
+				height: _(45);
+				line-height: _(45);
+				text-indent: _(65);
+				display: inline-block;
+				background-size: contain;
+				margin: _(30) _(0) _(0) 0;
+
+				&:first-child {
+					margin-right: _(325)
+				}
+
+				&.active {
+					background: url(../../assets/images/show/check.png) left center no-repeat;
+					background-size: contain;
+
+				}
+			}
+		}
+	}
+
+	.submit {
+		line-height: _(88);
+		border: _(1) solid #efeff4;
+		text-align: center;
+		border-radius: _(10);
+		color: #d1d1d6;
+		font-size: _(36);
+		pointer-events: none;
+		&.active {
+			background: #f9860b;
+			color: #fff;
+			border: _(1) solid #f9860b;
+			pointer-events: all;
+
+		}		
+	}
+
+	.rule {
+		margin: _(50) 0 0;
+		color: #cfcfd3;
+		white-space: wrap;
+		font-size: _(20);
+		line-height: _(32);
+	}
+}
+

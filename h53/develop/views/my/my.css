@@ -1,0 +1,149 @@
+html, body {
+  background: #f9f9fe; }
+
+#app {
+  background: #f9f9fe; }
+  #app .main .top {
+    background: #fff;
+    padding: 0.53333rem 0.4rem 0; }
+    #app .main .top > * {
+      vertical-align: middle;
+      display: inline-block; }
+    #app .main .top img {
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      margin: 0 0.26667rem 0 0; }
+    #app .main .top .s1 > * {
+      display: block; }
+    #app .main .top .s1 .name {
+      color: #04040f;
+      font-size: 0.4rem; }
+    #app .main .top .s1 .id {
+      color: #8e8e93;
+      font-size: 0.34667rem; }
+    #app .main .top .btn-edit {
+      width: 1.6rem;
+      font-size: 0.29333rem;
+      color: #f9860b;
+      border: 0.02667rem solid #f9860b;
+      height: 0.66667rem;
+      line-height: 0.66667rem;
+      text-align: center;
+      border-radius: 0.06667rem;
+      float: right;
+      margin: 0.53333rem 0 0; }
+  #app .main .l1 {
+    padding: 0.8rem 0 0.66667rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    text-align: center;
+    background: #fff; }
+    #app .main .l1 > span {
+      -webkit-box-flex: 1;
+          -ms-flex: 1;
+              flex: 1; }
+      #app .main .l1 > span > * {
+        display: block; }
+      #app .main .l1 > span .s1 {
+        color: #04040f;
+        font-size: 0.37333rem;
+        height: 0.21333rem; }
+      #app .main .l1 > span .s2 {
+        margin: 0.26667rem 0 0;
+        color: #8e8e93;
+        font-size: 0.29333rem; }
+  #app .main .box {
+    margin: 0.26667rem 0 0;
+    text-align: center; }
+    #app .main .box .row {
+      font-size: 0; }
+      #app .main .box .row .cell {
+        background: #fff;
+        width: 49%;
+        height: 1.86667rem;
+        display: inline-block;
+        font-size: 0.4rem; }
+        #app .main .box .row .cell:first-child {
+          margin: 0 1% 0 0; }
+        #app .main .box .row .cell .dot {
+          display: inline-block;
+          width: 0.48rem;
+          height: 0.48rem;
+          border-radius: 50%;
+          background: #ff3b30;
+          color: #fff;
+          line-height: 0.48rem; }
+      #app .main .box .row.r1 {
+        line-height: 1.86667rem;
+        color: #04040f; }
+        #app .main .box .row.r1 .dot {
+          position: relative;
+          top: -0.01333rem; }
+      #app .main .box .row.r2 .cell {
+        padding: 1.2rem 0 0;
+        color: #8e8e93;
+        font-size: 0.34667rem;
+        position: relative; }
+        #app .main .box .row.r2 .cell.msg {
+          background: #fff url(../../assets/images/my/msg.png) center 0.4rem no-repeat;
+          background-size: auto 0.6rem; }
+          #app .main .box .row.r2 .cell.msg .dot {
+            position: absolute;
+            top: 0.13333rem;
+            left: 2.53333rem; }
+        #app .main .box .row.r2 .cell.advice {
+          background: #fff url(../../assets/images/my/face.png) center 0.4rem no-repeat;
+          background-size: auto 0.66667rem; }
+  #app .profile {
+    background: #fff;
+    height: 100%;
+    width: 100%;
+    position: fixed; }
+    #app .profile .t1 {
+      margin: 0.4rem 0;
+      font-size: 0.32rem;
+      color: #f9860b;
+      text-align: center; }
+    #app .profile ul {
+      padding: 0rem 0.4rem; }
+      #app .profile ul li {
+        line-height: 1.46667rem;
+        height: 1.46667rem;
+        border-bottom: 0.02667rem solid #e5e5ea;
+        clear: right; }
+        #app .profile ul li.avatar {
+          height: 2rem;
+          line-height: 2rem; }
+          #app .profile ul li.avatar .r {
+            background: none; }
+          #app .profile ul li.avatar img {
+            width: 1.6rem;
+            height: 1.6rem;
+            border-radius: 50%; }
+        #app .profile ul li .l {
+          color: #8e8e93;
+          font-size: 0.4rem; }
+        #app .profile ul li .r {
+          color: #04040f;
+          float: right;
+          font-size: 0.4rem;
+          padding: 0 0.53333rem 0 0;
+          background: url(../../assets/images/my/arrow_gray.png) right center no-repeat;
+          background-size: 0.24rem auto;
+          height: 1.46667rem; }
+          #app .profile ul li .r.input {
+            border: none;
+            text-align: right;
+            outline: none; }
+    #app .profile .btn-save {
+      margin: 0.8rem 0.4rem;
+      width: 9.2rem;
+      height: 1.17333rem;
+      background: #f9860b;
+      border-radius: 0.13333rem;
+      color: #fff;
+      text-align: center;
+      font-size: 0.48rem;
+      line-height: 1.17333rem; }

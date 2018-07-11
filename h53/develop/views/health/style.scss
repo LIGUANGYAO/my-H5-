@@ -1,0 +1,651 @@
+
+@import "../../assets/sass/base/function/_pxTorem.scss";//引入sass mixin function等
+
+.opacity{
+    -webkit-animation: opacity 0.4s linear;
+    animation: opacity 0.4s linear;
+}
+@-webkit-keyframes opacity {
+    0% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+@keyframes opacity {
+    0% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+
+.swiper-pagination-bullet-active{
+    opacity: 0.8;
+    background: #f9860b;
+}
+//注册弹框
+
+.registrationModel{
+    width: _(590);
+    height: _(700);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 15;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    .registrationModelHeader{
+        margin-bottom: _(25);
+        .registrationHead{
+            height: _(77);
+            margin-bottom: _(15);
+            background-image: url(../../assets/images/home/bg.png);
+            background-size: 100%  _(77); 
+           
+            p{
+                font-size: _(26);
+                color: #ffffff;
+                text-align: center;
+                line-height: _(77);
+                height: _(77);
+            }
+        }
+    }
+
+    #sexDom{
+        height: _(158);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: _(15);
+        span{
+            color: #333333;
+            font-size: _(26);
+            padding: 0 _(30);
+        }
+        .boy{
+            width: _(111);
+            height: _(144);
+            background-image: url(../../assets/images/home/men.png);
+            background-size: _(111)  _(144);
+            background-repeat: no-repeat;
+        }
+        .boy.Active{
+            width: _(111);
+            height: _(158);
+            background-image: url(../../assets/images/home/menActive.png);
+            background-size: _(111)  _(158);
+            background-repeat: no-repeat;
+        }
+        .girl{
+            width: _(111);
+            height: _(144);
+            background-image: url(../../assets/images/home/women.png);
+            background-size: _(111)  _(144);
+            background-repeat: no-repeat;
+        }
+        .girl.Active{
+            width: _(111);
+            height: _(158);
+            background-image: url(../../assets/images/home/womenActive.png);
+            background-size: _(111)  _(158);
+            background-repeat: no-repeat;
+        }
+    }
+
+    .stature,.birthdate{
+        text-align: center;
+        h3{
+            color: #666666;
+            font-size: _(30);
+            font-weight: normal;
+            margin-bottom: _(10);
+        }
+        input{
+          background: none;
+          border:none;
+          color: #f88409;
+          font-size: _(44);
+          height: _(50);
+          text-align: center;
+          line-height: _(50);
+          border-bottom: _(2) solid #f88409;
+        }
+      }
+      .stature{
+          margin-bottom: _(32);
+      }
+      .birthdate{
+          margin-bottom: _(40);
+      }
+      #JS-stature{
+         margin: 0 auto; 
+         input{
+            width: _(160);
+         }
+      }
+      #JS-year{
+          margin: 0 auto; 
+          input{
+            width: _(260);
+          }
+      }
+
+      .secret-world{
+          text-align: center;
+          color: #999999;
+          font-size: _(22);
+      }
+     .registration-btn-box {
+         display: flex;
+         justify-content: center;
+         margin-top: _(25);
+        .registration-btn{
+            height: _(64);
+            width: _(302);
+            background: #f9850a;
+            border: 0;
+            border-radius: _(50);
+            color: #ffffff;
+            text-align: center;
+            line-height: _(64);
+        }
+     }
+}
+
+
+.bodyFatTitle{
+    font-size: _(34);
+    color: #333333;
+    text-align: center;
+    margin-top: _(40);
+    span{
+        color: #f9860b;
+    }
+}
+
+.bodyFat{
+    padding-top: _(40);
+    margin-bottom: _(20);
+    ul{
+        padding-top: _(10);
+        display: flex;
+        li{
+            width: 25%;
+            text-align: center;
+            margin-bottom: _(15);
+            span.percentage{
+                color: #f9860b;
+                font-size: _(30);
+            }
+            span.titleColor{
+                color: #666666;
+            }
+            span.headerTitle{
+                color: #b2b2b1;
+            }
+            span{
+                font-size: _(30);
+                
+                height: _(45);
+                line-height: _(45);
+                display: block;
+            }
+        }
+    }
+}
+
+.mask{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: rgba(0,0,0,0.5);
+    top: 0;
+    left: 0;
+    z-index: 12;
+}
+
+.userInfo{
+    width: 100%;
+    height: _(112);
+    margin-top: _(70);
+    margin-bottom: _(62);
+    .genderM,.genderW{
+        width: _(40);
+        height: _(40);
+        position: absolute;
+        top: _(175);
+        left: _(440);
+        z-index: 3;
+        background-image: url(../../assets/images/health/sex-icon.png);
+        background-size: _(80)  _(40);
+    }
+    .genderW{
+        background-position: 0 0;
+    }
+    .genderM{
+        background-position: _(40) 0;
+    }
+
+    .registrationUser{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        .registrationUserBox{
+          display: flex;
+          width: _(722);
+        .year,.weigth,.height{
+            width: _(240);
+            text-align: center;
+            span{
+                display: block;
+                font-size: _(38);
+                color: #999999;
+                
+            }
+        }
+        span.currentYear,span.currentWei,span.currentHeight{
+            color: #f8860a;
+            font-size: _(44);
+            margin-bottom: _(24);
+        }
+       
+       
+      }
+    }
+}
+
+.consulting{
+    width: _(124);
+    height: _(124);
+    position: fixed;
+    top: 40%;
+    right: _(10);
+    z-index: 5;
+    cursor: pointer;
+    img{
+        width: _(124);
+        height: _(124); 
+    }
+}
+#instructionMast{
+    width:100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    position: fixed;
+    top:0;
+    left: 0;
+    z-index: 18;
+    display: none;
+}
+.instruction{
+    width: _(507);
+    height: _(880);
+    position: fixed;
+    background-color: #ffffff;
+    z-index: 20;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    display: none;
+    .close{
+        width: _(32);
+        height: _(32);
+        position: absolute;
+        background-image: url(../../assets/images/health/close.png);
+        background-size: _(32)  _(32);
+        top: _(30);
+        right: _(26);
+        cursor: pointer;
+    }
+    h4{
+        font-size: _(34);
+        text-align: center;
+        padding-top: _(30);
+        margin-bottom: _(28);
+    }
+    .instructionInner{
+        padding: 0  _(36)  0  _(32);
+        color: #666666;
+        font-size: _(28);
+        .adaption{
+            margin-bottom: _(10);
+            color: #333333;
+        }
+        ul{
+            margin-bottom: _(30);
+            li{
+                line-height: 120%;
+            }
+        }
+        .insTitle{
+          span{
+              color: #333333;
+          }
+           p{
+              margin-bottom: _(10);
+              line-height: 120%;
+           }
+        }
+    }
+}
+
+.bmiBox{
+    margin-top: _(35);
+    text-align: center;
+    .bmiWorld{
+        text-align: center;
+        font-size: _(30);
+        margin-bottom: _(36);
+        position: relative;
+        .horn{
+            position: absolute;
+            width: _(30);
+            height: _(30);
+            background-image: url(../../assets/images/health/question.png);
+            background-size: _(30)  _(30);
+            right: _(40);
+            top: _(2);
+        }
+    }
+    .bmiIntroduce{
+        color: #999999;
+        font-size: _(28);
+        line-height: 160%;
+    }
+}
+.animationBox{
+    margin-top: _(120);
+    margin-bottom: _(20);
+    height: _(200);
+    padding-top: _(110);
+    position: relative;
+    .animationName{
+        position: absolute;
+        width: _(120);
+        height: _(40);
+        top: _(-50);
+        left: 0;
+        z-index: 3;
+        color: #999999;
+        text-overflow: ellipsis;
+        white-space:nowrap;
+        overflow:hidden;
+        
+    }
+    #peoplAnimat{
+        width: _(80);
+        height: _(90);
+        position: absolute;
+        z-index: 4;
+        top: _(2);
+        left: 0;
+        background-size: _(80)  _(90);
+    }
+    .men1{
+        background-image: url(../../assets/images/health/men1.gif);
+    }
+    .men2{
+        background-image: url(../../assets/images/health/men2.gif);
+    }
+    .men3{
+        background-image: url(../../assets/images/health/men3.gif);
+    }
+    .men4{
+        background-image: url(../../assets/images/health/men4.gif);
+    }
+
+    .women1{
+        background-image: url(../../assets/images/health/women1.gif);
+    }
+    .women2{
+        background-image: url(../../assets/images/health/women2.gif);
+    }
+    .women3{
+        background-image: url(../../assets/images/health/women3.gif);
+    }
+    .women4{
+        background-image: url(../../assets/images/health/women4.gif);
+    }
+    .progress{
+        height: _(16);
+        width: 100%;
+        // background-color: #999999;
+        // border-radius: _(10);
+        position: relative;
+        display:flex;
+        flex-direction:row;
+        justify-content:space-between;
+        .line{
+            width:23%;
+            height: _(16);
+            background-color:#999999;
+            border-radius: _(10);                         
+        }
+        .progressIner{
+            position: absolute;
+            height: _(23);
+            width: _(23);
+            left: 0;
+            top: _(-4);
+            background-color: #ffa343;
+            border-radius: _(20);
+        }
+    }
+    .bmiNumber{
+        margin-top: _(26);
+        margin-bottom: _(28);
+        font-size: _(24);
+        color: #999999;
+        span:nth-child(1){
+             margin-right: _(25);
+        }
+        span:nth-child(2){
+            margin-right: _(35);
+        }
+        span:nth-child(3){
+             margin-right: _(25);
+        }
+    }
+}
+
+.healthAd{
+    height: _(200);
+}
+
+.beautBody{
+    height: _(620);
+    margin-top: _(35);
+    background-image: url(../../assets/images/health/infoBg.png);
+    background-size: _(710) _(618);
+    position: relative;
+    .beautWomen,.beautMen{
+        width: _(180);
+        height: _(480);
+        background-size: _(180)  _(480);
+        position: absolute;
+        top: _(88);
+        left: _(265);
+        z-index: 3;
+    }
+    .beautMen{
+        background-image: url(../../assets/images/health/bodyMen.png);
+    }
+    .beautWomen{
+        background-image: url(../../assets/images/health/bodyWomen.png);
+    }
+    
+    .beautBodyL,.beautBodyR{
+        width: _(278);
+        height: _(312);
+        position: absolute;
+        top: _(116);
+        z-index: 4;
+        color: #ffffff;
+        text-align: center;
+        .headTop{
+            font-size: _(34);
+            margin-bottom: _(19);
+        }
+    }
+    .standardT{
+        font-size: _(28);
+        margin-bottom: _(20);
+    }
+    .standardW,.beautW{
+        font-size: _(30);
+        margin-bottom: _(32);
+    }
+    .thirdCirc{
+        font-size: _(34);
+        margin-bottom: _(19);
+    }
+    .basic{
+        font-size: _(28);
+        ul{
+            li{
+              margin-bottom: _(10);
+            }
+        }
+    }
+    .beautBodyL{
+        left: _(20);
+    }
+    .beautBodyR{
+       right: _(20);
+    }
+
+
+}
+
+.beautBodyTitle{
+    margin-top: _(40);
+    margin-bottom: _(38);
+    h4{
+        text-align: center;
+        color: #666666;
+        font-size: _(35);
+        margin-bottom: _(30);
+    }
+    p{
+        color: #999999;
+        font-size: _(28);
+        line-height: 170%;
+    }
+}
+.foodSuggest{
+    margin-top: _(40);
+    p.foodH{
+        margin-bottom: _(10);
+        position: relative;
+        span{
+            font-size: _(30);
+        }
+        i{
+            display: block;
+            font-style: normal;
+            width: _(38);
+            height:  _(38);
+            position: absolute;
+            top: _(-2);
+            right: 0;
+            img{
+                width: _(38);
+                height: _(38);
+            }
+        }
+    }
+    .suggestR{
+        position: relative;
+        width:100%;
+        height: _(380);
+        color: #ffffff;
+        img{
+            width:100%;
+            height: _(380); 
+        }
+    }
+    .suggestTitle{
+        width: 100%;
+        height: _(100);
+        position: absolute;
+        background: rgba(0,0,0,0.5);
+        bottom: 0;
+        left: 0;
+        z-index: 2;
+        color: #ffffff;
+        p{
+            padding: _(20)  0   0   _(20);
+            font-size: _(26);
+            line-height: 130%;
+        }
+    }
+}
+
+.sportSuggest{
+    margin-top: _(28);
+    p.sportH{
+        margin-bottom: _(10);
+        position: relative;
+        span{
+            font-size: _(30);
+        }
+        i{
+            display: block;
+            font-style: normal;
+            width: _(38);
+            height:  _(38);
+            position: absolute;
+            top: _(-2);
+            right: 0;
+            img{
+                width: _(38);
+                height: _(38);
+            }
+        }
+    }
+    .suggestR{
+        position: relative;
+        width:100%;
+        height: _(467);
+        .suggestRTitle{
+            position: absolute;
+            width: _(590);
+            height: _(210);
+            top: _(100);
+            left: _(67);
+            color: #ffffff;
+            p{
+                line-height: 160%;
+                color: #ffffff;
+            }
+            p:nth-child(1){
+                font-size: _(30);
+            }
+            p:nth-child(2),p:nth-child(2){
+                font-size: _(26);
+            }
+        }
+        img{
+            width:100%;
+            height: _(467);
+        }
+    }
+}
+
+.weightAdminister{
+    height: _(100);
+    width: _(620);
+    margin: 0 auto;
+    line-height: _(100);
+    font-size: _(30);
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: _(158);
+    margin-top: _(60);
+    background: linear-gradient(#fa9e19,#fb8f11);
+    border-radius: _(50);
+}

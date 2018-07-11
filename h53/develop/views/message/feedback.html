@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<title>意见反馈</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css?v=10.0">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css?v=10.0">
+	<link rel="stylesheet" type="text/css" href="./comment.css?v=10.0">
+	<script  type="text/javascript" src="../../assets/js/lib/flexible.js?v=10.0" async></script>
+</head>
+
+<body>
+
+    <div id="app" class="container">
+      <div class="contentInfor" v-cloak>
+         <ul >
+             <li v-for="v in sysreply" @click="linkTo(v.parentId)">
+                 <div class="me">
+                     <div class="portrait">
+                         <img src="../../assets/images/common/logo.png">
+                     </div>
+                     <div class="comments">
+                         <div class="userName" style="margin-bottom:0.2rem;">小仙女</div>
+                         <div class="feedBackTime">{{v.createTime | formatDate}}</div>
+                         <div class="myInfro">{{v.proposal}}</div>
+
+                         <div class="reply" >
+                             <div class="tr"></div>
+                             
+                             <div class="replyInfor" v-for="v in v.childMessage">
+                                 <p style="margin-bottom:0.1rem;"><span class="replyName2">我的反馈：</span>{{v.proposal}}</p>
+                                 <img :src="v.imgUrl" @click="preview(v.imgUrl)">
+                             </div>
+                             
+                         </div>
+                     </div>
+                 </div>
+             </li>
+         </ul>
+      </div>
+    </div>
+    <script src="../../assets/js/lib/jweixin-1.0.0.js?v=10.0"></script>
+    <script type="text/javascript" src="../../assets/js/require.js?v=10.0"></script>
+    <script src="../../assets/js/config.js?v=10.0"></script>
+    <script src="./feedback.js?v=10.0"></script>
+    
+</body>
+</html>

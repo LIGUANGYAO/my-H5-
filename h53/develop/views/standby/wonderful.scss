@@ -1,0 +1,144 @@
+@import "../../assets/sass/base/function/_pxTorem.scss";//引入sass mixin function等
+
+[v-cloak] {
+    display: none !important; 
+  }
+
+.footerTitle{
+    width: 100%;
+    height: _(30);
+    color: #8e8e93;
+    font-size: _(24);
+    text-align: center;
+    position: absolute;
+    left: 0;
+    bottom: 3%;
+    z-index: 5;
+}
+#btn{
+    width: 100%;
+    height: _(80);
+    position: relative;
+    display: none;
+    .animal{
+        position: absolute;
+        top: _(-160);
+        right: 16%;
+        z-index: 3;
+        width: _(152);
+        height: _(200);
+        img{
+            width: _(152);
+            height: _(200);
+        }
+    }
+    .authorizeBtn{
+        width: _(356);
+        height: _(66);
+        line-height: _(66);
+        text-align: center;
+        color: #f9860b;
+        font-size: _(32);
+        margin: 0 auto;
+        border: _(2) solid #f9860b;
+        border-radius: _(5);
+       
+    }
+}
+
+
+
+#instrument{
+    width: 100%;
+    height: _(478);
+    position: relative;
+    margin-bottom: _(130);
+    margin-top: _(60); 
+    .judgment{
+        position: absolute;
+        width: _(480);
+        height: _(407);
+        background-image: url(../../assets/images/home/ctxbg.png);
+        background-repeat: no-repeat;
+        background-size: _(480)  _(407);
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        z-index: 2;
+        display: none;
+    }
+    .ctxActive{
+        width: 100%;
+        height: _(204);
+        position: absolute;
+        left: 0;
+        top: _(116);
+        z-index: 6;
+        .centerBox{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            .currentWeight{
+                text-align: center;
+                margin-bottom: _(6);
+                p{
+                    color: #f9860b;
+                    font-size: _(110);
+                    height: _(120);
+                    span{
+                        font-size: _(34);
+                    }
+                }
+                span.currentWeightSpan{
+                    font-size: _(30);
+                    color: #8e8e93;
+                }
+            }
+            .prvWeight{
+                height: _(32);
+                line-height: _(32);
+                font-size: _(30);
+                color: #8e8e93;
+                margin-bottom: _(10);
+            }
+            .difference{
+                color: #8e8e93;
+                font-size: _(30);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .icon{
+                    width: _(20);
+                    height: _(24);
+                    margin-right: _(5);
+                  
+                }
+                .down{
+                    background-image: url(../../assets/images/home/down.png);
+                    background-size: _(20)  _(24);
+                    background-repeat: no-repeat;
+                }
+                .up{
+                    background-image: url(../../assets/images/home/down.png);
+                    background-size: _(20)  _(24);
+                    background-repeat: no-repeat;
+                    transform: rotate(180deg);
+                }
+            }
+        }
+    }
+
+    #myCanvas,#myCanvas2{
+        position: absolute;
+        width: _(480);
+        height: _(480);
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        z-index: 4;
+    }
+    #myCanvas2{
+        z-index: 3;
+    }
+}

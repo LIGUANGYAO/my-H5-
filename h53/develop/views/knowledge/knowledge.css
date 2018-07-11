@@ -1,0 +1,67 @@
+.knowledge-box {
+  padding: 0.4rem 0.26667rem;
+  font-size: 0.4rem;
+  margin-bottom: 1.30667rem; }
+  .knowledge-box .nav1 {
+    margin: 0 0 0.4rem;
+    text-align: center;
+    border-bottom: 1px solid #f2f2f2; }
+    .knowledge-box .nav1 li {
+      font-size: 0.4rem;
+      display: inline-block;
+      color: #999;
+      width: 2rem;
+      margin: 0 0.48rem;
+      padding: 0.26667rem 0;
+      border-bottom: 1px solid #f2f2f2; }
+      .knowledge-box .nav1 li.active {
+        color: #f9860b;
+        border-color: #f9860b; }
+  .knowledge-box .tag1 {
+    margin: 0 0 0.4rem 0;
+    text-align: left; }
+    .knowledge-box .tag1 > span {
+      display: inline-block;
+      width: 1.6rem;
+      height: 0.74667rem;
+      font-size: 0.34667rem;
+      border: 1px solid #cecece;
+      color: #999999;
+      border-radius: 0.33333rem;
+      text-align: center;
+      line-height: 0.74667rem;
+      margin: 0.13333rem 0.09333rem; }
+      .knowledge-box .tag1 > span.active {
+        background: #f9860b;
+        color: #fff;
+        border-color: #f9860b; }
+  .knowledge-box .list .item {
+    border-bottom: 1px solid #f2f2f2;
+    padding: 0.26667rem 0 0.26667rem; }
+    .knowledge-box .list .item .img-container {
+      float: left;
+      width: 2.66667rem;
+      height: 2.13333rem;
+      overflow: hidden;
+      margin: 0 0.26667rem 0 0; }
+      .knowledge-box .list .item .img-container img {
+        height: 100%;
+        width: 100%; }
+    .knowledge-box .list .item .item-detail {
+      position: relative;
+      height: 2.13333rem; }
+      .knowledge-box .list .item .item-detail .title {
+        color: #333;
+        line-height: 0.56rem;
+        font-size: 0.34667rem; }
+      .knowledge-box .list .item .item-detail .type {
+        color: #f9860b;
+        position: absolute;
+        bottom: 0;
+        left: 2.93333rem;
+        font-size: 0.42667rem; }
+      .knowledge-box .list .item .item-detail .date {
+        color: #999;
+        position: absolute;
+        bottom: 0;
+        right: 0; }

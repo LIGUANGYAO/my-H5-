@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta charset='utf-8'/>
+    <title>我的美图</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css">
+
+    <link rel="stylesheet" type="text/css" href="./photo.css">
+    <script type="text/javascript" src="../../assets/js/lib/flexible.js"></script>
+    <script>
+    var _hmt = _hmt || [];
+    _hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+    </script>
+</head>
+
+<body>
+    <div id="app" class="container" v-cloak >
+      <div class="photo-box" >
+          <div class="top-item">
+            <p class="a">我的美图</p>
+            <p class="b">
+              <span class="btn-edit" @click='edit' v-if='status != "delete" && (images != null && images.length)'>编辑</span>
+              <span class="btn-delete" @click='remove' v-if='status == "delete"'>删除</span>
+              <span class="btn-cancel" @click='cancel' v-if='status == "delete"'>取消</span>
+            </p>
+          </div>
+
+          <div class="guide" v-if='images != null && !images.length'>
+            <div class="box">
+              <img v-if='profile!=null && profile.gender == 1' src="../../assets/images/show/man.png" alt="">
+              <img v-if='profile!=null && profile.gender == 2' src="../../assets/images/show/woman.png" alt="">
+            </div>
+            <div class="text">你还没有上传美图噢！赶紧晒出你的美图</div>
+          </div>
+          <div class="photo-each">
+            <div class="unit" v-for='(img,index) in images' 
+            :class='{normal: data[index].state === 2}'
+            @click='select(index)'>
+              <div :style='{"background-image": "url(" + img+ "?x-oss-process=image/resize,w_300/auto-orient,1)"}' alt="" class="picture"></div>
+              <p class="caption" v-if='(status != "delete") && (data[index].state === 1)'>审核中</p>
+              <p class="caption" v-if='(status != "delete") && (data[index].state === 3)'>审核失败</p>
+              <span class="checked icon" v-if='selected[index]'></span>
+            </div>
+
+            <spin :isLoading='showLoading'></spin>
+            <!-- <div class="unit">
+              <img src="/assets/images/lab/cover.png" alt="" class="picture">
+              <p class="caption">审核中</p>
+              <span class="checked icon"></span>
+            </div>
+            <div class="unit">
+              <img src="/assets/images/lab/cover.png" alt="" class="picture">
+              <p class="caption">审核中</p>
+              <span class="checked icon"></span>
+            </div>
+            <div class="unit">
+              <img src="/assets/images/lab/cover.png" alt="" class="picture">
+              <p class="caption">审核中</p>
+              <span class="checked icon"></span>
+            </div>
+            <div class="unit">
+              <img src="/assets/images/lab/cover.png" alt="" class="picture">
+              <p class="caption">审核中</p>
+              <span class="checked icon"></span>
+            </div>
+            <div class="unit">
+              <img src="/assets/images/lab/cover.png" alt="" class="picture">
+              <p class="caption">审核中</p>
+              <span class="checked icon"></span>
+            </div> -->
+          </div>
+          <div class="bg" v-if='showDeleteDlg'></div>
+          <div class="dialog" v-if='showDeleteDlg'>
+            <div class="section">
+              <h3>确认删除美图吗？</h3>
+              <p>这些照片将被删除。<br/>
+此操作不能撤销。</p>
+            </div>
+            <div class="operate">
+              <b class="btn-cancel" @click='cancelDlg'>取消</b>
+              <b class="btn-confirm" @click='confirm'>确认</b>
+            </div>
+          </div>
+      </div>
+      <footer-bar :index="1"></footer-bar>
+
+    </div>
+    <script type="text/javascript" src="../../assets/js/require.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="./photo.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+@import "../../assets/sass/_entry.scss";//引入sass mixin function等
+@import "../../component/FooterBar/_index.scss";//底部导航样式
+
+
+
+.build{
+    width: _(348);
+    height: _(402);
+    position: absolute;
+    top: _(240);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    .buildAnima{
+        width: _(298);
+        height: _(234);
+        img{
+            width: _(298);
+            height: _(234);
+
+        }
+    }
+    p{
+        text-align: center;
+        color: #999999;
+        font-size: _(34);
+        line-height: 150%;
+    }
+    .first{
+        padding-top: _(20);
+    }
+}
