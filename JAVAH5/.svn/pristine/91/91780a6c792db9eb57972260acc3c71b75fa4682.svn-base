@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>精选</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport"
+          content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css?v=time">
+    <link rel="stylesheet" type="text/css" href="js/comment/tips.css?v=time">
+    <script type="text/javascript" src="plugins/flexible.js"></script>
+</head>
+<body>
+<div id="app" class="container">
+
+    <div class="content tips background--white">
+
+        <h3 class="title">筋长一寸，寿长十年-妹子动图示范正确拉筋方法</h3>
+
+        <p class="text-1">
+            现代人的流行病，是二十几年前不可想象的，年轻人的痛症则多是现代科技的副产品，因电脑、电视、游戏机和汽车的出现导致人体以同一姿势长时间不动而气血瘀堵，其次是因为空调，在夏季人们穿衣最少的时候它像个无形杀手，将寒湿不断灌入人体，堵塞气血的运行，形成痛症。对治痛症的办法，除了常规的针灸、推拿之外，拉筋也是非常有效的方法哦。妹子动图示范各部位正确拉筋方法，根据个人的身体素质，每个动作不限制次数，觉得舒服就行，赶紧运动起来gogogo！
+        </p>
+
+        <h4 class="title--dot">
+            第一步
+        </h4>
+        <img class="image" src="images/10/3/1.gif" alt="load">
+        <h4 class="title--dot">
+            第二步
+        </h4>
+        <img class="image" src="images/10/3/2.gif" alt="load">
+        <h4 class="title--dot">
+            第三步
+        </h4>
+        <img class="image" src="images/10/3/3.gif" alt="load">
+        <h4 class="title--dot">
+            第四步
+        </h4>
+        <img class="image" src="images/10/3/4.gif" alt="load">
+        <h4 class="title--dot">
+            第五步
+        </h4>
+        <img class="image" src="images/10/3/5.gif" alt="load">
+        <h4 class="title--dot">
+            第六步
+        </h4>
+        <img class="image" src="images/10/3/6.gif" alt="load">
+
+    </div>
+
+</div>
+</body>
+</html>

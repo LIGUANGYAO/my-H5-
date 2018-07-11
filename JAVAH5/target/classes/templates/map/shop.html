@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh"  th:with="host=${@environment.getProperty('spring.thymeleaf.host')}">
+<head>
+    <meta charset="UTF-8">
+    <title>附近网点</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- 避免IE使用兼容模式 -->
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="stylesheet" type="text/css" th:href="${host}+'/css/iconfont.css'">
+    <link rel="stylesheet" type="text/css" th:href="${host}+'/css/normalize.css'">
+    <link rel="stylesheet" type="text/css" th:href="${host}+'/css/swiper-3.4.2.min.css'">
+    <link rel="stylesheet" type="text/css" th:href="${host}+'/js/map/shop.css'">
+    <script type="text/javascript" th:src="${host}+'/plugins/flexible.js'"></script>
+</head>
+<body>
+<input type="hidden" th:value="${@environment.getProperty('spring.profiles.active')}" id="environment">
+<input type="hidden" th:value="${@environment.getProperty('spring.thymeleaf.host')}" id="host">
+<div id="app" class="container" v-cloak>
+    <div class="content my">
+        <p class="go-back" @click="goNearMap">
+            <i class="iconfont icon-fanhui"></i>
+        </p>
+        <!-- banner -->
+        <div class="banner">
+            <div class="go" @click="returnHome">
+                <div class="go-btn">
+                    <i class="iconfont icon-quzheli"></i>
+                    <span>去这里</span>
+                </div>
+            </div>
+            <!-- Swiper -->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" v-for="v in [envImage1,envImage2]"><img v-bind:src="v" /></div>
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+
+            <!--<img v-if="imgData.length == 0" src="images/test5.jpg" />-->
+        </div>
+
+        <!-- 商家名称 -->
+        <div class="dot-title">
+            <h3>{{devicename}}</h3>
+        </div>
+
+        <!-- 商家信息 -->
+        <div class="merchant-information">
+            <h3>商家信息</h3>
+            <ul>
+                <li class="address">
+                    <img src="images/dot_location.png" />
+                    <p>距离你{{distance}}米 | {{address}}</p>
+                </li>
+                <li>
+                    <img src="images/dot_time.png" />
+                    营业时间：{{serviceTime}}</li>
+                <li>
+                    <img src="images/dot_tal.png" />
+                    服务电话：{{tel}}</li>
+            </ul>
+        </div>
+
+        <!-- 商家介绍 -->
+        <div class="business-introduction">
+            <h3>商家介绍</h3>
+            <p>{{introduce}}</p>
+        </div>
+
+        <!-- 设备状态 -->
+        <div class="equipment-status">
+            <h3>设备状态</h3>
+            <div class="status-btn">
+                <a class="on-line" :class="{'line': true}">在线</a>
+                <a class="off-line" :class="{'line': false}">离线</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="${host}+'/js/require.js'"></script>
+<script th:src="${host}+'/js/config.js'"></script>
+<script th:src="${host}+'/js/map/shop.js'"></script>
+</body>
+</html>

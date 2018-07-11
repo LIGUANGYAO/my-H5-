@@ -1,0 +1,17 @@
+
+
+@mixin image_pdTop($horizontal: 1,$vertical:1, $position: relative, $width: 100%) {
+    $proportion: ($vertical / $horizontal) * 100%;
+    padding-top: $proportion;
+    width: $width;
+    position: $position;
+}
+
+@mixin image_pdTop__child{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+

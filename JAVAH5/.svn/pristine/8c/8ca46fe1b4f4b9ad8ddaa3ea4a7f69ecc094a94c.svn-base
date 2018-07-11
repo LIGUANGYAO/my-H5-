@@ -1,0 +1,37 @@
+package com.mzj.eagle.wechat.portal.map.service;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.mzj.eagle.wechat.portal.common.GlobalMethodUtil;
+import com.mzj.eagle.wechat.portal.map.vo.ScaleShopInfoVo;
+
+@Service
+public class BusinessDetailsService {
+	
+	@Value("${apigw.host}")
+	private String apigwHost;
+	
+	@Autowired
+	private RestTemplate restTemplate;
+	
+	public ScaleShopInfoVo get(Long id ,String _p) {
+		 GlobalMethodUtil globalMethodUtil =new GlobalMethodUtil();
+			String decry=globalMethodUtil.decrypt(_p);
+			Map<String,String> map =globalMethodUtil.getParams(decry);
+		if(map!=null) {
+			if(id!=null && !id.equals("")) {
+				ScaleShopInfoVo scaleShopInfoVo =restTemplate.getForObject(apigwHost+"scale/bd/shopinfo/{id}", ScaleShopInfoVo.class, id);
+				System.out.println(scaleShopInfoVo+"111111111111111111");
+				return scaleShopInfoVo;
+			}
+			return null;
+    	}
+		return null;
+	}
+	
+
+}

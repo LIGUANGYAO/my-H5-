@@ -1,0 +1,51 @@
+@import "../../sass/base/_fn.scss";
+
+$barName: "bar";
+.#{$barName}{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 10;
+    height: _(98);
+    background-color:#1c1c20;
+    border-top:_(1) solid #3a3b3d;
+    &>a{
+        position: relative;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: _(75);
+        &.bar__index{
+                width: _(42);
+                @include bgImg("../../images/tab_bar_icon/tab_home_normal.png");
+        }
+        &.bar__health{
+                width: _(8);
+                @include bgImg("../../images/tab_bar_icon/tab_health_norml.png");
+        }
+        &.bar__dot{
+                width: _(80);
+                @include bgImg("../../images/tab_bar_icon/tab_nearby_norml.png");
+
+        }
+        &.bar__mall{
+                width: _(42);
+                @include bgImg("../../images/tab_bar_icon/tab_mall_normal.png");
+        }
+    }
+    &>a.#{$barName}-active{
+        &.bar__index{
+                @include bgImg("../../images/tab_bar_icon/tab_home_select.png");
+        }
+        &.bar__health{
+                @include bgImg("../../images/tab_bar_icon/tab_health_selected.png");
+        }
+        &.bar__dot{
+                @include bgImg("../../images/tab_bar_icon/tab_nearby_selected.png");
+        }
+        &.bar__mall{
+                @include bgImg("../../images/tab_bar_icon/tab_mall_selecte.png");
+        }
+    }
+}

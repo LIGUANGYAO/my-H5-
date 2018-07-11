@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh" th:with="host=${@environment.getProperty('spring.thymeleaf.host')}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>运动建议</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="stylesheet" type="text/css" th:href="${host}+'/css/normalize.css'">
+    <link rel="stylesheet" type="text/css" th:href="${host}+'/js/health/food.css'">
+    <script type="text/javascript" th:src="${host}+'/plugins/flexible.js'"></script>
+</head>
+
+<body>
+<input type="hidden" th:value="${@environment.getProperty('spring.profiles.active')}" id="environment">
+<input type="hidden" th:value="${@environment.getProperty('spring.thymeleaf.host')}" id="host">
+<div id="app" class="container"  th:with="height=${userInfoVo.height}?${userInfoVo.height}:200,sex=${userInfoVo.gender}?${userInfoVo.gender}:1,year=${userInfoVo.age}?${userInfoVo.age}:20 ">
+
+    <div class="sport-content" th:with="bmi=${weight}/(${height}*0.01*${height}*0.01),BMI=${#numbers.formatDecimal(bmi, 1, 1)}">
+
+        <!--运动建议-->
+        <div class="sport-content-top flex" >
+            <p class="food-size">您的运动建议</p>
+            <span th:if="${BMI} le 18.4 "><p  class="sport-tips" >
+                建议您加强体育锻炼，尤其是负重锻炼，注重负重和有氧运动的结合，以负重练习为主，有氧练习不要太多。<br> 如：慢跑、负重跑步等。
+            </p></span>
+            <span th:if="${BMI} lt 24.0 "> <span th:if="${BMI} ge 18.5"><p class="sport-tips">
+                建议您平时可以保持适量的运动为主，<br>若期望拥有更完美身材，<br>建议您每周做5次以上中低强度的无氧运动。<br>如：跑步、深蹲、仰卧起座、平板撑等。
+            </p></span></span>
+            <span th:if="${BMI} lt 28.0"><span th:if="${BMI} ge 24.0"><p  class="sport-tips">
+                建议您每周做5次以上中低强度的有氧运动，<br>每次运40-50分钟，或是每周做3次以上高强度的有氧运动，<br>每次运动20分钟-30分钟，最好是全身性运动。<br> 如：跑步、游泳、健身操等。
+            </p></span></span>
+            <span th:if="${BMI} ge 28.0"><p  class="sport-tips">
+                建议您每周应保证有5天进行至少40-50分钟的中等强度有氧运动，<br>或是每周3天进行至少20分钟的高强度有氧运动。 <br>如：跑步、游泳、健身操等。
+            </p></span>
+        </div>
+
+        <!--能量消耗计算-->
+        <div class="sport-content-bottom flex"  th:with="bmr=${sex}==1? 66+(13.7*${weight})+(5.0*${height})-(6.8*${year}): 655+(9.6*${weight})+(1.7*${height})-(4.7*${year}),BMR=${#numbers.formatDecimal(bmr, 1, 0)}">
+            <div class="sport-suggest-calories">
+
+
+                <span th:if="${BMI} le 18.4 "><p class="sport-suggest-hot" >
+                    为了保证您的健康又能达到较好的负重锻炼，您每周的运动消耗建议控制在<a th:text="(${BMR}-200)+'~'+(${BMR}-100)">400~500</a>千卡路里，相当于：
+                </p>
+                 <ul >
+                     <li th:if="${BMR} gt 867"><span></span>散步<a th:with="time=((${BMR}-600)/167)" th:text="${#numbers.formatDecimal(time, 0, 0)}">3</a>小时（每小时=167千卡）</li>
+                     <li th:if="${BMR} le 867"><span></span>散步<a th:with="time=((${BMR}-300)/167)" th:text="${#numbers.formatDecimal(time, 0, 0)}">3</a>小时（每小时=167千卡）</li>
+                     <li><span></span>慢跑半小时（每小时=200千卡）</li>
+                     <li th:if="${BMR} gt 867" ><span></span>跑步半小时（每小时=300千卡）</li>
+                </ul></span>
+
+                <span th:if="${BMI} lt 24.0 "> <span th:if="${bmi} ge 18.5"> <p class="sport-suggest-hot" >
+                    为了保证您的健康又能达到较好健美效果，您每周的运动消耗建议控制在<a th:text="${BMR}">400</a>千卡路里，相当于：
+                </p>
+                 <ul >
+                      <li th:if="${BMR} gt 667"><span></span>散步<a th:with="time=((${BMR}-500)/167)" th:text="${#numbers.formatDecimal(time, 0, 0)}">3</a>小时（每小时=167千卡）</li>
+                      <li th:if="${BMR} le 667"><span></span>散步<a th:with="time=((${BMR}-200)/167)" th:text="${#numbers.formatDecimal(time, 0, 0)}">3</a>小时（每小时=167千卡）</li>
+                      <li><span></span>慢跑半小时（每小时=200千卡）</li>
+                      <li th:if="${BMR} gt 667"><span></span>跑步半小时（每小时=300千卡）</li>
+                  </ul></span></span>
+
+                <span th:if="${BMI} lt 28.0"><span th:if="${bmi} ge 24.0"><p class="sport-suggest-hot" >
+                    为了保证您的健康又能达到较好的减重效果，您每周的运动消耗建议控制在<a th:text="(${BMR}+300)+'~'+(${BMR}+400)">400~500</a>千卡路里，相当于：
+                </p>
+                 <ul >
+                   <li th:if="${BMR} gt 367"><span></span>散步<a th:with="time=((${BMR}-100)/167)" th:text="${#numbers.formatDecimal(time, 0, 0)}">3</a>小时（每小时=167千卡）</li>
+                   <li th:if="${BMR} le 367"><span></span>散步<a th:with="time=((${BMR}+200)/167)" th:text="${#numbers.formatDecimal(time, 0, 0)}">3</a>小时（每小时=167千卡）</li>
+                   <li><span></span>慢跑半小时（每小时=200千卡）</li>
+                   <li th:if="${bmr} gt 367"><span></span>跑步半小时（每小时=300千卡）</li>
+                </ul></span></span>
+
+                <span th:if="${BMI} ge 28.0"><p class="sport-suggest-hot" >
+                    为了保证您的健康又能达到较好的减重效果，您每周的运动消耗建议控制在<a th:text="(${BMR}+400)+'~'+(${BMR}+500)">400~500</a>千卡路里，相当于：
+                </p>
+                <ul >
+                    <li th:if="${BMR} gt 267"><span></span>散步<a th:with="time=(${BMR}/167)" th:text="${#numbers.formatDecimal(time, 0, 0)}">3</a>小时（每小时=167千卡）</li>
+                    <li th:if="${BMR} le 267"><span></span>散步<a th:with="time=((${BMR}+300)/167)" th:text="${#numbers.formatDecimal(time, 0, 0)}">3</a>小时（每小时=167千卡）</li>
+                    <li><span></span>慢跑半小时（每小时=200千卡）</li>
+                    <li th:if="${BMR} gt 267"><span></span>跑步半小时（每小时=300千卡）</li>
+                </ul></span>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+<script th:src="${host}+'/js/require.js'"></script>
+<script th:src="${host}+'/js/config.js'"></script>
+<script th:src="${host}+'/js/health/sport.js'"></script>
+</body>
+
+</html>

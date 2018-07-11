@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>健康分析</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="stylesheet" type="text/css" href="css/iosSelect.css?v=time">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css?v=time">
+    <link rel="stylesheet" type="text/css" href="js/health/health.css?v=time">
+    <script type="text/javascript" src="plugins/flexible.js?v=time"></script>
+    <script>
+        var _hmt = _hmt || [];
+        _hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+    </script>
+</head>
+
+<body>
+
+<div id="app" class="container" th:with="height=${userInfo.height}?${userInfo.height}:150,sex=${userInfo.gender}?${userInfo.gender}:1,year=${userInfo.age}?${userInfo.age}:20 "   v-cloak>
+
+<input type="hidden" th:value="${userInfo.height}" id="userInfoHeight">
+<input type="hidden" th:value="${weChatVo.unionid}" id="unionid">
+<input type="hidden" th:value="${weChatVo.gender}" id="sex">
+<input type="hidden" th:value="${weChatVo.nickname}" id="nickname">
+    
+
+    <!--注册弹框-->
+    <div class="registration-model-content"  th:if="${userInfo.height}==null">
+        <div class="registration-model">
+            <div class="registration-model-header">
+                填写下面资料方便我们给你更精确的建议哦！
+            </div>
+            <div class="registration-model-body">
+                <div class="stature">
+                    <h3>你的身高</h3>
+                    <div id="JS-stature" class="select">
+                        <input type="text" data-id="150" value="150cm" disabled="disabled" readonly/>
+                    </div>
+                </div>
+                <div class="birthdate">
+                    <h3>您的年龄</h3>
+                    <div id="JS-year" class="select">
+                        <input type="text" data-id="20" value="20岁" disabled="disabled" readonly/>
+                    </div>
+                </div>
+                <p class="secret-world"><span>*</span>仅用作综合体质测试，我们会帮你保密</p>
+            </div>
+            <button class="registration-btn">确定</button>
+        </div>
+        <div class="mask"></div>
+    </div>
+
+
+    <div class="health-analysis" th:with="bmi=${weight}/(${height}*0.01*${height}*0.01),BMI=${#numbers.formatDecimal(bmi, 1, 1)}">
+
+        <input type="hidden" id="bmi" th:value="${BMI}">
+        <input type="hidden" id="gender" th:value="${userInfo.gender}">
+
+
+        <div class="health-header">
+            <div class="current-weigth-box flex">
+                <p th:text="${weight}+'kg'">60kg</p>
+                <span>当前体重</span>
+            </div>
+            <div class="sex-box flex">
+                <p th:text="${sex}==1?'男':'女'">男</p>
+                <span>性别</span>
+            </div>
+            <div class="height-box flex">
+                <p   th:text="${height}+'cm'">170cm</p>
+                <span>身高</span>
+            </div>
+        </div>
+
+        <!--健康分析文字-->
+        <div class="health-wolrd" th:with="normWeight=${sex}==1?(${height}-80)*0.7:(${height}-70)*0.6">
+
+            <p class="bmi-title">您的-<span th:text="'BMI'+${BMI}">BMI</span>
+                <span th:if="${BMI} lt 18.4 ">偏瘦</span>
+                <span th:if="${BMI} lt 24.0 "> <span th:if="${BMI} ge 18.5">正常</span></span>
+                <span th:if="${BMI} lt 28.0"><span th:if="${BMI} ge 24.0">偏重</span></span>
+                <span th:if="${BMI} ge 28.0">超重</span>
+            </p>
+
+            <p class="ideal-weigth-title">
+                您的当前体重是<span th:text="${weight}">65</span>kg，
+                理想体重是<span th:text="${#numbers.formatDecimal(normWeight, 0, 0)}">45</span>kg，<br>体型偏瘦。可以恰当的再长些肉，以达到理想的体型~
+            </p>
+
+            <p class="ideal-weigth-title" >您的当前体重是<span th:text="${weight}">65</span>kg，
+                理想体重是<span th:text="${#numbers.formatDecimal(normWeight, 0, 0)}">45</span>kg，<br>体型正常。这是魔鬼的身材，关注度很高。
+                <br>身材理想，请继续保持~
+            </p>
+
+            <p class="ideal-weigth-title">
+                您的当前体重是<span th:text="${weight}">65</span>kg，
+                理想体重是<span th:text="${#numbers.formatDecimal(normWeight, 0, 0)}">45</span>kg，
+                <br>您的体重超出标准重量<span th:text="${weight}-${#numbers.formatDecimal(normWeight, 0, 0)}+'kg'">kg</span>，
+                <br>身材过重对个人形象会减分哦~
+            </p>
+
+            <p class="ideal-weigth-title">
+                您的当前体重是<span th:text="${weight}">65</span>kg，
+                理想体重是<span th:text="${#numbers.formatDecimal(normWeight, 0, 0)}">45</span>kg，
+                <br>您的体重超出标准重量<span th:text="${weight}-${#numbers.formatDecimal(normWeight, 0, 0)}+'kg'">kg</span>，
+                <br>积极减重，合理的饮食和运动能帮你健康减重~
+            </p>
+
+            <p class="next-wight" v-if="initRecord==1">
+                下一次称重，我们为您分析更多健康数据，<br>称重次数越多，健康数据越精准哦~~
+            </p>
+            <p class="next-wight" v-if="initRecord==2">
+                体重管家已帮您保存了本次称重和<br>上次称重的称重记录，可对比查看体重变化。
+            </p>
+            <p class="next-wight" v-if="initRecord >=3">
+                体重管家已帮您保存了所有称重记录，<br>体重变化随时查看。<br>已综合分析了您的身体状况，<br>方便您更好的了解自己的健康状态。
+            </p>
+            <p class="wight-range">正常范围：18.5～24.0</p>
+
+        </div>
+
+        <div class="bmi-box">
+            <div class="bmi-box_calculate">
+                <img src="images/3/BMI.png">
+            </div>
+            <div class="bmi-box__wrap" >
+                <!--发光 线&点-->
+                <div class="bmi-box__line" th:with="heightSquare=${height}*0.01*${height}*0.01">
+                    <!--发光 线&点-->
+                    <span th:with="dataNum=(18.5*${heightSquare})"  th:inline="text">[[${#numbers.formatDecimal(dataNum, 0, 0)}]]kg</span>
+                    <span th:with="dataNum=(24.0*${heightSquare})" th:inline="text">[[${#numbers.formatDecimal(dataNum, 0, 0)}]]kg</span>
+                    <span th:with="dataNum=(28.0*${heightSquare})" th:inline="text">[[${#numbers.formatDecimal(dataNum, 0, 0)}]]kg</span>
+                </div>
+                <!--临界体重-->
+                <div class="bmi-box__four">
+                    <div class="thin line_width">
+                        <p>偏轻</p>
+                    </div>
+                    <div class="standard line_width">
+                        <p>正常</p>
+                    </div>
+                    <div class="fat_lv1 line_width">
+                        <p>偏重</p>
+                    </div>
+                    <div class="super_fat line_width">
+                        <p>超重</p>
+                    </div>
+                </div>
+                <!--进度指针-->
+                <div class="bmi-box__text--top">
+                    <div id="indicator_target"></div>
+                    <div class="bmi-box__text--top__indicator" id="JS_indicator" >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--基础代谢 燃烧率-->
+        <div class="metabolic-box" >
+            <div class="metabolic-rate"  th:with="bmr=${sex}==1? 66+(13.7*${weight})+(5.0*${height})-(6.8*${year}): 655+(9.6*${weight})+(1.7*${height})-(4.7*${year}),BMR=${#numbers.formatDecimal(bmr, 1, 0)}">
+                <!--&lt;!&ndash;   女性:655 + (9.6 x 体重) + (1.7 x 身高) – (4.7X年龄) 2-->
+                <!--男性:66 + (13.7 x 体重) + (5.0 x 身高) – (6.8x年龄) 1-->
+                <p> 您的基础代谢率为
+                    <span>
+                        <span class="colorf9" th:text="${BMR}+'千卡/天' ">1111千卡/天</span>，
+                        相当于：<span  th:with="rice=(${BMR}-670)/120"  th:text="${#numbers.formatDecimal(rice, 1, 0)}">3</span>碗米饭+1个煎蛋+1个苹果+1瓶牛奶+1个玉米
+                    </span>
+                    <span th:if="${BMI} ge 24.0">（减肥最佳摄入热量 + 基础代谢率= 耗能 - 500）</span>
+                </p>
+            </div>
+            <div class="heart-rate">
+                <p>您的燃烧心率为<span class="colorf9" th:with="minBmr= (220-${year})*0.6,maxBmr=(220-${year})*0.75 "   th:text="${#numbers.formatDecimal(minBmr, 1, 0)} +'~' + ${#numbers.formatDecimal(maxBmr, 1, 0)} + '次/天'  ">119~149次/天</span>，(您的有氧运动时心率在此范围内较易消耗脂肪，做该心率范围内有氧运动，燃脂效果最好)</p>
+            </div>
+        </div>
+
+        <!--广告位-->
+        <div class="heath-ad" >
+            <a href="javascript:;">
+                <img src="images/1/adthin.png" alt="ad">
+            </a>
+        </div>
+
+        <!--建议-->
+        <div class="health-suggest">
+            <div class="diet-suggest">
+                <p class="diet-suggest-header">
+                    <span>饮食建议</span>
+                    <img src="images/3/right.png">
+                </p>
+                <div class="suggest-world">
+                    <span th:if="${BMI} lt 18.4 "><p>根据您的称重数据，健康管家给出适合您的饮食建议：建议您有规律地进餐，定时定量，可形成条件反射，有......</p></span>
+                    <span th:if="${BMI} lt 24.0 "><span th:if="${BMI} ge 18.5"><p>根据您的称重数据，健康管家给出适合您的饮食建议：建议您平时可以舒缓身体，保持身材为主。清淡饮食，......</p></span></span>
+                    <span th:if="${BMI} lt 28.0"><span th:if="${BMI} ge 24.0"><p>建议您饮食清淡，少油盐，不要吃太油腻的东西，餐前吃绿色产品来分解脂肪，正餐和小吃都要均衡的搭配，......</p></span></span>
+                    <span th:if="${BMI} ge 28.0"><p>根据您的称重数据，健康管家给出适合您的饮食建议：建议您尽量以『蒸、煮、卤、拌、烤』五大不用油的方......</p></span>
+                </div>
+            </div>
+            <div class="sports-suggest">
+                <p class="sports-suggest-header">
+                    <span>运动建议</span>
+                    <img src="images/3/right.png">
+                </p>
+                <div class="suggest-world">
+                    <span th:if="${BMI} lt 18.4 "><p>根据您的称重数据，健康管家给出适合您的运动建议：建议您加强体育锻炼，尤其是负重锻炼，注重负重和有......</p></span>
+                    <span th:if="${BMI} lt 24.0 "><span th:if="${BMI} ge 18.5"><p>根据您的称重数据，健康管家给出适合您的运动建议：建议您平时可以保持适量的运动为主，若期望拥有更完......</p></span></span>
+                    <span th:if="${BMI} lt 28.0"><span th:if="${BMI} ge 24.0"><p>根据您的称重数据，健康管家给出适合您的运动建议：建议您每周做5次以上中低强度的有氧运动，每次运动......</p></span></span>
+                    <span th:if="${BMI} ge 28.0"><p>根据您的称重数据，健康管家给出适合您的运动建议：建议您每周应保证有5天进行至少40-50分钟的中等强......</p></span>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <footer-bar :index="1"></footer-bar>
+
+</div>
+
+
+<script type="text/javascript" src="js/require.js?v=time"></script>
+<script type="text/javascript" src="js/config.js?v=time"></script>
+<script type="text/javascript" src="js/health/health.js?v=time"></script>
+</body>
+</html>

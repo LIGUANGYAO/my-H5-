@@ -1,0 +1,187 @@
+package com.mzj.eagle.wechat.portal.index.controller;
+
+import java.math.BigDecimal;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.mzj.eagle.wechat.portal.common.ApiData;
+import com.mzj.eagle.wechat.portal.index.service.IndexService;
+import com.mzj.eagle.wechat.portal.vo.UserInfoVo;
+import com.mzj.eagle.wechat.portal.vo.UserWeightVo;
+import com.mzj.eagle.wechat.portal.vo.WeChatUserVo;
+
+/**
+ * =================================
+ * 
+ * 首页信息
+ * 
+ * @author yanhuan on 2017/11/10.
+ * 
+ *         =================================
+ */
+@Configuration
+@Controller
+public class IndexController {
+	private static final Logger LOG = LoggerFactory.getLogger(IndexController.class);
+
+	private static final String DEFAULT_SECRET_KEY = "db5c7ed2-af94-46fe-a05d-40efdb4a77c9";// 默认密钥
+
+	@Autowired
+	private IndexService indexService;
+
+	// 详情信息
+	@GetMapping(value = { "/", "/index.html", "/grg-web-scale/src/views/home/index.html" })
+	public String goIndex(@RequestParam(name = "_p") String p, ModelMap map, UserWeightVo vo, WeChatUserVo weCharUser,
+			UserInfoVo userInfo) {
+
+		String decry = decrypt(p);
+		Map<String, String> paraMap = getParams(decry);
+		BigDecimal bweight = new BigDecimal(paraMap.get("weight"));
+		double weight = bweight.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+		vo.setWeight(weight);
+		vo.setBmi(43.3);
+		vo.setBmr(2178);
+		
+		bweight = new BigDecimal(paraMap.get("weight"));
+		BigDecimal cweight = new BigDecimal(paraMap.get("weightChange"));
+		BigDecimal sw = bweight.subtract(cweight);
+		double sweight = sw.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+		vo.setStandardWeight(sweight);
+		
+		double cw = cweight.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+		map.put("variation", cw);
+		cw = Math.abs(cw);
+		map.put("change", cw);
+
+		/*
+		 * List<UserWeightVo> listWeight=null; for(int i=0;i<10;i++) {
+		 * vo.setWeight(i*10); vo.setCreateTime(new Date()); listWeight.set(i, vo); }
+		 * map.put("listWeight", listWeight);
+		 */
+
+		weCharUser.setNickname("张珊");
+		weCharUser.setHeadimgurl(null);
+
+		userInfo.setGender(2);
+		userInfo.setHeight(150);
+		// userInfo.setName("张珊");
+
+		// 1是男 ，2是女
+		map.put("userWeightVo", vo);
+		map.put("userInfo", userInfo);
+		map.put("weCharUser", weCharUser);
+		
+		map.put("_p", p);
+
+		return "index/index";
+	}
+
+	private Map<String, String> getParams(String decry) {
+
+		Map<String, String> map = new HashMap<String, String>();
+		String[] strs = decry.split("&");
+		for (String str : strs) {
+			if (StringUtils.isNotEmpty(str) && str.startsWith("accountId")) {
+				map.put("accountId", str.substring("accountId".length() + 1, str.length()));
+			} else if (StringUtils.isNotEmpty(str) && str.startsWith("openId")) {
+				map.put("openId", str.substring("openId".length() + 1, str.length()));
+			} else if (StringUtils.isNotEmpty(str) && str.startsWith("recordId")) {
+				map.put("recordId", str.substring("recordId".length() + 1, str.length()));
+			} else if (StringUtils.isNotEmpty(str) && str.startsWith("weightChange")) {
+				String wchange = str.substring("weightChange".length() + 1, str.length());
+				DecimalFormat df = new DecimalFormat("0.00");
+				String change = df.format(Double.valueOf(wchange));
+				map.put("weightChange", change);
+			} else if (StringUtils.isNotEmpty(str) && str.startsWith("weight")) {
+				str = str.replace("kg", "");
+				map.put("weight", str.substring("weight".length() + 1, str.length()));
+			}
+		}
+
+		return map;
+	}
+
+	private String decrypt(String content) {
+		try {
+			// byte[] contentByte = parseHexStr2Byte(content);
+			byte[] contentByte = parseHexStr2Byte(content);
+			KeyGenerator kgen = KeyGenerator.getInstance("AES");
+			SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
+			secureRandom.setSeed(DEFAULT_SECRET_KEY.getBytes());
+			kgen.init(128, secureRandom);
+			SecretKey secretKey = kgen.generateKey();
+			byte[] enCodeFormat = secretKey.getEncoded();
+			SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");
+			Cipher cipher = Cipher.getInstance("AES");// 创建密码器
+			cipher.init(Cipher.DECRYPT_MODE, key);// 初始化
+			byte[] result = cipher.doFinal(contentByte);
+			return new String(result); // 加密
+		} catch (NoSuchAlgorithmException e) {
+			LOG.error(e.getMessage(), e);
+		} catch (NoSuchPaddingException e) {
+			LOG.error(e.getMessage(), e);
+		} catch (InvalidKeyException e) {
+			LOG.error(e.getMessage(), e);
+		} catch (IllegalBlockSizeException e) {
+			LOG.error(e.getMessage(), e);
+		} catch (BadPaddingException e) {
+			LOG.error(e.getMessage(), e);
+		}
+		return null;
+	}
+
+	private byte[] parseHexStr2Byte(String hexStr) {
+		if (hexStr.length() < 1)
+			return null;
+		byte[] result = new byte[hexStr.length() / 2];
+		for (int i = 0; i < hexStr.length() / 2; i++) {
+			int high = Integer.parseInt(hexStr.substring(i * 2, i * 2 + 1), 16);
+			int low = Integer.parseInt(hexStr.substring(i * 2 + 1, i * 2 + 2), 16);
+			result[i] = (byte) (high * 16 + low);
+		}
+		return result;
+	}
+
+	/**
+	 * 个人体重列表
+	 * 
+	 * @param pageNumber
+	 * @param pageSize
+	 * @param filter
+	 * @return
+	 * @throws Exception
+	 */
+	@GetMapping(value = "weUserWeightList")
+	@ResponseBody
+	public ApiData<UserWeightVo> page(UserWeightVo vo) throws Exception {
+		LOG.debug("----------> UserWeight{}", vo);
+		ApiData<UserWeightVo> apiData = indexService.wuList(vo);
+		new ApiData<UserWeightVo>();
+
+		return apiData;
+	}
+
+}

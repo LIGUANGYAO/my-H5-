@@ -1,0 +1,9 @@
+
+@import '../variable/global';
+
+$_designPlane : ($designPlane / 10);
+
+@function _($px) {
+  @return $px / $_designPlane * 1rem;
+}
+

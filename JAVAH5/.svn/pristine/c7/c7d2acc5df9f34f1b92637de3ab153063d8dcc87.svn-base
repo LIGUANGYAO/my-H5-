@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>运动</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport"
+          content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css?v=time">
+    <link rel="stylesheet" type="text/css" href="js/comment/tips.css?v=time">
+    <script type="text/javascript" src="plugins/flexible.js"></script>
+</head>
+<body>
+<div id="app" class="container">
+
+    <div class="content tips background--white">
+
+        <h3 class="title">有多少人曾趁着体转运动偷瞄暗恋对象-第八套广播体操</h3>
+
+        <p class="text-1">
+            一句“有多少人曾趁着体转运动偷瞄暗恋对象”，轰然激起无数人的回忆。说起第八套广播体操，记忆最深刻的应该是当时正在念中学的80后和90后。从1997年开始，第八套广播体操陪伴大家度过了14个春秋后，最终卸下它的担子。
+        </p>
+        <p>
+            从实用角度来看，第八套广播体操的8节动作，包括屈伸、转体、平衡、跳跃等各种动作，能使身体各部位的关节、肌肉、韧带得到锻炼，体重管家给大家带来这充满青春记忆的第八套广播体操，一起来看看吧：
+        </p>
+
+        <video controls>
+            <source src="images/10/4/k.mp4" type="video/mp4">
+            您的浏览器不支持 video 标签。
+        </video>
+
+        <div class="like-markdown">
+            天呢，看了久违的早操，仿佛又回到了学生时代！
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

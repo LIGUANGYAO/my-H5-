@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh" th:with="host=${@environment.getProperty('spring.thymeleaf.host')}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>健康小常识</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="stylesheet" type="text/css" th:href="${host}+'/css/normalize.css'">
+    <link rel="stylesheet" type="text/css" th:href="${host}+'/js/comment/healthSense.css'">
+    <script type="text/javascript" th:src="${host}+'/plugins/flexible.js'"></script>
+    <script>
+        var _hmt = _hmt || [];
+        _hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+	</script>
+</head>
+
+<body>
+<input type="hidden" th:value="${@environment.getProperty('spring.profiles.active')}" id="environment">
+<div id="app" class="container">
+    <div class="sense-container">
+        <div class="sense-content">
+            <ul>
+
+                <li onclick="_hmt.push(['_trackEvent','健康小常识广告','广告','广告']);">
+                     <div class="small-icon">
+                        <img src="images/6/food.png">
+                    </div>
+                    <a href="knowFood.html">
+                        <img src="images/6/ad.png">
+                    </a>
+                </li>
+                <li onclick="_hmt.push(['_trackEvent','健康小常识','热门','热门跳转']);">
+                    <div class="small-icon">
+                        <img src="images/6/hot.png">
+                    </div>
+                    <a href="knowHot.html">
+                        <img src="images/6/tips2_backup.png">
+                    </a>
+                </li>
+                <li onclick="_hmt.push(['_trackEvent','健康小常识','精选','精选跳转']);">
+                    <div class="small-icon">
+                        <img src="images/6/select.png">
+                    </div>
+                    <a href="knowChoice.html">
+                        <img src="images/6/tips3.png">
+                    </a>
+                </li>
+                <li onclick="_hmt.push(['_trackEvent','健康小常识','运动','运动跳转']);">
+                    <div class="small-icon">
+                        <img src="images/6/sport.png">
+                    </div>
+                    <a href="knowSport.html">
+                        <img src="images/6/tips4.png">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script th:src="${host}+'/js/require.js'"></script>
+<script th:src="${host}+'/js/config.js'"></script>
+<script th:src="${host}+'/js/comment/healthSense.js'"></script>
+</body>
+</html>

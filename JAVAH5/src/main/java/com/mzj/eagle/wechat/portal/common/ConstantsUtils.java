@@ -1,0 +1,27 @@
+package com.mzj.eagle.wechat.portal.common;
+
+public class ConstantsUtils {
+
+	public static String Wechat_Official_Accounts_Ref = "Wechat_Official_Accounts_Ref";//订阅号服务号关系
+	
+	// 订阅号授权信息对象key(后缀)
+	public static final String USERNAME_INFO_KEY = "_USERNAME_INFO";
+	//redis保存微信信息key
+	public static final String REDIS_WECHAT_KEY="OFFICIAL_ACCOUNTS";
+	
+	 //订阅号授权信息对象key(后缀)
+	public static final String AUTHORIZER_INFO_KEY="_AUTHORIZER_INFO";
+	
+	
+	 //服务号TOKEN
+	public static final String TOKEN="mzj";
+	
+	 //用户体重订阅号关系
+	public final static String USER_WEIGHT_DYH = "user_weight_dyh";//所有关注用户列表缓存key  根据openID的hash值对800取模分列表存储
+	
+	//用户  服务号openid
+	public final static String USER_SERVICE_OPENID = "user_service_openid";
+	public final static int USER_KEY_NUM = 800;
+	
+	
+}

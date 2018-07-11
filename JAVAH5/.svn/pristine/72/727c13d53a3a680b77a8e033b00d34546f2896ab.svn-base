@@ -1,0 +1,311 @@
+package com.mzj.eagle.wechat.portal.index.controller;
+
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Formatter;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSONObject;
+import com.mzj.eagle.wechat.portal.common.ApiData;
+import com.mzj.eagle.wechat.portal.common.GlobalMethodUtil;
+import com.mzj.eagle.wechat.portal.index.service.IndexService;
+import com.mzj.eagle.wechat.portal.profile.service.UserInfoService;
+import com.mzj.eagle.wechat.portal.vo.JssdkResultVo;
+import com.mzj.eagle.wechat.portal.vo.UserInfoVo;
+import com.mzj.eagle.wechat.portal.vo.UserWeightVo;
+import com.mzj.eagle.wechat.portal.vo.WeChatUserVo;
+
+import sun.misc.BASE64Encoder;
+
+/**
+ * =================================
+ * 
+ * 首页信息
+ * 
+ * @author yanhuan on 2017/11/10.
+ * 
+ *         =================================
+ */
+@Configuration
+@Controller
+public class IndexController {
+	private static final Logger LOG = LoggerFactory.getLogger(IndexController.class);
+
+	@Autowired
+	private IndexService indexService;
+	@Autowired
+	private UserInfoService userInfoService;
+
+	// 详情信息
+	@GetMapping(value = { "/", "/index.html", "/grg-web-scale/src/views/home/index.html" })
+	public String goIndex(@RequestParam(name = "_p") String p, ModelMap map, UserWeightVo vo, WeChatUserVo weCharUser,
+			UserInfoVo userInfo) {
+
+		GlobalMethodUtil util = new GlobalMethodUtil();
+		String decry = util.decrypt(p);
+		Map<String, String> paraMap = util.getParams(decry);
+		BigDecimal bweight = new BigDecimal(paraMap.get("weight"));
+		double weight = bweight.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+		vo.setWeight(weight);
+
+		bweight = new BigDecimal(paraMap.get("weight"));
+		BigDecimal cweight = new BigDecimal(paraMap.get("weightChange"));
+		BigDecimal sw = bweight.subtract(cweight);
+		double sweight = sw.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+		vo.setStandardWeight(sweight);
+
+		double cw = cweight.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+		map.put("variation", cw);
+		cw = Math.abs(cw);
+		map.put("change", cw);
+
+		// 查询微信关注用户
+		String openId = paraMap.get("openId");
+		String appId = paraMap.get("appId");
+		WeChatUserVo weChatUserVo = userInfoService.getOpenId(openId, appId);
+		if (weChatUserVo != null && weChatUserVo.getHeadimgurl()!=null) {
+			String imgData = getImgStr(weChatUserVo.getHeadimgurl());
+			weCharUser = weChatUserVo;
+			weCharUser.setHeadimgurl("data:image/png;base64," + imgData);
+		}
+
+		// 查询注册用户
+		if (weChatUserVo != null && !StringUtils.isEmpty(weChatUserVo.getUnionid())) {
+			UserInfoVo userInfoVo = userInfoService.getById(weChatUserVo.getUnionid());
+			if (userInfoVo != null) {
+				userInfo = userInfoVo;
+			}
+		}
+
+		// 1是男 ，2是女
+		map.put("userWeightVo", vo);
+		map.put("userInfo", userInfo);
+		map.put("weCharUser", weCharUser);
+
+		map.put("_p", p);
+
+		return "index/index";
+	}
+
+	/**
+	 * 个人体重列表
+	 * 
+	 * @param pageNumber
+	 * @param pageSize
+	 * @param filter
+	 * @return
+	 * @throws Exception
+	 */
+	@GetMapping(value = "/weUserWeightList")
+	@ResponseBody
+	public ApiData<UserWeightVo> page(@RequestParam(name = "_p") String p, @RequestParam Integer type) {
+		GlobalMethodUtil util = new GlobalMethodUtil();
+		String str = util.decrypt(p);
+		Map<String, String> map = util.getParams(str);
+		if (map == null) {
+			return null;
+		}
+		BigDecimal bweight = new BigDecimal(map.get("weight"));
+		double weight = bweight.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+		String openId = map.get("openId");
+		ApiData<UserWeightVo> apiData = indexService.wuList(type, openId);
+		// 加上当前体重信息
+		if (apiData == null) {
+			apiData = new ApiData<>();
+			apiData.setTotal(1L);
+		}
+		List<UserWeightVo> list = new ArrayList<>();
+		UserWeightVo vo = new UserWeightVo();
+		vo.setReceiverTime(new Date());
+		vo.setWeight(weight);
+		list.add(vo);
+		apiData.setData(list);
+		return apiData;
+	}
+
+	/**
+	 * 公众号二维码
+	 * 
+	 * @param p
+	 * @return
+	 */
+	@GetMapping(value = "/getQrcodeImg")
+	@ResponseBody
+	public String getQrcodeImg(@RequestParam(name = "_p") String p) {
+		GlobalMethodUtil util = new GlobalMethodUtil();
+		String decry = util.decrypt(p);
+		Map<String, String> paraMap = util.getParams(decry);
+		String appId = paraMap.get("appId");
+		String qrcode = indexService.getQrcodeImg(appId);
+		String imgData = "";
+		if (!StringUtils.isEmpty(qrcode)) {
+			imgData = getImgStr(qrcode);
+		}
+		JSONObject obj = new JSONObject();
+		obj.put("qrcode", imgData);
+		return obj.toJSONString();
+	}
+
+	public String getImgStr(String img) {
+		InputStream input = null;
+		ByteArrayOutputStream outData = new ByteArrayOutputStream();
+		try {
+			URL url = new URL(img);
+			byte[] data = new byte[1024];
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setConnectTimeout(5 * 1000);
+			input = conn.getInputStream();
+			int len = -1;
+			while ((len = input.read(data)) != -1) {
+				outData.write(data, 0, len);
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage(), e);
+		} finally {
+
+			try {
+				if (input != null) {
+					input.close();
+				}
+			} catch (IOException e) {
+				LOG.error(e.getMessage(), e);
+			}
+		}
+		BASE64Encoder encoder = new BASE64Encoder();
+		return encoder.encode(outData.toByteArray());
+	}
+
+	/**
+	 * 获取jssdk
+	 * 
+	 * @param p
+	 * @return
+	 */
+	@GetMapping(value = "/jssdk")
+	@ResponseBody
+	public String jssdk(@RequestParam(name = "_p") String p) {
+		GlobalMethodUtil util = new GlobalMethodUtil();
+		String decrypt = util.decrypt(p);
+		Map<String, String> map = util.getParams(decrypt);
+		if (map == null) {
+			return null;
+		}
+		String appId = map.get("appId");
+		// Object obj =
+		// redisTemplate.opsForHash().get("OFFICIAL_ACCOUNTS",appId+"_AUTHORIZER_TOKEN");
+		// 1.根据appId从redis中获取token
+		// 2.根据token查出ticket
+		// 3.根据ticket进行签名验证
+		// 4.ticket两个小时会失效,第一次取到后放到redis中
+		// 每次调用方法时先验证redis中所对应的token是否对应上一次的token(根据appid所获取到的token),相同则表示失效时间未到,直接取值进行签名验证.
+		// 不同则需要以前面取到的token为主(1小时会更新一次token),进行调用接口获取ticket进行签名验证
+		// 获取jsapi_ticket
+		String token = "i70dddTFqVPeSQ05QB8a9SiuhzGXM6ojjeW_9v6NOavZsGvtQ7AkQa4v7RkWwzKVTX2ZHzP0HJGu7F_XXCkpF_I-M9UnWpw0L1w71xLHYIBlo4KTjRI_rK1b0iRe3_vWIKSgAKDTVD";
+		String url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=" + token + "&type=jsapi";
+		// String ticket =
+		// "d3yp2Ud9Gzwj6dnSWFhcRX9Rz35FMqF28PbYRixzyznxBFE9FEe93Drs8NPylgfBBPfVQ6V_-p9m4VrkAnTm4g";
+		StringBuffer buffer = new StringBuffer();
+		try {
+			URL httpUrl = new URL(url);
+			HttpURLConnection conn = (HttpURLConnection) httpUrl.openConnection();
+			conn.setRequestMethod("GET");
+			InputStream inputStream = conn.getInputStream();
+			InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
+			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+			String str = null;
+			while ((str = bufferedReader.readLine()) != null) {
+				buffer.append(str);
+			}
+			bufferedReader.close();
+			inputStreamReader.close();
+			inputStream.close();
+			inputStream = null;
+			conn.disconnect();
+			// Object obj = JSONObject.toJSON(buffer.toString());
+			JSONObject json = JSONObject.parseObject(buffer.toString());
+			String ticket = json.get("ticket").toString();
+			String encryUrl = "http://example.com";
+			// encrypting(ticket, encryUrl,appId);
+
+			return json.get("ticket").toString();
+			// return obj.toString();
+		} catch (Exception e) {
+			LOG.error(e.getMessage(), e);
+		}
+
+		return null;
+	}
+
+	/**
+	 * 签名验证
+	 * 
+	 * @param ticket
+	 * @param url
+	 * @param appId
+	 * @return
+	 */
+	public JssdkResultVo encrypting(String ticket, String url, String appId) {
+		String nonce_str = UUID.randomUUID().toString();
+		String timestamp = Long.toString(System.currentTimeMillis() / 1000);
+		// String url = "http://example.com";
+		String signature = "";
+		String string1 = "jsapi_ticket=" + ticket + "&noncestr=" + nonce_str + "&timestamp=" + timestamp + "&url="
+				+ url;
+		try {
+			// 验证签名
+			MessageDigest crypt = MessageDigest.getInstance("SHA-1");
+			crypt.reset();
+			crypt.update(string1.getBytes("UTF-8"));
+			signature = byteToHex(crypt.digest());
+		} catch (Exception e) {
+			LOG.error(e.getMessage(), e);
+		}
+		JssdkResultVo vo = new JssdkResultVo();
+		vo.setAppId(appId);
+		vo.setNonceStr(nonce_str);
+		vo.setTimestamp(timestamp);
+		vo.setSignature(signature);
+		vo.setJsApiList(vo.getJsApiList());
+		return vo;
+	}
+
+	/**
+	 * 将字节数组转换为十六进制字符串
+	 * 
+	 * @param hash
+	 * @return
+	 */
+	private String byteToHex(final byte[] hash) {
+		Formatter formatter = new Formatter();
+		for (byte b : hash) {
+			formatter.format("%02x", b);
+		}
+		String result = formatter.toString();
+		formatter.close();
+		return result;
+	}
+
+}

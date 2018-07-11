@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<base href="/" />
+	<meta charset="UTF-8">
+	<title>共享免费秤</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="css/iosSelect.css">
+	<link rel="stylesheet" type="text/css" href="js/index/style.css">
+	<script type="text/javascript" src="plugins/flexible.js"></script>
+	<script>
+        var _hmt = _hmt || [];
+        _hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+	</script>
+</head>
+<body >
+<input type="hidden" id="user_weight" th:value="${userWeightVo.weight}">
+
+<script>
+	var userWeight = document.getElementById("user_weight").value;
+</script>
+<div id="app" class="container" >
+
+	<!--注册弹框-->
+	<div class="registration-model-content">
+		<div class="registration-model">
+			<div class="registration-model-header">
+				参与pk榜，请先完善个人资料
+			</div>
+			<div class="registration-model-body">
+				<div class="stature">
+					<h3>你的身高</h3>
+					<div id="JS-stature" class="select">
+						<input type="text" data-id="150" value="150cm" disabled="disabled" readonly/>
+					</div>
+				</div>
+				<div class="birthdate">
+					<h3>您的年龄</h3>
+					<div id="JS-year" class="select">
+						<input type="text" data-id="20" value="20岁" disabled="disabled" readonly/>
+					</div>
+				</div>
+
+				<p class="secret-world"><span>*</span>仅用作PK榜排行，我们会帮你保密</p>
+			</div>
+			<button class="registration-btn">确定</button>
+		</div>
+		<div class="mask"></div>
+	</div>
+
+
+	<div class="content info-index" >
+		<div id="JS-dashboard" class="dashboard"></div>
+
+		<!--用户注册身高 年龄-->
+		<div class="weight_content" th:object="${userWeightVo}" th:if="${userInfo.height}">
+
+			<input type="hidden" id="height" th:value="${userInfo.height}">
+			<input type="hidden" id="gender" th:value="${userInfo.gender}">
+
+			<div class="weight_content_box" th:with="bmi=${userWeightVo.weight}/${userInfo.height}*${userInfo.height}">
+				<div class="weight_circles">
+					<p class="current_world" th:text="${variation} gt 0?'上升':'下降'">上升</p>
+					<div class="current_weight" th:with="change=${change}" th:text="${#numbers.formatDecimal(change,1,1)}+'kg'"></div>
+					
+					 <p  th:class="${variation} gt 0 ? 'up_icon':'down_icon'" ></p>
+				</div>
+				<div class="weight_content_left" th:with="standardWeight=*{standardWeight}" th:text="'上一次'+${#numbers.formatDecimal(standardWeight,1,1)}+'kg'"></div>
+				<div class="weight_content_right" >
+				    <span th:if="*{bmi} lt 18.8 ">偏瘦</span>
+					<span th:if="*{bmi} lt 24.0 "> > <span th:if="*{bmi} ge 18.8">正常</span></span>
+					<span th:if="*{bmi} lt 28.0"><span th:if="*{bmi} ge 24.0">偏重</span></span>
+					<span th:if="*{bmi} ge 28.0">超重</span>
+				</div>
+			</div>
+			<!--  标准体重（SBW）
+                  男性：标准体重 =（身高（cm）－80）× 70%
+                  女性：标准体重 =（身高－70）× 60% -->
+			  <p class="weight_range" th:with="normWeight=(${userInfo.gender}==1?(${userInfo.height}-80):(${userInfo.height}-70))" th:text="'标准范围'+${#numbers.formatDecimal(normWeight*0.7*0.9, 0, 0)}+'~'+${#numbers.formatDecimal(normWeight*0.7*1.1, 0, 0)}+'kg'">标准范围20 ~ 40kg</p>
+		 </div>
+
+		<div class="title_world" th:if="${userInfo.height}==null"><!--userinfo.-->
+			<p>哈喽，欢迎<span th:text="${weCharUser.nickname}">hello name</span></p><!--userinfo.  -->
+			<p>想知道你的身材打败多少人吗~~</p>
+		</div>
+		<div class="check_bnt" >
+			<p class="check_title">
+				<span th:text="${userInfo.height}==null?'查看我的体型':'查看健康分析'">查看健康分析</span><!--userinfo.  -->
+			 </p>
+			<span class="right_icon"></span>
+		</div>
+		<!--广告-->
+		<div class="home_ad">
+			<a href="javascript:;">
+				<img  src="images/1/adup.jpg" alt="ad1">
+			</a>
+		</div>
+		
+		<!--表头-->
+		<div class="title__head">
+			<img class="title__head__img" src="images/5/title.png" alt="load">
+			<div class="title__head__info">
+				<div>最近体重变化</div>
+				<p>W E I G H T</p>
+			</div>
+		</div>
+
+		<!-- 体重图表数据 -->
+		<div class="weight-tab">
+			<span class="item-month active">本月</span>
+			<span class="item-halfYear">半年</span>
+			<span class="item-aYear">一年</span>
+			<span class="share">生成体重小卡片<i class="fenxiang"></i>
+			</span>
+		</div>
+
+		<div class="echars-box">
+			<span >数据加载中....</span>
+			<span >没有数据</span>
+			<div class="boxshadow echars-content">
+				<div id="JS_echars" class="change-report__echars"></div>
+				<div class="echars-tip">提示：左右拖动可查看更多称重数据</div>
+			</div>
+		</div>
+
+
+		<!--广告-->
+		<div class="home_ad">
+			<a href="javascript:;">
+				<img src="images/1/dowmap.jpg" alt="ad2">
+			</a>
+		</div>
+		<!--首页入口-->
+		<div class="home-links">
+			<ul>
+				<li class="health-link">
+					<a href="javascript:;">
+						<p class="home-icon  home-position"></p>
+						<span>健康小常识</span>
+					</a>
+				</li>
+				<li class="weight-link">
+					<a href="javascript:;">
+						<span class="home-icon pk-position"></span>
+						<span>体重PK</span>
+					</a>
+				</li>
+				<li class="about-link">
+					<a href="javascript:;">
+						<p class="home-icon about-position"></p>
+						<span>关于我们</span>
+					</a>
+				</li>
+				<li class="my-link">
+					<a href="javascript:;">
+						<p class="home-icon my-position"></p>
+						<span>个人中心</span>
+					</a>
+			</ul>
+		</div>
+
+
+		<!--弹窗 -->
+		<div class="modal" style="display: none;">
+			<div class="modal-mask"></div>
+			<div class="modal-body">
+				<div id="JS-modalContent" class="modal-body-content">
+					<div id="JS-generate-pictures" class="generate-pictures"></div>
+					<div class="modal-body-content-header">
+						<input type="hidden" th:value="${weCharUser.headimgurl}" id="weChaheadimgurl">
+						<img id="JS-imageurl"  src=""/><!-- 头像 -->
+						<span class="name" th:text="${weCharUser.nickname}"></span>
+					</div>
+					<div class="wind-resistance" th:object="${userWeightVo}">
+						<p class="friend-world">老铁，称完之后扎心了！</p>
+						<div class="wind-resistance-title">
+							<div class="wind-number">原来<span th:text="${weCharUser.nickname}" class="colorff9">{{nickname}}</span> 的体重属于
+								<span th:if="*{weight}*2 gt 0" ><span th:if="*{weight}*2 le 90">7级抗风型<p class="weigth-idiom">轻若鸿毛</p></span></span>
+								<span th:if="*{weight}*2 le 105" ><span th:if="*{weight}*2 gt 90" >7.5级抗风型<p class="weigth-idiom">弱不禁风</p></span></span>
+								<span th:if="*{weight}*2 le 120"><span  th:if="*{weight}*2 gt 105">8级抗风型<p class="weigth-idiom">抱电线杆</p></span></span>
+								<span th:if="*{weight}*2 le 135"><span  th:if="*{weight}*2 gt 120">8.5级抗风型<p class="weigth-idiom">东倒西歪</p></span></span>
+								<span th:if="*{weight}*2 le 150"><span  th:if="*{weight}*2 gt 135">9级抗风型<p class="weigth-idiom">脚踏实地</p></span></span>
+								<span th:if="*{weight}*2 le 160" ><span th:if="*{weight}*2 gt 150">9.5级抗风型<p class="weigth-idiom">稳如泰山</p></span></span>
+								<span th:if="*{weight}*2 le 200" ><span th:if="*{weight}*2 gt 160">10级抗风型<p class="weigth-idiom">牢不可摧</p></span></span>
+								<span th:if="*{weight}*2 gt 200 ">12级抗风型<p class="weigth-idiom">愚公都搬不动你</p></span>
+
+							</div>
+							
+						</div>
+						<div class="rabbit-image">
+							    <span th:if="*{weight}*2 gt 0" ><span th:if="*{weight}*2 le 90"><img src="images/1/80-90.png" alt="load"></span></span>
+								<span th:if="*{weight}*2 le 105" ><span th:if=" *{weight}*2 gt 90" ><img src="images/1/91-105.png" alt="load"></span></span>
+								<span th:if="*{weight}*2 le 120"><span  th:if=" *{weight}*2 gt 105"><img src="images/1/106-120.png" alt="load"></span></span>
+								<span th:if="*{weight}*2 le 135"><span  th:if=" *{weight}*2 gt 120"><img src="images/1/121-135.png" alt="load"></span></span>
+								<span th:if="*{weight}*2 le 150"><span  th:if=" *{weight}*2 gt 135"><img src="images/1/136-150.png" alt="load"></span></span>
+								<span th:if="*{weight}*2 le 160" ><span th:if=" *{weight}*2 gt 150"><img src="images/1/151-160.png" alt="load"></span></span>
+								<span th:if="*{weight}*2 le 200" ><span th:if=" *{weight}*2 gt 160"><img src="images/1/161-200.png" alt="load"></span></span>
+								<span th:if="*{weight}*2 gt 200 "><img :src="shareImage" alt="load"><img src="images/1/201.png" alt="load"></span>
+						</div>
+						<div class="know-wind">
+							想知道你的体重属于几级抗风型吗？
+						</div>
+					</div>
+					<div class="code">
+						<div class="code-img">
+						<!-- 关注的微信号 -->
+							<img src="" />
+							<span>体重随时知</span>
+						</div>
+						<div class="code-introduce">
+							<h3>美至简智能体重秤</h3>
+							<p class="p1">全国各大城市数千台设备免费任您用</p>
+							<p class="p2">快捷称重 · 微信管理 · 健康数据 · 一看便知</p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-body-footer">
+					<p>长按图片保存到相册，分享您的体重更多人知</p>
+					<a><i class="iconfont icon-guanbi"></i></a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<footer-bar :index="0"></footer-bar>
+</div>
+
+<script type="text/javascript" src="js/require.js"></script>
+<script type="text/javascript" src="js/config.js"></script>
+<script type="text/javascript" src="js/index/index.js"></script>
+</body>
+</html>

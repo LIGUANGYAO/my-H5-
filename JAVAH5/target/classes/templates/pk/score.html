@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh" th:with="host=${@environment.getProperty('spring.thymeleaf.host')}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>得分列表</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="stylesheet" type="text/css" th:href="${host}+'/css/normalize.css'">
+    <link rel="stylesheet" type="text/css" th:href="${host}+'/js/pk/style.css'">
+    <script type="text/javascript" th:src="${host}+'/plugins/flexible.js'"></script>
+</head>
+
+<body>
+<div id="app" class="container">
+
+    <div class="score-content">
+        <div class="content-list" id="J-content-list">
+            <!--得分列表页-->
+            <ul>
+                <li th:each="score,iterStat:${scorelist}">
+
+                    <i class="score-user-infor-num" th:if="${iterStat.count}==1">
+                        <img src="images/2/pk_ranking_1.png" alt="load">
+                    </i>
+                    <i class="score-user-infor-num" th:if="${iterStat.count}==2">
+                        <img src="images/2/pk_ranking_2.png" alt="load">
+                    </i>
+                    <i class="score-user-infor-num" th:if="${iterStat.count}==3">
+                        <img src="images/2/pk_ranking_3.png" alt="load">
+                    </i>
+                    <i class="score-user-infor-num" th:if="${iterStat.count} gt 3" th:text="${iterStat.count}">5</i>
+                    <div class="user-portrait">
+                        <img  alt="load" th:src="${score.imageUrl}">
+                    </div>
+                    <div class="score-user-infor">
+                        <div class="user-name" th:text="${score.nickName}">微信名字</div>
+                        <i class="user-sex" >
+                            <img th:src="${score.sex}==2? @{images/2/pk_Female_small.png}:@{images/2/pk_men_small.png}" src="images/2/pk_men_small.png" alt="load" >
+                        </i>
+                        <!--<i class="user-sex">-->
+                            <!--<img src="images/2/pk_Female_small.png" alt="load" >-->
+                        <!--</i>-->
+                    </div>
+
+                    <div class="score-cloum" th:text="${score.weightScore}">
+                       59.00分
+                    </div>
+                    <div class="score-good">
+                        <!-- 红心，点击之后取消关注 -->
+                        <span class="good-image"><img src="images/2/praise_selected.png" alt="load"></span>
+                        <!-- 空心，点击之后关注 -->
+                        <!--<span class="good-image"  ><img src="../../assets/images/2/praise_nomall.png" alt="load"></span>-->
+                        <span class="good-num" th:text="${score.weightScore}">20</span>
+                    </div>
+                </li>
+                <div  id="noLoading" class="lodeing">
+                    <div class="load-cont" >没有更多数据</div>
+                </div>
+                <div id="loading-more" class="lodeing">
+                    <div class="loading-more-box">
+                        <img src="images/more.gif">
+                        <span class="load-cont" >正在加载数据...</span>
+                    </div>
+                </div>
+            </ul>
+            <p class="list-length">暂时没有数据</p>
+        </div>
+    </div>
+
+
+
+</div>
+
+<script th:src="${host}+'/js/require.js'"></script>
+<script th:src="${host}+'/js/config.js'"></script>
+<script th:src="${host}+'/js/pk/score.js'"></script>
+</body>
+
+</html>

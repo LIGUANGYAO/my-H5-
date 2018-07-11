@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/iosSelect.css">
+    <link rel="stylesheet" type="text/css" href="js/profile/style.css">
+    <script type="text/javascript" src="plugins/flexible.js"></script>
+</head>
+
+<body>
+<input type="hidden" id="openId" th:value="${openId}">
+
+<input type="hidden" id="result" th:value="${result}">
+
+<div id="app" class="container">
+            <!--注册-->
+            <div class="individual-content">
+            <ul>
+            <li class="head-portrait">
+                <span>头像</span>
+                <div class="head-portrait-img">
+                    <img th:src="${headimgurl}" alt="user">
+                </div>
+            </li>
+            <li class="individual-name" >
+                <span>昵称</span>
+                <div class="li-right-box openBtn">
+                    <input type="text" value="" id="nicknameInput">
+                    <span class="individual-name-span" th:text="${userInfo.name}"></span>
+                </div>
+            </li>
+            <li>
+                <span>性别</span>
+                <div class="li-right-box">
+                    <div id="JS-sex" class="select">
+                        <input type="text" data-id="1"  th:value="${userInfo.genderStr}==''?'男':${userInfo.genderStr} " disabled="disabled" readonly/>
+                    </div>
+                    <img src="images/more.svg">
+                </div>
+            </li>
+            <li>
+                <span>年龄</span>
+                <div class="li-right-box">
+                    <div id="JS-year" class="select">
+                        <input type="text" data-id="20" th:value="${userInfo.age}==null?'20':${userInfo.age}" disabled="disabled" readonly/>
+                    </div>
+                    <img src="images/more.svg">
+                </div>
+
+            </li>
+            <li>
+                <span>身高</span>
+                <div class="li-right-box">
+                    <div id="JS-height" class="select">
+                        <input type="text" data-id="150" th:value="${userInfo.height}==null?'150CM':${userInfo.height}" disabled="disabled" readonly/>
+                    </div>
+                    <img src="images/more.svg">
+                </div>
+
+            </li>
+
+        </ul>
+        <button class="add-btn">确认修改</button>
+    </div>
+
+
+<script type="text/javascript" src="js/require.js"></script>
+<script type="text/javascript" src="js/config.js"></script>
+<script type="text/javascript" src="js/profile/index.js"></script>
+</body>
+
+</html>

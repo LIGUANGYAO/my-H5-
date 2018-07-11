@@ -1,0 +1,331 @@
+//@see 有背景的loading框
+function openLoading(msg) {
+    var loadingBox = document.createElement('div');
+    loadingBox.id = 'loadingBox';
+    loadingBox.style.cssText = "width:100%;height:100%;background-color: white;position:fixed;top:0;left:0;z-index:9999";
+    var loading = document.createElement('div');
+    loading.id = 'loading';
+    loading.style.cssText = "display:-webkit-box;-webkit-box-align:center; -webkit-box-pack: center;-webkit-box-orient: vertical; width:8em;height:7em;color:#ffffff;text-shadow: none; background:#000; opacity:0.4; border-radius:5px; position:fixed; top:50%; left:50%; margin-top:-3.5em;margin-left:-4em;z-index:9999";
+    var loadingImg = document.createElement('div');
+    loadingImg.id = 'loadingImg';
+    loadingImg.style.cssText = "width:5em;;height:4.5em;background-image:url('images/logo.gif');background-size:65%;background-position:center;background-repeat:no-repeat;";
+    var loadingText = document.createElement('div');
+    loadingText.id = 'loadingText';
+    loadingText.innerHTML = msg
+    loadingText.style.cssText = "-webkit-box-flex:1;font-family:Microsoft Yahei;font-size:1.1em;color: rgb(153,207,22);"
+    loading.appendChild(loadingImg);
+    loading.appendChild(loadingText);
+    loadingBox.appendChild(loading);
+    document.getElementsByTagName('body')[0].appendChild(loadingBox);
+}
+//@see 关闭有背景的loading框
+function closeLoading() {
+    $("div#loadingBox").remove();
+}
+
+//openLoading("加载中......");//在require加载模块js之前显示loading
+
+require(['jquery', 'Vue', 'FooterBar', 'common', 'IScroll', 'iosSelect'], function ($, Vue, FooterBar, common, IScroll, iosSelect) {
+    $(function () {
+        //wx.hideOptionMenu();
+        common.globalAjax();//开始全局ajax监听
+        //common.hideOptionMenu();//禁用分享等按钮
+        var FooterBar_vue = FooterBar.init();
+        // var Loading_vue = Loading.init();
+
+        // settimeout 防止页面假死
+        setTimeout(function () {
+            new Vue({
+                el: '#app',
+                data: {
+                    stature: null, //身高
+                    statureArr: [], //身高数组
+                    isLoading: false,
+                    year: null,
+                    yearArr: [],
+                    topData: null,
+                    womenClass:'women',
+                    menClass:'men',
+                    bodyTypeChinese: null,
+                    isLoading: false,
+                    disabledStatus: false,
+                    standartWeight: null,
+                    initRecord: null,
+                    modifyYear:null,
+                    age:null,
+                    unionid:null,
+                    modify:{
+                        sex:null,
+                        nickname:null
+                    },
+                    Isheight:null
+                },
+                components: {
+                    'footer-bar': FooterBar_vue
+                },
+                created: function () {
+
+                   this.getPresentWeightRecord(1);
+
+                },
+                mounted: function () {
+
+                    this.getAdvertising();
+
+                    this.Isheight = $("#userInfoHeight").val();
+                    this.unionid = $("#unionid").val();
+                    this.modify.sex = $("#sex").val();
+                    this.modify.nickname = $("#nickname").val();
+
+                    var sex = $("#gender").val();
+
+                    if(sex == 1) {
+                        $("#JS_indicator").addClass("men");
+                    }else {
+                        $("#JS_indicator").addClass("women");
+
+                    };
+
+                    var bmi = $("#bmi").val();
+                    if(bmi<18.4){
+                        $(".ideal-weigth-title").eq(0).show();
+                    }else if(bmi>=18.5 && bmi < 24.0){
+                        $(".ideal-weigth-title").eq(1).show();
+                    }else if(bmi >=24.0 && bmi< 28.0){
+                        $(".ideal-weigth-title").eq(2).show();
+                    }else if(bmi >= 28.0){
+                        $(".ideal-weigth-title").eq(3).show();
+                    }
+
+                    this.init();
+                },
+                methods: {
+                    //初始化
+                    init: function () {
+                        var _this = this;
+                        this.statureSelect();
+                        this.yearSelect();
+                        this.linkTo();
+                        this.figuresAnimation();
+                        this.IsRegister();
+
+                        $(".registration-btn").click(function(){
+                            _this.toRegister();
+                        })
+                    },
+                    //年龄计算
+                    getAge: function (param) {
+                        var myDate = new Date();
+                        var year = myDate.getFullYear(); //获取当前年份
+                        return year - param;
+                    },
+                    //页面滚动到底部执行指针和人物滑动
+                    figuresAnimation: function(){
+                        var _this = this;
+                        var offsetTop=$(".health-wolrd").offset().top;
+                        $(window).on('scroll.myScroll',function(){
+                            var scrollHeight=$(window).scrollTop();
+                            if(scrollHeight>=offsetTop+50){
+                                _this.indicator();
+                                $(window).off(".myScroll");
+                            }
+                        });
+                    },
+                    //建议页面跳转
+                    linkTo: function(){
+                        $(".diet-suggest").click(function(){
+
+                            window.location.href = 'food.html?_p=' + common.getRequest()._p + '&unionid=' + $("#unionid").val();
+                            _hmt.push(['_trackEvent','健康分析','饮食建议','饮食建议跳转']);
+                        });
+                        $(".sports-suggest").click(function(){
+
+                            window.location.href = 'sport.html?_p=' + common.getRequest()._p + '&unionid=' + $("#unionid").val();
+                            _hmt.push(['_trackEvent','健康分析','运动建议','运动建议跳转']);
+                        });
+                    },
+                    //获取身高数据
+                    getStatureData: function () {
+                        for (var i = 1; i <= 200; i++) {
+                            var data = {
+                                id: i,
+                                value: i
+                            }
+                            this.statureArr.push(data);
+                        }
+                        return this.statureArr;
+                    },
+                    //获取年龄数据
+                    getYearData: function () {
+                        for (var i = 1; i <= 100; i++) {
+                            var data = {
+                                id: i,
+                                value: i
+                            }
+                            this.yearArr.push(data);
+                        }
+                        return this.yearArr;
+                    },
+                    //身高下拉选择弹窗事件
+                    statureSelect: function () {
+                        var that = this;
+                        $('#JS-stature').click(function () {
+                            var dom = $(this);
+                            var bankId = dom.find('input').attr('data-id');
+                            var bankSelect = new iosSelect(1, [that.getStatureData()], {
+                                itemHeight: 50,
+                                itemShowCount: 5,
+                                oneLevelId: bankId,
+                                callback: function (obj) {
+                                    that.modify.height = obj.value;
+                                    dom.find('input').val(obj.value + 'cm');
+                                    dom.find('input').attr('data-id', obj.id);
+                                }
+                            });
+                        });
+                    },
+                    //年龄下拉选择弹窗事件
+                    yearSelect: function () {
+                        var that = this;
+                        $('#JS-year').click(function () {
+                            var dom = $(this);
+                            var bankId = dom.find('input').attr('data-id');
+                            var bankSelect = new iosSelect(1, [that.getYearData()], {
+                                itemHeight: 50,
+                                itemShowCount: 5,
+                                oneLevelId: bankId,
+                                callback: function (obj) {
+                                    that.year = obj.value;
+                                   // that.modify.year= that.getAge(obj.value);
+                                    that.modify.year = obj.value;
+                                    dom.find('input').val(obj.value + '岁');
+                                    dom.find('input').attr('data-id', obj.id);
+                                }
+                            });
+                        });
+                    },
+                    //获取广告图片
+                    getAdvertising: function (){
+                        var _this = this;
+                        $.ajax({
+                            type: "post",
+                            async: true,
+                            contentType: "application/json",
+                            dataType:'JSON',
+                            data: JSON.stringify([3]),
+                            url: '/getAdvertising?_p='+common.getRequest()._p,
+                            success: function(response){
+                                _this.path= response.path;
+                            }
+                        })
+                    },
+                    IsRegister: function(){
+
+                        var _this =this;
+                      if(this.Isheight==null){
+                          _this.modify.height = 150;
+                          _this.modify.year = 20;
+                      }
+
+                    },
+                    //提交注册
+                    toRegister: function () {
+                        var _this = this;
+
+                        if(!_this.isLoading){
+
+                            $.ajax({
+                                type: "post",
+                                url: "/updateUserInfo",
+                                data: {
+                                    _p:common.getRequest()._p,
+                                    unionid: _this.unionid,
+                                    name: _this.modify.nickname,
+                                    gender: _this.modify.sex,
+                                    height: _this.modify.height,
+                                    birthdate: _this.modify.year
+                                },
+                                beforeSend: function(){
+                                    _this.isLoading = true;
+                                    $(".registration-btn").text("请稍后...");
+                                },
+                                success: function(response){
+                                     window.location.reload();
+                                    // $(".individual-name-span").show();
+                                    // $("#nicknameInput").hide();
+
+                                },
+                                complete: function(){
+                                    _this.isLoading = false;
+                                    $(".registration-btn").text("确定");
+                                }
+                            })
+
+                        }
+                    },
+                    indicator: function(){
+                        //指针位置
+                        var bmi = $("#bmi").val();
+                        var bmiToFixed = Number(bmi).toFixed(1);
+
+                        var leftValue = 0;
+                        if( bmiToFixed <= 18.4 ) {//偏瘦
+                            leftValue = (bmiToFixed/18.4)*20;
+                            if(bmiToFixed <= 10) {
+                                leftValue=4;
+                            };
+                        }else if( bmiToFixed >= 18.5 && bmiToFixed < 24.0 ) {//正常
+
+                            leftValue = ((bmiToFixed-18.5)/(24.0-18.5))*20+25;
+
+                        }else if( bmiToFixed >= 24.0 && bmiToFixed <= 28.0 ) {//偏胖
+
+                            leftValue = ((bmiToFixed-24.0)/(28.0-24.0))*20+50;
+
+                        }else if(bmiToFixed>=28.0) {//肥胖
+
+                            leftValue = (bmiToFixed/28.0)*20+60;
+                            if(bmiToFixed>=42){
+                                leftValue=96;
+                            };
+                        }
+                        //男生女生人物跑动
+                        $(".men").stop().animate({"left":leftValue+"%"},2500,"swing",function(){
+                            $(".men").css({
+                                "background-image":"url(../../images/menStop.png)"
+                            })
+                        });
+                        $(".women").stop().animate({"left":leftValue+"%"},2500,"swing",function(){
+                            $(".women").css({
+                                "background-image":"url(../../images/womenStop.png)"
+                            })
+                        });
+                        $('#indicator_target').animate({"left":leftValue+"%"},2500,"swing");
+
+                    },
+                    //获取目前的体重记录
+                    getPresentWeightRecord: function(type){
+                        var _this = this;
+                        $.ajax({
+                            type: "GET",
+                            async: false,
+                            url: "/weUserWeightList",
+                            data: {
+                                _p: common.getRequest()._p,
+                                type: type
+                            },
+                            beforeSend: function() {
+
+                            },
+                            success: function(response){
+
+                                _this.initRecord = response.data.length;
+
+                            }
+                        })
+                    }
+                }
+            })
+        }, 50)
+    });
+});

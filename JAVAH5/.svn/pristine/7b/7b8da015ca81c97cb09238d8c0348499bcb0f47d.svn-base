@@ -1,0 +1,84 @@
+@import '../base/_fn.scss';
+
+body{
+    font-weight: 300;
+}
+
+.ellipsis{
+    @include ellipsis(100%);
+}
+.ellipsisLn2{
+    @include ellipsisLn(2);
+}
+.ellipsisLn3{
+    @include ellipsisLn(3);
+}
+
+
+.freeLine{
+    @include text_wrap();
+}
+
+$footerNavHeight:_(90) !default;
+.bar{
+    position: fixed;
+    bottom:0;
+    left:0;
+    right:0;
+
+    display: flex;
+    width: 100%;
+    height: $footerNavHeight;
+    overflow: hidden;
+    z-index: 10;
+
+    background-color: #222;
+    & + .content{
+        padding-bottom: $footerNavHeight;
+    }
+}
+
+.content{
+    min-height: 100%;
+    overflow: hidden;
+}
+
+.background--blue{
+    background-color: $bgColor_blue;
+}
+
+.background--black{
+    background-color: $bgColor_black;
+}
+
+.background--white{
+    background-color: white;
+}
+
+.background--grey{
+    background-color: #f1f1f1;;
+}
+
+.fs24{
+    font-size: _(24);
+}
+
+.fs26{
+    font-size: _(26);
+}
+
+.fs28{
+    font-size: _(28);
+}
+
+.fs30{
+    font-size: _(30);
+}
+
+.fs36{
+    font-size: _(36);
+}
+
+.fs38{
+    font-size: _(38);
+}

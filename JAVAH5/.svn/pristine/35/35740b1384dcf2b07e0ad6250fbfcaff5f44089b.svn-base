@@ -1,0 +1,147 @@
+package com.mzj.eagle.wechat.portal.pk.service;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Service;
+ 
+import com.mzj.eagle.wechat.portal.pk.vo.UserCommonInfo;
+import com.mzj.eagle.wechat.portal.pk.vo.WeightScorePKCountList;
+import com.mzj.eagle.wechat.portal.profile.service.UserInfoService;
+import com.mzj.eagle.wechat.portal.vo.UserInfoVo;
+import com.mzj.eagle.wechat.portal.vo.WeChatUserVo;
+import com.mzj.eagle.wechat.portal.wxuser.service.WeChatUserService;
+
+ 
+
+@Service
+public class PkService {
+	private static final Logger LOG = LoggerFactory.getLogger(PkService.class);
+	
+	@Autowired
+	@Qualifier("redisTemplate")
+	private StringRedisTemplate redisTemplate;
+	
+	@Autowired
+	UserInfoService userInfoService;
+	@Autowired
+	WeChatUserService weChatUserService;
+	public final static String PK_ORDER_SORT_SET = "PKOrderSortSet_";//各PK榜缓存key
+	
+	//redis保存用户输入的个人信息key
+	private static final String REDIS_WECHATUSER_INFO_KEY="WECHAT_USERINFO_";
+	
+	/**
+	 * 展示排行首页数据
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws Exception 
+	 */
+	public Map<String,String> showPklist(WeChatUserVo vo) throws Exception{
+		Map params = new HashMap();
+		if(vo.getUnionid()==null) { 
+			return null;
+		}
+		//获取微信用户信息
+		params.put("weChatUser", weChatUserService.weChatUser(vo));
+		/*WeChatUserVo weChat=JSON.parseObject((String)redisTemplate.opsForHash().get(REDIS_WECHATUSER_INFO_KEY+
+					Math.abs(vo.getUnionid().hashCode())%800, vo.getUnionid()), WeChatUserVo.class);
+		    if(weChat!=null) {
+		    	
+		    }else {
+		    	
+		    }*/
+		//获取注册信息
+		UserInfoVo infoVo = new UserInfoVo();
+		infoVo.setUnionid(vo.getUnionid());
+		params.put("userInfo", userInfoService.getById(vo.getUnionid()));
+	    //个人pk信息
+	    redisTemplate.opsForHash().get(PK_ORDER_SORT_SET+
+				Math.abs(vo.getOpenid().hashCode())%800, vo.getOpenid());
+	    
+	    
+	    
+	    //总数
+	    Long zcard = redisTemplate.opsForHash().size(PK_ORDER_SORT_SET+vo.getAccountId());
+	    
+	    //start pk榜分数段
+	    Double sta = 94.995;
+		Double end = 99.994999999999999;
+		List<WeightScorePKCountList> orderList = new ArrayList<WeightScorePKCountList>();
+		for (int i = 0; i <= 20; i++) {
+			WeightScorePKCountList cl = new WeightScorePKCountList();
+			if(i==0){
+				Long start = (long) 99.999;
+				Long endl = (long) 100.001;
+				Long countFs =redisTemplate.opsForZSet().count(PK_ORDER_SORT_SET+vo.getAccountId(), start, endl); 
+				Double bfb = (Double.valueOf(countFs)/Double.valueOf(zcard))*100;
+				cl.setScoreStart(99.995);//开始分数
+				cl.setScoreEnd(100.001);//结束分数
+				cl.setPercentage(bfb);//百分比
+			}else {
+				Long countFs =redisTemplate.opsForZSet().count(PK_ORDER_SORT_SET+vo.getAccountId(), sta, sta); 
+				Double bfb = (Double.valueOf(countFs)/Double.valueOf(zcard))*100;
+				cl.setScoreStart(99.995);//开始分数
+				cl.setScoreEnd(100.001);//结束分数
+				cl.setPercentage(bfb);//百分比
+				sta = sta-5;
+				end = end-5; 
+			}
+			orderList.add(cl);
+		}
+		 //end pk榜分数段
+	    params.put("orderList", orderList);
+	    params.put("weChatUser", vo);
+		return params;
+	}
+	/**
+	 * 展示排行详细数据
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws Exception 
+	 */
+	public Map<String,String> userPklist(WeChatUserVo vo) throws Exception{
+		Map params = new HashMap();
+		if(vo.getUnionid()==null) { 
+			return null;
+		}
+		  
+	    //pk信息
+	    redisTemplate.opsForHash().get(PK_ORDER_SORT_SET+
+				Math.abs(vo.getOpenid().hashCode())%800, vo.getOpenid());
+	    redisTemplate.opsForHash();
+	    
+	    String acconid = "";
+	    //总数
+	    Long zcard = redisTemplate.opsForHash().size(PK_ORDER_SORT_SET+acconid);
+	    Double sta = 94.995;
+		Double end = 99.994999999999999;
+		Set<String> openIdSet = redisTemplate.opsForZSet().rangeByScore(PK_ORDER_SORT_SET+vo.getAccountId(), sta, sta);	    
+		for (String s : openIdSet) {
+			UserCommonInfo  uc = new UserCommonInfo();
+			if(redisTemplate.hasKey(s)){
+				 
+			}else{
+				/*u=weightRecordPKService.findUserByOpenId(s,accountId);
+				if(u!=null&&!StringUtils.isEmpty(u.getOpenId())){
+					hashRedis.hset(userKey, u.getOpenId(), u);
+				}*/
+			}
+		}
+		params.put("weChatUser", vo);
+		return params;
+	}
+	
+	
+}

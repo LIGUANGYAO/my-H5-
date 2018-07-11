@@ -1,0 +1,38 @@
+
+
+@import '../variable/_global';
+$arrowColor:$borderColor_default !default;
+
+@mixin _setArrow($arrowsize, $color, $borderWidth){
+    display: inline-block;
+    height: $arrowsize;
+    width: $arrowsize;
+    border-width: $borderWidth $borderWidth 0 0;
+    border-color: $color;
+    border-style: solid;
+}
+
+@mixin arrow($direction:right,$arrowsize:6px,$color:$arrowColor,$borderWidth:2px) {
+    @include _setArrow($arrowsize, $color, $borderWidth);
+    @if $direction == top {
+        transform: matrix(0.71,-0.71,0.71,0.71,0,0);
+    }
+    @else if $direction == bottom {
+        transform: matrix(-0.71,0.71,-0.71,-0.71,0,0);
+
+        position: relative;
+        top: -3px;
+    }
+    @else if $direction == right {
+        transform: matrix(0.71,0.71,-0.71,0.71,0,0);
+
+        position: relative;
+        top: -2px;
+    }
+    @else if $direction == left {
+        transform: matrix(-0.71,-0.71,0.71,-0.71,0,0);
+
+        position: relative;
+        top: -2px;
+    }
+}

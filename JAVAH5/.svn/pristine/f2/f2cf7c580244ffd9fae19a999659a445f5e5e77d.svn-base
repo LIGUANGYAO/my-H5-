@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>附近网点</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- 避免IE使用兼容模式 -->
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="stylesheet" type="text/css" href="css/iconfont.css?v=time">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css?v=time">
+    <link rel="stylesheet" type="text/css" href="css/swiper-3.4.2.min.css?v=time">
+    <link rel="stylesheet" type="text/css" href="js/map/shop.css?v=time">
+    <script type="text/javascript" src="plugins/flexible.js?v=time"></script>
+</head>
+<body>
+<div id="app" class="container">
+    <div class="content my">
+        <p class="go-back" @click="goNearMap">
+            <i class="iconfont icon-fanhui"></i>
+        </p>
+        <!-- banner -->
+        <div class="banner">
+            <div class="go" @click="returnHome">
+                <div class="go-btn">
+                    <i class="iconfont icon-quzheli"></i>
+                    <span>去这里</span>
+                </div>
+            </div>
+            <!-- Swiper -->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" v-for="v in [envImage1,envImage2]"><img v-bind:src="v" /></div>
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+
+            <!--<img v-if="imgData.length == 0" src="images/test5.jpg" />-->
+        </div>
+
+        <!-- 商家名称 -->
+        <div class="dot-title">
+            <h3>{{devicename}}</h3>
+        </div>
+
+        <!-- 商家信息 -->
+        <div class="merchant-information">
+            <h3>商家信息</h3>
+            <ul>
+                <li class="address">
+                    <img src="images/dot_location.png" />
+                    <p>距离你{{distance}}米 | {{address}}</p>
+                </li>
+                <li>
+                    <img src="images/dot_time.png" />
+                    营业时间：{{serviceTime}}</li>
+                <li>
+                    <img src="images/dot_tal.png" />
+                    服务电话：{{tel}}</li>
+            </ul>
+        </div>
+
+        <!-- 商家介绍 -->
+        <div class="business-introduction">
+            <h3>商家介绍</h3>
+            <p>{{introduce}}</p>
+        </div>
+
+        <!-- 设备状态 -->
+        <div class="equipment-status">
+            <h3>设备状态</h3>
+            <div class="status-btn">
+                <a class="on-line" :class="{'line': appstatu == 1}">在线</a>
+                <a class="off-line" :class="{'line': appstatu != 1}">离线</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/require.js?v=time"></script>
+<script src="js/config.js?v=time"></script>
+<script src="js/map/shop.js?v=time"></script>
+</body>
+</html>

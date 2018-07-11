@@ -1,0 +1,40 @@
+
+@import "../../sass/entry.scss";//入口
+
+
+.sense-container{
+  width:100%;
+  background-image: url(../../images/1/indexBg.png);
+  background-position-y: top;
+  background-size: 100% _(1298);
+  background-repeat: no-repeat;
+  background-color:#212123;
+}
+.sense-content{
+  width: _(690);
+  height: 100%;
+  margin: 0 auto;
+  ul{
+    padding-top: _(30);
+    li{
+      width: 100%;
+      height: _(330);
+      margin-bottom: _(30);
+      position: relative;
+      a{
+        img{
+          width: 100%;
+          height: _(330);
+        }
+      }
+      .small-icon{
+        position: absolute;
+        width: _(100);
+        height: _(68);
+        top: 0;
+        left: _(30);
+        z-index: 2;
+      }
+    }
+  }
+}

@@ -1,0 +1,193 @@
+package com.mzj.eagle.wechat.portal.index.controller;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.math.BigDecimal;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSONObject;
+import com.mzj.eagle.wechat.portal.common.ApiData;
+import com.mzj.eagle.wechat.portal.common.GlobalMethodUtil;
+import com.mzj.eagle.wechat.portal.index.service.IndexService;
+import com.mzj.eagle.wechat.portal.profile.service.UserInfoService;
+import com.mzj.eagle.wechat.portal.vo.UserInfoVo;
+import com.mzj.eagle.wechat.portal.vo.UserWeightVo;
+import com.mzj.eagle.wechat.portal.vo.WeChatUserVo;
+
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
+
+/**
+ * =================================
+ * 
+ * 首页信息
+ * 
+ * @author yanhuan on 2017/11/10.
+ * 
+ *         =================================
+ */
+@Configuration
+@Controller
+public class IndexController {
+	private static final Logger LOG = LoggerFactory.getLogger(IndexController.class);
+
+
+	@Autowired
+	private IndexService indexService;
+	@Autowired
+	private UserInfoService userInfoService;
+
+	// 详情信息
+	@GetMapping(value = { "/", "/index.html", "/grg-web-scale/src/views/home/index.html" })
+	public String goIndex(@RequestParam(name = "_p") String p, ModelMap map, UserWeightVo vo, WeChatUserVo weCharUser,
+			UserInfoVo userInfo) {
+
+		GlobalMethodUtil util = new GlobalMethodUtil();
+		String decry = util.decrypt(p);
+		Map<String, String> paraMap = util.getParams(decry);
+		BigDecimal bweight = new BigDecimal(paraMap.get("weight"));
+		double weight = bweight.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+		vo.setWeight(weight);
+		/*vo.setBmi(43.3);
+		vo.setBmr(2178);*/
+		
+		bweight = new BigDecimal(paraMap.get("weight"));
+		BigDecimal cweight = new BigDecimal(paraMap.get("weightChange"));
+		BigDecimal sw = bweight.subtract(cweight);
+		double sweight = sw.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+		vo.setStandardWeight(sweight);
+		
+		double cw = cweight.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+		map.put("variation", cw);
+		cw = Math.abs(cw);
+		map.put("change", cw);
+
+		/*
+		 * List<UserWeightVo> listWeight=null; for(int i=0;i<10;i++) {
+		 * vo.setWeight(i*10); vo.setCreateTime(new Date()); listWeight.set(i, vo); }
+		 * map.put("listWeight", listWeight);
+		 */
+
+		//查询微信关注用户
+		String openId = paraMap.get("openId");
+		WeChatUserVo weChatUserVo = userInfoService.getOpenId(openId);
+		if(weChatUserVo != null) {
+			String imgData = getImgStr(weChatUserVo.getHeadimgurl());
+			weCharUser = weChatUserVo;
+			weCharUser.setHeadimgurl("data:image/png;base64,"+imgData);
+		}
+		/*String img ="http://dev.files.mzjmedia.com/ad/1/201711241511525176823.jpg?Expires=1522747719&OSSAccessKeyId=LTAIVq0hktSg0XP0&Signature=5sgONFJVk8rrR4jBL9igmDdKRbY%3D";
+		String imgData = getImgStr(img);
+		imgData = "data:image/png;base64,"+imgData;
+		weCharUser.setHeadimgurl(imgData);*/
+
+		//查询注册用户
+		if(weChatUserVo!=null && !StringUtils.isEmpty(weChatUserVo.getUnionid())) {
+			UserInfoVo userInfoVo = userInfoService.getById(weChatUserVo.getUnionid());
+			if(userInfoVo != null) {
+				userInfo = userInfoVo;
+			}
+		}
+
+		// 1是男 ，2是女
+		map.put("userWeightVo", vo);
+		map.put("userInfo", userInfo);
+		map.put("weCharUser", weCharUser);
+		
+		map.put("_p", p);
+
+		return "index/index";
+	}
+
+	/**
+	 * 个人体重列表
+	 * 
+	 * @param pageNumber
+	 * @param pageSize
+	 * @param filter
+	 * @return
+	 * @throws Exception
+	 */
+	@GetMapping(value = "/weUserWeightList")
+	@ResponseBody
+	public ApiData<UserWeightVo> page(@RequestParam(name = "_p") String p,@RequestParam Integer type){
+		GlobalMethodUtil util = new GlobalMethodUtil();
+		String str = util.decrypt(p);
+		Map<String,String> map = util.getParams(str);
+		if(map == null) {
+			return null;
+		}
+		ApiData<UserWeightVo> apiData = indexService.wuList(type);
+		
+		return apiData;
+	}
+	
+	/**
+	 * 公众号二维码
+	 * @param p
+	 * @return
+	 */
+	@GetMapping(value = "/getQrcodeImg")
+	@ResponseBody
+	public String getQrcodeImg(@RequestParam(name = "_p") String p) {
+		GlobalMethodUtil util = new GlobalMethodUtil();
+		String decry = util.decrypt(p);
+		Map<String, String> paraMap = util.getParams(decry);
+		String appId = paraMap.get("appId");
+		//String appId = "wx51df9397fc3e7d41";
+		String qrcode = indexService.getQrcodeImg(appId);
+		String imgData = "";
+		if(!StringUtils.isEmpty(qrcode)) {
+			imgData = getImgStr(qrcode);
+		}
+		JSONObject obj = new JSONObject();
+		obj.put("qrcode", imgData);
+		return obj.toJSONString();
+	}
+	
+	public String getImgStr(String img) {
+		InputStream input = null;
+		ByteArrayOutputStream outData = new ByteArrayOutputStream();
+		try {
+			URL url = new URL(img);
+			byte[] data = new byte[1024];
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setConnectTimeout(5*1000);
+			input = conn.getInputStream();
+			int len = -1;
+            while ((len = input.read(data)) != -1) {
+            	outData.write(data, 0, len);
+            }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(input != null)
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		}
+		BASE64Encoder encoder = new BASE64Encoder();
+		return encoder.encode(outData.toByteArray());
+	}
+
+}

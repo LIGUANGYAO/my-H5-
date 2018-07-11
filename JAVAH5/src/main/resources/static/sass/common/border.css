@@ -1,0 +1,73 @@
+.borderT {
+  position: relative; }
+  .borderT:after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 1px;
+    border-top: 1px solid #cecece;
+    color: #cecece;
+    transform-origin: 0 0;
+    transform: scaleY(0.5); }
+
+.borderB {
+  position: relative; }
+  .borderB:after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px solid #cecece;
+    color: #cecece;
+    transform-origin: 0 100%;
+    transform: scaleY(0.5); }
+
+.borderL {
+  position: relative; }
+  .borderL:after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    border-left: 1px solid #cecece;
+    color: #cecece;
+    transform-origin: 0 0;
+    transform: scaleX(0.5); }
+
+.borderR {
+  position: relative; }
+  .borderR:after {
+    content: " ";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    border-right: 1px solid #cecece;
+    color: #cecece;
+    transform-origin: 100% 0;
+    transform: scaleX(0.5); }
+
+.borderAll {
+  position: relative; }
+  .borderAll:after {
+    content: " ";
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid #cecece;
+    transform: scale(0.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    box-sizing: border-box;
+    border-radius: 10px; }
+
+/*# sourceMappingURL=border.css.map */

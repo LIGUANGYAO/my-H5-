@@ -1,0 +1,419 @@
+html, body, .container {
+  background-color: #f8f8f8;
+  max-width: 960px;
+  height: 100%;
+  margin: 0 auto; }
+
+body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "SimHei", sans-serif;
+  overflow-x: hidden;
+  font-size: 14px !important; }
+
+ul, li {
+  list-style: none; }
+
+img {
+  max-width: 100%; }
+
+a {
+  text-decoration: none; }
+
+.clearfix:after {
+  clear: both;
+  content: '.';
+  display: block;
+  height: 0;
+  line-height: 0;
+  overflow: hidden; }
+
+*, :after, :before {
+  margin: 0;
+  padding: 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent; }
+
+input[type="tel"], input[type="text"], input[type="password"], textarea {
+  -webkit-appearance: none;
+  border-radius: 0; }
+
+[v-cloak] {
+  display: none; }
+
+body {
+  font-weight: 300; }
+
+.ellipsis {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal; }
+
+.ellipsisLn2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.ellipsisLn3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.freeLine {
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  width: 100%;
+  height: 1.2rem;
+  overflow: hidden;
+  z-index: 10;
+  background-color: #222; }
+  .bar + .content {
+    padding-bottom: 1.2rem; }
+
+.content {
+  min-height: 100%;
+  overflow: hidden; }
+
+.background--blue {
+  background-color: #1d2232; }
+
+.background--black {
+  background-color: #19181e; }
+
+.background--white {
+  background-color: white; }
+
+.background--grey {
+  background-color: #f1f1f1; }
+
+.fs24 {
+  font-size: 0.32rem; }
+
+.fs26 {
+  font-size: 0.3466666667rem; }
+
+.fs28 {
+  font-size: 0.3733333333rem; }
+
+.fs30 {
+  font-size: 0.4rem; }
+
+.fs36 {
+  font-size: 0.48rem; }
+
+.fs38 {
+  font-size: 0.5066666667rem; }
+
+.go-back {
+  position: fixed;
+  width: 1.2666666667rem;
+  height: 1.2666666667rem;
+  top: 0.5333333333rem;
+  left: 0.5333333333rem;
+  z-index: 5;
+  text-align: center;
+  line-height: 1.2666666667rem;
+  border-radius: 50%;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.4); }
+  .go-back .icon-fanhui {
+    font-size: 0.56rem; }
+
+.pk-content {
+  background-color: #212123; }
+  .pk-content .pk-user {
+    width: 100%;
+    height: 4.2666666667rem;
+    background-size: cover;
+    position: relative; }
+    .pk-content .pk-user .user-avatar {
+      width: 2.1333333333rem;
+      height: 2.1333333333rem;
+      position: absolute;
+      top: 0.8rem;
+      left: 3.92rem;
+      z-index: 4; }
+      .pk-content .pk-user .user-avatar img {
+        width: 2.1333333333rem;
+        height: 2.1333333333rem;
+        border-radius: 100%; }
+    .pk-content .pk-user .user-infor {
+      width: 100%;
+      height: 0.5066666667rem;
+      position: absolute;
+      top: 3.2rem;
+      left: 0;
+      z-index: 4;
+      display: flex;
+      justify-content: center; }
+      .pk-content .pk-user .user-infor .user-infor-name {
+        font-size: 0.5066666667rem;
+        text-align: center;
+        display: block;
+        color: #ffffff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; }
+      .pk-content .pk-user .user-infor .user-infor-sex {
+        width: 0.5066666667rem;
+        height: 0.5066666667rem;
+        margin-left: 0.2133333333rem; }
+        .pk-content .pk-user .user-infor .user-infor-sex img {
+          width: 0.5066666667rem;
+          height: 0.5066666667rem; }
+    .pk-content .pk-user .pk-avatar-bg {
+      width: 100%;
+      height: 4.2666666667rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: url(../../images/2/pk_avatar_bg.png) no-repeat;
+      background-size: 100% 4.2666666667rem;
+      z-index: 2; }
+    .pk-content .pk-user .user-avatar-img {
+      width: 100%;
+      height: 4.2666666667rem;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0.8;
+      filter: blur(2px); }
+  .pk-content .pk-list {
+    background-image: url(../../images/1/indexBg.png);
+    background-position-y: top;
+    background-size: 100% 17.3066666667rem;
+    background-repeat: no-repeat; }
+    .pk-content .pk-list .user-case {
+      width: 100%;
+      height: 1.8666666667rem;
+      display: flex; }
+      .pk-content .pk-list .user-case .user-case-rank, .pk-content .pk-list .user-case .user-case-score, .pk-content .pk-list .user-case .user-case-percent {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; }
+        .pk-content .pk-list .user-case .user-case-rank .user-case-number, .pk-content .pk-list .user-case .user-case-score .user-case-number, .pk-content .pk-list .user-case .user-case-percent .user-case-number {
+          color: #ffffff;
+          font-size: 0.4rem;
+          margin-bottom: 0.2rem; }
+        .pk-content .pk-list .user-case .user-case-rank .user-case-world, .pk-content .pk-list .user-case .user-case-score .user-case-world, .pk-content .pk-list .user-case .user-case-percent .user-case-world {
+          color: #8e8e93;
+          font-size: 0.3466666667rem; }
+    .pk-content .pk-list .city-list {
+      padding: 0.7733333333rem 0 0.8rem 0;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      .pk-content .pk-list .city-list img {
+        width: 1.0933333333rem;
+        height: 1.0933333333rem; }
+      .pk-content .pk-list .city-list .city-list-head {
+        margin-left: 0.2666666667rem; }
+        .pk-content .pk-list .city-list .city-list-head div {
+          color: #ffffff;
+          font-size: 0.4266666667rem; }
+        .pk-content .pk-list .city-list .city-list-head p {
+          color: #a8a8a8;
+          font-size: 0.32rem;
+          margin-top: 0.2133333333rem; }
+    .pk-content .pk-list .pk-list-top {
+      padding-bottom: 0.2666666667rem;
+      position: relative;
+      display: flex; }
+      .pk-content .pk-list .pk-list-top:after {
+        content: " ";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        border-bottom: 1px solid #434348;
+        color: #434348;
+        transform-origin: 0 100%;
+        transform: scaleY(0.5); }
+      .pk-content .pk-list .pk-list-top span {
+        font-size: 0.3733333333rem;
+        color: #8e8e93; }
+      .pk-content .pk-list .pk-list-top span:nth-child(1) {
+        margin-left: 1.2rem; }
+      .pk-content .pk-list .pk-list-top span:nth-child(2) {
+        margin-left: 1.8266666667rem; }
+      .pk-content .pk-list .pk-list-top span:nth-child(3) {
+        margin-left: 1.9866666667rem; }
+    .pk-content .pk-list .pk-user-list ul li:last-child {
+      border-bottom: none; }
+    .pk-content .pk-list .pk-user-list ul .listBg {
+      background-color: #3a3b3d; }
+    .pk-content .pk-list .pk-user-list ul li {
+      width: 100%;
+      height: 1.6533333333rem;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      color: #ffffff;
+      font-size: 0.3466666667rem;
+      position: relative; }
+      .pk-content .pk-list .pk-user-list ul li:after {
+        content: " ";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        border-bottom: 1px solid #3a3b3d;
+        color: #3a3b3d;
+        transform-origin: 0 100%;
+        transform: scaleY(0.5); }
+      .pk-content .pk-list .pk-user-list ul li i.pk-user-num {
+        width: 0.4rem;
+        font-style: normal;
+        margin-left: 0.4rem;
+        margin-right: 0.36rem;
+        text-align: center; }
+        .pk-content .pk-list .pk-user-list ul li i.pk-user-num img {
+          width: 0.4rem;
+          height: 0.52rem; }
+      .pk-content .pk-list .pk-user-list ul li .pk-user-score {
+        width: 1.8666666667rem;
+        text-align: center;
+        margin-right: 1.5466666667rem; }
+      .pk-content .pk-list .pk-user-list ul li .pk-user-ratio {
+        width: 1.1066666667rem;
+        text-align: center;
+        margin-right: 1.7866666667rem; }
+      .pk-content .pk-list .pk-user-list ul li .pk-user-people {
+        width: 1.0666666667rem;
+        text-align: center;
+        margin-right: 0.8rem; }
+      .pk-content .pk-list .pk-user-list ul li .pk-icon-right {
+        width: 0.24rem; }
+        .pk-content .pk-list .pk-user-list ul li .pk-icon-right img {
+          width: 0.24rem;
+          height: 0.4266666667rem; }
+
+.score-content {
+  width: 100%;
+  height: 100%;
+  background-color: #212123;
+  background-image: url(../..//images/1/indexBg.png);
+  background-position-y: top;
+  background-size: 100% 17.3066666667rem;
+  background-repeat: no-repeat; }
+  .score-content .content-list {
+    width: 100%;
+    height: 100%; }
+    .score-content .content-list .list-length {
+      height: 1.3333333333rem;
+      line-height: 1.3333333333rem;
+      font-size: 0.4rem;
+      color: #ffffff;
+      text-align: center;
+      display: none; }
+  .score-content ul {
+    display: block;
+    width: 100%; }
+    .score-content ul li {
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      color: #ffffff;
+      font-size: 0.3466666667rem;
+      width: 100%;
+      height: 1.6rem;
+      position: relative; }
+      .score-content ul li:after {
+        content: " ";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        border-bottom: 1px solid #3a3b3d;
+        color: #3a3b3d;
+        transform-origin: 0 100%;
+        transform: scaleY(0.5); }
+      .score-content ul li i.score-user-infor-num {
+        font-style: normal;
+        width: 0.4rem;
+        height: 0.52rem;
+        margin-left: 0.4rem;
+        margin-right: 0.2133333333rem;
+        text-align: center;
+        line-height: 0.52rem; }
+      .score-content ul li .user-portrait {
+        width: 0.8rem;
+        height: 0.8rem;
+        margin-right: 0.2666666667rem; }
+        .score-content ul li .user-portrait img {
+          border-radius: 100%;
+          width: 0.8rem;
+          height: 0.8rem; }
+      .score-content ul li .score-user-infor {
+        width: 2.5333333333rem;
+        display: flex;
+        align-items: center;
+        margin-right: 0.6666666667rem; }
+        .score-content ul li .score-user-infor .user-name {
+          margin-right: 0.1333333333rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-size: 0.32rem; }
+        .score-content ul li .score-user-infor .user-sex {
+          width: 0.32rem;
+          height: 0.32rem;
+          font-style: normal; }
+          .score-content ul li .score-user-infor .user-sex img {
+            width: 0.2933333333rem;
+            height: 0.2933333333rem; }
+      .score-content ul li .score-cloum {
+        width: 1.4666666667rem;
+        text-align: center;
+        margin-right: 2.0666666667rem; }
+      .score-content ul li .score-good .good-image {
+        width: 0.3466666667rem;
+        height: 0.2933333333rem;
+        margin-right: 0.1333333333rem; }
+        .score-content ul li .score-good .good-image img {
+          width: 0.3466666667rem;
+          height: 0.2933333333rem; }
+
+.loading-more-box {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.lodeing {
+  width: 100%;
+  height: 1.2rem;
+  text-align: center;
+  display: none; }
+  .lodeing .load-cont {
+    font-size: 0.3466666667rem;
+    color: #ffffff;
+    text-align: center;
+    line-height: 1.2rem; }
+  .lodeing img {
+    width: 0.6666666667rem;
+    height: 0.6666666667rem;
+    margin-right: 0.1333333333rem; }
+
+/*# sourceMappingURL=style.css.map */

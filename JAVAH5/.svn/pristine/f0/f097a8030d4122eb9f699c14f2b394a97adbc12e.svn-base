@@ -1,0 +1,362 @@
+//@see 有背景的loading框
+function openLoading(msg) {
+    var loadingBox = document.createElement('div');
+    loadingBox.id = 'loadingBox';
+    loadingBox.style.cssText = "width:100%;height:100%;background-color: white;position:fixed;top:0;left:0;z-index:9999";
+    var loading = document.createElement('div');
+    loading.id = 'loading';
+    loading.style.cssText = "display:-webkit-box;-webkit-box-align:center; -webkit-box-pack: center;-webkit-box-orient: vertical; width:8em;height:7em;color:#ffffff;text-shadow: none; background:#000; opacity:0.4; border-radius:5px; position:fixed; top:50%; left:50%; margin-top:-3.5em;margin-left:-4em;z-index:9999";
+    var loadingImg = document.createElement('div');
+    loadingImg.id = 'loadingImg';
+    loadingImg.style.cssText = "width:5em;;height:4.5em;background-image:url('images/logo.gif');background-size:65%;background-position:center;background-repeat:no-repeat;";
+    var loadingText = document.createElement('div');
+    loadingText.id = 'loadingText';
+    loadingText.innerHTML = msg
+    loadingText.style.cssText = "-webkit-box-flex:1;font-family:Microsoft Yahei;font-size:1.1em;color: rgb(153,207,22);"
+    loading.appendChild(loadingImg);
+    loading.appendChild(loadingText);
+    loadingBox.appendChild(loading);
+    document.getElementsByTagName('body')[0].appendChild(loadingBox);
+}
+//@see 关闭有背景的loading框
+function closeLoading() {
+    $("div#loadingBox").remove();
+}
+//openLoading("加载中......");//在require加载模块js之前显示loading
+
+require(['jquery', 'Vue', 'common', 'api', 'IScroll', 'iosSelect'], function ($, Vue, common, api,  IScroll, iosSelect) {
+    $(function () {
+
+        common.globalAjax();//开始全局ajax监听
+        common.hideOptionMenu();//禁用分享等按钮
+        /*var Loading_vue = Loading.init();*/
+
+        // settimeout 防止页面假死
+        setTimeout(function () {
+            new Vue({
+                el: '#app',
+                data: {
+                    sexSelect: [],//性别数组
+                    statureArr: [], //身高数组
+                    isLoading: false,
+                    yearArr: [],
+                    topData: null,
+                    disabledStatus: false,
+                    initBirth:null,
+                    modify:{
+                        sex:null,
+                        nickname:null,
+                        height:null,
+                        year:null
+                    },
+                    textarea:null,
+                    nickVule:null,
+                    age:null
+                },
+                components: {
+                    // 'loading': Loading_vue
+                },
+                created: function () {
+                    this.getHometTopData();
+                },
+                mounted: function () {
+                    this.init();
+                    $(".individual-name").click(function(){
+                        $("#nicknameInput").show();
+                        $(".individual-name-span").hide();
+                        $(".add-btn").show();
+                        $("#nicknameInput").focus();
+                    })
+                },
+                methods: {
+                    //初始化
+                    init: function () {
+                        this.statureSelect();
+                        this.yearSelect();
+                        this.sexSelectFn();
+                        this.initIputData();
+                    },
+                    //弹出修改按钮
+                    openModelInfor: function(){
+                        $("#confirm").unbind().bind('click',function(){
+                            $(".add-btn").show();
+                        });
+                    },
+                    //性别获取数据
+                    getSexData: function () {
+                        var data = [{
+                            id: "1",
+                            value: "男"
+                        },{
+                            id: "2",
+                            value: "女"
+                        }]
+                        this.sexSelect = data;
+                        return this.sexSelect;
+                    },
+                    //获取身高数据
+                    getStatureData: function () {
+                        for (var i = 1; i <= 200; i++) {
+                            var data = {
+                                id: i,
+                                value: i
+                            }
+                            this.statureArr.push(data);
+                        }
+                        return this.statureArr;
+                    },
+                    //获取年龄数据
+                    getYearData: function () {
+                        for (var i = 1; i <= 100; i++) {
+                            var data = {
+                                id: i,
+                                value: i
+                            }
+                            this.yearArr.push(data);
+                        }
+                        return this.yearArr;
+                    },
+                    //性别下拉选择弹框事件
+                    sexSelectFn: function () {
+                        var that = this;
+                        $("#JS-sex").click(function () {
+                            $(".add-btn").show();
+                            var dom = $(this);
+                            var bankId = dom.find('input').attr('data-id');
+                            var bankSelect = new iosSelect(1, [that.getSexData()], {
+                                itemHeight: 50,
+                                itemShowCount: 5,
+                                oneLevelId: bankId,
+                                callback: function (obj) {
+                                    that.modify.sex = obj.id;
+                                    dom.find('input').val(obj.value);
+                                    dom.find('input').attr('data-id', obj.id);
+                                }
+                            });
+                        })
+                    },
+                    //身高下拉选择弹窗事件
+                    statureSelect: function () {
+                        var that = this;
+                        $('#JS-height').click(function () {
+                            $(".add-btn").show();
+                            var dom = $(this);
+                            var bankId = dom.find('input').attr('data-id');
+                            var bankSelect = new iosSelect(1, [that.getStatureData()], {
+                                itemHeight: 50,
+                                itemShowCount: 5,
+                                oneLevelId: bankId,
+                                callback: function (obj) {
+                                    that.modify.height = obj.value;
+                                    dom.find('input').val(obj.value + 'CM');
+                                    dom.find('input').attr('data-id', obj.id);
+                                }
+                            });
+                        });
+                    },
+                    //年份下拉选择弹窗事件
+                    yearSelect: function () {
+                        var that = this;
+                        $('#JS-year').click(function () {
+                            $(".add-btn").show();
+                            var dom = $(this);
+                            var bankId = dom.find('input').attr('data-id');
+                            var bankSelect = new iosSelect(1, [that.getYearData()], {
+                                itemHeight: 50,
+                                itemShowCount: 5,
+                                oneLevelId: bankId,
+                                callback: function (obj) {
+                                    that.modify.year = obj.value;
+                                    that.age = that.getAge(obj.value);
+                                    dom.find('input').val(obj.value+'岁');
+                                    dom.find('input').attr('data-id', obj.id);
+                                }
+                            });
+                        });
+                    },
+                    //修改昵称弹框
+                    modificationName: function () {
+                        $(".user-name-model").show();
+                    },
+                    //修改昵称弹框验证
+                    saveModification: function () {
+                        var valName = $(".user-name-infor input");
+                        if (valName.val() == "") {
+                            alert("用户名不能为空!");
+                            valName.focus();
+                        }else if(valName.val().length>10){
+                            alert("输入的用户名过长!");
+                            valName.focus();
+                        }else {
+                            $(".individual-name-span").text(valName.val());
+                            $(".user-name-model").hide();
+                            //this.modify.nickname=valName.val();
+                        }
+                    },
+                    //隐藏修改昵称弹框
+                    cancelsaveModl:function(){
+                        $("#nicknameInput").val("");
+                        $(".user-name-model").hide();
+                    },
+                    //反馈弹框
+                    retroactionInfor: function () {
+                        $(".textarea").val("");
+                        $(".retroaction-model,#mask").show();
+                    },
+                    //隐藏反馈弹框
+                    cancelModl: function(){
+                        $(".textarea").val("");
+                        $(".retroaction-model,#mask").hide();
+                    },
+                    //获取用户数据
+                    getHometTopData: function () {
+                        var _this = this;
+                        if (!_this.isLoading) {
+                            $.ajax({
+                                type: "get",
+                                async: false,
+                                data: {
+                                    _p: common.getRequest()._p
+                                },
+                                url: api.getHomeTopDate,
+                                success: function (response) {
+                                    closeLoading();//关闭loading页面
+                                    if (response.retcode == 1) {
+                                        _this.topData = response;
+                                    }
+                                }
+                            })
+                        }
+                    },
+                    //年龄计算
+                    getAge: function (param) {
+                        var myDate = new Date();
+                        var year = myDate.getFullYear(); //获取当前年份
+                        return year - param;
+                    },
+                    //初始表单数据
+                    initIputData: function(){
+                        var _this=this;
+                        if(_this.topData.userinfo.updateState==0){//没有注册
+                            _this.modify.nickname = _this.topData.userinfo.user.nickname;
+                            _this.modify.sex = _this.topData.userinfo.user.sex;
+                            _this.modify.height = 150;
+                            _this.modify.year = 20;
+                            _this.age = _this.getAge(20);
+                            $(".individual-name-span").text(_this.topData.userinfo.user.nickname);
+                            $("#nicknameInput").val(_this.topData.userinfo.user.nickname);
+                            var initSex= _this.topData.userinfo.user.sex==1 ? '男':'女';
+                            $("#JS-sex").find("input").val(initSex).attr('data-id',_this.topData.userinfo.user.sex);
+                            $("#JS-year").find("input").val(_this.modify.year+'岁').attr('data-id', _this.modify.year);
+                            $("#JS-height").find("input").val(_this.modify.height+'CM').attr('data-id',_this.modify.height);
+                        }else{//注册
+                            _this.modify.sex = _this.topData.userinfo.sex;
+                            _this.modify.height = _this.topData.userinfo.height;
+                            var stringYear = _this.topData.userinfo.birthDate.toString();//判断之前年龄为1990 数据
+
+                            if(stringYear.length==4){
+                                _this.modify.year= _this.getAge(_this.topData.userinfo.birthDate);
+                            }else{
+                                _this.modify.year = _this.topData.userinfo.birthDate;
+                            }
+                            _this.age = stringYear.length==4? _this.topData.userinfo.birthDate : _this.getAge(_this.topData.userinfo.birthDate);
+                            _this.nickVule= _this.topData.userinfo.nicknam;
+                            $(".individual-name-span").text(_this.topData.userinfo.nickname);
+                            $("#nicknameInput").val(_this.topData.userinfo.nickname);
+                            var initSex= _this.topData.userinfo.sex==1 ? '男':'女';
+                            $("#JS-sex").find("input").val(initSex).attr('data-id', _this.topData.userinfo.sex);
+                            $("#JS-year").find("input").val(_this.modify.year+'岁').attr('data-id',_this.modify.year);
+                            $("#JS-height").find("input").val(_this.topData.userinfo.height+'CM').attr('data-id',_this.topData.userinfo.height);
+                        }
+                    },
+                    //修改用户信息
+                    toRegister: function(){
+                        var _this = this;
+                        var valName = $("#nicknameInput");
+                        if(valName.val() == ""){
+                            alert("请输入昵称");
+                            valName.focus();
+                            return false;
+                        }else{
+                            _this.modify.nickname = valName.val();
+                        }
+                        if(!_this.isLoading){
+                            $.ajax({
+                                type: "POST",
+                                url: api.updateOrSavePersoInfo,
+                                data: {
+                                    _p: common.getRequest()._p,
+                                    sex: _this.modify.sex,
+                                    height: _this.modify.height,
+                                    birthDate: _this.age,
+                                    updateState: '1',
+                                    nickname: _this.modify.nickname
+                                },
+                                beforeSend: function(){
+                                    _this.isLoading = true;
+                                    _this.disabledStatus = true;
+                                },
+                                success: function(response){
+                                    if(response.retcode == 1){
+                                        window.location.reload();
+                                        $(".individual-name-span").show();
+                                        $("#nicknameInput").hide();
+                                    }else{
+                                        alert(response.retmsg);
+                                    }
+                                },
+                                complete: function(){
+                                    _this.isLoading = false;
+                                    _this.disabledStatus = false;
+                                }
+                            })
+                        }
+                    },
+                    //反馈信息提交
+                    informationFeedBack: function(){
+                        var _this=this;
+                        var textareaDom=$(".textarea");
+                        if(textareaDom.val()==""){
+                            alert("请输入反馈内容！");
+                            textareaDom.focus();
+                        }else{
+                            _this.textarea=textareaDom.val();
+                            if(!_this.isLoading){
+                                $.ajax({
+                                    type: "POST",
+                                    url: api.saveWxbUserProposal,
+                                    data:{
+                                        _p: common.getRequest()._p,
+                                        content: _this.textarea,
+                                        nickname: _this.topData.userinfo.user.nickname,
+                                        unionId:  _this.topData.userinfo.unionId,
+                                        sex: _this.modify.sex,
+                                        birthDate: _this.age
+                                    },
+                                    beforeSend: function(){
+                                        _this.isLoading = true;
+                                    },
+                                    success:function(response){
+                                        if(response.retcode==1){
+                                            $(".tips-infor").show();
+                                            setTimeout(function(){
+                                                $(".tips-infor").fadeOut();
+                                            },300)
+                                            $(".retroaction-model,#mask").hide();
+                                        }else{
+                                            alert(response.retmsg);
+                                        }
+                                    },
+                                    complete: function(){
+                                        _this.isLoading = false;
+
+                                    }
+                                })
+                            }
+                        }
+                    }
+                }
+            })
+        }, 50)
+    });
+});

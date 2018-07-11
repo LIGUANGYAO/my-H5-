@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>共享免费秤</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css?v=time">
+    <link rel="stylesheet" type="text/css" href="js/mall/style.css?v=time">
+    <script type="text/javascript" src="plugins/flexible.js?v=time"></script>
+
+   	<script>
+        var _hmt = _hmt || [];
+        _hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+	</script>
+</head>
+
+<body>
+<div id="app" class="container">
+    <div class="mall-content">
+        <div class="build-box">
+            <div class="build-image">
+                <img src="../../images/building.png">
+            </div>
+            <div class="build-world">
+                <p>该栏目正在建设中...</p>
+                <p>更多精彩内容敬请期待</p>
+            </div>
+        </div>
+    </div>
+    <footer-bar :index="2"></footer-bar>
+</div>
+
+<script type="text/javascript" src="js/require.js?v=time"></script>
+<script type="text/javascript" src="js/config.js?v=time"></script>
+<script type="text/javascript" src="js/mall/index.js?v=time"></script>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>PK榜</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="stylesheet" type="text/css" href="js/pk/style.css">
+    <script type="text/javascript" src="plugins/flexible.js"></script>
+</head>
+
+<body>
+
+<div id="app" class="container">
+
+    <div class="pk-content">
+        <!--头部用户信息-->
+        <div class="pk-user">
+            <div class="user-avatar">
+                <img th:src="${weCharUser.headimgurl}" src="images/2/pk_icon_men.png">
+            </div>
+            <div class="user-infor">
+                <span class="user-infor-name">tryh56y6y</span>
+                <span class="user-infor-sex">
+						<img th:src="${weCharUser.sex}==1?@{images/2/pk_icon_men.png}:@{images/2/pk_icon_Female.png}">
+           			</span>
+            </div>
+            <div class="pk-avatar-bg"></div>
+            <div class="user-avatar-img" style="background-image:url(images/2/pk_icon_men.png)" th:with="url=(background-image+':url('+${weCharUser.headimgurl}+')')" th:style="${url}"></div>
+            
+        </div>
+        <!--用户分段信息列表-->
+        <div class="pk-list">
+            <div class="user-case">
+                <div class="user-case-rank">
+                    <span class="user-case-number" th:text="${rank}">gfhgh</span>
+                    <span class="user-case-world">全市排名</span>
+                </div>
+                <div class="user-case-score">
+                    <span class="user-case-number" th:text="${userWeightVo.weightScore}">trhtrh</span>
+                    <span class="user-case-world">体重综合得分</span>
+                </div>
+                <div class="user-case-percent">
+                    <span class="user-case-number" th:text="${personpercentage}">300</span>
+                    <span class="user-case-world">超过全市/人</span>
+                </div>
+            </div>
+            <div class="city-list">
+                <img src="images/2/pk_icon_top.png" alt="">
+                <div class="city-list-head">
+                    <div>全市排行榜</div>
+                    <p>678参加</p>
+                </div>
+            </div>
+            <div class="pk-list-top">
+                <span>综合得分</span>
+                <span>占比率</span>
+                <span>人数</span>
+            </div>
+            <div class="pk-user-list">
+                <ul>
+                    <li th:each="pk,iterStat:${pklist}">
+                        <i class="pk-user-num" th:if="${iterStat.count}==1">
+                            <img src="images/2/pk_ranking_1.png" alt="load">
+                        </i>
+                        <i class="pk-user-num" th:if="${iterStat.count}==2">
+                            <img src="images/2/pk_ranking_2.png" alt="load">
+                        </i>
+                        <i class="pk-user-num" th:if="${iterStat.count}==3">
+                            <img src="images/2/pk_ranking_3.png" alt="load">
+                        </i> 
+                        <i class="pk-user-num" th:if="${iterStat.count} gt 3"></i>
+                        <div class="pk-user-score" th:if="${iterStat.count} gt 1" th:text="${pk.scoreStart}+'~'+${pk.scoreEnd}+'分'">88分</div>
+                        <div class="pk-user-score" th:if="${iterStat.count}==1" th:text="${pk.scoreStart}+'分'">88分</div>
+                        <div class="pk-user-ratio" th:text="${pk.percentage}+'%'">33%</div>
+                        <div class="pk-user-people" th:text="${pk.userNumber}">65</div>
+                        <span class="pk-icon-right">
+                  				<img src="images/2/pk_icon_forward.png" alt="load">
+              				</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript" src="require.js"></script>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="js/index/index.js"></script>
+</body>
+</html>

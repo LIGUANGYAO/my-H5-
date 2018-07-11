@@ -1,0 +1,64 @@
+
+
+@import "../../sass/entry.scss";
+
+
+$name: "tips";
+
+.#{$name}{
+  line-height: 1.75;
+  color: #212121;
+  padding: _(42) _(30);
+  video{
+    display: block;
+    width: _(690);
+    height: _(388);
+  }
+  .title{
+    font-size: _(42);
+    font-weight: 400;
+    margin-bottom: _(72);
+  }
+  .title--dot{
+    display: flex;
+    align-items: center;
+    font-size: _(30);
+    font-weight: 400;
+    margin-bottom: _(60);
+    margin-top: _(116);
+    &:before{
+      content: "";
+      display: block;
+      width: _(12);
+      height: _(12);
+      margin-right: _(20);
+      background-color: #3dc0c1;
+    }
+  }
+  .text-1{
+    font-size: _(28);
+  }
+  .text-1 + .text-1{
+    margin-top: _(64);
+  }
+  .text-1 + .image{
+    margin-top: _(72);
+  }
+  .image + .title--dot{
+    margin-top: _(60);
+  }
+  .image{
+    width: 100%;
+    margin-bottom: _(55);
+  }
+  .like-markdown{
+    border-left: _(4) solid #e7e7e7;
+    background-color: #f9f9f9;
+    padding: _(20) _(24);
+    margin-top: _(76);
+    font-size: _(30);
+  }
+  .mb70{
+    margin-bottom: _(70);
+  }
+}

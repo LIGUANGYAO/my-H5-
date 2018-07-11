@@ -1,0 +1,59 @@
+package com.mzj.eagle.wechat.portal.map.service;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
+
+import com.mzj.eagle.wechat.portal.common.GlobalMethodUtil;
+import com.mzj.eagle.wechat.portal.common.URLBuilder;
+import com.mzj.eagle.wechat.portal.map.vo.ScaleMachineVo;
+import com.mzj.eagle.wechat.portal.map.vo.ScaleShopInfoVo;
+import com.mzj.eagle.wechat.portal.map.vo.ScaleShopVo;
+
+@Service
+public class BusinessDetailsService {
+	
+	@Value("${apigw.host}")
+	private String apigwHost;
+	
+	@Autowired
+	private RestTemplate restTemplate;
+	
+	public ScaleShopInfoVo get(Long id ,String _p) {
+		 GlobalMethodUtil globalMethodUtil =new GlobalMethodUtil();
+			String decry=globalMethodUtil.decrypt(_p);
+			Map<String,String> map =globalMethodUtil.getParams(decry);
+		if(map!=null) {
+			if(id!=null && !id.equals("")) {
+				ScaleShopInfoVo scaleShopInfoVo =restTemplate.getForObject(apigwHost+"scale/bd/shopinfo/{id}", ScaleShopInfoVo.class, id);
+				
+				return scaleShopInfoVo;
+			}
+			return null;
+    	}
+		return null;
+	}
+
+	public List<ScaleShopVo> getScaleMachine(String aname, String _p,Double latitude, Double longitude) {
+		URLBuilder url = new URLBuilder(apigwHost + "scale/machine/business" );
+		 	GlobalMethodUtil globalMethodUtil =new GlobalMethodUtil();
+			String decry=globalMethodUtil.decrypt(_p);
+			url.param("aname",aname);
+			url.param("latitude", latitude);
+			url.param("longitude", longitude);
+			ResponseEntity<List<ScaleShopVo>> responseEntity= restTemplate.exchange(url.toString(), HttpMethod.GET, 
+					null, new ParameterizedTypeReference<List<ScaleShopVo>>(){});
+			List<ScaleShopVo> list = responseEntity.getBody();
+			return list;
+	
+	}
+	
+
+}

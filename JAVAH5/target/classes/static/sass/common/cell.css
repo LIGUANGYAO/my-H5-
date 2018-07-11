@@ -1,0 +1,12 @@
+.cell {
+  position: relative;
+  display: flex;
+  align-items: center; }
+  .cell .cell-l {
+    text-align: left; }
+  .cell .cell-m {
+    flex: 1; }
+  .cell .cell-r {
+    text-align: right; }
+
+/*# sourceMappingURL=cell.css.map */

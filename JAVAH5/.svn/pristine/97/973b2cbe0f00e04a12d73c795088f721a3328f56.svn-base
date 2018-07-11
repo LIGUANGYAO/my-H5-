@@ -1,0 +1,56 @@
+
+@import "../../sass/entry.scss";
+
+
+
+.about-content{
+  background-color: #ffffff;
+  .header-box{
+    padding: 0  _(30);
+    h3{
+      font-size: _(44);
+      color: #3a3b3d;
+      padding-top: _(30);
+    }
+    .header-world{
+      font-size: _(26);
+      color: #8e8e93;
+      margin-top: _(40);
+      margin-bottom: _(20);
+      line-height: 170%;
+    }
+  }
+  .color-bg{
+    width:100%;
+    height: _(15);
+    background-color: #f2f2f2;
+  }
+
+  .share-box{
+    padding: 0  _(30);
+    h3{
+      color: #009944;
+      font-size: _(36);
+      text-align: center;
+      margin-top: _(77);
+    }
+    .subtitle{
+      font-size: _(26);
+      color: #009944;
+      text-align: center;
+      margin-top: _(20);
+    }
+  }
+  h4{
+    font-size: _(34);
+    color: #3a3b3d;
+    margin-top: _(40);
+  }
+  h4+p{
+    font-size: _(26);
+    color: #8e8e93;
+    margin: _(15) 0;
+    line-height: 160%;
+  }
+
+}

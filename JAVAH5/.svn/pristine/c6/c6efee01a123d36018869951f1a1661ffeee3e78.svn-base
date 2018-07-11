@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>附近的秤</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- 避免IE使用兼容模式 -->
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="stylesheet" type="text/css" href="css/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" type="text/css" href="js/map/style.css">
+    <script>
+        var _hmt = _hmt || [];
+        _hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+    </script>
+    <style>
+        img {
+            max-width: none; }
+        .swiper-slide {
+            height: auto;
+            /* -webkit-box-sizing: border-box;
+            box-sizing: border-box; */
+
+        }
+    </style>
+    <script type="text/javascript" src="plugins/flexible.js?v=time"></script>
+</head>
+<body>
+<div id="app" class="container" >
+    <footer-bar></footer-bar>
+    <div class="content my">
+        <!-- 返回 -->
+        <p class="go-back" @click="goBack()">
+            <i class="iconfont icon-fanhui"></i>
+        </p>
+
+        <!-- 地图 -->
+        <div id="JS-map" class="map"></div>
+
+        <!-- 底部菜单 -->
+        <div class="footer">
+            <div class="footer-content">
+                <span id="js-LocationControl" class="item item-location" @click="location"><i class="iconfont icon-leidatance"></i></span>
+                <span class="item item-nearby-equipment" @click="openNearbyOutletsList()"><i class="iconfont icon-activity"></i>附近的秤</span>
+                <span class="item item-refresh mzj-align-center" @click="refresh"><i class="iconfont icon-refresh"></i></span>
+            </div>
+        </div>
+
+        <!-- 当前网点点击查看信息 -->
+        <div class="current-dot-footer" v-show="currentDot.modalDisplay">
+            <div class="go" @click="goHere">
+                <div class="go-btn">
+                    <i class="iconfont icon-quzheli"></i>
+                    <span>去这里</span>
+                </div>
+            </div>
+
+            <div class="dot" @click="openNearbyOutletsDetails">
+                <div class="dot-img">
+                    <img :src="currentDot.logUrl != '' ? currentDot.logUrl : 'images/no.jpg'" />
+                </div>
+                <div class="dot-address">
+                    <h3>{{currentDot.devicename}}</h3>
+                    <p>距离你{{currentDot.distance}}米 | {{currentDot.address}}</p>
+                </div>
+            </div>
+
+            <div class="equipment-status">
+                <span>设备状态</span>
+                <a class="on-line" :class="{'line': currentDot.appstatu == 1}">在线</a>
+                <a class="off-line" :class="{'line': currentDot.appstatu != 1}">离线</a>
+            </div>
+        </div>
+
+        <!-- 附近网点列表弹窗 -->
+        <div class="nearbyModal" v-show="nearby.modalDisplay" style="display:none;">
+            <div class="nearbyModal-mask"></div>
+            <div class="nearbyModal-container">
+                <div class="container-header">
+                    <div class="search">
+                        <i class="iconfont icon-sousuo"></i>
+                        <div class="search-input">
+                            <input type="text" v-model="dotSearch" placeholder="搜索店名"/>
+                            <a @click="closeNearbyModal">取消</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="JS-container-body" class="container-body ">
+
+                    <ul  v-if="nearby.dotData.length > 0" >
+                        <li v-for="(v, index) in nearby.dotData" @click="openNearbyListDetails(index)">
+                            <div class="item-content">
+                                <h3><span :class="{'on-line': v.deviceStatus == 1, 'off-line': v.deviceStatus != 1}">{{v.deviceStatus == 1 ? '在线' : '离线'}}</span>{{v.mr_ShopName}}</h3>
+                                <p>距离您{{v.distance}}米 | {{v.address}}</p>
+                            </div>
+                            <img :src="v.logoUrl != '' ? v.logoUrl : 'images/no.jpg'" />
+                        </li>
+                    </ul>
+
+
+                    <div class="tip" v-if="nearby.dotData.length == 0">没有数据</div>
+
+                    <!--<div class="load">
+                        正在加载中...
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/require.js?v=time"></script>
+<script src="js/config.js?v=time"></script>
+<script src="js/map/index.js?v=time"></script>
+
+</body>
+</html>

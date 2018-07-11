@@ -1,0 +1,363 @@
+package com.mzj.eagle.wechat.portal.wechat.controller;
+
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.RestTemplate;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.mzj.eagle.wechat.portal.common.AESUtil;
+import com.mzj.eagle.wechat.portal.common.ConstantsUtils;
+import com.mzj.eagle.wechat.portal.common.SSLNetProvider;
+import com.mzj.eagle.wechat.portal.wechat.vo.BusinessNews;
+import com.mzj.eagle.wechat.portal.wechat.vo.NewsItem;
+import com.mzj.eagle.wechat.portal.wechat.vo.UserWeight;
+import com.mzj.eagle.wechat.portal.wechat.vo.WechatOfficialAccounts;
+import com.mzj.eagle.wechat.portal.wechat.vo.WechatOfficialAccountsRef;
+import com.mzj.eagle.wechat.portal.wechat.vo.WechatUser;
+import com.mzj.eagle.wechat.portal.wechat.vo.WeightRecordVo;
+
+@Controller
+@RequestMapping("/")
+public class ScanController {
+
+	@Autowired
+	@Qualifier("redisTemplate0")
+	private StringRedisTemplate redisTemplate0;
+	
+	
+	@Autowired
+	@Qualifier("redisTemplate2")
+	private StringRedisTemplate redisTemplate2;
+	
+	
+	@Autowired
+	@Qualifier("redisTemplate4")
+	private StringRedisTemplate redisTemplate4;
+	
+	@Autowired
+	@Qualifier("redisTemplate8")
+	private StringRedisTemplate redisTemplate8;
+	
+
+	@Value("${apigw.host}")
+	private String apigwHost;
+
+	@Autowired
+	private RestTemplate restTemplate;
+
+	private static final Logger LOG = LoggerFactory.getLogger(ScanController.class);
+
+	private static String AUTHORIZEURL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+	private static String ACCESS_TOKENURL = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code";
+
+	/**
+	 * 二维码扫码进来的地址
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 * @throws WeixinException
+	 * @throws ServletException
+	 */
+	@RequestMapping("/scan")
+	public void getCode(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		String REDIRECT_URI = request.getRequestURL().toString();
+		REDIRECT_URI = REDIRECT_URI.substring(0, REDIRECT_URI.length()-7);
+		REDIRECT_URI = REDIRECT_URI+"WX/getUnionid.do";
+		REDIRECT_URI += "?machineId=" + request.getParameter("machineId");
+//		REDIRECT_URI += "?machineId=362523450000933";
+		
+		REDIRECT_URI += "&weight=" + request.getParameter("weight");
+		String appId = request.getParameter("appId");
+		REDIRECT_URI += "&appId=" + appId;
+		String reqTime = request.getParameter("reqTime");
+		
+		Date date = new Date(new Long(reqTime));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		reqTime = sdf.format(date);
+		REDIRECT_URI += "&reqTime=" + reqTime;
+		REDIRECT_URI = URLEncoder.encode(REDIRECT_URI, "UTF-8");
+		String url = String.format(AUTHORIZEURL, appId, REDIRECT_URI);
+		response.sendRedirect(url);
+	}
+
+	/**
+	 * 微信回调
+	 * 
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping("/WX/getUnionid")
+	public String getUnionid(HttpServletRequest request, HttpServletResponse response) {
+
+		String result = "";
+		try {
+
+			// 服务号appid
+			String appId = request.getParameter("appId");
+			String machineId = request.getParameter("machineId");
+			String reqTime = request.getParameter("reqTime");
+
+			// 下面为了获取用户的unionid
+			WechatOfficialAccounts account = JSON.parseObject((String) redisTemplate0.opsForHash()
+					.get(ConstantsUtils.REDIS_WECHAT_KEY, appId + ConstantsUtils.AUTHORIZER_INFO_KEY),
+					WechatOfficialAccounts.class);
+			String appSecret = account.getAppsecret();
+			SSLNetProvider provider = new SSLNetProvider();
+
+			String url = String.format(ACCESS_TOKENURL, appId, appSecret, request.getParameter("code"));
+			String rObj = provider.doPost(url, "");
+			JSONObject json = JSONObject.parseObject(rObj);
+			String openId = json.getString("openid");
+			if(openId==null)return null;
+		
+			
+
+			// 服务号和订阅号关系
+			boolean relationFlag = redisTemplate8.opsForHash().hasKey(ConstantsUtils.Wechat_Official_Accounts_Ref, appId);
+
+			WechatOfficialAccountsRef ffhDyhRelation = null;
+			List<WechatOfficialAccountsRef> ffhDyhRelationList = null;
+			if (relationFlag) {
+				String ffhDyhRelationString = (String) redisTemplate8.opsForHash().get(ConstantsUtils.Wechat_Official_Accounts_Ref,
+						appId);
+				ffhDyhRelationList = JSON.parseArray(ffhDyhRelationString, WechatOfficialAccountsRef.class);
+				for (int i = 0; i < ffhDyhRelationList.size(); i++) {
+					ffhDyhRelation = ffhDyhRelationList.get(i);
+					String available = ffhDyhRelation.getActive();
+					if (available != null && "1".equals(available)) {
+						break;
+					}
+				}
+			} else {
+				result = "qrCodePage/index2";
+			}
+
+			// 订阅号的appid
+			String dyhAppId = "";
+			if (ffhDyhRelation != null) {
+				dyhAppId = ffhDyhRelation.getSubscribId();
+			}
+			
+			JSONObject authInfo = JSON.parseObject(
+					(String) redisTemplate0.opsForHash().get(ConstantsUtils.REDIS_WECHAT_KEY, dyhAppId + ConstantsUtils.USERNAME_INFO_KEY));
+			if (authInfo == null) {
+				authInfo = JSON.parseObject((String) redisTemplate0.opsForHash().get(ConstantsUtils.REDIS_WECHAT_KEY,
+						dyhAppId + ConstantsUtils.AUTHORIZER_INFO_KEY));
+			}
+			
+			String unionId = "";
+			boolean serviceOpenIdFlag = redisTemplate4.opsForHash().hasKey(getUserServiceOpenId(ConstantsUtils.USER_SERVICE_OPENID),appId+"_"+openId);
+			if(serviceOpenIdFlag==false){
+				String infoUrlB = apigwHost + "wxapi/wxUser";
+				
+				infoUrlB = infoUrlB + "?appId=" + appId + "&openId=" + openId;
+				RestTemplate restTemplate = new RestTemplate();
+				ResponseEntity<WechatUser> uisResponseEntity = restTemplate.exchange(infoUrlB.toString(),
+						HttpMethod.GET, null, new ParameterizedTypeReference<WechatUser>() {
+				});
+				WechatUser wx = uisResponseEntity.getBody();
+				
+				unionId = wx.getUnionid();
+				unionId = authInfo.getString("plant")+"_"+unionId;
+				redisTemplate4.opsForHash().put(getUserServiceOpenId(ConstantsUtils.USER_SERVICE_OPENID),appId+"_"+openId,unionId);
+			}else{
+				unionId = (String) redisTemplate4.opsForHash().get(getUserServiceOpenId(ConstantsUtils.USER_SERVICE_OPENID),appId+"_"+openId);
+			}
+			
+			// 体重
+			String weight = request.getParameter("weight");
+
+			request.setAttribute("weight", weight);
+			boolean appIdUnionIdFlag = redisTemplate4.opsForHash().hasKey(getUserWeightDyh(ConstantsUtils.USER_WEIGHT_DYH),
+					dyhAppId + "_" + unionId);
+			String subscribe = "";
+			Map<String, String> userMap = null;
+			if (appIdUnionIdFlag) {
+				String tempString = (String) redisTemplate4.opsForHash().get(getUserWeightDyh(ConstantsUtils.USER_WEIGHT_DYH),
+						dyhAppId + "_" + unionId);
+				userMap = JSON.parseObject(tempString, Map.class);
+				subscribe = userMap.get("subscribe");
+			}
+
+			// 已经关注过
+			if (appIdUnionIdFlag && "1".equals(subscribe)) {
+				
+				gotoH5Page(openId,dyhAppId,weight,machineId,reqTime,result,response);
+				return null;
+			} else {
+
+				// 是否首次关注
+				String focus = ffhDyhRelation.getFirstFollow();
+				boolean focusFlag = false;
+				if (focus.equals("0")) {
+					for (int i = 0; i < ffhDyhRelationList.size(); i++) {
+						WechatOfficialAccountsRef tempRelation = ffhDyhRelationList.get(i);
+						String tempDyhAppId = tempRelation.getSubscribId();
+						boolean tempFlag = redisTemplate4.opsForHash().hasKey(getUserWeightDyh(ConstantsUtils.USER_WEIGHT_DYH),
+								tempDyhAppId + "_" + unionId);
+						if (tempFlag) {
+							String tempString = (String) redisTemplate4.opsForHash().get(getUserWeightDyh(ConstantsUtils.USER_WEIGHT_DYH),
+									tempDyhAppId + "_" + unionId);
+							Map<String, String> tempMap = JSON.parseObject(tempString, Map.class);
+							String tempSubscribe = tempMap.get("subscribe");
+							if (tempSubscribe != null && "1".equals(tempSubscribe)) {
+								focusFlag = true;
+								break;
+							}
+						}
+					}
+					if (focusFlag) {
+						gotoH5Page(openId,dyhAppId,weight,machineId,reqTime,result,response);
+						return null;
+					} else {
+						// 没有关注过
+						Map<String, String> userNewMap = new HashMap<String, String>();
+						userNewMap.put("weight", weight);
+						userNewMap.put("machineId", machineId);
+						redisTemplate4.opsForHash().put(getUserWeightDyh(ConstantsUtils.USER_WEIGHT_DYH), dyhAppId + "_" + unionId,
+								JSON.toJSONString(userNewMap));
+
+						request.setAttribute("imgeUrl", authInfo.getString("qrcodePath"));
+						result = "qrCodePage/wechat";
+					}
+				} else {
+					// 没有关注过
+					Map<String, String> userNewMap = new HashMap<String, String>();
+					userNewMap.put("weight", weight);
+					userNewMap.put("machineId", machineId);
+					redisTemplate4.opsForHash().put(getUserWeightDyh(ConstantsUtils.USER_WEIGHT_DYH), dyhAppId + "_" + unionId,
+							JSON.toJSONString(userNewMap));
+
+					request.setAttribute("imgeUrl", authInfo.getString("qrcodePath"));
+					result = "qrCodePage/wechat";
+				}
+
+				// 发到mq
+				WeightRecordVo weightRecordVo = new WeightRecordVo();
+				weightRecordVo.setOfficialAccountsAppid(dyhAppId);
+				weightRecordVo.setWeight(new Double(weight));
+				weightRecordVo.setChannel("3");
+				weightRecordVo.setDelay(0);
+				String openid = json.getString("openid");
+				weightRecordVo.setOpenid(openid);
+				weightRecordVo.setMachineId(machineId);
+				weightRecordVo.setOfficialAccountsServiceAppid(appId);
+				weightRecordVo.setUnionid(unionId);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+				weightRecordVo.setReqTime(sdf.parse(reqTime).getTime()+"");
+				
+				restTemplate.postForObject(apigwHost + "health/weightRecord", weightRecordVo, WeightRecordVo.class);
+			}
+
+		} catch (Exception e) {
+			LOG.error("Exception", e);
+		}
+		return result;
+	}
+	
+	public void gotoH5Page(String openId,String dyhAppId,String weight,
+			String machineId,String reqTime,String result,HttpServletResponse response){
+		
+		//添加图文
+		String type = "WEIGHTRETURNNEWSFIRST";//获取类型
+		BusinessNews businessNews = new BusinessNews();
+		businessNews = JSON.parseObject((String)redisTemplate0.opsForHash().get("BussinessNewsList", type), BusinessNews.class) ;//(BusinessNews) hashDataCRUD.hget("BussinessNewsList", type);
+		if (businessNews != null) {
+			
+			List<NewsItem> articles = null;
+			if(redisTemplate0.opsForHash().hasKey("wxbNewsItemList", businessNews.getNewsId())){
+				articles = JSON.parseObject((String)redisTemplate0.opsForHash().get("wxbNewsItemList", businessNews.getNewsId()),List.class);
+			}
+			
+			if (articles != null && articles.size() > 0) {
+				NewsItem newsItem = JSON.parseObject(JSON.toJSONString(articles.get(0)),
+						NewsItem.class);
+				String indexUrl = newsItem.getUrl();;
+				
+				UserWeight userWeight = new UserWeight();
+				userWeight.setChannel("3");
+				userWeight.setAccountId(dyhAppId);
+				userWeight.setWeight(new Double(weight));
+				userWeight.setOpenId(openId);
+				userWeight.setMachineId(machineId);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+				try {
+					userWeight.setReqTime(sdf.parse(reqTime));
+				
+				userWeight.setReceiverTime(new Date());
+				restTemplate.postForObject(apigwHost + "wxapi/sUserWeight", userWeight, UserWeight.class);
+				
+				result = setUrlParam(indexUrl, openId, null, openId, weight, "0",dyhAppId);
+//				result = "http://h5.mzjmedia.com/index.html?_p=f36ec29dc5e46a65a846861155ea9dd4a31891e37ab8141e158043d47a1d6f4c5192f03143522f14f930ed2ae835b47186fc81656dd3b5d910f3935b1482ec9150174c4e2231ade75521a9dc6ff118ee682d0fe1e16bbb64c446985780bb51805384a0a618be341ac9fb49bb4b003520b47cbebc4b027c191eb5d1d5a3468ca6";
+					response.sendRedirect(result);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	public static String getUserWeightDyh(String openId) {
+		if(StringUtils.isEmpty(openId)) {
+			return "";
+		}
+		return ConstantsUtils.USER_WEIGHT_DYH+Math.abs(openId.hashCode())%ConstantsUtils.USER_KEY_NUM;
+	}
+	
+	
+	public static String getUserServiceOpenId(String openId) {
+		return ConstantsUtils.USER_SERVICE_OPENID+Math.abs(openId.hashCode())%ConstantsUtils.USER_KEY_NUM;
+	}
+	
+
+	/**
+	 * 带上体重数据
+	 * 
+	 * @param newsItem
+	 * @param openId
+	 * @param accountId
+	 * @param id
+	 * @param weight
+	 * @param weightChange
+	 */
+	private String setUrlParam(String url, String openId, String accountId, String id, String weight,
+			String weightChange,String appId) {
+
+		String param = "accountId=" + accountId + "&openId=" + openId + "&recordId=" + id + "&weight=" + weight
+				+ "&weightChange=" + weightChange+"&appId"+appId;
+		String _p = "_p=" + AESUtil.encrypt(param);
+		if (url.contains("?") && url.contains("=")) {
+			url += "&" + _p;
+		} else if (url.contains("?")) {
+			url += _p;
+		} else {
+			url += "?" + _p;
+		}
+		return url;
+	}
+
+}

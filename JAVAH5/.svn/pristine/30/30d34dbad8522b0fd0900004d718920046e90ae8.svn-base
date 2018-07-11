@@ -1,0 +1,59 @@
+package com.mzj.eagle.wechat.portal.index.service;
+
+ 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.mzj.eagle.wechat.portal.common.ApiData;
+import com.mzj.eagle.wechat.portal.common.URLBuilder;
+import com.mzj.eagle.wechat.portal.vo.UserWeightVo;
+/** 
+ * ==================================
+ * 
+ *  首页信息service
+ * @author  huangrijia
+ * 
+ *  =================================
+ */
+@Service
+public class IndexService {
+	private static final Logger LOG = LoggerFactory.getLogger(IndexService.class);
+	@Value("${apigw.host}")
+	private String apigwHost;
+	
+	@Autowired
+	private RestTemplate restTemplate;
+
+	private final String userUrl = "els/userWeight";
+	
+	/**
+	 * 用户体重列表
+	 * @param vo
+	 * @return
+	 */
+	public ApiData<UserWeightVo> wuList(UserWeightVo vo){ 
+		vo.setOpenId("222");
+		vo.setAccountId("162");
+		vo.setDateType(1);
+		 
+		URLBuilder api = new URLBuilder(apigwHost + userUrl+"/userWeightList");
+		api.param("openId", vo.getOpenId()).param("accountId", vo.getAccountId()).param("dateType", vo.getDateType()); 
+		//    restTemplate.getForObject(url,UserWeightVo.class); 
+		    ResponseEntity<ApiData<UserWeightVo>> responseEntity =    restTemplate.exchange(
+		    		api.toString(),
+					HttpMethod.GET,
+					null,
+					new ParameterizedTypeReference<ApiData<UserWeightVo>>() {});
+		    ApiData<UserWeightVo> data = responseEntity.getBody();
+		    return data;
+	}
+	
+}

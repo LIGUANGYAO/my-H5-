@@ -1,0 +1,114 @@
+package com.mzj.eagle.wechat.portal.index.service;
+
+ 
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.mzj.eagle.wechat.portal.common.ApiData;
+import com.mzj.eagle.wechat.portal.common.URLBuilder;
+import com.mzj.eagle.wechat.portal.vo.UserWeightVo;
+import com.mzj.eagle.wechat.portal.vo.WeChatUserVo;
+import com.mzj.eagle.wechat.portal.vo.WechatOfficialAccountsVo;
+/** 
+ * ==================================
+ * 
+ *  首页信息service
+ * @author  huangrijia
+ * 
+ *  =================================
+ */
+@Service
+public class IndexService {
+	private static final Logger LOG = LoggerFactory.getLogger(IndexService.class);
+	@Value("${apigw.host}")
+	private String apigwHost;
+	
+	@Autowired
+	private RestTemplate restTemplate;
+	@Autowired
+	@Qualifier("redisTemplate")
+	private StringRedisTemplate redisTemplate;
+
+	private final String userWeightUrl = "els/userWeight/month";
+	private final String qrcodePath = "wxmanager/officialAccounts/getQRCode";
+	
+	/**
+	 * 用户体重列表
+	 * @param vo
+	 * @return
+	 */
+	public ApiData<UserWeightVo> wuList(Integer type,String openId){
+		String userWeightUrl = null;
+		switch (type) {
+		case 1:
+			userWeightUrl = "els/userWeight/month";
+			break;
+		case 2:
+			userWeightUrl = "els/userWeight/half";
+			break;
+		case 3:
+			userWeightUrl = "els/userWeight/year";
+			break;
+		}
+		URLBuilder api = new URLBuilder(apigwHost + userWeightUrl);
+		api.param("openid", openId);
+		ResponseEntity<ApiData<UserWeightVo>> response = restTemplate.exchange(api.toString(), HttpMethod.GET,null,
+				new ParameterizedTypeReference<ApiData<UserWeightVo>>(){});
+		ApiData<UserWeightVo> list = response.getBody();
+		return list;
+	}
+	
+	/**
+	 * 查询二维码图片
+	 * @param id
+	 */
+	public String getQrcodeImg(String appId) {
+		if(!StringUtils.isEmpty(appId)) {
+			//查询缓存
+			Object obj = redisTemplate.opsForHash().get("OFFICIAL_ACCOUNTS",appId+"_AUTHORIZER_INFO");
+			WechatOfficialAccountsVo vo = null;
+			if(obj!=null) {
+				vo =(WechatOfficialAccountsVo) JSONObject.parseObject(obj.toString(),WechatOfficialAccountsVo.class);
+				return vo.getQrcodePath();
+			}else {
+				vo = restTemplate.getForObject(apigwHost+qrcodePath+"?appId={appId}", WechatOfficialAccountsVo.class, appId);
+			}
+			if(vo == null)
+				return null;
+			//获取二维码的完整url
+			String pathUrl = apigwHost + "oss/files/qrcode/url";
+			ResponseEntity<Map<String, String>> responseEntity = restTemplate.exchange(
+					pathUrl, 
+					HttpMethod.POST, 
+					new HttpEntity<>(Collections.singletonList(vo.getQrcodePath())), 
+					new ParameterizedTypeReference<Map<String, String>>() {});
+			Map<String, String> urlMap = responseEntity.getBody();
+			if(urlMap != null) {
+				String qrCode = urlMap.get(String.valueOf(vo.getQrcodePath()));
+				return qrCode;
+			}
+		}
+		return null;
+	}
+	
+}

@@ -1,0 +1,54 @@
+@import "../../sass/base/fn.scss";
+
+$barName: "bar";
+.#{$barName}{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 10;
+  height: _(98);
+  background-color:#1c1c20;
+  border-top:_(1) solid #3a3b3d;
+  &>a{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: _(75);
+    background-image:url("../../images/tab_bar_icon/nav-tab.png");
+    background-size: _(244)  _(75);
+    &.bar__index{
+      width: _(42);
+    }
+    &.bar__health{
+      width: _(80);
+      background-position: _(-42) 0;
+    }
+    &.bar__dot{
+      width: _(80);
+      background-position: _(-122) 0;
+    }
+    &.bar__mall{
+      width: _(42);
+      background-position: _(-202) 0;
+    }
+  }
+  &>a.#{$barName}-active{
+    background-image:url("../../images/tab_bar_icon/nav-tab-active.png");
+    &.bar__index{
+      width: _(42);
+    }
+    &.bar__health{
+      width: _(80);
+      background-position: _(-42) 0;
+    }
+    &.bar__dot{
+      width: _(80);
+      background-position: _(-122) 0;
+    }
+    &.bar__mall{
+      width: _(42);
+      background-position: _(-202) 0;
+    }
+  }
+}

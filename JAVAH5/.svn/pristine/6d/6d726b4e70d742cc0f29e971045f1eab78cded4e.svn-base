@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>饮食建议</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css?v=time">
+    <link rel="stylesheet" type="text/css" href="js/health/food.css?v=time">
+    <script type="text/javascript" src="plugins/flexible.js?v=time"></script>
+</head>
+
+<body>
+
+<div id="app" class="container" th:with="height=${userInfoVo.height}?${userInfoVo.height}:10,sex=${userInfoVo.gender}?${userInfoVo.gender}:1,year=${userInfoVo.age}?${userInfoVo.age}:20 ">
+
+
+    <div class="food-content" th:with="bmi=${weight}/(${height}*0.01*${height}*0.01),BMI=${#numbers.formatDecimal(bmi, 1, 1)}">
+
+        <!--体重建议-->
+        <div class="food-content-top flex" >
+            <p class="food-size">针对体重<span th:if="${BMI} le 18.4 ">偏瘦</span>
+                <span th:if="${BMI} lt 24.0"><span th:if="${BMI} ge 18.5">正常</span></span>
+                <span th:if="${BMI} lt 28.0"><span th:if="${BMI} ge 24.0">偏重</span></span>
+                <span th:if="${BMI} ge 28.0">超重</span>的您</p>
+            <div class="calories-tips">
+                <span th:if="${BMI} le 18.4 "><p >
+                    建议您有规律地进餐，定时定量，可形成条件反射，<br>有助于消化腺的分泌，更利于胃肠的吸收，从而达到食物增重的目的，<br>1.多吃蔬果，2.多补充维生素C，3.少吃油炸食物。
+                </p></span>
+                <span th:if="${BMI} lt 24.0 "> <span th:if="${BMI} ge 18.5"> <p >
+                    建议您平时可以舒缓身体，保持身材为主。<br>清淡饮食，主食粗细搭配，多吃蔬果，拒绝宵夜，少吃甜食饮料。<br>保持愉快的心情和充足的睡眠，只要继续保持以往的习惯就行。
+                </p></span></span>
+                <span th:if="${BMI} lt 28.0"><span th:if="${BMI} ge 24.0"> <p >
+                    建议您尽量以『蒸、煮、卤、拌、烤』五大不用油的方式烹调食物，避免摄入过多高热量食物，1.多补充蔬果、益生菌，2.少糖少油少吃肉，3.不暴饮暴食。多吃纤维食物（增加饱足感）
+                </p></span></span>
+                <span th:if="${BMI} ge 28.0"><p>
+                    建议您饮食清淡，少油盐，少糖，不要吃太油腻的东西，<br>餐前吃绿色产品来分解脂肪，正餐和小吃都要均衡的搭配，<br>饮食中均衡补充维生素、蛋白质等，少补充脂肪和热量。
+                </p>
+                </span>
+            </div>
+        </div>
+
+           <p >
+
+
+
+
+           </p>
+
+
+        <!--饮食建议-->
+        <div class="food-content-bottom flex"  th:with="bmr=${sex}==1? 66+(13.7*${weight})+(5.0*${height})-(6.8*${year}): 655+(9.6*${weight})+(1.7*${height})-(4.7*${year}),BMR=${#numbers.formatDecimal(bmr, 1, 0)}">
+            <p class="food-suggest-world" >您的饮食建议</p>
+            <div class="food-suggest-calories">
+                 <span th:if="${bmi} lt 18.4 "><p class="food-suggest-hot">
+                    为了保证您的健康又能继续保持身材，您每天的饮食摄入热量建议控制在<span  th:text="(${BMR}+300)+'~'+(${BMR}+500)">1415~1615</span>大卡之间，相当于：
+                </p>
+                <ul>
+                    <li th:if="(${BMR}+300) gt 800"><span></span><a th:with="rice=((${BMR}-180)/120)" th:text="${#numbers.formatDecimal(rice, 0, 0)}">8</a>碗米饭（120千卡）</li><!-- ${bmr}-105-100-215-260+500)/120 -->
+                    <li th:if="(${BMR}+300) le 800"><a th:if="${BMR} gt 465"><span></span><a th:with="rice=((${BMR}+80)/120)" th:text="${#numbers.formatDecimal(rice, 0, 0)}">8</a>碗米饭（120千卡）</a></li><!-- {{((bmr-105-100-215+500)/120) -->
+                    <li th:if="(${BMR}+300) le 465"><span></span><a th:with="rice=((${BMR}+295)/120)" th:text="${#numbers.formatDecimal(rice, 0, 0)}">8</a>碗米饭（120千卡）</li><!-- {{((bmr-105-100+500)/120) -->
+                    <li><span></span>1个苹果（105千卡）</li>
+                    <li><span></span>1个煎蛋（100千卡）</li>
+                    <li th:if="${BMR} gt 165"><span></span>1瓶牛奶（215千卡）</li>
+                    <li th:if="${BMR} gt 500"><span></span>1个玉米（260千卡）</li>
+                </ul>
+                </span>
+                <span th:if="${BMI} lt 24.0 "> <span th:if="${BMI} ge 18.5"><p class="food-suggest-hot" >
+                    为了保证您的健康又能继续保持身材，您每天的饮食摄入热量建议控制在<span th:text="${BMR}">1415</span>大卡之间，相当于：
+                </p>
+                <ul>
+                    <li th:if="${BMR} gt 800"><span></span><a th:with="rice=((${BMR}-680)/120)" th:text="${#numbers.formatDecimal(rice, 0, 0)}">8</a>碗米饭（120千卡）</li>
+                    <li th:if="${BMR} le 800"><a th:if="${bmr} gt 465"><span></span><a th:with="rice=((${BMR}-420)/120)" th:text="${#numbers.formatDecimal(rice, 0, 0)}">8</a>碗米饭（120千卡）</a></li>
+                    <li th:if="${BMR} le 465"><span></span><a th:with="rice=((${BMR}-205)/120)" th:text="${#numbers.formatDecimal(rice, 0, 0)}">8</a>碗米饭（120千卡）</li>
+                    <li><span></span>1个苹果（105千卡）</li>
+                    <li><span></span>1个煎蛋（100千卡）</li>
+                    <li th:if="${BMR} gt 465"><span></span>1瓶牛奶（215千卡）</li>
+                    <li th:if="${BMR} gt 800"><span></span>1个玉米（260千卡）</li>
+                </ul>
+                </span></span>
+                <span th:if="${BMI} lt 28.0"><span th:if="${BMI} ge 24.0"><p class="food-suggest-hot" >
+                    为了保证您的健康又能继续保持身材，您每天的饮食摄入热量建议控制在<span th:text="(${BMR}-500)+'~'+(${BMR}-300)">1415~1615</span>大卡之间，相当于：
+                </p>
+                 <ul>
+                    <li th:if="${BMR} gt 1300"><span></span><a th:with="rice=((${BMR}-980)/120)" th:text="${#numbers.formatDecimal(rice, 0, 0)}">8</a>碗米饭（120千卡）</li>
+                    <li th:if="${BMR} le 1300"><a th:if="${BMR} gt 965"><span></span><a th:with="rice=((${BMR}-720)/120)" th:text="${#numbers.formatDecimal(rice, 0, 0)}">8</a>碗米饭（120千卡）</a></li>
+                    <li th:if="${BMR} le 965"><span></span><a th:with="rice=((${BMR}-505)/120)" th:text="${#numbers.formatDecimal(rice, 0, 0)}">8</a>碗米饭（120千卡）</li>
+                    <li><span></span>1个苹果（105千卡）</li>
+                    <li><span></span>1个煎蛋（100千卡）</li>
+                    <li th:if="${BMR} gt 965" ><span></span>1瓶牛奶（215千卡）</li>
+                    <li th:if="${BMR} gt 1300"><span></span>1个玉米（260千卡）</li>
+                </ul>
+                </span></span>
+                <span th:if="${BMI} ge 28.0"><p class="food-suggest-hot" >
+                    为了保证您的健康又能继续保持身材，您每天的饮食摄入热量建议控制在<span th:text="(${BMR}-600)+'~'+(${BMR}-400)">1415~1615</span>大卡之间，相当于：
+                </p>
+                <ul>
+                    <li th:if="${BMR} gt 1400"><span></span><a th:with="rice=((${BMR}-1080)/120)" th:text="${#numbers.formatDecimal(rice, 0, 0)}">8</a>碗米饭（120千卡）</li>
+                    <li th:if="${BMR} le 1400"><a th:if="${BMR} gt 1065"><span></span><a th:with="rice=((${bmr}-820)/120)" th:text="${#numbers.formatDecimal(rice, 0, 0)}">8</a>碗米饭（120千卡）</a></li>
+                    <li th:if="${BMR} le 1065"><span></span><a th:with="rice=((${BMR}-605)/120)" th:text="${#numbers.formatDecimal(rice, 0, 0)}">8</a>碗米饭（120千卡）</li>
+                    <li><span></span>1个苹果（105千卡）</li>
+                    <li><span></span>1个煎蛋（100千卡）</li>
+                    <li th:if="${BMR} gt 1065"><span></span>1瓶牛奶（215千卡）</li>
+                    <li th:if="${BMR} gt 1400"><span></span>1个玉米（260千卡）</li>
+                </ul>
+                </span>
+
+            </div>
+        </div>
+
+
+
+
+        <!--饮水建议-->
+        <div class="drink-suggest flex">
+            <p>您的饮水量建议</p>
+        </div>
+
+        <!--饮水数量计算-->
+        <div class="drink-suggest-box" th:with="water=((${weight}*30)/200)">
+            <p >建议您每日喝水<span th:text="(${weight}*30)+'~'+(${weight}*35)"></span>ml，以帮助身体新陈谢，平均每天<span th:text="(${water}<1?1:${#numbers.formatDecimal(water, 0, 0)})">3</span>杯水，每杯水平均200ml。</p>
+            <div class="water-num">
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+    <script src="js/require.js?v=time"></script>
+    <script src="js/config.js?v=time"></script>
+    <script src="js/health/food.js?v=time"></script>
+    <script th:inline="javascript">
+        var  cupArry=[];
+        var  weight=[[${weight}]];
+        var cuNum=((weight*30)/200).toFixed(0);
+        var water=document.querySelector(".water-num");
+        if(cuNum<1){
+            cuNum=1;
+        }
+        cupArry.length=cuNum;
+        for(var i=0;i<cupArry.length;i++){
+            var laberImg=document.createElement('img');
+            laberImg.src='images/3/water.png';
+            water.appendChild(laberImg);
+        }
+    </script>
+</body>
+
+</html>

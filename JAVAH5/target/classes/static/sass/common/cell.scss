@@ -1,0 +1,16 @@
+@import '../base/fn';
+
+.cell{
+    position: relative;
+    display: flex;
+    align-items: center;
+    .cell-l{
+        text-align: left;
+    }
+    .cell-m{
+        flex: 1;
+    }
+    .cell-r{
+        text-align:right;
+    }
+}

@@ -1,0 +1,65 @@
+package com.mzj.eagle.wechat.portal.profile.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.alibaba.fastjson.JSON;
+import com.mzj.eagle.wechat.portal.profile.service.UserInfoService;
+import com.mzj.eagle.wechat.portal.vo.UserInfoVo;
+/**
+ * ==================================
+ *  用户信息
+ *  
+ * @author  huangrijia
+ * 
+ * =================================
+ */
+@Configuration
+@Controller
+public class ProfileController {
+	private static final Logger LOG = LoggerFactory.getLogger(ProfileController.class);
+	@Autowired
+	private UserInfoService userInfoService;
+	
+	//个人中心
+	@RequestMapping(value= "profile.html",method=RequestMethod.GET)
+	public String profile(@RequestParam(name = "_p") String p,@RequestParam(name = "unionid") String unionid,ModelMap map) {
+		//查询头像信息。头像信息没有,则不返回用户信息
+		
+		
+		UserInfoVo userInfo = userInfoService.getById(unionid);
+		map.put("userInfo", userInfo);
+		return "profile/profile";
+	}
+	
+	/*
+    *//**
+     * 获取个人注册信息
+     * @return
+     *//*
+	@GetMapping(value="/profile/{unionid}")
+	public UserInfoVo getByUnionid() {
+		return null;
+	}
+	*/
+	/*@PutMapping
+	public UserInfoVo update(UserInfoVo vo) {
+		userInfoService.save(vo);
+		return null;
+	}*/
+}

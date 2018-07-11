@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>共享免费秤</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<script type="text/javascript">
+		!function (a, b) { function c() { var b = f.getBoundingClientRect().width; b / i > 960 && (b = 960 * i); var c = b / 10; f.style.fontSize = c + "px", k.rem = a.rem = c } var d, e = a.document, f = e.documentElement, g = e.querySelector('meta[name="viewport"]'), h = e.querySelector('meta[name="flexible"]'), i = 0, j = 0, k = b.flexible || (b.flexible = {}); if (g) { console.warn("将根据已有的meta标签来设置缩放比例"); var l = g.getAttribute("content").match(/initial\-scale=([\d\.]+)/); l && (j = parseFloat(l[1]), i = parseInt(1 / j)) } else if (h) { var m = h.getAttribute("content"); if (m) { var n = m.match(/initial\-dpr=([\d\.]+)/), o = m.match(/maximum\-dpr=([\d\.]+)/); n && (i = parseFloat(n[1]), j = parseFloat((1 / i).toFixed(2))), o && (i = parseFloat(o[1]), j = parseFloat((1 / i).toFixed(2))) } } if (!i && !j) { var p = (a.navigator.appVersion.match(/android/gi), a.navigator.appVersion.match(/iphone/gi)), q = a.devicePixelRatio; i = p ? q >= 3 && (!i || i >= 3) ? 3 : q >= 2 && (!i || i >= 2) ? 2 : 1 : 1, j = 1 / i } if (f.setAttribute("data-dpr", i), !g) if (g = e.createElement("meta"), g.setAttribute("name", "viewport"), g.setAttribute("content", "initial-scale=" + j + ", maximum-scale=" + j + ", minimum-scale=" + j + ", user-scalable=no"), f.firstElementChild) f.firstElementChild.appendChild(g); else { var r = e.createElement("div"); r.appendChild(g), e.write(r.innerHTML) } a.addEventListener("resize", function () { clearTimeout(d), d = setTimeout(c, 300) }, !1), a.addEventListener("pageshow", function (a) { a.persisted && (clearTimeout(d), d = setTimeout(c, 300)) }, !1), "complete" === e.readyState ? e.body.style.fontSize = 14 * i + "px" : e.addEventListener("DOMContentLoaded", function () { e.body.style.fontSize = 14 * i + "px" }, !1), c(), k.dpr = a.dpr = i, k.refreshRem = c, k.rem2px = function (a) { var b = parseFloat(a) * this.rem; return "string" == typeof a && a.match(/rem$/) && (b += "px"), b }, k.px2rem = function (a) { var b = parseFloat(a) / this.rem; return "string" == typeof a && a.match(/px$/) && (b += "rem"), b } }(window, window.lib || (window.lib = {}));
+	</script>
+	<style type="text/css">
+	  html, body, div, span, object, iframe,  
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,  
+abbr, address, cite, code,  
+del, dfn, em, img, ins, kbd, q, samp,  
+small, strong, sub, sup, var,  
+b, i,  
+dl, dt, dd, ol, ul, li,  
+fieldset, form, label, legend,  
+table, caption, tbody, tfoot, thead, tr, th, td,  
+article, aside, canvas, details, figcaption, figure,   
+footer, header, hgroup, menu, nav, section, summary,  
+time, mark, audio, video {  
+    margin:0;  
+    padding:0;  
+    border:0;  
+    outline:0;  
+    font-size:100%;  
+    vertical-align:baseline;  
+    background:transparent;  
+}  
+  
+body {  
+    line-height:1;  
+}  
+  
+:focus {  
+    outline: 1;  
+}  
+  
+article,aside,canvas,details,figcaption,figure,  
+footer,header,hgroup,menu,nav,section,summary {   
+    display:block;  
+}  
+  
+nav ul {  
+    list-style:none;  
+}  
+  
+blockquote, q {  
+    quotes:none;  
+}  
+  
+blockquote:before, blockquote:after,  
+q:before, q:after {  
+    content:'';  
+    content:none;  
+}  
+a {  
+    margin:0;  
+    padding:0;  
+    border:0;  
+    font-size:100%;  
+    vertical-align:baseline;  
+    background:transparent;  
+}  
+ins {  
+    background-color:#ff9;  
+    color:#000;  
+    text-decoration:none;  
+}  
+mark {  
+    background-color:#ff9;  
+    color:#000;   
+    font-style:italic;  
+    font-weight:bold;  
+}  
+  
+del {  
+    text-decoration: line-through;  
+}  
+  
+abbr[title], dfn[title] {  
+    border-bottom:1px dotted #000;  
+    cursor:help;  
+}  
+  
+table {  
+    border-collapse:collapse;  
+    border-spacing:0;  
+}  
+  
+hr {  
+    display:block;  
+    height:1px;  
+    border:0;     
+    border-top:1px solid #cccccc;  
+    margin:1em 0;  
+    padding:0;  
+}  
+  
+input, select {  
+    vertical-align:middle;  
+}  
+	</style>
+
+	<style type="text/css">
+
+
+
+
+	  html, body, .container {
+    background-color: #f8f8f8;
+    max-width: 960px;
+    height: 100%;
+    margin: 0 auto;
+}
+	   body{
+	   	  background-color: #f2f2f2;
+	   	  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "SimHei", sans-serif;
+  			overflow-x: hidden;
+  			font-size: 14px !important;
+	   }
+	   .container{
+		    max-width: 960px;
+		    height: 100%;
+		    margin: 0 auto;
+		    position: relative;
+		}
+		.code{
+			width: 8.4rem;
+			height: 8.4rem;
+			margin: 0 auto;
+			border-radius: 0.13rem;
+			background-color: #ffffff;
+		}
+		.code-title{
+			text-align: center;
+		}
+		.footer{
+		  width:100%;
+		  height: 1.933rem;
+		  position: absolute;
+		  bottom: 0.45rem;
+		  left: 0;
+		  z-index: 5;
+          text-align: center;
+		}
+		.footer .font28{
+           font-size: 0.373rem;
+           color: #3a3b3d;
+           line-height: 160%;
+		}
+		.footer  .font20{
+            font-size: 0.23rem;
+            color: #8e8e93;
+            line-height: 150%;
+		}
+		.code-image{
+			width: 6rem;
+			height: 6rem;
+			margin: 0 auto;
+			padding-top: 1rem;
+			margin-bottom: 0.12rem;
+		}
+		.code-image img{
+            width: 6rem;
+			height: 6rem;
+		}
+		.code-title p{
+			color: #3a3b3d;
+			font-size: 0.43rem;
+			line-height: 140%;
+		}
+		.height60{
+			width: 100%;
+			height: 0.8rem;
+		}
+		.chen{
+			width: 2.46rem;
+			height: 5.9rem;
+			position: absolute;
+			bottom: 0;
+			left: 0.1rem;
+			z-index: 3;
+			background-image: url(../images/cheng.png);
+			background-repeat: no-repeat;
+			background-size: 2.46rem 5.9rem;
+
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+        <div class="chen"></div>
+		<div class="height60"></div>
+		<div class="code">
+			<div class="code-image">
+				<img th:src="${imgeUrl}" >
+			</div>
+			<div class="code-title">
+				<p>长按关注公众号</p>
+				<p>获取您的体重</p>
+			</div>
+		</div>
+
+
+		<div class="footer">
+			<p class="font28">哎呀！！亲您是第一次来~</p>
+			<p class="font28">微信扫码关注一次 永久免费享用</p>
+			<p class="font20">你的健康需要管理，而非简单的测量</p>
+		</div>
+	</div>
+</body>
+</html>

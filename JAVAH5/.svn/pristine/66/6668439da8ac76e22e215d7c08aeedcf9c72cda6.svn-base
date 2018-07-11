@@ -1,0 +1,173 @@
+package com.mzj.eagle.wechat.portal.vo;
+
+import java.util.Date;
+import com.alibaba.fastjson.JSONObject;
+/**
+ * ==================================
+ * 
+ * @Description 微信用户信息
+ * @author huangrijia 
+ * @date on 2017/11/12
+ * ==================================
+ */
+public class UserWeightVo {
+	private String id;
+	private double weight;//体重
+	private String code;//随机码
+	private String machineId;//机器编号
+	private String openId;//数据绑定openID
+	private String unionId;//用户相对第三方唯一标志
+
+	private Date createTime;//数据生成时间
+	private Date bindTime;//数据绑定时间
+	private int codeBack;//code是否放回 0 未放回 1 已放回
+	private String accountId;
+	private String ReportId;
+	private String processId;
+	
+	private double bmi;
+	private String burnHeartRate;//燃烧心率
+	private double weightScore;
+	private double standardWeight;
+	private double bmr;
+	private JSONObject userInfo;
+	private JSONObject ScaleInfo;
+	
+	private String type;//MQ的操作类型
+	private String receiverTime;//接收时间
+	private int dateType;
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public double getWeight() {
+		return weight;
+	}
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getMachineId() {
+		return machineId;
+	}
+	public void setMachineId(String machineId) {
+		this.machineId = machineId;
+	}
+	public String getOpenId() {
+		return openId;
+	}
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
+	public String getUnionId() {
+		return unionId;
+	}
+	public void setUnionId(String unionId) {
+		this.unionId = unionId;
+	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	public Date getBindTime() {
+		return bindTime;
+	}
+	public void setBindTime(Date bindTime) {
+		this.bindTime = bindTime;
+	}
+	public int getCodeBack() {
+		return codeBack;
+	}
+	public void setCodeBack(int codeBack) {
+		this.codeBack = codeBack;
+	}
+	public String getAccountId() {
+		return accountId;
+	}
+	public void setAccountId(String accountId) {
+		this.accountId = accountId;
+	}
+	public String getReportId() {
+		return ReportId;
+	}
+	public void setReportId(String reportId) {
+		ReportId = reportId;
+	}
+	public String getProcessId() {
+		return processId;
+	}
+	public void setProcessId(String processId) {
+		this.processId = processId;
+	}
+	public double getBmi() {
+		return bmi;
+	}
+	public void setBmi(double bmi) {
+		this.bmi = bmi;
+	}
+	public String getBurnHeartRate() {
+		return burnHeartRate;
+	}
+	public void setBurnHeartRate(String burnHeartRate) {
+		this.burnHeartRate = burnHeartRate;
+	}
+	public double getWeightScore() {
+		return weightScore;
+	}
+	public void setWeightScore(double weightScore) {
+		this.weightScore = weightScore;
+	}
+	public double getStandardWeight() {
+		return standardWeight;
+	}
+	public void setStandardWeight(double standardWeight) {
+		this.standardWeight = standardWeight;
+	}
+	public double getBmr() {
+		return bmr;
+	}
+	public void setBmr(double bmr) {
+		this.bmr = bmr;
+	}
+	public JSONObject getUserInfo() {
+		return userInfo;
+	}
+	public void setUserInfo(JSONObject userInfo) {
+		this.userInfo = userInfo;
+	}
+	public JSONObject getScaleInfo() {
+		return ScaleInfo;
+	}
+	public void setScaleInfo(JSONObject scaleInfo) {
+		ScaleInfo = scaleInfo;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getReceiverTime() {
+		return receiverTime;
+	}
+	public void setReceiverTime(String receiverTime) {
+		this.receiverTime = receiverTime;
+	}
+	public int getDateType() {
+		return dateType;
+	}
+	public void setDateType(int dateType) {
+		this.dateType = dateType;
+	}
+	
+	
+}

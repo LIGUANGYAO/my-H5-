@@ -1,0 +1,135 @@
+package com.mzj.eagle.wechat.portal.profile.service;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import net.sf.json.JSONArray;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
+
+import com.alibaba.fastjson.JSON;
+import com.mzj.eagle.wechat.portal.common.URLBuilder;
+import com.mzj.eagle.wechat.portal.vo.UserInfoVo;
+import com.mzj.eagle.wechat.portal.vo.WeChatUserVo;
+
+/**
+ * ==================================
+ * 
+ * 个人信息
+ * @author  huangrijia on 2017/11/10.
+ *  
+ * ==================================
+ */
+@Service
+public class UserInfoService {
+	private static final Logger LOG = LoggerFactory.getLogger(UserInfoService.class);
+	@Autowired
+	private StringRedisTemplate redisTemplate;
+
+	// redis保存用户输入的个人信息key
+	private static final String REDIS_WECHATUSER_INFO_KEY = "WECHAT_USERINFO_";
+
+	@Value("${apigw.host}")
+	private String apigwHost;
+	@Autowired
+	private RestTemplate restTemplate;
+
+	private final String userUrl = "wxuserInfo/wxUserInfo/user";
+	private final String weChatUserUrl = "wxuser/wxUser/getWechatUser";
+
+	/**
+	 * 获取个人信息
+	 * @param unionid
+	 * @return
+	 */
+	public UserInfoVo getById(String unionid) {
+		UserInfoVo userInfo = null;
+		if(!StringUtils.isEmpty(unionid)) {
+			int str = Math.abs(unionid.hashCode()) % 800;
+			String key = REDIS_WECHATUSER_INFO_KEY + str;
+			Object obj = redisTemplate.opsForHash().get(key, unionid);
+			if(obj != null) {
+				userInfo = JSON.parseObject((String)obj,UserInfoVo.class);
+			}else{
+				List<String> unionids = new ArrayList<>();
+				unionids.add(unionid);
+				URLBuilder api = new URLBuilder(apigwHost + userUrl);
+				api.param("unionid", unionid); 
+			    ResponseEntity<UserInfoVo> responseEntity = restTemplate.exchange(
+			    		api.toString(),
+						HttpMethod.GET,
+						null,
+						new ParameterizedTypeReference<UserInfoVo>() {});
+			    userInfo = responseEntity.getBody();
+			    if(userInfo!=null) {
+			    	redisTemplate.opsForHash().put(REDIS_WECHATUSER_INFO_KEY+Math.abs(unionid.hashCode())%800, 
+							unionid, JSON.toJSONString(userInfo));
+			    }
+			}
+		}
+		return userInfo;
+	}
+
+	public Integer update(UserInfoVo userInfo,String openId,String appId) {
+		Calendar date = Calendar.getInstance();
+		if(userInfo.getUnionid()== null){
+			URLBuilder api = new URLBuilder(apigwHost + "wxuser/wxUser/wechatUser");
+			api.param("appId", appId);
+			api.param("openId", openId);
+			ResponseEntity<WeChatUserVo> unionid = restTemplate
+					.exchange(api.toString(),
+							HttpMethod.GET,
+							null,
+							new ParameterizedTypeReference<WeChatUserVo>() {	});
+			WeChatUserVo uservo = unionid.getBody();
+			userInfo.setUnionid(uservo.getUnionid());
+		}
+		int year = date.get(Calendar.YEAR);
+		if(userInfo.getAge() != null) {
+				userInfo.setBirthdate(String.valueOf(year - userInfo.getAge()));
+		}
+		URLBuilder api = new URLBuilder(apigwHost + "wxuserInfo/wxUserInfo/userInfo");
+		api.param("unionid", userInfo.getUnionid());
+		api.param("name", userInfo.getName());
+		api.param("gender", userInfo.getGender());
+		api.param("height", userInfo.getHeight());
+		api.param("birthdate", userInfo.getBirthdate());
+		api.param("openId", openId);
+		ResponseEntity<Integer> ace = restTemplate
+				.exchange(api.toString(),
+						HttpMethod.PUT,
+						null,
+						new ParameterizedTypeReference<Integer>() {	});
+		Integer result = ace.getBody();
+		return result;
+	}
+	
+	public WeChatUserVo getOpenId(@RequestParam(name="openId")String openId) {
+		if(!StringUtils.isEmpty(openId)) {
+			URLBuilder api = new URLBuilder(apigwHost + weChatUserUrl);
+			api.param("openId", openId);
+			ResponseEntity<WeChatUserVo> responseEntity = restTemplate.exchange(api.toString(), 
+					HttpMethod.GET,
+					null,
+					new ParameterizedTypeReference<WeChatUserVo>(){});
+			WeChatUserVo weChatUserVo = responseEntity.getBody();
+			if(weChatUserVo!=null)
+				return weChatUserVo;
+		}
+		return null;
+	}
+
+	
+}

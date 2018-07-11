@@ -1,0 +1,121 @@
+package com.mzj.eagle.wechat.portal.health.controller;
+
+import com.alibaba.fastjson.JSONObject;
+import com.mzj.eagle.wechat.portal.common.GlobalMethodUtil;
+import com.mzj.eagle.wechat.portal.profile.controller.ProfileController;
+import com.mzj.eagle.wechat.portal.profile.service.UserInfoService;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.mzj.eagle.wechat.portal.vo.UserInfoVo;
+import com.mzj.eagle.wechat.portal.vo.UserWeightVo;
+import com.mzj.eagle.wechat.portal.vo.WeChatUserVo;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.crypto.*;
+import javax.crypto.spec.SecretKeySpec;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
+
+@Configuration
+@Controller
+public class HealthController {
+	private static final Logger LOG = LoggerFactory.getLogger(ProfileController.class);
+	@Autowired
+	private UserInfoService userInfoService;
+
+	private static final String DEFAULT_SECRET_KEY = "db5c7ed2-af94-46fe-a05d-40efdb4a77c9";// 默认密钥
+	
+	//健康分析
+	@RequestMapping(value= "health.html",method=RequestMethod.GET)
+	public String health(@RequestParam(name = "_p") String p,ModelMap map){
+			GlobalMethodUtil util = new GlobalMethodUtil();
+			String decry = util.decrypt(p);
+			Map<String, String> paraMap = util.getParams(decry);
+			/*String decry = decrypt(p);
+			Map<String, String> paraMap = getParams(decry);*/
+			String openId = paraMap.get("openId");
+			String weight = paraMap.get("weight");
+			String appId = paraMap.get("appId");
+			WeChatUserVo weChatVo = userInfoService.getOpenId(openId,appId);
+			UserInfoVo userInfo = null;
+			if(weChatVo!=null && !StringUtils.isEmpty(weChatVo.getUnionid())) {
+				userInfo = userInfoService.getById(weChatVo.getUnionid());
+			}else {
+				weChatVo = new WeChatUserVo();
+			} 
+			if(userInfo == null){
+				userInfo = new UserInfoVo();
+			}
+		if(weChatVo.getGender()!=null && weChatVo.getGender()!=1 && weChatVo.getGender()!=2){
+			weChatVo.setGender(1);
+		}
+			map.put("weChatVo",weChatVo);
+			map.put("userInfo",userInfo);
+			map.put("weight",weight);
+
+		return "health/health";
+	}
+
+
+
+	//饮食建议
+	@RequestMapping(value= "food.html",method=RequestMethod.GET)
+	public String food(ModelMap map,@RequestParam(value = "_p") String p,@RequestParam String unionid) {
+		UserInfoVo vo= null;
+
+		GlobalMethodUtil util = new GlobalMethodUtil();
+		String str = util.decrypt(p);
+		Map<String,String> mapStr = util.getParams(str);
+		
+		String weight=mapStr.get("weight");
+		if(mapStr != null) {
+			vo=userInfoService.getById(unionid);
+		}
+
+		if(vo == null) {
+			vo = new UserInfoVo();
+		}
+		 map.put("weight", weight);
+		 map.put("userInfoVo", vo);
+
+		return "health/food";
+	}
+	
+	//运动建议
+	@RequestMapping(value= "sport.html",method=RequestMethod.GET)
+	public String sport(ModelMap map,@RequestParam(value = "_p") String p,@RequestParam String unionid) {
+		UserInfoVo vo=new UserInfoVo();
+		GlobalMethodUtil util = new GlobalMethodUtil();
+		String str = util.decrypt(p);
+		Map<String,String> mapStr = util.getParams(str);
+		
+		String weight=mapStr.get("weight");
+		if(mapStr != null) {
+			vo=userInfoService.getById(unionid);
+		}
+
+		if(vo == null) {
+			vo = new UserInfoVo();
+		}
+
+		 map.put("weight", weight);
+		 map.put("userInfoVo", vo);
+		
+		return "health/sport";
+	}
+	
+
+}

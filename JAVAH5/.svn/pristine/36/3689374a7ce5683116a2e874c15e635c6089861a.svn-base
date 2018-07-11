@@ -1,0 +1,497 @@
+html, body, .container {
+  background-color: #f8f8f8;
+  max-width: 960px;
+  height: 100%;
+  margin: 0 auto; }
+
+body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "SimHei", sans-serif;
+  overflow-x: hidden;
+  font-size: 14px !important; }
+
+ul, li {
+  list-style: none; }
+
+img {
+  max-width: 100%; }
+
+a {
+  text-decoration: none; }
+
+.clearfix:after {
+  clear: both;
+  content: '.';
+  display: block;
+  height: 0;
+  line-height: 0;
+  overflow: hidden; }
+
+*, :after, :before {
+  margin: 0;
+  padding: 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent; }
+
+input[type="tel"], input[type="text"], input[type="password"], textarea {
+  -webkit-appearance: none;
+  border-radius: 0; }
+
+[v-cloak] {
+  display: none; }
+
+body {
+  font-weight: 300; }
+
+.ellipsis {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal; }
+
+.ellipsisLn2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.ellipsisLn3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.freeLine {
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  width: 100%;
+  height: 1.2rem;
+  overflow: hidden;
+  z-index: 10;
+  background-color: #222; }
+  .bar + .content {
+    padding-bottom: 1.2rem; }
+
+.content {
+  min-height: 100%;
+  overflow: hidden; }
+
+.background--blue {
+  background-color: #1d2232; }
+
+.background--black {
+  background-color: #19181e; }
+
+.background--white {
+  background-color: white; }
+
+.background--grey {
+  background-color: #f1f1f1; }
+
+.fs24 {
+  font-size: 0.32rem; }
+
+.fs26 {
+  font-size: 0.3466666667rem; }
+
+.fs28 {
+  font-size: 0.3733333333rem; }
+
+.fs30 {
+  font-size: 0.4rem; }
+
+.fs36 {
+  font-size: 0.48rem; }
+
+.fs38 {
+  font-size: 0.5066666667rem; }
+
+.bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 10;
+  height: 1.3066666667rem;
+  background-color: #1c1c20;
+  border-top: 0.0133333333rem solid #3a3b3d; }
+  .bar > a {
+    position: relative;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1rem; }
+    .bar > a.bar__index {
+      width: 0.56rem;
+      background: url("../../images/tab_bar_icon/tab_home_normal.png") no-repeat center center;
+      background-size: 100% 100%; }
+    .bar > a.bar__health {
+      width: 1.0666666667rem;
+      background: url("../../images/tab_bar_icon/tab_health_norml.png") no-repeat center center;
+      background-size: 100% 100%; }
+    .bar > a.bar__dot {
+      width: 1.0666666667rem;
+      background: url("../../images/tab_bar_icon/tab_nearby_norml.png") no-repeat center center;
+      background-size: 100% 100%; }
+    .bar > a.bar__mall {
+      width: 0.56rem;
+      background: url("../../images/tab_bar_icon/tab_mall_normal.png") no-repeat center center;
+      background-size: 100% 100%; }
+  .bar > a.bar-active.bar__index {
+    background: url("../../images/tab_bar_icon/tab_home_select.png") no-repeat center center;
+    background-size: 100% 100%; }
+  .bar > a.bar-active.bar__health {
+    background: url("../../images/tab_bar_icon/tab_health_selected.png") no-repeat center center;
+    background-size: 100% 100%; }
+  .bar > a.bar-active.bar__dot {
+    background: url("../../images/tab_bar_icon/tab_nearby_selected.png") no-repeat center center;
+    background-size: 100% 100%; }
+  .bar > a.bar-active.bar__mall {
+    background: url("../../images/tab_bar_icon/tab_mall_selecte.png") no-repeat center center;
+    background-size: 100% 100%; }
+
+.health-analysis {
+  width: 100%;
+  height: auto;
+  background-image: url(../../images/1/indexBg.png);
+  background-position-y: top;
+  background-size: 100% 17.3066666667rem;
+  background-repeat: no-repeat;
+  background-color: #212123; }
+  .health-analysis .flex {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+  .health-analysis .health-header {
+    margin-bottom: 0.8rem;
+    height: 5.0933333333rem;
+    position: relative; }
+    .health-analysis .health-header .current-weigth-box {
+      width: 4.2666666667rem;
+      height: 4.2666666667rem;
+      background-image: url(../../images/3/weight.png);
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      position: absolute;
+      top: 0.7733333333rem;
+      left: 2.7733333333rem;
+      z-index: 2;
+      flex-direction: column; }
+      .health-analysis .health-header .current-weigth-box p {
+        color: #ffffff;
+        font-size: 0.8rem;
+        margin: 1.3333333333rem 0 0.3333333333rem 0;
+        font-weight: bold; }
+      .health-analysis .health-header .current-weigth-box span {
+        color: #ffffff;
+        font-size: 0.3466666667rem; }
+    .health-analysis .health-header .height-box, .health-analysis .health-header .sex-box {
+      width: 2.1066666667rem;
+      height: 2.1066666667rem;
+      border: 0.0266666667rem solid #3a383d;
+      border-radius: 100%;
+      position: absolute;
+      z-index: 2;
+      flex-direction: column;
+      top: 2.9066666667rem; }
+    .health-analysis .health-header .height-box {
+      right: 0.3733333333rem; }
+    .health-analysis .health-header .sex-box {
+      left: 0.4rem; }
+    .health-analysis .health-header .sex-box p, .health-analysis .health-header .height-box p {
+      color: #ffffff;
+      font-size: 0.48rem;
+      margin-bottom: 0.16rem; }
+    .health-analysis .health-header .sex-box span, .health-analysis .health-header .height-box span {
+      color: #8f9094;
+      font-size: 0.32rem; }
+  .health-analysis .health-wolrd {
+    text-align: center; }
+    .health-analysis .health-wolrd .bmi-title {
+      font-size: 0.5333333333rem;
+      color: #ffffff;
+      margin-bottom: 0.8533333333rem; }
+      .health-analysis .health-wolrd .bmi-title span {
+        color: #ff9501; }
+    .health-analysis .health-wolrd .ideal-weigth-title, .health-analysis .health-wolrd .next-wight {
+      width: 8rem;
+      margin: 0 auto;
+      color: #8f8e93;
+      font-size: 0.3733333333rem;
+      line-height: 180%; }
+    .health-analysis .health-wolrd .ideal-weigth-title, .health-analysis .health-wolrd .next-wight {
+      margin-bottom: 0.8rem; }
+    .health-analysis .health-wolrd .ideal-weigth-title span {
+      color: #ff9501; }
+    .health-analysis .health-wolrd .wight-range {
+      font-size: 0.3733333333rem;
+      color: #ff9501; }
+  .health-analysis .bmi-box {
+    display: block;
+    width: 9.2rem;
+    margin: 0 auto;
+    margin-bottom: 0.7066666667rem;
+    overflow: hidden; }
+    .health-analysis .bmi-box_calculate {
+      width: 2.6133333333rem;
+      margin: 0 auto;
+      padding-top: 0.64rem; }
+      .health-analysis .bmi-box_calculate img {
+        width: 100%; }
+    .health-analysis .bmi-box__wrap {
+      margin: 0 auto;
+      margin-top: 3.0666666667rem;
+      position: relative;
+      width: 8.48rem; }
+    .health-analysis .bmi-box__four {
+      width: 100%;
+      height: 0.9866666667rem;
+      display: flex; }
+      .health-analysis .bmi-box__four .line_width {
+        width: 23%;
+        height: 0.0533333333rem;
+        border-radius: 0.0266666667rem;
+        color: #ffffff;
+        text-align: center; }
+        .health-analysis .bmi-box__four .line_width p {
+          padding-top: 0.5333333333rem;
+          font-size: 0.3466666667rem; }
+      .health-analysis .bmi-box__four .thin {
+        background-color: #74b4da;
+        margin-right: 2.6%; }
+      .health-analysis .bmi-box__four .standard {
+        background-color: #92d971;
+        margin-right: 2.6%; }
+      .health-analysis .bmi-box__four .fat_lv1 {
+        background-color: #d89673;
+        margin-right: 2.6%; }
+      .health-analysis .bmi-box__four .super_fat {
+        background-color: #c772d9; }
+    .health-analysis .bmi-box__line {
+      position: relative;
+      display: flex;
+      height: 0.08rem;
+      width: 100%; }
+      .health-analysis .bmi-box__line span {
+        position: absolute;
+        top: 0.2666666667rem;
+        display: block;
+        width: 0.6666666667rem;
+        height: 0.6666666667rem;
+        font-size: 0.3466666667rem;
+        text-align: center;
+        color: #b3b3b3;
+        transform: translateX(-50%); }
+        .health-analysis .bmi-box__line span:nth-child(1) {
+          left: 25%; }
+        .health-analysis .bmi-box__line span:nth-child(2) {
+          left: 50%; }
+        .health-analysis .bmi-box__line span:nth-child(3) {
+          left: 75%; }
+    .health-analysis .bmi-box__text--bottom {
+      display: flex;
+      justify-content: space-around;
+      padding-top: 0.4rem;
+      color: #2adcf6; }
+    .health-analysis .bmi-box__text--top {
+      position: absolute;
+      top: -2.5333333333rem;
+      left: 0;
+      width: 100%; }
+      .health-analysis .bmi-box__text--top #indicator_target {
+        background: url("../../images/1/circle_normal.png") no-repeat center center;
+        background-size: 100% 100%;
+        position: absolute;
+        top: 2.0266666667rem;
+        width: 1.2rem;
+        height: 1.2rem;
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%); }
+      .health-analysis .bmi-box__text--top .men, .health-analysis .bmi-box__text--top .women {
+        background-size: 100% 100%;
+        height: 1.84rem; }
+      .health-analysis .bmi-box__text--top .men {
+        width: 1.0666666667rem;
+        background-image: url("../../images/men.gif"); }
+      .health-analysis .bmi-box__text--top .women {
+        width: 1.4133333333rem;
+        background-image: url("../../images/women.gif"); }
+      .health-analysis .bmi-box__text--top__indicator {
+        position: absolute;
+        display: block;
+        width: 0.2666666667rem;
+        height: 0.3466666667rem;
+        transform: translateX(-50%);
+        left: 0%;
+        top: 0.4rem;
+        z-index: 8; }
+      .health-analysis .bmi-box__text--top__bmivalue {
+        background: url("../../images/1/index_p_box.png") no-repeat center center;
+        background-size: 100% 100%;
+        position: absolute;
+        top: -1rem;
+        left: 50%;
+        display: block;
+        width: 1.3866666667rem;
+        height: 0.6666666667rem;
+        transform: translateX(-50%);
+        text-align: center;
+        line-height: 0.5333333333rem;
+        font-size: 0.32rem; }
+  .health-analysis .metabolic-box {
+    width: 9.2rem;
+    margin: 0 auto; }
+    .health-analysis .metabolic-box .metabolic-rate {
+      margin-bottom: 0.4rem; }
+    .health-analysis .metabolic-box .heart-rate {
+      margin-bottom: 0.8rem; }
+    .health-analysis .metabolic-box .metabolic-rate, .health-analysis .metabolic-box .heart-rate {
+      padding: 0.32rem 0.2666666667rem;
+      background-color: #3a3b3d;
+      border-radius: 0.0666666667rem; }
+      .health-analysis .metabolic-box .metabolic-rate p, .health-analysis .metabolic-box .heart-rate p {
+        line-height: 150%;
+        font-size: 0.3733333333rem;
+        color: #ffffff; }
+        .health-analysis .metabolic-box .metabolic-rate p span.colorf9, .health-analysis .metabolic-box .heart-rate p span.colorf9 {
+          color: #ff9501; }
+  .health-analysis .heath-ad {
+    width: 9.2rem;
+    margin: 0 auto;
+    height: 2.4rem;
+    margin-bottom: 0.8rem; }
+    .health-analysis .heath-ad img {
+      width: 9.2rem;
+      height: 2.4rem; }
+  .health-analysis .health-suggest {
+    width: 9.2rem;
+    margin: 0 auto;
+    padding-bottom: 2.1066666667rem; }
+    .health-analysis .health-suggest .diet-suggest {
+      background: url("../../images/3/foodBg.png") no-repeat center center;
+      background-size: 100% 100%; }
+    .health-analysis .health-suggest .sports-suggest {
+      background: url("../../images/3/sportBg.png") no-repeat center center;
+      background-size: 100% 100%; }
+    .health-analysis .health-suggest .diet-suggest, .health-analysis .health-suggest .sports-suggest {
+      border-radius: 0.2133333333rem;
+      width: 100%;
+      height: 2.96rem;
+      margin-bottom: 0.4rem;
+      overflow: hidden; }
+      .health-analysis .health-suggest .diet-suggest .diet-suggest-header, .health-analysis .health-suggest .diet-suggest .sports-suggest-header, .health-analysis .health-suggest .sports-suggest .diet-suggest-header, .health-analysis .health-suggest .sports-suggest .sports-suggest-header {
+        height: 0.8rem;
+        line-height: 0.8rem;
+        text-align: left;
+        background: #000000;
+        opacity: 0.9;
+        display: flex;
+        justify-content: space-between;
+        align-items: center; }
+        .health-analysis .health-suggest .diet-suggest .diet-suggest-header span, .health-analysis .health-suggest .diet-suggest .sports-suggest-header span, .health-analysis .health-suggest .sports-suggest .diet-suggest-header span, .health-analysis .health-suggest .sports-suggest .sports-suggest-header span {
+          padding-left: 0.3466666667rem;
+          color: #ff9501;
+          font-size: 0.3466666667rem; }
+        .health-analysis .health-suggest .diet-suggest .diet-suggest-header img, .health-analysis .health-suggest .diet-suggest .sports-suggest-header img, .health-analysis .health-suggest .sports-suggest .diet-suggest-header img, .health-analysis .health-suggest .sports-suggest .sports-suggest-header img {
+          width: 0.3466666667rem;
+          height: 0.3466666667rem;
+          margin-right: 0.2666666667rem; }
+      .health-analysis .health-suggest .diet-suggest .suggest-world, .health-analysis .health-suggest .sports-suggest .suggest-world {
+        color: #ffffff;
+        padding: 0.2933333333rem 0.2666666667rem 0 0.2666666667rem; }
+        .health-analysis .health-suggest .diet-suggest .suggest-world p, .health-analysis .health-suggest .sports-suggest .suggest-world p {
+          font-size: 0.3466666667rem;
+          line-height: 160%; }
+
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 15;
+  background: rgba(0, 0, 0, 0.6); }
+
+.registration-model {
+  width: 7.2rem;
+  height: 8.8666666667rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 16;
+  border-radius: 0.2133333333rem;
+  overflow: hidden;
+  background: url("../../images/3/health-model.png") no-repeat center center;
+  background-size: 100% 100%;
+  background-color: #222224; }
+  .registration-model .registration-model-header {
+    height: 0.8rem;
+    line-height: 0.8rem;
+    text-align: center;
+    color: #ffffff;
+    font-size: 0.2933333333rem;
+    background: #483c54;
+    box-shadow: 0 2px 3px #30243c; }
+  .registration-model .registration-model-body {
+    height: 6.7466666667rem; }
+    .registration-model .registration-model-body .select {
+      width: 2rem;
+      margin: 0 auto; }
+    .registration-model .registration-model-body h3 {
+      color: #ffffff;
+      font-size: 0.5333333333rem;
+      text-align: center; }
+    .registration-model .registration-model-body .stature input, .registration-model .registration-model-body .birthdate input {
+      background: none;
+      border: none;
+      width: 2rem;
+      color: #ffffff;
+      font-size: 0.3733333333rem;
+      height: 0.7333333333rem;
+      text-align: center;
+      line-height: 0.7333333333rem;
+      border-bottom: 0.0266666667rem solid #8f8e94; }
+    .registration-model .registration-model-body .stature {
+      width: 2.6rem;
+      margin: 0 auto;
+      margin-top: 0.8rem; }
+    .registration-model .registration-model-body .birthdate {
+      width: 2.5333333333rem;
+      margin: 0 auto;
+      margin-top: 1.5466666667rem;
+      text-align: center; }
+  .registration-model .secret-world {
+    text-align: center;
+    color: #8f8e94;
+    font-size: 0.2933333333rem;
+    margin-top: 0.8rem; }
+  .registration-model .registration-btn {
+    width: 100%;
+    height: 1.3066666667rem;
+    text-align: center;
+    line-height: 1.3066666667rem;
+    color: #ffffff;
+    font-size: 0.5333333333rem;
+    background-color: #ff9501;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border: 0; }
+
+/*# sourceMappingURL=health.css.map */

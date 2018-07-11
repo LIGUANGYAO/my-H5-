@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en" th:with="host=${@environment.getProperty('spring.thymeleaf.host')}">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<title>共享免费秤</title>
+	<link rel="stylesheet" type="text/css" th:href="${host}+'/css/normalize.css'">
+	<script>
+	 !function (a, b) { function c() { var b = f.getBoundingClientRect().width; b / i > 960 && (b = 960 * i); var c = b / 10; f.style.fontSize = c + "px", k.rem = a.rem = c } var d, e = a.document, f = e.documentElement, g = e.querySelector('meta[name="viewport"]'), h = e.querySelector('meta[name="flexible"]'), i = 0, j = 0, k = b.flexible || (b.flexible = {}); if (g) { console.warn("将根据已有的meta标签来设置缩放比例"); var l = g.getAttribute("content").match(/initial\-scale=([\d\.]+)/); l && (j = parseFloat(l[1]), i = parseInt(1 / j)) } else if (h) { var m = h.getAttribute("content"); if (m) { var n = m.match(/initial\-dpr=([\d\.]+)/), o = m.match(/maximum\-dpr=([\d\.]+)/); n && (i = parseFloat(n[1]), j = parseFloat((1 / i).toFixed(2))), o && (i = parseFloat(o[1]), j = parseFloat((1 / i).toFixed(2))) } } if (!i && !j) { var p = (a.navigator.appVersion.match(/android/gi), a.navigator.appVersion.match(/iphone/gi)), q = a.devicePixelRatio; i = p ? q >= 3 && (!i || i >= 3) ? 3 : q >= 2 && (!i || i >= 2) ? 2 : 1 : 1, j = 1 / i } if (f.setAttribute("data-dpr", i), !g) if (g = e.createElement("meta"), g.setAttribute("name", "viewport"), g.setAttribute("content", "initial-scale=" + j + ", maximum-scale=" + j + ", minimum-scale=" + j + ", user-scalable=no"), f.firstElementChild) f.firstElementChild.appendChild(g); else { var r = e.createElement("div"); r.appendChild(g), e.write(r.innerHTML) } a.addEventListener("resize", function () { clearTimeout(d), d = setTimeout(c, 300) }, !1), a.addEventListener("pageshow", function (a) { a.persisted && (clearTimeout(d), d = setTimeout(c, 300)) }, !1), "complete" === e.readyState ? e.body.style.fontSize = 14 * i + "px" : e.addEventListener("DOMContentLoaded", function () { e.body.style.fontSize = 14 * i + "px" }, !1), c(), k.dpr = a.dpr = i, k.refreshRem = c, k.rem2px = function (a) { var b = parseFloat(a) * this.rem; return "string" == typeof a && a.match(/rem$/) && (b += "px"), b }, k.px2rem = function (a) { var b = parseFloat(a) / this.rem; return "string" == typeof a && a.match(/px$/) && (b += "rem"), b } }(window, window.lib || (window.lib = {}));
+	</script>
+	<style type="text/css">
+		html, body,.container {
+		  max-width: 960px;
+		  margin: 0 auto; 
+		  background-color: #f2f2f2;
+		  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "SimHei", sans-serif;
+	   	}
+	   .container{
+	   	 background-color: #f2f2f2;
+	   }
+	  .header{
+	  	display: flex;
+	  	justify-content: center;
+        align-items: center;
+        flex-direction:column;
+	  }
+	  .girl{
+	  	width: 4.3rem;
+	  	height: 4.6rem;
+	  	margin-top: 2rem;
+	  }
+	  .girl img{
+	  	width: 4.3rem;
+	  	height: 4.6rem;
+	  }
+	  .world{
+	  	
+	  	text-align: center;
+	  	
+	  }
+	 .world p{
+	  	margin: 0;
+	  	color: #3a3b3d;
+	  	font-size: 0.5rem;
+	  	line-height: 150%;
+	  }
+	  .world p:nth-child(1){
+	  	margin-top: 0.5rem;
+	  }
+	  .btn{
+	  	width: 7.2rem;
+	  	height: 1.5rem;
+	  	background-color: #ff9500;
+	  	border-radius: 0.666rem;
+	  	text-align: center;
+	  	line-height: 1.5rem;
+	  	font-size: 0.533rem;
+	  	color: #ffffff;
+	  	margin: 0 auto;
+	  	display: flex;
+	  	justify-content: center;
+        align-items: center;
+	  }
+	  .hand{
+	  	width: 1rem;
+	  	height: 1.6rem;
+	  	margin-bottom: 0.533rem;
+	  	margin-top: 2.1rem;
+	  }
+	   .hand img{
+	   	width: 1rem;
+	  	height: 1.6rem;
+	   }
+	   .right{
+	   	width: 0.56rem;
+	   	height: 0.493rem;
+	   	margin-left: 0.2rem;
+	   }
+	   .right img{
+	      width: 0.56rem;
+	   	  height: 0.493rem;
+	   }
+
+.weui-loading {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-animation: weuiLoading 1s steps(12, end) infinite;
+    animation: weuiLoading 1s steps(12, end) infinite;
+    background: transparent url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHBhdGggZmlsbD0ibm9uZSIgZD0iTTAgMGgxMDB2MTAwSDB6Ii8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjRTlFOUU5IiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgLTMwKSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iIzk4OTY5NyIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgzMCAxMDUuOTggNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjOUI5OTlBIiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKDYwIDc1Ljk4IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0EzQTFBMiIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSg5MCA2NSA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNBQkE5QUEiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoMTIwIDU4LjY2IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0IyQjJCMiIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgxNTAgNTQuMDIgNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjQkFCOEI5IiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKDE4MCA1MCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNDMkMwQzEiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTE1MCA0NS45OCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNDQkNCQ0IiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTEyMCA0MS4zNCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNEMkQyRDIiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTkwIDM1IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0RBREFEQSIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgtNjAgMjQuMDIgNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjRTJFMkUyIiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKC0zMCAtNS45OCA2NSkiLz48L3N2Zz4=) no-repeat;
+    background-size: 100%;
+}
+
+@-webkit-keyframes weuiLoading {
+    0% {
+        -webkit-transform: rotate3d(0, 0, 1, 0deg);
+        transform: rotate3d(0, 0, 1, 0deg);
+    }
+    100% {
+        -webkit-transform: rotate3d(0, 0, 1, 360deg);
+        transform: rotate3d(0, 0, 1, 360deg);
+    }
+}
+
+@keyframes weuiLoading {
+    0% {
+        -webkit-transform: rotate3d(0, 0, 1, 0deg);
+        transform: rotate3d(0, 0, 1, 0deg);
+    }
+    100% {
+        -webkit-transform: rotate3d(0, 0, 1, 360deg);
+        transform: rotate3d(0, 0, 1, 360deg);
+    }
+}
+.weui-mask_transparent {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+.weui-toast {
+    position: absolute;
+    z-index: 5000;
+    width:3.333333rem;
+    min-height: 7em;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: rgba(40, 40, 40, 0.75);
+    text-align: center;
+    border-radius:0.106667rem;
+    color: #FFFFFF;   
+    margin:0 auto;
+}
+.weui-icon_toast.weui-loading {
+    margin: 0.8rem auto 0 auto;
+    width:0.8rem;
+    height: 0.8rem;
+    vertical-align: baseline;
+}
+.weui-toast__content {
+    margin: 0.133333rem 0 0.8rem;
+    font-size:0.373333rem;
+}
+#loading{
+	position:absolute;
+	top:0;
+	left:0;
+	width:10.0rem;
+	margin:0 auto;
+	display:none;
+	right: 0;
+	bottom: 0;
+	margin:auto;
+}
+#loading.loading{
+	display:block;
+}
+
+
+	</style>
+	
+</head>
+
+<body>
+	
+<input type="hidden" th:value="${authorUrl}" id="authorUrlId"> 
+  <div class="container" id="container">
+  	<div class="header">
+	  	 <div class="girl" id="girl">
+	  	 	<img th:src="${host}+'/images/girl.png'">
+	  	 </div>
+	  	 <div class="world">
+	  	 	<p>哎呀，手滑错了~~ </p>
+	  	 	<p>点击按钮获取体重信息</p>
+	  	 </div>
+
+	  	 <div class="hand" id="hand">
+	  	 	<img th:src="${host}+'/images/hand.png'">
+	  	 </div>
+
+  	 </div>
+
+  	 <div class="btn" onclick="init()"><p>我要查看体重<p><span class="right"><img th:src="${host}+'/images/right.png'"></span></div>
+  	<form action="http://h5.mzjmedia.com/getCode" id="wechat">
+		<input type="hidden" name="machineId" id="machineId"/>
+		<input type="hidden" name="weight" id="weight"/>
+		<input type="hidden" name="appId" id="appId"/>
+		<input type="hidden" name="reqTime" id="reqTime"/>
+		<input type="hidden" name="channel" id="channel"/>
+		<input type="hidden" name="authorUrl" id="authorUrl"/>
+	</form>
+  </div>
+  <script type="text/javascript">
+   is_iPad();
+   function is_iPad(){ 
+	    var ua = navigator.userAgent.toLowerCase(); 
+	    if(ua.match(/iPad/i)=="ipad") { 
+	        var girl = document.getElementById("girl");
+	        var hand = document.getElementById("hand");
+	        hand.style.marginTop = "1rem";
+	        girl.style.marginTop = "1.4rem";
+	    } else { 
+	       return false; 
+	    } 
+	}
+     var authorUrl = document.getElementById("authorUrlId").value;
+	 if(authorUrl=="1" || authorUrl==1){
+		 document.getElementById("container").style.display = "";
+	 }
+	 setTimeout(function(){
+		 init();
+	 },500);
+
+   /**
+    * 初始化并且马上提交
+    */
+   function init(){
+   	document.getElementById("machineId").value = GetQueryString("machineId");
+   	document.getElementById("weight").value = GetQueryString("weight");
+   	document.getElementById("appId").value = GetQueryString("appId");
+   	document.getElementById("reqTime").value = GetQueryString("reqTime");
+   	document.getElementById("channel").value = GetQueryString("channel");
+   	document.getElementById("authorUrl").value = document.getElementById("authorUrlId").value;
+   	var wechat = document.getElementById("wechat");
+   	wechat.submit();
+   }
+
+   /**
+    * 获取参数
+    */
+   function GetQueryString(name)
+   {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+   }
+  </script>
+</body>
+</html>

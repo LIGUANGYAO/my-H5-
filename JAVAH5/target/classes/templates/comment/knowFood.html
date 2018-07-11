@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh" th:with="host=${@environment.getProperty('spring.thymeleaf.host')}">
+<head>
+    <meta charset="UTF-8">
+    <title>食物</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport"
+          content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="stylesheet" type="text/css" th:href="${host}+'/css/normalize.css'">
+    <link rel="stylesheet" type="text/css" th:href="${host}+'/js/comment/tips.css'">
+    <script type="text/javascript" th:src="${host}+'/plugins/flexible.js'"></script>
+</head>
+<body>
+<input type="hidden" th:value="${@environment.getProperty('spring.profiles.active')}" id="environment">
+<input type="hidden" th:value="${@environment.getProperty('spring.thymeleaf.host')}" id="host">
+<div id="app" class="container">
+
+    <div class="content tips background--white">
+
+        <h3 class="title">沙拉的热量也是很惊人！你没吃错吧？</h3>
+
+        <p class="text-1">
+            提起健康饮食，大家总会第一时间想到沙拉。绿色的蔬菜配上橙色的胡萝卜，再来点紫色的洋葱和鲜亮的西红柿、彩椒……这颜色搭配，简直不能更健康～
+        </p>
+        <p class="text-1">
+            但是,很多人却表示越吃越胖,这让很多减重人士懵圈了.其实吃胖的人完全不知道自己看着吃了一盘健康的沙拉,实际吞下了一整个奶油蛋糕.而这万恶的热量来源就在于你添加的这一勺酱。
+        </p>
+
+        <h4 class="title--dot">
+            沙拉酱
+        </h4>
+        <p class="text-1">
+            热量：724卡/100g
+        </p>
+        <p class="text-1">
+            质料：蛋黄、色拉油、白砂糖、白醋、盐、氢化植物油
+        </p>
+        <p class="text-1">
+            不利于瘦身的质料：蛋黄、色拉油、白砂糖、氢化植物油（反式脂肪酸）
+        </p>
+        <img class="image" src="images/10/2/1.png" alt="load">
+
+
+        <h4 class="title--dot">
+            蛋黄酱
+        </h4>
+        <p class="text-1">
+            热量：760卡/100g
+        </p>
+        <p class="text-1">
+            质料：蛋黄、白醋、橄榄油、氢化植物油、白砂糖
+        </p>
+        <p class="text-1">
+            不利于瘦身的质料：蛋黄、氢化植物油（反式脂肪酸）、白砂糖
+        </p>
+        <img class="image" src="images/10/2/2.png" alt="load">
+
+
+        <h4 class="title--dot">
+            油醋汁
+        </h4>
+        <p class="text-1">
+            热量：59卡/100g
+        </p>
+        <p class="text-1">
+            质料：橄榄油、白醋、欧芹、黑胡椒、洋葱、芥末、盐
+        </p>
+        <p class="text-1">
+            不利于瘦身的质料：无
+        </p>
+        <img class="image" src="images/10/2/3.png" alt="load">
+
+
+        <h4 class="title--dot">
+            西红柿酱
+        </h4>
+        <p class="text-1">
+            热量：81卡/100g
+        </p>
+        <p class="text-1">
+            质料：西红柿、苹果、白砂糖、盐
+        </p>
+        <p class="text-1">
+            不利于瘦身的质料：白砂糖
+        </p>
+        <img class="image" src="images/10/2/4.png" alt="load">
+
+        <p class="text-1">
+            由上可见,只有油醋汁所含卡路里最低.因此如果在选择酱料,油醋汁最为合适。
+        </p>
+
+        <h4 class="title--dot">
+            附:油醋汁彩虹水果沙拉
+        </h4>
+        <p class="text-1">
+            材料：草莓8个、芒果1个、猕猴桃1个、圣女果10个、香蕉1个、蓝莓10个
+        </p>
+        <p class="text-1">
+            功效：排毒减肥、美容养颜、补充维c、增强免疫力
+        </p>
+        <img class="image" src="images/10/2/5.png" alt="load">
+
+        <!--<div class="like-markdown">
+          减肥不可能一蹴而就，贵在坚持。将减肥经验变成生活习惯坚持下去，避免反弹，才能保持苗条身材。
+        </div>-->
+
+    </div>
+
+</div>
+<script th:src="${host}+'/js/require.js'"></script>
+<script th:src="${host}+'/js/config.js'"></script>
+<script th:src="${host}+'/js/comment/about.js'"></script>
+</body>
+
+</html>
