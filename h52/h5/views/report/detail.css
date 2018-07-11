@@ -1,0 +1,52 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: #333; }
+
+.detail-box {
+  padding: 0.26667rem; }
+  .detail-box .title {
+    font-size: 0.4rem;
+    line-height: 0.64rem; }
+  .detail-box .weightRecords {
+    position: relative;
+    height: 5.33333rem;
+    background-image: url(../../assets/images/home/recently.png);
+    background-size: 9.46667rem 5.33333rem;
+    margin: 0.48rem 0; }
+    .detail-box .weightRecords .leftLine, .detail-box .weightRecords .rightLing {
+      position: absolute;
+      width: 1.2rem;
+      height: 0.02667rem;
+      background-color: #ffffff;
+      top: 0.53333rem; }
+    .detail-box .weightRecords .leftLine {
+      left: 1.81333rem; }
+    .detail-box .weightRecords .rightLing {
+      right: 1.81333rem; }
+    .detail-box .weightRecords .recordsHead {
+      position: absolute;
+      width: 100%;
+      height: 0.48rem;
+      line-height: 0.48rem;
+      text-align: center;
+      color: #ffffff;
+      font-size: 0.48rem;
+      top: 0.30667rem;
+      left: 0; }
+    .detail-box .weightRecords .checkRecords {
+      width: 0.50667rem;
+      height: 0.50667rem;
+      position: absolute;
+      right: 0.26667rem;
+      top: 0.26667rem;
+      z-index: 5;
+      background-image: url(../../assets/images/home/checkRecord.png);
+      background-size: 0.50667rem 0.50667rem; }
+  .detail-box .recordsEchart {
+    height: 4.66667rem;
+    padding-top: 0.4rem;
+    background: orange; }
+  .detail-box .text-box {
+    font-size: 0.4rem;
+    line-height: 0.64rem; }

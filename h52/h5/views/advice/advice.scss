@@ -1,0 +1,65 @@
+
+@import "../../assets/sass/_entry.scss";//引入sass mixin function等
+
+
+.line{
+    width: _(650);
+    height: 1px;
+    margin: _(45)  auto;
+    background-color: #dddddd;
+    
+}
+.adviceBox{
+    width: _(710);
+    margin: _(20) auto 0 auto;
+    display: flex;
+    .experts{
+        width: _(210);
+        height: _(270);
+        img{
+           width: 100%;
+           height: auto;
+            border: _(2)  solid #0ca6cc;
+         }
+    }
+
+    .expertsInfor{
+        margin-left: _(20);
+        width: _(480);
+        .expertsInforH{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: _(30);
+           .company{
+               font-size: _(30);
+           }
+           .expertsInforBtn{
+               width: _(110);
+               height: _(50);
+               background-color: #f9860b;
+               text-align: center;
+               line-height: _(50);
+               color: #ffffff;
+               font-size: _(22);
+           }
+        }
+        .physician{
+            margin-bottom: _(20);
+            p{
+                font-size: _(24);
+            }
+        }
+        .hobby{
+            p{
+            font-size: _(24);
+            color: #999999;
+            line-height: 150%;
+            span{
+                color: #333333;
+            }
+          }
+        }
+    }
+   
+}

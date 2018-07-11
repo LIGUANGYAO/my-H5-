@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta charset='utf-8'/>
+    <title>发布美图</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css">
+
+    <link rel="stylesheet" type="text/css" href="./submit.css">
+    <script type="text/javascript" src="../../assets/js/lib/flexible.js"></script>
+     <script>  
+        var _hmt = _hmt || [];
+        _hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+      </script>
+</head>
+
+<body>
+
+<script type='text/x-template' id='item'>
+  <div class="item">
+    <p class="parent">
+      <img :src="img" alt="">
+    </p>
+    <span class="delete-btn" @click='remove'></span>
+  </div>
+</script>
+    <div id="app" class="container" v-cloak>
+      <div class="submit-box" v-show='loaded'>
+
+      <div class="bg" v-if='showCloseDlg'></div>
+      <div class="dialog" v-if='showCloseDlg'>
+        <div class="section">
+          <p>您还没有发布动态,确认不发布？</p>
+        </div>
+        <div class="operate">
+          <b class="btn-cancel" @click='confirm'>不发了</b>
+          <b class="btn-confirm" @click='cancelDlg'>再看看</b>
+        </div>
+      </div>
+
+        <div class="form">
+          <textarea v-model='content' name="" id="" cols="30" rows="10" placeholder="说两句呗，最多可输入50字。
+" 
+          class="my-text"></textarea>
+        </div>
+        
+        <!-- 上传图片-->
+        <div class="upload-item">
+          <div class="for">
+
+            <Item v-for='(i,index) in items' :img='i.img' @remove='removePhoto' :index='index'></Item>
+
+            <div class="new-btn" v2-if='!items.length' :class='{show: !items.length}'>
+              <span class="icon"></span>
+              <input type="file" accept='image/*' @change='onUpload'/>
+            </div>
+          </div>
+        </div>
+
+        <div class="l-box">
+          <div class="t1">类型</div>
+          <div class="b1 ck">
+            <span code='1'>运动时刻</span>
+            <span code='2'>秀身材</span>
+            <span code='3'>秀美食</span>
+          </div>
+        </div>
+
+        <div class="submit" @click='publish'>发布</div>
+
+        <div class="rule">规则：<br/>
+1、发布的图片含有广告、网址、色情的内容，将不予通过。<br/>
+2、图片模糊不清的，明显含有其他网站logo、水印的，将不予通过。<br/>
+3、涉及肖像权/版权及其他不适宜内容图片，将不予通过哦。</div>
+      </div>
+
+      <!-- <img src="" alt="" ref='test'/> -->
+      <footer-bar :index="0"></footer-bar>
+
+    </div>
+    <script type="text/javascript" src="../../assets/js/require.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="../../assets/js/funs/upload.js"></script>
+    <script src="./submit.js"></script>
+</body>
+
+</html>

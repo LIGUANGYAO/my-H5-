@@ -1,0 +1,138 @@
+
+
+@import "../../assets/sass/_entry.scss";//引入sass mixin function等
+
+.expertsHead{
+   width: 100%;
+   height: _(600);
+   background-image: url(../../assets/images/advice/replyBg.png);
+   background-size: 100%  _(600);
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+   align-items: center;
+   .head{
+       width: _(350);
+       height: _(350);
+       margin-top: _(20);
+       img{
+        width: _(350);
+        height: _(350);
+        border-radius: 100%;
+       }
+   }
+   .doctor{
+       color: #d5f7ff;
+       font-size:  _(34);
+       margin-top: _(20);
+   }
+   .hospital{
+       font-size: _(26);
+       margin-top: _(20);
+       color: #d5f7ff;
+   }
+   .department{
+        font-size: _(26);
+        margin-top: _(20);
+        color: #d5f7ff;
+   }
+   .technology{
+       display: flex;
+       margin-top: _(25);
+       width: 100%;
+       span{
+           color: #ffffff;
+           font-size: _(26);
+           flex: 1;
+           text-align: center;
+       }
+   }
+}
+.clum{
+    margin-top: _(28);
+    h4{
+        color: #f9860b;
+        font-size: _(40);
+        font-weight: normal;
+    }
+    p{
+        line-height: 150%;
+        margin-top: _(10);
+        color: #999999;
+    }
+}
+.message{
+    margin-top: _(40);
+    min-height: _(100);
+    .theme{
+        color: #f9860b;
+        font-size: _(40);
+    }
+    .time24{
+        font-size: _(26);
+        color: #999999;
+        margin-left: _(20);
+    }
+}
+.feedbackInfor{
+    background-color: #f4f4f4;
+    margin-bottom: _(112);
+    padding:  _(20)  _(24);
+    ul{
+        li.professor{
+            margin-top: _(20);
+            border-bottom: 0;
+        }
+        li{
+            .meSpan{
+                margin-bottom: _(20);
+                display: block;
+            }
+            p{
+                font-size: _(26);
+                color: #333333;
+                line-height: 150%;
+            }
+            padding-bottom: _(20);
+            border-bottom: 1px solid #dddddd;
+            .hours{
+                text-align: right;
+                span{
+                    color: #999999;
+                    font-size: _(24);
+                }
+            }
+        }
+    }
+}
+.feedback{
+    width: 100%;
+    height: _(98);
+    background-color: #12151a;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    .feedbackInput{
+        border: 0;
+        height: _(80);
+        width: _(500);
+        margin-left: _(20);
+        text-indent: _(20);
+        color: #cccccc;
+    }
+
+    .feedbackBtn{
+        width: _(186);
+        height: _(78);
+        border: _(2)  solid #ff0000;
+        text-align: center;
+        font-size: _(34);
+        line-height: _(78);
+        background-color: #f9860b;
+        margin-left: _(22);
+        color: #ffffff;
+    }
+}

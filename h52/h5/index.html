@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="en" >
+<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta charset="utf-8">
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta content="telephone=no" name="format-detection">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+	<title>智能体重秤</title>
+	<link rel="stylesheet" type="text/css" href="./assets/css/iosselect.css?v11.1.0">
+	<link rel="stylesheet" type="text/css" href="./assets/css/swiper-3.4.2.min.css?v11.1.0">
+	<link rel="stylesheet" type="text/css" href="./component/component.css?v11.1.0">
+	<link rel="stylesheet" type="text/css" href="./style.css?v11.1.0">
+	<script  defer>
+        !function (a, b) { function c() { var b = f.getBoundingClientRect().width; b / i > 960 && (b = 960 * i); var c = b / 10; f.style.fontSize = c + "px", k.rem = a.rem = c } var d, e = a.document, f = e.documentElement, g = e.querySelector('meta[name="viewport"]'), h = e.querySelector('meta[name="flexible"]'), i = 0, j = 0, k = b.flexible || (b.flexible = {}); if (g) { console.warn("将根据已有的meta标签来设置缩放比例"); var l = g.getAttribute("content").match(/initial\-scale=([\d\.]+)/); l && (j = parseFloat(l[1]), i = parseInt(1 / j)) } else if (h) { var m = h.getAttribute("content"); if (m) { var n = m.match(/initial\-dpr=([\d\.]+)/), o = m.match(/maximum\-dpr=([\d\.]+)/); n && (i = parseFloat(n[1]), j = parseFloat((1 / i).toFixed(2))), o && (i = parseFloat(o[1]), j = parseFloat((1 / i).toFixed(2))) } } if (!i && !j) { var p = (a.navigator.appVersion.match(/android/gi), a.navigator.appVersion.match(/iphone/gi)), q = a.devicePixelRatio; i = p ? q >= 3 && (!i || i >= 3) ? 3 : q >= 2 && (!i || i >= 2) ? 2 : 1 : 1, j = 1 / i } if (f.setAttribute("data-dpr", i), !g) if (g = e.createElement("meta"), g.setAttribute("name", "viewport"), g.setAttribute("content", "initial-scale=" + j + ", maximum-scale=" + j + ", minimum-scale=" + j + ", user-scalable=no"), f.firstElementChild) f.firstElementChild.appendChild(g); else { var r = e.createElement("div"); r.appendChild(g), e.write(r.innerHTML) } a.addEventListener("resize", function () { clearTimeout(d), d = setTimeout(c, 300) }, !1), a.addEventListener("pageshow", function (a) { a.persisted && (clearTimeout(d), d = setTimeout(c, 300)) }, !1), "complete" === e.readyState ? e.body.style.fontSize = 14 * i + "px" : e.addEventListener("DOMContentLoaded", function () { e.body.style.fontSize = 14 * i + "px" }, !1), c(), k.dpr = a.dpr = i, k.refreshRem = c, k.rem2px = function (a) { var b = parseFloat(a) * this.rem; return "string" == typeof a && a.match(/rem$/) && (b += "px"), b }, k.px2rem = function (a) { var b = parseFloat(a) / this.rem; return "string" == typeof a && a.match(/px$/) && (b += "rem"), b } }(window, window.lib || (window.lib = {}));
+	</script>
+	  <script>
+		var _hmt = _hmt || [];
+		_hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+  </script>
+</head>
+<body>
+	<div id="app" class="container">
+
+	  <page-load :loadstage="!pageLoad"></page-load>
+
+		<div id="mastBg"></div>
+        <div id="obesity-model">
+
+			<div class="obesity-content">
+              <div v-html="obesityData"></div>
+				 <div class="close-obesity" @click="closeObesity()">
+					 <img src="./assets/images/home/close-model.png">
+				 </div>
+			</div>
+			<div id="obesity-bg"></div>
+		</div>
+
+      <div  id="page-content"  v-cloak  v-show="pageLoad">
+
+         <!--头部-->
+         <div class="header-scale">
+			<div class="head-portrait">
+               <div class="head-img">
+					<img :src="headPortrait?headPortrait:'./assets/images/home/boy.png'" alt="头像" v-cloak>
+
+			   </div>
+
+			    <div class="report-forms">
+					<p class="standard-title" v-cloak v-if="registerStage" @click="goToRegister()">比比看，您的身材标准吗？></p>
+					<p class="standard-title" v-cloak v-else  @click="goHealthStatements()">查看你的健康报表></p>
+				</div>
+			</div>
+
+           <div class="current-cloum">
+                <div class="current-weight">
+					<p>{{(homeData*2).toFixed(1)}}<span>斤</span></p>
+				</div>
+				<div class="prev-weight"  v-cloak  v-if="historyWeightLength>1">
+					比上一次{{comparisonData}}斤
+				</div>
+		   </div>
+
+            <div class="sex-box">
+					<img :src="shape" v-if="!registerStage">
+					<img src='./assets/images/home/M1.png' v-else>
+			</div>
+
+
+		   <div class="health-cloum">
+			 <div class="BMI-cloum">
+				 <ul>
+					 <li>
+						 <p v-cloak>{{registerStage?'18.2-23.9':BMI.bmi?BMI.bmi:''}}</p>
+						 <span>BMI</span>
+					 </li>
+					 <li>
+						<p v-cloak>{{registerStage?'126斤':(standardWeight.weight*2).toFixed(1)+'斤'}}</p>
+						<span>标准体重</span>
+						</li>
+						<li>
+							<p v-cloak>{{registerStage?'正常':bodyTypeChinese}}</p>
+							<span>体型</span>
+						</li>
+				 </ul>
+			 </div>
+			 <div class="body-cloum">
+					<ul>
+							<li>
+								<p>{{proteinPercen}}</p>
+								<span>蛋白质</span>
+							</li>
+							<li>
+							   <p>{{fatPercen?(fatPercen*100).toFixed(1)+'%':''}}</p>
+							   <span>脂肪</span>
+							   </li>
+							   <li>
+								   <p>{{waterPercen?(waterPercen*100).toFixed(1)+'%':''}}</p>
+								   <span>水份</span>
+							   </li>
+						</ul>
+			 </div>
+		   </div>
+		 </div>
+
+		<div class="contaniner-content targetPadding">
+			<!--目标体重-->
+			<div class="target-contanier">
+				<p class="target-title">合理设置目标，生成专属你的体重方案</p>
+
+				<div class="set-up" v-cloak  v-show="showSet">
+					<p class="set-title">目标体重:<span>{{getManiangData.targetWeight?parseInt(getManiangData.targetWeight):''}}</span>斤&nbsp;&nbsp;&nbsp;&nbsp;目标周期:<span>{{getManiangData.days?getManiangData.days:''}}</span>天</p><span class="modify" id="Js-modify" @click="Tomodify()">修改</span>
+				</div>
+
+				<div class="install-target" style="display: none;">
+					<div class="install-in">
+						<span>目标体重</span>
+						<input type="text"   v-cloak  data-id="50斤" class="target-box" id="Js-weight" v-model="targetWach" onfocus="this.blur();" readonly/>
+					</div>
+					<div class="install-in">
+						<span>目标周期</span>
+						<div class="cycle" id="Js-cycle" data-id="14天">14天</div>
+					</div>
+					<div class="button" :class="disabledStyle?'disabled':''"  id="Js-button"  v-cloak>保存</div>
+				</div>
+				<p class="error">减重过快有损健康，请重新设定目标</p>
+
+
+        <div class="select-box" id="Js-select">
+					<p class="choose">请选择你的类型：</p>
+					<ul class="muscle-ul" v-show="muscleUlStase">
+							<li>
+									<div class="check-left">
+										<span class="pay_list_c1 on" data-target="3">
+											<input type="radio"   class="radioclass">
+										</span>
+										<span class="check-title">增肌</span>
+									</div>
+									<div class="check-left">
+											<span class="pay_list_c1" data-target="2">
+													<input type="radio"   class="radioclass">
+											</span>
+											<span class="check-title">塑形</span>
+									</div>
+								</li>
+					</ul>
+                    <ul class="fat-ul" v-show="fatUlStase">
+						<li>
+								<div class="check-left">
+										<span class="pay_list_c1 on" data-target="5">
+												<input type="radio"   class="radioclass">
+										</span>
+										<span class="check-title">单纯性肥胖</span>
+										<span class="question" data-question="5"><img src="./assets/images/home/question.png"></span>
+								</div>
+							<div class="check-left">
+								<span class="pay_list_c1 " data-target="4">
+									<input type="radio"   class="radioclass">
+								</span>
+								<span class="check-title">遗传性肥胖</span>
+								<span class="question" data-question="4"><img src="./assets/images/home/question.png"></span>
+							</div>
+						</li>
+						<li>
+								<div class="check-left">
+									<span class="pay_list_c1" data-target="6">
+											<input type="radio"   class="radioclass">
+									</span>
+									<span class="check-title">腹部型肥胖</span>
+									<span class="question" data-question="6"><img src="./assets/images/home/question.png"></span>
+								</div>
+								<div class="check-left">
+										<span class="pay_list_c1" data-target="7">
+												<input type="radio"   class="radioclass">
+										</span>
+										<span class="check-title">虚胖型肥胖</span>
+										<span class="question" data-question="7"><img src="./assets/images/home/question.png"></span>
+								</div>
+							</li>
+							<li>
+									<div class="check-left">
+										<span class="pay_list_c1" data-target="8">
+												<input type="radio"   class="radioclass">
+										</span>
+										<span class="check-title">水肿型肥胖</span>
+										<span class="question" data-question="8"><img src="./assets/images/home/question.png"></span>
+									</div>
+									<div class="check-left">
+											<span class="pay_list_c1" data-target="9">
+													<input type="radio"   class="radioclass">
+											</span>
+											<span class="check-title">产后型肥胖</span>
+											<span class="question" data-question="9"><img src="./assets/images/home/question.png"></span>
+									</div>
+								</li>
+					</ul>
+				</div>
+
+		</div>
+
+		<div class="targeet-bottom"></div>
+
+		</div>
+
+		<div class="gap-height"></div>
+
+			<!--最近体重曲线-->
+			<div id="weight-curve">
+					<p class="weight-header"><span>最近体重曲线</span></p>
+					<div class="echarts" id="JS-echars">
+					</div>
+				 </div>
+
+					 <!--广告-->
+				<div class="gap-height" v-if="adImgeData4"></div>
+
+      <div class="homeAd opacity  swiper-container" v-if="adImgeData4" id="swiper-container4" v-cloak>
+			<ul  class="swiper-wrapper">
+				<li class="swiper-slide" v-for="(v,index) in adImgeData4"  @click="getAdCount(v.id,v.spaceId,'轮播广告一'+index)">
+				   <a href="v.adLink">
+					<img :src="v.path">
+				   </a>
+				</li>
+			</ul>
+			<div class="swiper-pagination"></div>
+		 </div>
+
+
+				 <div class="gap-height"></div>
+
+          <div class="link-icon">
+				   <ul>
+					   <li :class="{ad1:adImgeData1S}"   @click="adImgeData1S?goToAd(adImgeData1.adLink,'目标管理'):goToTarget('目标管理')">
+							<img :src="adImgeData1.path" v-if="adImgeData1S">
+						    <img src="./assets/images/home/ICON1.png" v-else>
+						   <span v-show="!adImgeData1S">目标管理</span>
+					   </li>
+					   <li :class="{ad2:adImgeData2S}" @click="adImgeData2S?goToAd(adImgeData2.adLink,'称重打卡'):goToTarget('称重打卡')">
+						    <img :src="adImgeData2.path" v-if="adImgeData2S">
+							<img src="./assets/images/home/ICON2.png" v-else>
+							<span v-show="!adImgeData2S">称重打卡</span>
+						</li>
+						<li :class="{ad3:adImgeData3S}" @click="adImgeData3S?goToAd(adImgeData3.adLink,'健康报表'):goToTarget('健康报表')">
+								<img :src="adImgeData3.path" v-if="adImgeData3S">
+								<img src="./assets/images/home/ICON3.png"  v-else>
+								<span v-show="!adImgeData3S">健康报表</span>
+							</li>
+				   </ul>
+			   </div>
+
+
+			 <div class="gap-height"></div>
+			<!--完善资料-->
+			<div id="perfect">
+					<div class="perfect-left" @click="goToTips()">
+					  <img src="./assets/images/home/tips.png">
+					</div>
+					<div class="perfect-center">
+						<!--修改资料，建议更合理-->
+					  <p class="perfect-titps" v-cloak>{{registerStage?'完善资料，减重方案更精准':'修改资料，建议更合理'}}</p>
+					  <div class="perfect-scoll">
+						  <ul v-cloak>
+							  <li v-for="v in repoArtis"  @click="linkList(v.id)">{{v.title}}</li>
+						  </ul>
+					  </div>
+					</div>
+					<div class="perfect-right" v-cloak @click="openModel()">{{registerStage?'完善':'修改'}}</div>
+				  </div>
+
+        <!--运动管理-->
+		<div class="management">
+			<div class="management-nav">
+            <ul>
+				<li class="food active" data-active="1">
+						<span class="triangle"></span>
+				</li>
+				<li class="sport" data-active="2">
+						<span class="triangle"></span>
+				</li>
+			</ul>
+		</div>
+        <!--饮食-->
+		<div class="management-content" style="display: block;">
+
+		<div class="slide">
+			<div class="li" style="display: none" data-li='1'>
+					<div class="change-left">
+							<img src="./assets/images/home/break.png">
+							<div class="inner"><span>早餐</span>(早餐要吃好)</div>
+						</div>
+						<div class="change-right">
+							<img src="./assets/images/home/add.png">
+						</div>
+			</div>
+
+			<ul class="li-ul" style="display:block" >
+				<li class="first break-first">
+					<div class="left">
+						<img src="./assets/images/home/break.png" class="img">
+						<div class="inner">
+							  <p class="p1"><span>早餐</span>(早餐要吃好)</p>
+							  <p class="p2" v-cloak>{{recommendData.breakfast}}</p>
+							</div>
+					</div>
+
+					<div class="right" v-cloak>{{kil1}}<span>千卡</span></div>
+				</li>
+				<li v-for="v in IngredientData1" v-cloak>
+					<div class="left-content">
+						<div class="inner">
+							<span>{{v.mykallName}}</span>
+							<p>{{v.intake}}</p>
+						</div>
+					</div>
+					<div class="right-content">{{(v.kllTotal).toFixed(0)}}<span>千卡</span></div>
+				</li>
+				<div class="change-nav">
+						<ul>
+							<li class="photo" @click="goToCode(3,'早餐拍照打卡')"><img src="./assets/images/home/photo.png" class="photo-img" >晒一晒</li>
+							<li class="breakfast" @click="judgeGoTo(1,'教你吃早餐')"><img src="./assets/images/home/bulb.png" class="bulb">怎么吃</li>
+							<li class="estimates" @click="goToTipsImg()"></li>
+							<li class="change-btn" @click="changeType(btn1,1,'早餐')" id="btn1">
+							</li>
+						</ul>
+					</div>
+			</ul>
+
+		</div>
+
+		<div class="slide">
+
+				<div class="li" data-li='2'>
+					<div class="change-left">
+						<img src="./assets/images/home/lunch.png">
+						<div class="inner"><span>午餐</span>(午餐要吃饱)</div>
+					</div>
+					<div class="change-right">
+						<img src="./assets/images/home/add.png">
+					</div>
+				 </div>
+
+
+				 <ul class="li-ul">
+						 <li class="first break-first">
+							 <div class="left">
+								 <img src="./assets/images/home/lunch.png" class="img">
+								 <div class="inner">
+									   <p class="p1"><span>午餐</span>(午餐要吃饱)</p>
+									   <p class="p2" v-cloak>{{recommendData.lunch}}</p>
+									 </div>
+							 </div>
+
+							 <div class="right" v-cloak>{{kil2}}<span>千卡</span></div>
+						 </li>
+						 <li v-for="v in IngredientData2" v-cloak>
+							 <div class="left-content">
+								 <div class="inner">
+									 <span>{{v.mykallName}}</span>
+									 <p>{{v.intake}}</p>
+								 </div>
+							 </div>
+							 <div class="right-content">{{(v.kllTotal).toFixed(0)}}<span>千卡</span></div>
+						 </li>
+
+
+						 <div class="change-nav">
+								 <ul>
+									 <li class="photo" @click="goToCode(3,'午餐拍照打卡')"><img src="./assets/images/home/photo.png" class="photo-img" >晒一晒</li>
+									 <li class="breakfast" @click="judgeGoTo(2,'教你吃午餐')"><img src="./assets/images/home/bulb.png" class="bulb">怎么吃</li>
+									 <li class="estimates" @click="goToTipsImg()"></li>
+									 <li class="change-btn" @click="changeType(btn2,2,'午餐')" id="btn2">
+
+									 </li>
+								 </ul>
+							 </div>
+					 </ul>
+
+			 </div>
+
+			 <div class="slide">
+					<div class="li" data-li='3'>
+					 <div class="change-left">
+						 <img src="./assets/images/home/plus.png">
+						 <div class="inner"><span>加餐</span>(加餐要吃精)</div>
+					 </div>
+					 <div class="change-right">
+						 <img src="./assets/images/home/add.png">
+					 </div>
+				 </div>
+
+				 <ul class="li-ul">
+						 <li class="first break-first">
+							 <div class="left">
+								 <img src="./assets/images/home/plus.png" class="img">
+								 <div class="inner">
+									   <p class="p1"><span>加餐</span>(加餐要吃精)</p>
+									   <p class="p2" v-cloak>{{recommendData.plus}}</p>
+									 </div>
+							 </div>
+
+							 <div class="right" v-cloak>{{kil4}}<span>千卡</span></div>
+						 </li>
+						 <li v-for="v in IngredientData4" v-cloak>
+							 <div class="left-content">
+								 <div class="inner">
+									 <span>{{v.mykallName}}</span>
+									 <p>{{v.intake}}</p>
+								 </div>
+							 </div>
+							 <div class="right-content">{{(v.kllTotal).toFixed(0)}}<span>千卡</span></div>
+						 </li>
+
+
+						 <div class="change-nav">
+								 <ul>
+									 <li class="photo" @click="goToCode(3,'加餐拍照打卡')"><img src="./assets/images/home/photo.png" class="photo-img" >晒一晒</li>
+									 <li class="breakfast" @click="judgeGoTo(4,'教你加餐')"><img src="./assets/images/home/bulb.png" class="bulb">怎么吃</li>
+									 <li class="estimates" @click="goToTipsImg()"></li>
+									 <li class="change-btn" @click="changeType(btn3,4,'加餐')" id="btn3">
+
+									 </li>
+								 </ul>
+							 </div>
+					 </ul>
+			 </div>
+
+			 <div class="slide">
+					<div class="li" data-li='4'>
+						<div class="change-left">
+							<img src="./assets/images/home/dinner.png">
+							<div class="inner"><span>晚餐</span>(晚餐要吃少)</div>
+						</div>
+						<div class="change-right">
+							<img src="./assets/images/home/add.png">
+						</div>
+					</div>
+
+					<ul class="li-ul">
+							<li class="first break-first">
+								<div class="left">
+									<img src="./assets/images/home/dinner.png" class="img">
+									<div class="inner">
+										  <p class="p1"><span>晚餐</span>(晚餐要吃少)</p>
+										  <p class="p2" v-cloak>{{recommendData.dinner}}</p>
+										</div>
+								</div>
+
+								<div class="right" v-cloak>{{kil3}}<span>千卡</span></div>
+							</li>
+
+							<li v-for="v in IngredientData3" v-cloak>
+								<div class="left-content">
+									<div class="inner">
+										<span>{{v.mykallName}}</span>
+										<p>{{v.intake}}</p>
+									</div>
+								</div>
+								<div class="right-content">{{(v.kllTotal).toFixed(0)}}<span>千卡</span></div>
+							</li>
+
+							<div class="change-nav">
+									<ul>
+										<li class="photo" @click="goToCode(3,'晚餐拍照打卡')"><img src="./assets/images/home/photo.png" class="photo-img" >晒一晒</li>
+										<li class="breakfast" @click="judgeGoTo(3,'教你吃晚餐')"><img src="./assets/images/home/bulb.png" class="bulb">怎么吃</li>
+										<li class="estimates" @click="goToTipsImg()"></li>
+										<li class="change-btn" @click="changeType(btn4,3,'晚餐')" id="btn4">
+
+										</li>
+									</ul>
+								</div>
+						</ul>
+
+
+				</div>
+		</div>
+
+		<!--漂浮广告-->
+    <div id="float-ad" @mousedown="down" @touchstart="down"
+	   @mousemove="move" @touchmove="move"
+	   @mouseup="end" @touchend="end"  @click="goToPut(adImgeData5.adLink)"  v-if="adImgeData5S">
+	      <img :src="adImgeData5.path">
+	   </div>
+
+   <!--运动-->
+    <div class="management-content">
+	   <div class="slide">
+          <ul class="li-ul" style="display: block;">
+			  <li class="first">
+				  <div class="left">
+					  <img src="./assets/images/home/sprotli.png" class="img">
+					  <div class="inner">
+							<p class="p1"><span>运动</span></p>
+							<p class="p2">无氧+有氧，身材fitfit~</p>
+						  </div>
+				  </div>
+
+				  <div class="right" v-cloak>{{kil5}}<span>千卡</span></div>
+			  </li>
+			  <li v-for="v in IngredientData5" v-cloak>
+				<div class="left-content">
+					<div class="inner">
+						<span>{{v.mykallName}}</span>
+						<p>{{v.intake}}</p>
+					</div>
+				</div>
+				<div class="right-content">{{(v.kllTotal).toFixed(0)}}<span>千卡</span></div>
+			</li>
+			  <div class="change-nav">
+					<ul>
+						<li class="photo" style="width:70%" @click="goToCode(1,'运动拍照打卡')"><img src="./assets/images/home/photo.png" class="photo-img" >晒一晒</li>
+						<li class="change-btn" @click="changeType(btn5,5,'运动')" id="btn5">
+
+						</li>
+					</ul>
+				</div>
+		  </ul>
+		</div>
+
+
+		 </div>
+		 <div class="base-line">我们是有底线的</div>
+		</div>
+		</div>
+           <!--注册弹框-->
+	     <div class="registration-model-content">
+			<div class="registrationModel">
+				<div class="registrationModelHeader">
+					<div class="registrationHead">
+						<p>{{registerStage?'完善资料':'修改资料'}}</p>
+					</div>
+				</div>
+				<div class="registrationModelBody">
+
+                    <div id="sexDom">
+						<div class="menBox">
+							<div class="boy" :class="{Active:modify.sex==1}" @click="changeSex(1)"></div>
+							<span>男</span>
+					   </div>
+						<div class="womenBox">
+							<div class="girl" :class="{Active:modify.sex==2}" @click="changeSex(2)"></div>
+							<span>女</span>
+						</div>
+					</div>
+                   <div class="another"  v-cloak v-show="anotherStage">
+					<div id="pregnant">
+						<div class="select-box">
+								<span class="pay_list_c2 active" data-preg="1">
+										<input type="radio"   class="radioclass2">
+									</span>
+							   <span class="check-title">未孕</span>
+						</div>
+						<div class="select-box">
+								<span class="pay_list_c2" data-preg="2">
+										<input type="radio"   class="radioclass2">
+									</span>
+							   <span class="check-title">孕期</span>
+						</div>
+						<div class="select-box">
+								<span class="pay_list_c2" data-preg="3">
+										<input type="radio"   class="radioclass2">
+									</span>
+							   <span class="check-title">哺乳期</span>
+						</div>
+					</div>
+
+
+					<div id="preproduction-day">
+							<div id="JS-preproduction" class="select">
+									<span class="preproduction-span">预产期</span><input type="text" data-year="1990" data-month="10"  data-date="02" value="(填选)" disabled="disabled" readonly/>
+								</div>
+					</div>
+
+					<div id="lactation">
+							<div id="JS-lactation" class="select">
+									<span class="lactation-span">BB出生日期</span><input type="text" data-year="1990" data-month="10"  data-date="02" value="(填选)" disabled="disabled" readonly/>
+							</div>
+					</div>
+
+				</div>
+
+					<div class="stature">
+
+						<div id="JS-stature" class="select">
+							<span class="stature-span">身高</span><input type="text" data-id="170" value="170cm" disabled="disabled" readonly/>
+						</div>
+					</div>
+					<div class="birthdate">
+						<div id="JS-year" class="select">
+								<span class="year-span">年龄</span><input type="text"  data-year="1993" data-month="10"  data-date="10" value='1993-10-10' disabled="disabled" readonly/>
+						</div>
+					</div>
+
+					<p class="secret-world">点击下划线的内容进行操作</p>
+				</div>
+				<div class="registration-btn-box">
+					<a class="registration-btn" href="javascript:;" @click="savePersoInfo()">确定</a>
+				</div>
+
+
+                <div class="close-model" @click="closeModel()">
+					<img src="./assets/images/home/close-model.png">
+				</div>
+
+			</div>
+			<div class="mask"></div>
+		</div>
+
+		<div id="isModify-Target">
+			<div class="isModify-content">
+				<div class="inner">是否修改目标体重</div>
+				<div class="btn">
+					<span class="left-btn" @click="closeIsTarget()">不去</span>
+					<span class="right-btn" @click="goToModifyTarget()">去修改</span>
+				</div>
+			</div>
+
+			<div class="isModify-Bg"></div>
+		</div>
+
+		<footer-bar :index="1"></footer-bar>
+	</div>
+
+
+
+
+
+
+	<script type="text/javascript" src="./assets/js/require.js?v11.1.0"></script>
+	<script src="./assets/js/config.js?v11.1.0"></script>
+	<script src="index.js?v11.1.0"></script>
+</body>
+</html>

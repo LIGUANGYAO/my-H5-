@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta charset='utf-8'/>
+    <title>我的美图</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css">
+
+    <link rel="stylesheet" type="text/css" href="./photo.css">
+    <script type="text/javascript" src="../../assets/js/lib/flexible.js"></script>
+    <script>
+    var _hmt = _hmt || [];
+    _hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+    </script>
+</head>
+
+<body>
+    <div id="app" class="container" v-cloak >
+
+      <page-load :loadstage='!loaded'></page-load>
+      <div class="photo-box" v-show='loaded'>
+        <div v-show='list.length'>
+          <div class="list">
+            <div class="item" @click='toDetail(item.picid)' v-for='(item,index) in list'  :class='{auditing:item.state==1 || item.state == 3}'>
+              <div class="img-box">
+                <div class='img' :style='{"background-image": "url(" + item.picUrl + "?x-oss-process=image/resize,w_300/auto-orient,1)"}' alt="" @click='toDetail(item.picid)'></div>
+
+                <div class="text" v-show='item.state==1'>审核中</div>
+                <div class="text" v-show='item.state==3'>审核失败</div>
+              </div>
+              <div class="title">{{item.picName}}</div>
+
+              <div class="f1">
+                <span class="like" :class='{active: item.light}' @click.stop='like( item)'>{{item.thuupSum}}</span>
+                <span class="comment" @click='toDetail(item.picid)'>{{item.commSum}}</span>
+              </div>
+            </div>
+          </div>
+
+          
+
+          <spin :isloading='true' :onscroll='addImages' :prevent='preventScroll' :delay=100></spin>
+
+     
+
+</div>
+          <div class="empty" v-show='!list.length'>
+            <div class="text">您还没有晒过美图哦</div>
+
+            <div class="btn-go" @click='toShow'>去晒一晒</div>
+          </div>
+      </div>
+
+
+      <footer-bar :index="5"></footer-bar>
+
+    </div>
+    <script type="text/javascript" src="../../assets/js/require.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="./photo.js"></script>
+</body>
+
+</html>

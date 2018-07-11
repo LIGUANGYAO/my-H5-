@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+    <title>附近的秤</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css">
+
+    <link rel="stylesheet" type="text/css" href="./map.css">
+    <script  type="text/javascript" src="../../assets/js/lib/flexible.js"></script>
+</head>
+
+
+<body>
+
+    <div id="app" class="container" v-cloak>
+            <div class="content my">
+                    <!-- 返回 -->
+                    <p class="go-back" @click="goBack()">
+                        <i class="iconfont icon-fanhui"></i>
+                    </p>
+                    
+                    <!-- 地图 -->
+                    <div id="JS-map" class="map"></div>
+                    
+                    <!-- 底部菜单 -->
+                    <div class="footer">
+                        <div class="footer-content">
+                            <span id="js-LocationControl" class="item item-location" @click="location()">
+                                <img src="../../assets/images/map/location.png">
+                            </span>
+                             <span class="item item-nearby-equipment" @click="openNearbyOutletsList()">附近设备</span>
+                            <span class="item item-refresh mzj-align-center" @click="refresh">
+                                <img src="../../assets/images/map/refresh.png">
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- 当前网点点击查看信息 -->
+                    <div class="current-dot-footer" v-show="currentDot.modalDisplay">
+                        <div class="go" @click="goHere">
+                            <div class="go-btn">
+                                <img src="../../assets/images/map/goHere.png">
+                            </div>
+                        </div>
+                        
+                        <div class="dot" @click="openNearbyOutletsDetails">
+                            <div class="dot-img">
+                                <img :src="currentDot.logUrl != '' ? currentDot.logUrl : 'images/no.jpg'" />
+                            </div>
+                            <div class="dot-address">
+                                <h3>{{currentDot.devicename}}</h3>
+                                <p>距离你{{currentDot.distance}}米 | {{currentDot.address}}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="equipment-status">
+                            <span>设备状态</span>
+                            <!-- <a class="on-line" :class="{'line': currentDot.appstatu = 1}">在线</a>
+                            <a class="off-line" :class="{'line': currentDot.appstatu != 1}">离线</a> -->
+
+                            <a class="on-line" :class="{'line': true}">在线</a>
+                            <a class="off-line" :class="{'line': false}">离线</a>
+                        </div>				
+                    </div>
+                    
+                    <!-- 附近网点列表弹窗 -->
+                    <div class="nearbyModal" v-show="nearby.modalDisplay">
+                        <div class="nearbyModal-mask"></div>
+                        <div class="nearbyModal-container">
+                            <div class="container-header">
+                                <div class="search">
+                                    <i class="iconfont icon-sousuo"></i>
+                                    <div class="search-input">
+                                        <input type="text" v-model="dotSearch" placeholder="搜索附件店名或者地址"/>
+                                        <span @click="closeNearbyModal">取消</span>
+                                    </div>							
+                                </div>
+                            </div>
+                            <div id="JS-container-body" class="container-body">	              
+                                <ul v-if="nearby.dotData.length > 0">
+                                   
+                                    <li v-for="(v, index) in nearby.dotData" @click="openNearbyListDetails(index)">
+                                        <div class="item-content">
+                                            <div class="h3"><span :class="[v.deviceStatus==1?'on-line':'on-line']">{{v.deviceStatus==1?'在线':'在线'}}</span>
+                                                <span class="adress">{{v.name}}</span>
+                                            </div>
+                                            <p>距离您{{v.distance}}米 | {{v.address}}</p>
+                                        </div>
+                                        <img :src="v.logoUrl != '' ? v.logoUrl : ''">
+                                    </li>   
+                                </ul>
+                        
+                        
+                                <!-- <div class="tip">没有数据</div> -->
+       
+                            </div>					
+                        </div>
+                    </div>		
+                </div>
+    </div>
+    <script type="text/javascript" src="../../assets/js/require.js"></script>
+	<script src="../../assets/js/config.js"></script>
+    <script src="./map.js"></script>
+</body>
+</html>

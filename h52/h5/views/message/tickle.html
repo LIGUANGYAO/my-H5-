@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<title>点赞</title>
+	<link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="./comment.css">
+	<script  type="text/javascript" src="../../assets/js/lib/flexible.js" async></script>
+</head>
+
+<body>
+
+    <div id="app" class="container" v-cloak>
+      <div class="contentInfor">
+         <ul >
+             <li v-for="v in pigupsInfo">
+                 <div class="me">
+                     <div class="portrait">
+                         <img :src="v.userInfo.headimgurl?v.userInfo.headimgurl:portrait">
+                     </div>
+                     <div class="comments">
+                         <div class="userName" v-cloak>{{v.userInfo.name}}</div>
+                         <p class="time" v-cloak>{{v.create_time |filterSting}}</p>
+                         <div class="myInfro">赞了我</div>
+
+                         <div class="reply" v-if="v.pic_name||v.pic_url">
+                             <div class="tr"></div>
+                               <p class="replyInfor" v-cloak>
+                                 <span class="replyName">我的美图：</span>
+                                 {{v.pic_name}}
+                             </p>
+                             <img :src="v.pic_url" @click="preview(v.pic_url)" v-if="v.pic_url">
+                           
+                         </div>
+                     </div>
+                 </div>
+             </li>
+         </ul>
+      </div>
+    </div>
+    <script src="../../assets/js/lib/jweixin-1.0.0.js?v11.1.0"></script>
+    <script type="text/javascript" src="../../assets/js/require.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="./tickle.js"></script>
+
+</body>
+</html>

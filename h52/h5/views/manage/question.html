@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta charset='utf-8'/>
+
+	<title>体重管理</title>
+	<link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css?v11.1.0">
+	<link rel="stylesheet" type="text/css" href="../../component/component.css?v11.1.0">
+	<link rel="stylesheet" type="text/css" href="./question.css?v11.1.0">
+	<script  type="text/javascript" src="../../assets/js/lib/flexible.js?v11.1.0" defer></script>
+    <script>  
+			var _hmt = _hmt || [];
+			_hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+		</script>
+</head>
+
+<body>
+
+    <div id="app" class="container">
+
+			<page-load :loadstage="!pageLoad"></page-load>
+
+		<div v-cloak v-show="pageLoad">
+
+		<div class="question">
+			<div class="xA">
+				<p class="xA-1">我们将根据你的目标和基础</p>
+				<p class="xA-1">推荐最适合你的体重管理建议</p>
+			</div>
+ 
+			 <div class="currentWeight">
+				当前体重：<span v-cloak>{{(homeData.currentWeight*2).toFixed(1)}}斤</span>
+			 </div>
+ 
+			<div class="xB">
+				<div class="xB-a">我的目标体型</div>
+				<ul class="checkUl">
+					<li  id="reduction" data-target="1"  :class="targetType==1?'checked':''" >减脂</li>
+					<li  data-target="2" id="type" :class="targetType==2?'checked':''">塑型</li>
+					<li  id="cultivate" data-target="3" :class="targetType==3?'checked':''">健身增肌</li>
+				</ul>
+			</div>
+			<div class="xB time" id="target">
+				<div class="xB-a" v-cloak>目标体重:{{weightNumber}}斤</div>
+				<ul  class="checkUl2">
+					<li v-cloak>
+					   <span id="reduce">
+						   <img src="../../assets/images/manage/reduce.png">
+						</span>
+						   <input type="number" class="checked2" v-model.lazy.number="weightNumber">
+						   <span id="add">
+								<img src="../../assets/images/manage/add.png">
+						   </span>
+					</li>
+				</ul>
+			</div>
+
+
+			 <div class="stage">
+              <p>我能坚持的时间</p>
+              <ul>
+				  <li v-for="(v,index) in stageArry" :class="v==stageN?'act':''" :name="v" v-cloak>第{{index+1}}阶段</li>
+			  </ul>
+			 </div>
+
+
+			<ul class="sport" id="type1">
+				<li v-cloak>1、第一阶段为14天，可理想{{stageTitle}}斤</li>
+				<li v-cloak>2、您要经历{{stateNumber}}阶段，可以达到体重。记得坚持体重管理噢！</li>
+			</ul>
+
+			<ul class="sport" id="type2">
+				<li>1、两个阶段塑型，每个阶段为14天。</li>
+				<li>2、您要经历2阶段，想要有更好看的身材，一定要坚持第二阶段哦！</li>
+			</ul>
+
+
+
+			<div class="btn-large-orange" @click="btnManage">开始我的体重管理</div>
+
+		</div>
+
+		<div class="dialog">
+			<div class="content2">
+				<p class="btn-close" @click='closeDlg'></p>
+				<div class="text"></div>
+				<div class="textTip"></div>
+				<div class="btns" v-if="bntsSate2">
+					<span class="btns-1" @click="confirm">确定</span>
+					<span class="btns-2" @click='closeDlg'>取消</span>
+				</div>
+				<div class="btns" v-if="bntsSate">
+					<span class="btns-1" @click="determine"></span>
+					<span class="btns-2" @click="recommend">推荐方案</span>
+				</div>
+			</div>
+		</div>
+
+		<footer-bar :index='6'></footer-bar>
+	</div>
+    </div>
+    <script type="text/javascript" src="../../assets/js/require.js?v11.1.0"></script>
+    <script src="../../assets/js/config.js?v11.1.0"></script>
+    <script src="./question.js?v11.1.0"></script>
+
+</body>
+</html>

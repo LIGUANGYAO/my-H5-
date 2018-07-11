@@ -1,0 +1,125 @@
+@import "../../assets/sass/base/function/_pxTorem.scss";
+
+@import "../../component/Spin/_index.scss";//底部导航样式
+
+html {
+	background: #f9f9fe;
+
+}  
+#app {
+	@include marginBottom(98);
+	padding: 0 0 _(160);
+	font-size: _(26); 
+	background: #f9f9fe;
+
+	.btn-publish {
+		width: _(100);
+		height: _(100);
+		position: fixed;
+		top: _(426);
+		right: _(4);
+		z-index: 10;
+		background: url(../../assets/images/show/publish_new.png) center center no-repeat;
+		background-size: contain;
+
+	}
+	.tab {
+		padding: 0 _(30);
+		background: #fff;
+		line-height: _(90);
+		height: _(90);
+		display: flex;
+		text-align: center;
+		border-bottom: _(2) solid #e5e5ea;
+		span {
+			flex: 1;
+			position: relative;
+			top: _(2);
+			margin: 0 _(12);
+			font-size: _(32);
+			color: #8e8e93;
+			&.active {
+				color: #f9860b;
+				border-bottom: _(4) solid #f9860b;
+			}
+		}
+	}
+
+	.list {
+		padding: _(30) _(30);
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+
+
+		.item {
+			height: _(475);
+			width: _(335);
+			display: inline-block;
+			background: #fff;
+			margin: 0 0 _(20);
+			position: relative;
+			border-bottom-left-radius: _(10);
+			border-bottom-right-radius: _(10);
+
+			&.auditing {
+
+				.text {
+					line-height: _(365);
+					position: absolute;
+					top: 0;
+					left: 0;
+					color: #fff;
+					text-align: center;
+					width: 100%;
+					background: rgba(0,0,0,.6);
+				}
+			}
+			.img {
+				border-top-left-radius: _(10);
+				border-top-right-radius: _(10);
+				height: _(365);
+				background-position: center center;
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+
+			.title {
+				margin: _(20) _(10) _(16);
+				-webkit-line-clamp: 1;
+				display: -webkit-box;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				-webkit-box-orient: vertical;
+				font-size: _(26);
+				color: #04040f;
+			}
+
+			.f1 {
+				color: #8e8e93;
+				padding: 0 _(10);
+				.like {
+					background: url(../../assets/images/common/no-fav.png) left center no-repeat;
+					background-size: _(32);
+					line-height: _(32);
+					text-indent: _(38);
+					display: inline-block;
+					float: left;
+
+					&.active {
+					background: url(../../assets/images/common/favorite.png) left center no-repeat;
+					background-size: _(32);						
+					}
+				}
+				.comment {
+					background: url(../../assets/images/common/comment.png) left center no-repeat;
+					background-size: _(30);
+					line-height: _(32);
+					text-indent: _(38);
+					display: inline-block;
+					float: right;
+				}
+			}
+		}
+	}
+}

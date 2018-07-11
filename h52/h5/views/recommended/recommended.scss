@@ -1,0 +1,80 @@
+@import "../../assets/sass/base/function/_pxTorem.scss";//引入sass mixin function等
+@import "../../component/Spin/_index.scss";//底部导航样式
+
+
+// .over{
+//     display: none;
+//     height: _(80);
+//     line-height: _(80);
+//     font-size: _(26);
+//     text-align: center;
+//     color: #999999;
+// }
+#isScoll{
+    padding-bottom:  _(100);
+}
+.opacity{
+    -webkit-animation: opacity 0.3s linear;
+    animation: opacity 0.3s linear;
+}
+@-webkit-keyframes opacity {
+    0% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+@keyframes opacity {
+    0% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+.recommendUl{
+    margin-top: _(20);
+    >li{
+        margin-bottom: _(20);
+        position: relative;
+        .recommenInner{
+            width: _(270);
+            height: _(116);
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            flex-direction:column;
+            align-items: center;
+            top: _(75);
+            left: _(220);
+            z-index: 2;
+            background: rgba(0,0,0,0.5);
+            span{
+                color: #ffffff;
+            }
+            span:nth-child(1){
+                font-size: _(26);
+                margin-bottom: _(6);
+            }
+            span:nth-child(2){
+                font-size: _(30);
+            }
+        }
+        img{
+            width: 100%;
+            height: _(300);
+        }
+    }
+}
+.mainid{
+    display: none;
+}
+.ad{
+    height: _(200);
+    margin-bottom: _(30);
+    img{
+        width:100%;
+        height: _(200);
+    }
+}

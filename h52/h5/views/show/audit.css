@@ -1,0 +1,28 @@
+#app > :first-child > :last-child {
+  margin-bottom: 0rem; }
+
+.audit-box {
+  text-align: center; }
+  .audit-box .fail {
+    display: none; }
+  .audit-box.fail .fail {
+    display: block; }
+  .audit-box.fail .progress {
+    display: none; }
+  .audit-box img {
+    height: 2.8rem;
+    margin: 4.18667rem auto 0; }
+  .audit-box .text {
+    color: #999;
+    margin: 0.54667rem 0 0; }
+  .audit-box .btn {
+    display: inline-block;
+    cursor: pointer; }
+  .audit-box .btn1 {
+    background: #f9860b;
+    color: #fff;
+    line-height: 0.86667rem;
+    width: 4.06667rem;
+    height: 0.86667rem;
+    border-radius: 0.4rem;
+    margin: 1.70667rem auto; }

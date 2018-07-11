@@ -1,0 +1,37 @@
+@import "../../../assets/sass/_entry.scss";//引入sass mixin function等
+
+
+.recomm{
+    
+    li{
+        padding-top: _(20);
+        padding-bottom: _(20);
+        @include borderBottomAfter($color: #f2f2f2,$dpr:2);
+        a{
+            display: flex;
+            .clumLeft{
+                width: _(200);
+                height: _(160);
+                img{
+                    width: _(200);
+                    height: _(160);
+                }
+            }
+            .clumR{
+                 margin-left: _(20);
+                 position: relative;
+                 p:nth-child(1){
+                     color: #333333;
+                     font-size: _(26);
+                 }
+                 .time{
+                     color: #999999;
+                     position: absolute;
+                     bottom: 0;
+                     left: 0;
+                     font-size: _(24);
+                 }
+            }
+        }
+    }
+}

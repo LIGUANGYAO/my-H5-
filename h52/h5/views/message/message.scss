@@ -1,0 +1,156 @@
+@import "../../assets/sass/base/function/_pxTorem.scss";//引入sass mixin function等
+
+[v-cloak] {
+    display: none !important; 
+  }
+
+.centerContainer{ 
+    padding: _(25) 0 0 _(30);
+    ul{
+        li{
+            list-style: none;
+            display: flex;
+            justify-content: left;
+            padding-bottom: _(26);
+            .leftIcon{
+                width: _(100);
+                height: _(100);
+                margin-right: _(20);
+                position: relative;
+                .num{
+                    position: absolute;
+                    width: _(36);
+                    height: _(36);
+                    top: _(-10);
+                    right: _(-10);
+                    background-color: #ff3b30;
+                    z-index: 2;
+                    text-align: center;
+                    line-height: _(36);
+                    color: #fff;
+                    font-size: _(22);
+                    border-radius: _(50);
+                }
+                img{
+                    width: _(100);
+                    height: _(100);
+                }
+            }
+            .rightCloum{
+                width: _(600);
+                border-bottom: 1px solid #e5e5e5;
+                .comment{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: _(18);
+                    .commentWorld{
+                        color: #04040f;
+                        font-size: _(34);
+                    }
+                    .commentTime{
+                        margin-right: _(20);
+                        font-size: _(20);
+                        color: #8e8e93;
+                    }
+                }
+                .user{
+                    font-size: _(28);
+                    margin-bottom: _(30);
+                    color:#8e8e93;
+                    width: 60%;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;/*禁止自动换行*/
+                    overflow: hidden; 
+                    .nickname{
+                        color: #f9860b
+                    }
+                }
+            }
+        }
+        
+    }
+}
+
+
+
+//活动内页样式
+
+.activeContanier{
+    ul{
+        padding-top: _(20);
+        li{
+            width: _(692);
+            margin: 0 auto;
+            margin-bottom: _(30);
+            img{
+                width: 100%;
+                margin-left:auto;
+                margin-right: auto;
+                margin-bottom: _(20);
+            }
+            p{
+                height: _(35);
+                line-height: _(35);
+                font-size: _(28);
+                color: #04040f;
+                text-indent: _(20);                 
+            }
+        }
+    }
+}
+
+//公告内页样式
+.announContanier{
+   ul{
+       li{
+           border-bottom: _(2) solid #d4d4d4;
+           display: flex;
+           justify-content: space-around;
+           align-items: center;
+           height: _(80);
+           line-height: _(80);
+           width: 95%;
+           margin-left: 4%;
+           
+           p{
+                font-size: _(34);
+                color: #000000;
+               width: 60%;
+               text-overflow: ellipsis;
+               white-space: nowrap;/*禁止自动换行*/
+               overflow: hidden; 
+           }
+           span{
+               font-size: _(24);
+               color: #8e8e93
+           }
+       }
+   }
+}
+
+
+
+
+//公告内页
+.AnnounInner{
+    width: _(680);
+    margin: 0 auto;
+   h3{
+       text-align: center;
+       font-size: #000000;
+       font-size: _(48);
+       margin-top: _(28);
+   }
+   .time{
+       font-size: _(30);
+       color: #888888;
+       margin: _(34) 0 _(50); 
+   }
+   .messageinfo{
+       font-size: _(34);
+       color: #111111;
+       text-indent: _(16);
+       line-height: 170%;
+   }
+}

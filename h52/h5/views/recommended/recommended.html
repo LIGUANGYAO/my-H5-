@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<title>教你怎么吃</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css?v11.1.0">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/swiper-3.4.2.min.css?v11.1.0">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css?v11.1.0">
+	<link rel="stylesheet" type="text/css" href="./recommended.css?v11.1.0">
+    <script  type="text/javascript" src="../../assets/js/lib/flexible.js?v11.1.0" async></script>
+    <script>
+		var _hmt = _hmt || [];
+		_hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+</script>
+</head>
+
+<body>
+
+     <div id="app" class="container" >
+
+     <page-load :loadstage="!pageLoad"></page-load>
+
+     <div v-cloak v-show="pageLoad">
+         <div class="content">
+             <div id="isScoll">
+            <ul class="recommendUl">
+                <li v-for="(v,index) in hotMainData" key="index" @click="linkToHot(index)" class="opacity" v-cloak>
+                        <div class="recommenInner">
+                            <span>{{(v.mainName)}}</span>
+                        </div>
+                        <img :src="v.picPath">
+                </li>
+                <spin :isLoading='showLoading'></spin>
+                <!-- <div class="over">我们是有底线的</div> -->
+            </ul>
+            </div>
+         </div>
+         <footer-bar :index="6"></footer-bar>
+        </div>
+    </div>
+            <script type="text/javascript" src="../../assets/js/require.js?v11.1.0"></script>
+            <script src="../../assets/js/config.js?v11.1.0"></script>
+            <script src="./recommended.js?v11.1.0"></script>
+</body>
+</html>

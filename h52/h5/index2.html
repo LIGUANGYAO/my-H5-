@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en" >
+<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta charset="utf-8">
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta content="telephone=no" name="format-detection">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+	<title>智能体重秤</title>
+	<link rel="stylesheet" type="text/css" href="./assets/css/iosselect.css?v11.1.0">
+	<link rel="stylesheet" type="text/css" href="./assets/css/swiper-3.4.2.min.css?v11.1.0">
+	<link rel="stylesheet" type="text/css" href="./component/component.css?v11.1.0">
+	<link rel="stylesheet" type="text/css" href="./style.css?v11.1.0">
+	<script  defer>
+        !function (a, b) { function c() { var b = f.getBoundingClientRect().width; b / i > 960 && (b = 960 * i); var c = b / 10; f.style.fontSize = c + "px", k.rem = a.rem = c } var d, e = a.document, f = e.documentElement, g = e.querySelector('meta[name="viewport"]'), h = e.querySelector('meta[name="flexible"]'), i = 0, j = 0, k = b.flexible || (b.flexible = {}); if (g) { console.warn("将根据已有的meta标签来设置缩放比例"); var l = g.getAttribute("content").match(/initial\-scale=([\d\.]+)/); l && (j = parseFloat(l[1]), i = parseInt(1 / j)) } else if (h) { var m = h.getAttribute("content"); if (m) { var n = m.match(/initial\-dpr=([\d\.]+)/), o = m.match(/maximum\-dpr=([\d\.]+)/); n && (i = parseFloat(n[1]), j = parseFloat((1 / i).toFixed(2))), o && (i = parseFloat(o[1]), j = parseFloat((1 / i).toFixed(2))) } } if (!i && !j) { var p = (a.navigator.appVersion.match(/android/gi), a.navigator.appVersion.match(/iphone/gi)), q = a.devicePixelRatio; i = p ? q >= 3 && (!i || i >= 3) ? 3 : q >= 2 && (!i || i >= 2) ? 2 : 1 : 1, j = 1 / i } if (f.setAttribute("data-dpr", i), !g) if (g = e.createElement("meta"), g.setAttribute("name", "viewport"), g.setAttribute("content", "initial-scale=" + j + ", maximum-scale=" + j + ", minimum-scale=" + j + ", user-scalable=no"), f.firstElementChild) f.firstElementChild.appendChild(g); else { var r = e.createElement("div"); r.appendChild(g), e.write(r.innerHTML) } a.addEventListener("resize", function () { clearTimeout(d), d = setTimeout(c, 300) }, !1), a.addEventListener("pageshow", function (a) { a.persisted && (clearTimeout(d), d = setTimeout(c, 300)) }, !1), "complete" === e.readyState ? e.body.style.fontSize = 14 * i + "px" : e.addEventListener("DOMContentLoaded", function () { e.body.style.fontSize = 14 * i + "px" }, !1), c(), k.dpr = a.dpr = i, k.refreshRem = c, k.rem2px = function (a) { var b = parseFloat(a) * this.rem; return "string" == typeof a && a.match(/rem$/) && (b += "px"), b }, k.px2rem = function (a) { var b = parseFloat(a) / this.rem; return "string" == typeof a && a.match(/px$/) && (b += "rem"), b } }(window, window.lib || (window.lib = {}));
+	</script>
+	  <script>  
+		var _hmt = _hmt || [];
+		_hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+</script>
+</head>
+<body>
+	<div id="app" class="container" >
+
+	<page-load :loadstage="!pageLoad"></page-load>
+
+	<div v-cloak v-show="pageLoad">
+
+    <!--注册弹框-->
+	<div class="registration-model-content">
+			<div class="registrationModel">
+				<div class="registrationModelHeader">
+					<div class="registrationHead"><p>填写下面资料方便我们给你更精确的建议哦</p></div>
+				</div>
+				<div class="registrationModelBody">
+
+                    <div id="sexDom">
+						<div class="menBox">
+							<div class="boy" :class="{Active:modify.sex==1}" @click="changeSex(1)"></div>
+							<span>男</span>
+					   </div>
+						<span class="sexTitle">性别</span>
+						<div class="womenBox">
+							<div class="girl" :class="{Active:modify.sex==2}" @click="changeSex(2)"></div>
+							<span>女</span>
+						</div>
+					</div>
+
+					<div class="stature">
+						<h3>选择身高</h3>
+						<div id="JS-stature" class="select">
+							<input type="text" data-id="160" value="160cm" disabled="disabled" readonly/>
+						</div>
+					</div>
+					<div class="birthdate">
+						<h3>填写您的年龄</h3>
+						<div id="JS-year" class="select">
+							<input type="text"  data-year="1990" data-month="10"  data-date="02" value='1990-10-10' disabled="disabled" readonly/>
+						</div>
+					</div>
+	
+					<p class="secret-world">点击下划线的内容进行操作</p>
+				</div>
+				<div class="registration-btn-box">
+					<a class="registration-btn" href="javascript:;" @click="savePersoInfo()">确定</a>
+				</div>
+				
+			</div>
+			<div class="mask"></div>
+		</div>
+		
+		<div class="webChat" v-if="homeData.wxname">
+			<p v-cloak>{{homeData.wxname}}-提醒您关注体重变化</p>
+		</div>
+
+		<div class="bodyFat" >
+			<ul v-if="bodyFat.fat&&bodyFat.water" v-cloak>
+				<li class="fat">
+					<span class="colorff9" v-cloak>{{bodyFat.fat?(bodyFat.fat*100).toFixed(1)+'%':''}}</span>
+					<span>脂肪率</span>
+				</li>
+				<li class="bodySize">
+					<span class="colorff9" v-cloak>{{bodyFat.water?(bodyFat.water*100).toFixed(1)+'%':''}}</span>
+					<span>水份率</span>
+				</li>
+				<li class="moreHeath" data-target="health">
+					<span class="colorff9"><img src="./assets/images/home/lie.png" class="line"></span>
+					<span>更多分析</span>
+				</li>
+			</ul>
+		 </div>
+
+         
+
+
+		 <!-- <div class="floatAd" id="floatAd"  @mousedown="down" @touchstart="down"
+		 @mousemove="move" @touchmove="move"
+		 @mouseup="end" @touchend="end"  v-cloak v-show="adImgeData5Staus">
+		    <img src="./assets/images/home/float.png"> 
+		 </div> -->
+
+
+         <!--头部仪表盘-->
+         <div id="instrument">
+			 <div class="judgment"> </div>
+			 
+             <div class="analysis" v-show="registeredData.height&&registeredData.gender">
+				 <span class="leftPeople">
+					 <img :src="sexR==1?'./assets/images/home/m1.png':'./assets/images/home/w1.png'">
+				 </span>
+				 <div class="progress">
+						<div class="analysisIcon" :style="{left:styleWidth1}">
+							<span v-cloak>{{bodyTypeChinese}}</span>	
+						</div>
+					 <div class="innerProgress" :style="{width:styleWidth2}"></div></div>
+				 <span class="rightPeople">
+					<img :src="sexR==1?'./assets/images/home/m2.png':'./assets/images/home/w2.png'">
+				 </span>
+			 </div>
+
+             <div class="ctxActive">
+                <div class="centerBox">
+                <div class="currentWeight" v-cloak>
+				   <p v-if='homeData.currentWeight'>{{(((homeData.currentWeight)*2).toFixed(1)) || ''}}<span>斤</span></p>
+				   <span class="currentWeightSpan" v-if="historyWeightLength==1">当前体重</span>
+                </div>
+                <div class="prvWeight" v-cloak v-if="historyWeightLength>1">上一次体重:{{((homeData.weightStr)*2).toFixed(1)}}斤</div>
+                <div class="difference" v-if="historyWeightLength>1"><span class="icon" :class="homeData.difference>0?'up':'down'"></span><p v-cloak>{{Math.abs(homeData.difference*2)}}<span>斤</span></p></div>
+            </div>
+            </div> 
+			 <canvas id="myCanvas" width="480" height="480"></canvas>
+			 <canvas id="myCanvas2" width="480" height="480"></canvas>
+		 </div>
+		 
+		 <!--查看健康分析按钮-->
+		 <p class="btnHealth" id="healthLink" v-cloak v-show="!bodyFat.fat&&!bodyFat.water" data-target="health">查看健康分析</p>
+
+		<div class="content">
+
+	
+			  <!--首页链接入口-->
+			  <div class="homeLink">
+                <ul>
+					<li class="manage" data-target="manage">
+						<a href="javascript:;">
+							<img src="./assets/images/home/nav1.png"> 
+							<span>体重管理</span>
+						</a>
+					</li>
+					<li class="pk" data-target="pk">
+						<a href="javascript:;">
+							<img src="./assets/images/home/nav2.png">
+							<span>PK榜</span>
+						</a>
+					</li>
+					<!-- <li class="run">
+						<a href="javascript:;">
+							<img src="./assets/images/home/nav3.png">
+							<span>运动咖</span>
+						</a>
+					</li> -->
+					<li class="sun" data-target="sun">
+						<a href="javascript:;">
+						  <img src="./assets/images/home/nav4.png">
+						  <span>晒一晒</span>
+						</a>
+					</li>
+				</ul>
+			  </div>
+
+
+		  <!--广告-->
+		  <div class="homeAd opacity  swiper-container" v-if="adImgeData1" id="swiper-container1" v-cloak>
+			<ul  class="swiper-wrapper">
+				<li class="swiper-slide" v-for="(v,index) in adImgeData1"  @click="getAdCount(v.id,v.spaceId,'轮播广告一'+index)">
+				   <a :href="v.adLink">
+					   <img :src="v.path">
+				   </a>
+				</li>
+			</ul>
+			<div class="swiper-pagination"></div>
+		 </div> 
+
+
+
+		  <div class="homeAd opacity  swiper-container" v-if="adImgeData2" id="swiper-container2" v-cloak>
+			<ul  class="swiper-wrapper">
+				<li class="swiper-slide" v-for="(v,index) in adImgeData2"  @click="getAdCount(v.id,v.spaceId,'轮播广告二'+index)">
+				   <a :href="v.adLink">
+					   <img :src="v.path">
+				   </a>
+				</li>
+			</ul>
+			<div class="swiper-pagination"></div>
+		 </div> 
+
+
+		<div class="homeAd opacity  swiper-container" v-if="adImgeData3" id="swiper-container3" v-cloak>
+			<ul  class="swiper-wrapper">
+				<li class="swiper-slide" v-for="(v,index) in adImgeData3"  @click="getAdCount(v.id,v.spaceId,'轮播广告三'+index)">
+				   <a :href="v.adLink">
+					   <img :src="v.path">
+				   </a>
+				</li>
+			</ul>
+			<div class="swiper-pagination"></div>
+		 </div> 
+
+		 
+			<!--热门推荐-->
+			<div class="hotRecommend">
+                 <p class="head">
+					 <span>热门推荐</span>
+					 <a href="javascript:;" class="checkAll"><span class="moreT" id="moreT">更多</span><img src="./assets/images/home/right.png"></a>
+				 </p>
+                 <div class="hotImg">
+                   <ul v-cloak>
+					   <li class="reducedFat opacity" v-for="v in hotImgData" v-cloak>
+						   <div class="innerTitle">
+                                <span class="china">{{v.mainCname}}</span>
+							   <span class="englisth">{{(v.mainName).toUpperCase()}}</span>
+						   </div>
+						   <img :src="v.picPath" >
+					   </li>
+				   </ul>
+
+                 </div>
+                 
+                  <div class="hotExperts">
+                     <ul>
+                         <li class="knowledge opacity">
+                            <img src="./assets/images/home/knowleage.png">
+                         </li>
+                         <li class="experiment opacity">
+                            <img src="./assets/images/home/lab.png">
+                        </li>
+                     </ul>
+                  </div>
+
+                 
+				 <div class="recommendAd opacity  swiper-container" v-if="adImgeData4" id="swiper-container4" v-cloak>
+					<ul  class="swiper-wrapper">
+						<li class="swiper-slide" v-for="(v,index) in adImgeData4"  @click="getAdCount(v.id,v.spaceId,'轮播广告四'+index)">
+						   <a :href="v.adLink">
+							   <img :src="v.path">
+						   </a>
+						</li>
+					</ul>
+					<div class="swiper-pagination"></div>
+				 </div> 
+
+				 <div class="weightRecords">
+		
+				   <div class="recordsHead">
+                       <p class="weightTitle">最近体重变化</p>
+                       <p class="checkAll" id="weightAll"><span>更多</span><img src="./assets/images/home/right.png"></p>
+                    </div>
+
+                    <div class="recordContent">
+				    <div class="recordsEchart" id="JS-echars">
+                    </div>
+
+				   </div>
+				 </div>
+			</div>
+		</div>
+		<footer-bar :index="1"></footer-bar>
+	</div>
+	</div>
+
+	<script type="text/javascript" src="./assets/js/require.js?v11.1.0"></script>
+	<script src="./assets/js/config.js?v11.1.0"></script>
+	<script src="index.js?v11.1.0"></script>
+</body>
+</html>

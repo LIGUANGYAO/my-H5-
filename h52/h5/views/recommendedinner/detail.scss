@@ -1,0 +1,29 @@
+@import "../../assets/sass/base/function/_pxTorem.scss";//引入sass mixin function等
+
+body {
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "SimHei", sans-serif;
+    overflow-x: hidden;
+    font-size: 14px !important;
+}
+
+#detail{
+    p{
+        line-height: 150%;
+        font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "SimHei", sans-serif;
+    }
+    .title {
+		font-size: _(42);
+		color: #333;
+		text-align: center;
+		height: _(60);
+		line-height: _(60);
+		margin-top: _(10);
+	}
+	.date {
+		color: #999;
+		font-size: _(26);
+		line-height: _(80);
+		border-bottom: 1px solid #c7c7cc;
+		text-align: right;
+	}
+}

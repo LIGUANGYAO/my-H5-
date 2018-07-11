@@ -1,0 +1,129 @@
+
+@import "../../assets/sass/base/function/_pxTorem.scss";
+
+@import "../../component/Spin/_index.scss";//底部导航样式
+
+#app {
+}
+
+.over{ 
+    height: _(80);
+    line-height: _(80);
+    font-size: _(26);
+    text-align: center;
+    color: #999999; 
+}
+html, body, .container {
+	height: 100%;
+	background: #efeff4 !important;
+}
+.history-box {
+	margin-bottom: _(80);
+
+	padding: _(24) 0;
+	.card {
+		display: block;
+		width: _(690);
+		height: auto;
+		margin: 0 auto _(48) auto;
+		position: relative;
+		background: #fff url(../../assets/images/my/blue2.png) top center no-repeat;
+		background-size: _(790) _(10);
+		padding: 0 _(30);
+		
+		&.green {
+			background: #fff url(../../assets/images/my/green2.png) top center no-repeat;
+			background-size: _(790) _(10);
+
+			.date {
+				background: url(../../assets/images/my/green1.png) left _(4) no-repeat;
+				background-size: _(320) _(65);
+			}
+		}
+
+		&:after {
+			content: '.';
+			text-indent: -999px;
+			background: url(../../assets/images/my/bg2.png) left bottom repeat-x;
+			background-size: auto _(12);
+			width: 100%;
+			display: inline-block;
+			position: absolute;
+			bottom: _(-12);
+			left: 0;
+			height: _(12);
+		}
+		.date {
+		    display: inline-block;
+		    width: _(320);
+		    height: _(65);
+		    margin: _(24) auto _(24) _(-42);
+		    background: url(../../assets/images/my/blue1.png) left _(4) no-repeat;
+		    background-size: _(320) _(65);
+		    font-size: _(24);
+		    line-height: _(65);
+			color: #fff;
+			text-indent: _(12)
+		}
+
+		.text-1 {
+			font-size: _(30);
+			color: #8e8e93;
+		}
+
+		.text-2 {
+			font-size: _(30);
+			color:#f9860b;
+			margin: _(12) 0 _(40) _(29);
+			.number {
+				font-size: _(60);
+
+			}
+		}
+
+		.address {
+			font-size: _(24);
+			background: url(../../assets/images/common/location.png) left center no-repeat;
+			background-size: auto _(28);
+			height: _(28);
+			text-indent: _(36);
+			color: #999;
+			margin: _(52) 0;
+		}
+
+	}	
+
+	.bodyFat{
+    padding-top: _(0);
+    margin-bottom: _(20);
+    ul{
+        padding-top: _(15);
+        display: flex;
+        li{
+            width: 25%;
+            text-align: center;
+            margin-bottom: _(15);
+            span.percentage{
+                color: #f9860b;
+                font-size: _(30);
+            }
+            span.titleColor{
+                color: #666666;
+            }
+            span.headerTitle{
+                color: #b2b2b1;
+            }
+            span{
+                font-size: _(30);
+                
+                height: _(45);
+                line-height: _(45);
+                display: block;
+            }
+        }
+    }
+}
+}
+
+
+

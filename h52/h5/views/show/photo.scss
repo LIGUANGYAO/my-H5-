@@ -1,0 +1,108 @@
+@import "../../assets/sass/base/function/_pxTorem.scss";
+@import "../../component/Spin/_index.scss";//引入sass mixin function等
+
+#app {
+	@include marginBottom(98);
+	padding: 0 0 _(48);
+	font-size: _(26);
+
+	.list {
+		padding: _(30) _(30);
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+
+
+		.item {
+			height: _(510);
+			width: _(335);
+			display: inline-block;
+			background: #fff;
+			margin: 0 0 _(20);
+			position: relative;
+
+
+
+			&.auditing {
+
+				.text {
+					line-height: _(365);
+					position: absolute;
+					top: 0;
+					left: 0;
+					color: #fff;
+					text-align: center;
+					width: 100%;
+					background: rgba(0,0,0,.6);
+				}
+			}
+			.img {
+				border-radius: _(10);
+				height: _(365);
+				background-position: center center;
+				background-repeat: no-repeat;
+				background-size: cover;
+
+
+			}
+
+			.title {
+				margin: _(20) 0 _(16);
+				-webkit-line-clamp: 2;
+				display: -webkit-box;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				-webkit-box-orient: vertical;
+				font-size: _(26);
+				color: #04040f;
+			}
+
+			.f1 {
+				color: #8e8e93;
+				padding: 0 _(10);
+				.like {
+					background: url(../../assets/images/common/no-fav.png) left center no-repeat;
+					background-size: _(32);
+					line-height: _(32);
+					text-indent: _(38);
+					display: inline-block;
+					float: left;
+
+					&.active {
+					background: url(../../assets/images/common/favorite.png) left center no-repeat;
+					background-size: _(32);						
+					}
+				}
+				.comment {
+					background: url(../../assets/images/common/comment.png) left center no-repeat;
+					background-size: _(30);
+					line-height: _(32);
+					text-indent: _(38);
+					display: inline-block;
+					float: right;
+				}
+			}
+		}
+	}
+
+	.empty {
+		padding: _(460) 0 0;
+		text-align: center;
+		background: url(../../assets/images/goal/boy.png) center _(206) no-repeat;
+
+		font-size: _(30);
+		color: #8e8e93;
+
+		.btn-go {
+			width:_(360);
+			height: _(66);
+			margin: _(138) auto;
+			color: #f9860b;
+			border: _(2) solid #f9860b;
+			line-height: _(66);
+			border-radius: _(10);
+			font-size: _(32);
+		}
+	}
+}
+

@@ -1,0 +1,34 @@
+@import "../../assets/sass/base/function/_pxTorem.scss";//引入sass mixin function等
+
+
+#tips-ul{
+    background-color: #efeff4;
+    padding-bottom: _(120);
+    li{
+        border-bottom: 1px solid #e5e5e5; 
+        margin-bottom: _(16);
+        background-color: #ffffff;
+        p{
+            height: _(88);
+            line-height: _(88);
+            color: #000000;
+            font-size: _(34);
+            font-weight: bold;
+            padding-left: _(30); 
+            background-color: #ffffff;
+            border-bottom: 1px solid #e5e5e5; 
+        }
+        .tips-content{
+            display: flex;
+            justify-content: center;
+        }
+        .fruit{
+            width: _(453);
+            height: _(370);
+        }
+        .nut,.beans{
+            width: _(510);
+            height: _(360);
+        }
+    }
+}

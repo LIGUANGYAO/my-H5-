@@ -1,0 +1,37 @@
+.feedback-box {
+  text-align: center; }
+  .feedback-box > img {
+    width: 2.93333rem;
+    height: auto;
+    margin: 1.2rem auto 0;
+    display: block; }
+  .feedback-box .text-1 {
+    font-size: 0.4rem;
+    color: #999;
+    line-height: 1.78667rem; }
+  .feedback-box .form {
+    margin: 2.24rem auto 0;
+    font-size: 0.45333rem; }
+    .feedback-box .form label {
+      color: #f9860b; }
+    .feedback-box .form input {
+      border: none;
+      border-bottom: 0.02667rem solid #f9860b;
+      margin: 0 0 0 0.2rem;
+      outline: none;
+      text-align: center; }
+  .feedback-box .btn {
+    display: inline-block;
+    cursor: pointer;
+    clear: left; }
+  .feedback-box .btn1 {
+    background: #f9860b;
+    color: #fff;
+    line-height: 0.86667rem;
+    width: 4.06667rem;
+    height: 0.86667rem;
+    border-radius: 0.4rem;
+    margin: 0.84rem auto; }
+
+.hidden {
+  visibility: hidden; }

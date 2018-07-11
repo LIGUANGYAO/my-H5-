@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta charset='utf-8'/>
+    <title>晒身材</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css">
+
+    <link rel="stylesheet" type="text/css" href="./post.css">
+    <script type="text/javascript" src="../../assets/js/lib/flexible.js" async></script>
+</head>
+
+<body>
+    <div id="app" class="container " v-cloak>
+
+      <page-load :loadstage='!loaded'></page-load>
+      <div class="post-box" v-show='loaded' v-cloak :style="{opacity:  imageLoaded ? 1 : 0}">
+ 
+        <!--头像栏-->
+        <div class="basic">
+          <div class="image-box" v-cloak>
+            <img v-show='loaded' :src="owner.headimgurl  || (owner.gender == 2 ? '../../assets/images/my/girl.png' : '../../assets/images/my/boy.png')" alt="" :class='{dft: !owner.headimgurl}'>
+
+          </div>
+          <div class="second-box">
+            <div class="username" v-cloak>{{owner.name || '123'}}</div>
+            <div class="date" v-cloak>{{data.shotTime | formatDate(2) || '6分钟前'}}</div> 
+            <div class="btn-delete" v-if='showDelete' @click='removePhoto'>删除</div>
+          </div>
+        </div>
+
+        <!--正文-->
+        <div class="section">
+          <p v-cloak>{{data.picName}}</p>
+          <img v-if='data.picUrl' @click='preview(data.picUrl + "?x-oss-process=image/resize,w_1000/auto-orient,1")' :src='data.picUrl + "?x-oss-process=image/resize,w_300/auto-orient,1"' alt="" ref='image'/>
+
+<!--           <img v-if='data.picUrl' @click='preview(data.picUrl + "?x-oss-process=image/resize,w_1000/auto-orient,1")' :src='data.picUrl + "?x-oss-process=image/resize,w_300/auto-orient,1"' alt="" ref='image'>
+
+ -->          <img src="../../assets/images/show/audit.png" alt="" class="audit" :style='{bottom: auditBottom + "px", left: auditLeft + "px"}' v-show='(data.state == 1)'>
+ <img src="../../assets/images/show/fail2.png" alt="" class="audit" :style='{bottom: auditBottom + "px", left: auditLeft + "px"}' v-show='(data.state == 3)'>
+        </div>
+
+        <!--评论和收藏数量-->
+        <div class="other-content" >
+          <div class="buttons">
+            <span class="heart" v-cloak @click='like'>
+              <img src="../../assets/images/common/no-fav.png" alt="" v-if='!isLike' >
+              <img src="../../assets/images/common/favorite.png" alt="" v-if='isLike'>
+              <b class="digit">{{likeCount || 0}}</b>
+            </span>
+            <span class="comment">
+              <img src="../../assets/images/common/comment.png" alt="">
+              <span class="digit" v-cloak>{{commCount || 0}}</span>
+            </span>
+          </div>
+        </div>
+
+        <!--广告-->
+         <div class="homeAd" v-if='adImge[0].adLink' v-on:click="getAdCount(adImge[0].id, adImge[0].spaceId)" v-cloak>
+            <a  :href="adImge[0].adLink">
+                <img :src="adImge[0].path">
+            </a>
+         </div>
+
+         <!--点赞-->
+         <div class="star-area"  >
+           <p class="state">
+             <span class="input" v-cloak>{{likeCount || 0}}</span>人点赞
+           </p>
+            <div class="user-list" id='userList' v-show='data.praiseList && data.praiseList.length'>
+              <div class="cover" v-for='user in data.praiseList' v-cloak v-if='user'>
+              <img :src="(user && user.headimgurl)  || (user.gender == 2 ? '../../assets/images/my/girl.png' : '../../assets/images/my/boy.png')" alt="">
+              <div class="name">{{user.name}}</div>
+              </div>
+           <spin :isloading='true' :onscroll='onLikeScroll' :prevent='preventLike' :delay=100 :targetdom='"#userList"' :horizontal='true'></spin>
+
+<!--               <div class="cover"><img src="../../assets/images/lab/cover.png" alt=""></div>
+              <div class="cover"><img src="../../assets/images/lab/cover.png" alt=""></div> -->
+            </div>
+         </div>
+
+         <!--评论-->
+         <div class="board-container" id='board-container' >
+           <div class="caption">全部评论</div>
+           <div class="each" id='commlist'>
+             <div class="one" v-for='comm in data.commList' v-cloak>
+                <div class="header">
+                <span class='s1'>
+                   <img :src="(comm.userInfo && comm.userInfo.headimgurl)  || (comm.user && comm.user.headimgurl2) ||(comm.userInfo && comm.userInfo.gender == 2 ? '../../assets/images/my/girl.png' : '../../assets/images/my/boy.png')" alt="" :class='{dft: !((comm.userInfo && comm.userInfo.headimgurl)  || (comm.user && comm.user.headimgurl2))}'/>
+                   </span>
+                   <span class="info">
+                     <span class="username">{{comm.nickname || (comm.userInfo && comm.userInfo.name)}}&nbsp;</span>
+                     <span class="timestamp">{{comm.createTime | formatDate(2)}}</span>
+                   </span>
+                </div>
+                <div class="textfield">
+                  {{comm.commInfo}}
+                </div>  
+
+             </div>
+
+             <div class="empty"  v-show='!data.commList || !data.commList.length'>暂无评论</div>
+
+
+             <spin v-show='(data.state != 1)' :isloading='true' :onscroll='onCommScroll' :prevent='preventComment' :delay=100 :istall='data.commList && data.commList.length > 5'></spin>
+           </div>
+
+
+         </div>
+
+
+         <!--发表-->
+         <div class="form" >
+           <span class='input'><input type="text" ref='comment' placeholder="有话不说憋着难受" ></span>
+           <span><span class="btn-send" @click='addComment'>发表</span></span>
+         </div>
+      </div>
+
+                <div class="bg" v-if='showPublicDlg'></div>
+                <div class="dialog" v-if='showPublicDlg'>
+                  <div class="section">
+                    <h3>审核失败</h3>
+                    <p>原因: {{data.reason}}</p>
+                  </div>
+                  <div class="operate">
+                    <b class="btn-cancel" @click='cancelDlg'>不了</b>
+                    <b class="btn-confirm" @click='confirmPublic'>去修改</b>
+                  </div>
+                </div>
+
+
+                <div class="bg" v-if='showDeleteDlg'></div>
+                <div class="dialog" v-if='showDeleteDlg'>
+                  <div class="section">
+                    <h3>删除</h3>
+                    <p>确认删除美图吗？</p>
+                  </div>
+                  <div class="operate">
+                    <b class="btn-cancel" @click='cancelDlg'>取消</b>
+                    <b class="btn-confirm" @click='confirm'>确认</b>
+                  </div>
+                </div>
+
+      <!-- <footer-bar :index="1"></footer-bar> -->
+    </div>
+
+<!--     <div class="toastr">成功</div>
+ -->    
+ <script src="../../assets/js/lib/jweixin-1.0.0.js?v11.1.0"></script>
+
+ <script type="text/javascript" src="../../assets/js/require.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="./post.js"></script>
+</body>
+
+</html>

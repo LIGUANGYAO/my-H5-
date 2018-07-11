@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<title>PK榜</title>
+	<link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css?v11.1.0">
+    <link rel="stylesheet" type="text/css" href="./pk.css?v11.1.0">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css?v11.1.0">
+    <link rel="stylesheet" type="text/css" href="./dropload.css?v11.1.0">
+	<script  type="text/javascript" src="../../assets/js/lib/flexible.js?v11.1.0" async></script>
+</head>
+
+<body>
+        <div id="app" class="container load" >
+
+
+         <page-load :loadstage="!pageLoad"></page-load>
+
+         <div v-cloak v-show="pageLoad">
+                
+            <div class="pkHead">
+                <div class="portrait">
+                     <img  v-show='loaded' :src="scoreInfor.headimgurl ? scoreInfor.headimgurl : '../../assets/images/common/logo.png'" :class='{dft: !scoreInfor.headimgurl}'>
+                </div>
+                <p class="userName" v-cloak>{{scoreInfor.nickname}}</p>
+                <p class="beat" v-cloak>在本次PK中我打败了{{scorerRank.overcome}}人</p>
+
+                <div class="pkResults">
+                    <span class="score" v-cloak>体型综合得分：{{scorerRank.score=="null"?'再去称一次':Number(scorerRank.score).toFixed(2)}}</span>
+                    <span class="part" v-cloak>参加人数：{{scorerRank.size==null?'暂时没有人数':scorerRank.size}}</span>
+                </div>
+            </div>
+
+           
+            <div class="lodeDate">
+                <div class="noData">暂无数据</div>
+           <div class="content">
+              <div class="pkCrowd">
+                  <p class="colorF8">PK人群</p>
+                  <p v-cloak>{{scoreInfor.gender==1?'男':scoreInfor.gender==2?'女':''}} {{scorerRank.ageGroup}}岁 {{scoreInfor.urbanarea=="null"?'':scoreInfor.urbanarea}}</p>
+              </div>
+              <div class="pkNave">
+                  <div class="user">用户</div>
+                  <div class="scoreClum">得分</div>
+                  <div class="like">点赞数</div>
+              </div>
+           </div>
+
+           <div class="pkList">
+                <ul>
+
+                    <li v-for="(v,index) in showPklistData" class="opacity" :class="[v.unionid==meUnionid?'activeBg':'']"   v-cloak>
+                        <div class="rightClum">
+                        <i class="pkNum" v-if="v.rank==1">
+                            <img src="../../assets/images/pk/one.png" alt="load" >
+                        </i>
+                        <i class="pkNum" v-if="v.rank==2">
+                                <img src="../../assets/images/pk/two.png" alt="load" >
+                        </i>
+                        <i v-if="v.rank==3">
+                                <img src="../../assets/images/pk/three.png" alt="load" >
+                        </i>
+                         <i v-if="v.rank>3">
+                             {{v.rank}}
+                         </i>
+                        <div class="userPortrait">
+                               <span :class="[v.gender==1?'sexMen':'sexWomen']"></span>
+                                <img :src="v.headImgUrl?v.headImgUrl:'../../assets/images/common/logo.png'" alt="load"  :class='{dft: !v.headImgUrl}'>
+                        </div>
+                        <div class="userName">{{v.name}}</div>
+                    </div>
+                        <div class="scoreNumber">
+                            {{(v.score).toFixed(2)}}分
+                        </div>
+
+                        <div class="leftClum">
+                        <div class="pkIcon" @click="showGood(index,2)" v-if="v.likeStatus==true">
+                                <img src="../../assets/images/pk/like.png" alt="load" >
+                        </div>
+                        <div class="pkIcon" @click="showGood(index,1)" v-if="v.likeStatus==false">
+                                <img src="../../assets/images/pk/no.png" alt="load" >
+                        </div>
+                        <span class="goodNumber">{{v.likeSize}}</span>
+                    </div>
+                    </li>
+                    <div class="downNo">我是有底线的</div>
+                </ul>
+              </div>
+            </div>
+
+           <footer-bar :index="1"></footer-bar>
+        </div>
+         </div>
+         
+
+         <script type="text/javascript" src="../../assets/js/require.js?v11.1.0"></script>
+         <script src="../../assets/js/config.js?v11.1.0"></script>
+         <script src="./pk.js?v11.1.0"></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta charset='utf-8'/>
+    <title>晒一晒</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css">
+
+    <link rel="stylesheet" type="text/css" href="../../assets/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" type="text/css" href="./show.css">
+    <script type="text/javascript" src="../../assets/js/lib/flexible.js" async></script>
+
+     <script>  
+        var _hmt = _hmt || [];
+        _hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+      </script>
+
+</head>
+
+<body>
+    <div id="app" class="container" >
+    <!-- <Lo ng :isloading='showLoading'></Loading> -->
+
+      <page-load :loadstage="!loaded"></page-load>
+      <div v-cloak v-show="loaded">
+
+        <div class="btn-publish" @click='go'></div>
+        <div class="tab">
+            <span :class='{active: cur == "hot"}' @click='tab("hot")'>热门推荐</span>
+            <span :class='{active: cur == "sport"}' @click='tab("sport")'>运动时刻</span>
+            <span :class='{active: cur == "body"}' @click='tab("body")'>秀身材</span>            <span :class='{active: cur == "food"}' @click='tab("food")'>秀美食</span>
+        </div>
+        
+        <div class="hot" v-show='cur == "hot"'>
+
+          <div class="list">
+            <div class="item" @click='toDetail(data[0][index].picid)'  v-for='(item,index) in typeImgs[0]' :class='{auditing: data[0][index].state == 1}'>
+              <div class="img-box">
+                <div class='img' :style='{"background-image": "url(" + item + "?x-oss-process=image/resize,w_300/auto-orient,1)"}' alt="" ></div>
+                <div class="text" v-show='data[0][index].state == 1'>审核中</div>
+              </div>
+              <div class="title">{{data[0][index].picName}}</div>
+
+              <div class="f1">
+                <span class="like" :class='{active: data[0][index].light}' @click.stop='like(0, data[0][index])'>{{data[0][index].thuupSum}}</span>
+                <span class="comment" @click='toDetail(data[0][index].picid)'>{{data[0][index].commSum}}</span>
+              </div>
+            </div>
+          </div>
+
+          <spin :isloading='true' :onscroll='onScroll' :prevent='data[0].prevent || type != 0' :delay=100 :istall='data[0].length > 4'></spin>
+        </div>
+        <div class="sport" v-show='cur == "sport"'>
+
+          <div class="list">
+            <div class="item" @click='toDetail(data[1][index].picid)'  v-for='(item,index) in typeImgs[1]' :class='{auditing: data[1][index].state == 1}'>
+              <div class="img-box">
+                <div class='img' :style='{"background-image": "url(" + item + "?x-oss-process=image/resize,w_300/auto-orient,1)"}' alt="" ></div>
+                <div class="text" v-show='data[1][index].state == 1'>审核中</div>
+              </div>
+              <div class="title">{{data[1][index].picName}}</div>
+
+              <div class="f1">
+                <span class="like" :class='{active: data[1][index].light}' @click.stop='like(1, data[1][index])'>{{data[1][index].thuupSum}}</span>
+                <span class="comment" @click='toDetail(data[1][index].picid)'>{{data[1][index].commSum}}</span>
+              </div>
+            </div>
+          </div>
+
+          <spin :isloading='true' :onscroll='onScroll' :prevent='data[1].prevent || type != 1' :delay=100  :istall='data[1].length > 4'></spin>
+        </div>
+        <div class="body" v-show='cur == "body"'>
+
+          <div class="list">
+            <div class="item" @click='toDetail(data[2][index].picid)' v-for='(item,index) in typeImgs[2]'  :class='{auditing: data[2][index].state == 1}'>
+              <div class="img-box" >
+                <div class='img' :style='{"background-image": "url(" + item + "?x-oss-process=image/resize,w_300/auto-orient,1)"}' alt="" ></div>
+                <div class="text" v-show='data[2][index].state == 1'>审核中</div>
+              </div>
+              <div class="title">{{data[2][index].picName}}</div>
+
+              <div class="f1">
+                <span class="like" :class='{active: data[2][index].light}' @click.stop='like(2, data[2][index])'>{{data[2][index].thuupSum}}</span>
+                <span class="comment" @click='toDetail(data[2][index].picid)'>{{data[2][index].commSum}}</span>
+              </div>
+            </div>
+          </div>
+
+          <spin :isloading='true' :onscroll='onScroll' :prevent='data[2].prevent || type != 2' :delay=100  :istall='data[2].length > 4'></spin>
+        </div>
+        <div class="food" v-show='cur == "food"'>
+
+          <div class="list">
+            <div class="item" @click='toDetail(data[3][index].picid)'  v-for='(item,index) in typeImgs[3]' :class='{auditing: data[3][index].state == 1}'>
+              <div class="img-box">
+                <div class='img' :style='{"background-image": "url(" + item + "?x-oss-process=image/resize,w_300/auto-orient,1)"}' alt="" ></div>
+                <div class="text" v-show='data[3][index].state == 1'>审核中</div>
+              </div>
+              <div class="title">{{data[3][index].picName}}</div>
+
+              <div class="f1">
+                <span class="like" :class='{active: data[3][index].light}' @click.stop='like(3, data[3][index])'>{{data[3][index].thuupSum}}</span>
+                <span class="comment" @click='toDetail(data[3][index].picid)'>{{data[3][index].commSum}}</span>
+              </div>
+            </div>
+          </div>
+
+          <spin :isloading='true' :onscroll='onScroll' :prevent='data[3].prevent || type != 3' :delay=100  :istall='data[3].length > 4'></spin>
+
+
+
+        </div>
+                        
+      </div>
+      <footer-bar :index="2"></footer-bar>
+    </div>
+    <script type="text/javascript" src="../../assets/js/require.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="./show.js"></script>
+</body>
+
+</html>

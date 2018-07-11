@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta charset='utf-8'/>
+    <title>建议吐槽</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css">
+
+    <link rel="stylesheet" type="text/css" href="./feedback.css">
+    <script type="text/javascript" src="../../assets/js/lib/flexible.js"></script>
+    <script>
+    var _hmt = _hmt || [];
+    _hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+    </script>
+</head>
+
+<body>
+    <div id="app" class="container" v-cloak>
+        <div class="feedback-box">
+            <div class="t">
+                <span class="jianyi" 
+                :class='{active: tab == "jianyi"}'
+                @click='tab = "jianyi"'
+                >
+                    <span class="text">建议</span>
+                </span>
+                <span class="tucao"
+                :class='{active: tab == "tucao"}'
+                @click='tab = "tucao"'>
+                    <span class="text">吐槽</span>
+                </span>
+                <span class="history"
+                :class='{active: tab == "history"}'
+                @click='tab = "history"'>
+                    <span class="text">历史记录</span>
+                </span>
+            </div>
+
+            <div class="main">
+                
+                <div class="j" v-show='tab == "jianyi"'>
+                    <textarea ref='jianyi_text' placeholder='有想法有建议？！快快告诉我们的小仙女吧~
+' name="" id="" cols="30" rows="10"></textarea>
+                    <input ref='jianyi_email' placeholder='留下你的邮箱，小仙女会及时联系你哦（选填）' type="text">
+                    <div class="upload">
+                        <div class="btn-upload">
+                            <input type="file" accept='image/*' @change='onUpload'>
+                            <span class="text">点击添加图片</span>
+                            <img :src="img" alt="" v-if='img'>
+                        </div>
+                        <span class="t1">(选填)</span>
+                    </div>
+                    <div class="btn-save" :class='{btnDisable: disableJianyi}' @click='saveJianyi'>提交</div>
+                    <div class="b">联系小仙女: 400-8782-181</div>
+
+                </div>
+                <div class="tu" v-show='tab == "tucao"'>
+                    <div class="problems">
+                        <span v-for='(item,i) in problems' 
+                        @click='problemId = item.problemId'
+                        :class='{active: item.problemId == problemId}'>{{item.problem}}</span>
+                    </div>
+                    <textarea ref='tucao_text' placeholder='其他问题可在这吐槽哦(选填)' name="" id="" cols="30" rows="10"></textarea>
+                    <div class="upload">
+                        <div class="btn-upload">
+                            <input type="file" accept='image/*' @change='onUpload2'>
+                            <span class="text">点击添加图片</span>
+                            <img :src="img2" alt="" v-if='img2'>
+                        </div>
+                        <span class="t1">(选填)</span>
+                    </div>
+                    <div class="btn-save"  :class='{btnDisable: disableTucao}' @click='saveTucao'>提交</div>
+
+                    <div class="b">联系小仙女: 400-8782-181</div>
+                </div>
+
+                <div class="h" v-show='tab == "history"'>
+                <div id="h-list">
+                    <div class="item" v-for='item in history' :class='{jianyi: item.type == 1}' @click='toDetail(item.id)'>
+                        <span class="s1">
+                            <span class="a1">{{item.type == 2 ? problemMap[item.problemId] : '建议'}}</span>
+                            <span class="a2">{{item.proposal}}</span>
+                            <span class="date">{{item.createTime | formatDate}}</span>
+                        </span>
+                        <span class="s2">回复 <span :class="{red: item.readState == 0}">({{item.childMessage ? item.childMessage.length : 0}})</span></span>
+                    </div>
+
+
+
+                    <div class="no-record" v-if='!history.length'>
+                        亲爱哒,还没有历史记录哦~
+                    </div>
+
+                    </div>
+                    <!-- <div class="b">联系小仙女: 400-8782-181</div> -->
+
+                </div>
+            </div>
+        </div>
+        <footer-bar :index="0"></footer-bar>
+    </div>
+    <script type="text/javascript" src="../../assets/js/require.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="../../assets/js/funs/upload.js"></script>
+
+    <script src="./feedback.js"></script>
+</body>
+
+</html>

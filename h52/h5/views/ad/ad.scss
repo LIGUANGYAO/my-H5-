@@ -1,0 +1,15 @@
+@import "../../assets/sass/_entry.scss";//引入sass mixin function等
+
+
+
+.homeAd{
+   width: 100%;
+   height: _(250);
+   display: block;
+   margin-top: _(20);
+}
+
+.homeAd img{
+    width: 100%;
+    height: _(250);
+}

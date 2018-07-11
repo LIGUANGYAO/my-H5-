@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta charset='utf-8'/>
+    <title>健康报表</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/js/lib/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/js/lib/bootstrap-datetimepicker/bootstrap-datetimepicker-standalone.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/swiper-3.4.2.min.css?v=v11.1.0">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/iosselect.css?v=v11.1.0">
+
+
+    <link rel="stylesheet" type="text/css" href="../../component/component.css">
+
+    <link rel="stylesheet" type="text/css" href="./report.css">
+    <script type="text/javascript" src="../../assets/js/lib/flexible.js"></script>
+    
+
+    <script>
+    var _hmt = _hmt || [];
+    _hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+    </script>
+</head>
+
+<body>
+    <div id="app" class="container" v-cloak>
+        <page-load :loadstage="!reportLoaded"></page-load>
+         <div class="report" v-show='reportLoaded' >
+            <div class="grid" v-if='reportData.fat'>
+                
+                <div class="row">
+                    <div class="item">
+                        <div class="d1">脂肪率</div>
+                        <div class="d2">{{reportData.fat?(reportData.fat*100).toFixed(1)+'%':''}}</div>
+                        <div class="d3" :class='{low: reportData.fatRateTitle == "瘦" || reportData.fatRateTitle == "偏瘦", high: reportData.fatRateTitle == "胖" || reportData.fatRateTitle == "偏胖"}'>{{reportData.fatRateTitle}}</div>
+                    </div>
+                    <div class="item">
+                        <div class="d1">水分</div>
+                        <div class="d2">{{reportData.water?(reportData.water*100).toFixed(1)+'%':''}}</div>
+                        <div class="d3" :class='{low: reportData.waterTitle == "瘦" || reportData.waterTitle == "偏瘦", high: reportData.waterTitle == "胖" || reportData.waterTitle == "偏胖"}'>{{reportData.waterTitle}}</div>
+                    </div>
+                    <div class="item">
+                        <div class="d1">骨量</div>
+                        <div class="d2">{{reportData.bon?(reportData.bon * 2).toFixed(1)+'斤':''}}</div>
+                        <div class="d3" :class='{low: reportData.bonTitle == "低" || reportData.bonTitle == "偏低", high: reportData.bonTitle == "高" || reportData.bonTitle == "偏高"}'>{{reportData.bonTitle}}</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="item">
+                        <div class="d1">肌肉率</div>
+                        <div class="d2">{{reportData.muscle?(reportData.muscle).toFixed(1)+'%':''}}</div>
+                        <div class="d3" :class='{low: reportData.muscleTitle == "低" || reportData.muscleTitle == "偏低", high: reportData.muscleTitle == "高" || reportData.muscleTitle == "偏高"}'>{{reportData.muscleTitle}}</div>
+                    </div>
+                    <div class="item">
+                        <div class="d1">蛋白质</div>
+                        <div class="d2">{{reportData.protein?(reportData.protein).toFixed(1):''}}%</div>
+                        <div class="d3" :class='{low: reportData.proteinTitle == "低" || reportData.proteinTitle == "偏低", high: reportData.proteinTitle == "高" || reportData.proteinTitle == "偏高"}'>{{reportData.proteinTitle}}</div>
+                    </div>
+                    <div class="item">
+                        <div class="d1">脂肪重量</div>
+                        <div class="d2">{{reportData.fatWeight?(reportData.fatWeight*2).toFixed(1)+'斤':''}}</div>
+                        <div class="d3" :class='{low: reportData.fatWeightText == "低" || reportData.fatWeightText == "偏低", high: reportData.fatWeightText == "高" || reportData.fatWeightText == "偏高"}'>{{reportData.fatWeightText}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="item">
+                        <div class="d1">内脏脂肪</div>
+                        <div class="d2">{{reportData.visceralFat?(reportData.visceralFat).toFixed(1)+'':''}}</div>
+                        <div class="d3" :class='{ high: reportData.fatWeightTitle == "警示型" || reportData.fatWeightTitle == "危险型"|| reportData.fatWeightTitle == "极度危险"}'>{{reportData.fatWeightTitle}}</div>
+                    </div>
+                    <div class="item">
+                        <div class="d1">肥胖等级</div>
+                        <div class="d2">{{(reportData.fat * 100).toFixed(0)}}</div>
+                        <div class="d3" :class='{low: reportData.fatLevelTitle == "瘦" || reportData.fatLevelTitle == "偏瘦", high: reportData.fatLevelTitle == "胖" || reportData.fatLevelTitle == "偏胖"}'>{{reportData.fatLevelTitle}}</div>
+                    </div>
+                    <div class="item">
+                        <div class="d1">身体年龄</div>
+                        <div class="d2">{{reportData.bodyAge?reportData.bodyAge+'岁':''}}</div>
+                        <!-- <div class="d3"></div> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="weight" :style='{"background-image": "url(../../assets/images/goal/" + bmiPhoto + ".gif)"}'>
+                <div class="d1">本次体重<span class="s1"><span class="val">{{manageData.currentWeight | number}}</span></span>斤</div>
+                <div class="d2">距离目标体重<span class="val">{{manageData.vo.targetWeight | number(0)}}</span>斤</div>
+                
+                <div class="dd">
+                <div class="d4"></div>
+                <div class="d3">
+                    <div class="d31">还需{{(manageData.vo.targetWeight > manageData.currentWeight)?'增加':'减少'}}</div>
+                    <div class="d32"><span class="val">{{ Math.abs(manageData.vo.targetWeight - manageData.currentWeight) || 0 | number}}</span><span class="s1">斤</span></div>
+
+                </div>
+                </div>
+
+            </div>
+
+            <div class="bmi">
+                <div class="d1">你的BMI<span class="val">{{reportData.BMI.bmi}}</span>{{reportData.bodyTypeChinese}}</div>
+
+                <div class="level">
+                    <span>偏瘦: &lt;18.5</span>
+                    <span>正常: 18.5 - 23.9</span>
+                    <span>偏胖: 24 - 27.9</span>
+                    <span>肥胖: ≥28</span>
+
+                    <span class="avatar" :style='{left: bmiLeft + "%"}'>
+                        <img :src='"../../assets/images/goal/" + (profile.gender == 1 ? "boy": "girl" )+ ".png"' alt=""/>
+                    </span>
+                </div>
+            </div>
+
+            <div class="heat">
+                <div class="d1">基础代谢率: <span class="val">{{manageData.bmr | number(0,1)}}</span>千卡</div>
+                <div class="list">
+                    <div class="item">
+                        <div class="d1">卡路里</div>
+                        <div class="d2">
+                            <div class="d21"></div>
+                        </div>
+                        <div class="d3"><span class="val">{{calorie}}</span>kcal</div>
+                    </div>
+                    <div class="item i1">
+                        <div class="d1">碳水</div>
+                        <div class="d2">
+                            <div class="d21"></div>
+                        </div>
+                        <div class="d3"><span class="val">{{(calorie*0.5).toFixed(0)}}</span>kcal</div>
+                    </div>
+                    <div class="item i2">
+                        <div class="d1">脂肪</div>
+                        <div class="d2">
+                            <div class="d21"></div>
+                        </div>
+                        <div class="d3"><span class="val">{{(calorie*0.25).toFixed(0)}}</span>kcal</div>
+                    </div>
+                    <div class="item i3">
+                        <div class="d1">蛋白质</div>
+                        <div class="d2">
+                            <div class="d21"></div>
+                        </div>
+                        <div class="d3"><span class="val">{{(calorie*0.25).toFixed(0)}}</span>kcal</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="excel" v-if='reportList.length'>
+                <div class="title">
+                    <span class="s1">我的报表</span>
+                    <span class="more" @click='toReport' v-if='reportCount > 2'>更多</span>
+                </div>
+                <div class="list">
+                    <div class="item" :class='{unread: !item.readcount}' v-for='item in reportList' @click='toReportDetail(item.id, item.reportId)'>
+                        <div class="i1">
+                            <span class="s1">{{item.reportNper}}</span>
+                            <span class="s2">{{item.createTime | formatDate}}</span>
+                        </div>
+                        <div class="i2">
+                  {{item.overview}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ad">
+             <div class="homeAd opacity  swiper-container" v-if="adImgeData5.length" id="swiper-container5" v-cloak>
+               <ul  class="swiper-wrapper">
+                   <li class="swiper-slide" v-for="(v,index) in adImgeData5"   @click="getAdCount(v.id,v.spaceId,'轮播广告一'+index,1,'健康报表广告')">
+                      <a :href="v.adLink">
+                          <img :src="v.path">
+                      </a>
+                   </li>
+               </ul>
+               <div class="swiper-pagination"></div>
+            </div> 
+            
+            
+            <div class="homeAd opacity  swiper-container" v-if="adImgeData6.length" id="swiper-container6" v-cloak>
+               <ul  class="swiper-wrapper">
+                   <li class="swiper-slide" v-for="(v,index) in adImgeData6"   @click="getAdCount(v.id,v.spaceId,'轮播广告一'+index,2,'健康报表广告')">
+                      <a :href="v.adLink">
+                          <img :src="v.path">
+                      </a>
+                   </li>
+               </ul>
+               <div class="swiper-pagination"></div>
+            </div>   
+            </div>         
+
+         </div>
+        <footer-bar :index="0"></footer-bar>
+    </div>
+    <script type="text/javascript" src="../../assets/js/require.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="./report.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<title>更多精彩</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css?v11.1.0">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css?v11.1.0">
+	<link rel="stylesheet" type="text/css" href="./wonderful.css?v11.1.0">
+	<script  type="text/javascript" src="../../assets/js/lib/flexible.js?v11.1.0" async></script>
+</head>
+
+<body>
+
+    <div id="app" class="container">
+        
+           <!--头部仪表盘-->
+           <div id="instrument">
+            <div class="judgment"> </div>
+            <div class="ctxActive">
+               <div class="centerBox">
+               <div class="currentWeight" v-cloak>
+                  <p v-cloak >{{currentWeight}}<span>斤</span></p>
+                  <span class="currentWeightSpan">当前体重</span>
+               </div>
+           </div>
+           </div> 
+            <canvas id="myCanvas" width="480" height="480"></canvas>
+            <canvas id="myCanvas2" width="480" height="480"></canvas>
+        </div>
+
+       <div id="btn">
+           <div class="animal">
+               <img src="../../assets/images/standby/animal.png">
+           </div>
+          <div class="authorizeBtn" >打开更多精彩</div>
+       </div>
+       
+
+
+       <div class="footerTitle">吐槽专线：400-8782-181</div>
+
+
+    </div>
+    <script type="text/javascript" src="../../assets/js/require.js?v11.1.0"></script>
+    <script src="../../assets/js/config.js?v11.1.0"></script>
+    <script src="./wonderful.js?v11.1.0"></script>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+
+@import "../../assets/sass/base/function/_pxTorem.scss";
+
+
+#app {
+}
+ 
+* {
+	box-sizing: border-box;
+}
+.report-box {
+	padding: _(20);
+
+	.report-list {
+		li {
+
+			&.gray {
+				background: #ccc;
+			}
+			padding: _(25);
+			background: #fa910c;
+			color: #fff;
+			height: _(348);
+			margin: _(25) 0;
+			position: relative;
+
+			.title {
+				text-align: center;
+				font-size: _(30);
+
+				&:before {
+					content: '.';
+					text-indent: -9999px;
+					display: inline-block;
+					width: _(85);
+					border-top: _(1) solid #fff;
+					position: absolute;
+					margin: _(15) 0 0 _(-90);
+				}
+
+				&:after {
+					content: '.';
+					text-indent: -9999px;
+					display: inline-block;
+					width: _(85);
+					border-top: _(1) solid #fff;
+					position: absolute;
+					margin: _(15) 0 0 _(5);					
+				}
+			}
+			.content2 {
+				margin: _(37) 0;
+				font-size: _(26);
+				line-height: _(36);
+			}
+
+			.date {
+				font-size: _(24);
+				position: absolute;
+				bottom: _(25);
+				right: _(25);
+			}
+		}
+	}
+
+	.empty-list {
+		position: fixed;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		margin: auto;
+		height: _(240);
+		text-align: center;
+
+		font-size: _(34);
+		color: #999;
+		line-height: _(56);
+		.a1 {
+			font-weight: 100;
+		}
+	}
+}

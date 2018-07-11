@@ -1,0 +1,95 @@
+[v-cloak] {
+  display: none; }
+
+.detail .top {
+  padding: 0.4rem 0.4rem;
+  border-bottom: 0.02667rem solid #e5e5ea; }
+  .detail .top .title {
+    font-size: 0.37333rem;
+    color: #333;
+    font-weight: bold; }
+  .detail .top .date {
+    font-size: 0.26667rem;
+    color: #999;
+    margin: 0.13333rem 0 0; }
+  .detail .top .content {
+    font-size: 0.32rem;
+    color: #8e8e93;
+    margin: 0.26667rem 0 0; }
+  .detail .top img {
+    margin: 0.4rem 0;
+    max-width: 6.66667rem; }
+
+.detail .reply {
+  padding: 0 0 1.30667rem; }
+  .detail .reply .item {
+    padding: 0.53333rem 0.4rem;
+    border-bottom: 0.01333rem solid #e5e5ea;
+    position: relative; }
+    .detail .reply .item img {
+      width: 1.06667rem;
+      height: 1.06667rem;
+      vertical-align: top;
+      border-radius: 50%; }
+    .detail .reply .item .s1 {
+      display: inline-block;
+      margin: 0 0 0 0.26667rem;
+      vertical-align: middle;
+      width: 80%; }
+      .detail .reply .item .s1 > * {
+        display: block; }
+      .detail .reply .item .s1 .a1 {
+        font-size: 0.34667rem; }
+        .detail .reply .item .s1 .a1 .name {
+          color: #f9860b; }
+      .detail .reply .item .s1 .a2 {
+        margin: 0.13333rem 0 0;
+        font-size: 0.37333rem; }
+      .detail .reply .item .s1 .a3 {
+        margin: 0.29333rem 0 0;
+        color: #999;
+        font-size: 0.26667rem; }
+        .detail .reply .item .s1 .a3 .icon {
+          position: absolute;
+          display: inline-block;
+          width: 0.4rem;
+          height: 0.4rem;
+          background: url(../../assets/images/my/comment.png) center center no-repeat;
+          background-size: contain;
+          right: 30px; }
+
+.detail .input {
+  position: fixed;
+  bottom: 1.30667rem;
+  height: 1.30667rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  background: #f9f9fe;
+  border-top: 0.01333rem solid #e5e5ea;
+  display: none; }
+  .detail .input input {
+    height: 0.90667rem;
+    border: 0.01333rem solid #e5e5ea;
+    margin: 0 0.16rem;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    padding: 0 0.32rem;
+    font-size: 0.4rem; }
+  .detail .input .btn-send {
+    background: #f9860b;
+    color: #fff;
+    display: inline-block;
+    height: 0.77333rem;
+    padding: 0 0.16rem;
+    line-height: 0.77333rem;
+    border-radius: 0.10667rem;
+    -ms-flex-preferred-size: 1.33333rem;
+        flex-basis: 1.33333rem;
+    text-align: center;
+    margin: 0 0.16rem; }

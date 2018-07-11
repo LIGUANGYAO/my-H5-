@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<title>系统消息</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css?v11.1.0">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css?v11.1.0">
+	<link rel="stylesheet" type="text/css" href="./message.css?v11.1.0">
+	<script  type="text/javascript" src="../../assets/js/lib/flexible.js?v11.1.0" async></script>
+</head>
+
+<body>
+
+    <div id="app" class="container">
+       
+      <div class="centerContainer"  v-cloak>
+          <ul>
+              <li class="activity" v-if="activityInfo.messageinfo">
+                    
+                  <div class="leftIcon">
+                        <span class="num"  v-cloak v-if="MessLis.activnums>0">{{MessLis.activnums?MessLis.activnums:''}}</span>
+                      <img src="../../assets/images/message/system1.png">
+                  </div>
+                  <div class="rightCloum">
+                      <div class="comment"><span class="commentWorld">活动</span><span class="commentTime" v-cloak>{{activityInfoTime}}</span></div>
+                      <p class="user" v-cloak>{{activityInfo.messageinfo}}</p>
+                  </div>
+              </li>
+              <li class="announ"  v-if="Info.messageinfo">
+                <div class="leftIcon">
+                        <span class="num"  v-cloak v-if="MessLis.publicnums>0">{{MessLis.publicnums?MessLis.publicnums:''}}</span>
+                    <img src="../../assets/images/message/system2.png">
+                </div>
+                <div class="rightCloum">
+                    <div class="comment"><span class="commentWorld">公告</span><span class="commentTime" v-cloak>{{InfoTime}}</span></div>
+                    <p class="user" v-cloak>{{Info.messageinfo}}</p>
+                </div>
+            </li>
+            <li class="feedback">
+                    <div class="leftIcon">
+                            <span class="num"  v-cloak v-if="MessLis.proposalnums>0">{{MessLis.proposalnums?MessLis.proposalnums:''}}</span>
+                        <img src="../../assets/images/message/system3.png">
+                    </div>
+                    <div class="rightCloum">
+                        <div class="comment"><span class="commentWorld">意见反馈</span><span class="commentTime"></span></div>
+                        <p class="user">回复内容</p>
+                    </div>
+                </li>
+                <li class="healtRport">
+                        <div class="leftIcon">
+                                 <span class="num"  v-cloak v-if="MessLis.healthnums>0">{{MessLis.healthnums?MessLis.healthnums:''}}</span>
+                            <img src="../../assets/images/message/system4.png">
+                        </div>
+                        <div class="rightCloum">
+                            <div class="comment"><span class="commentWorld">健康报表</span><span class="commentTime"  v-cloak v-show="false">{{listTime | formatDate}}</span></div>
+                            <p class="user" v-cloak >{{MessLis.healthnums>0?'有最新的健康报表待查看哦':'暂无最新内容'}}</p>
+                        </div>
+                    </li>
+          </ul>
+      </div>
+    </div>
+    <script type="text/javascript" src="../../assets/js/require.js?v11.1.0"></script>
+    <script src="../../assets/js/config.js?v11.1.0"></script>
+    <script src="./system.js?v11.1.0"></script>
+
+</body>
+</html>

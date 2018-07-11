@@ -1,0 +1,68 @@
+
+@import "../../assets/sass/base/function/_pxTorem.scss";
+
+#app {
+}
+ 
+* {
+	box-sizing: border-box;
+	color: #333;
+}
+.detail-box {
+	padding: _(20);
+	
+	.title {
+		font-size: _(30);
+		line-height: _(48);
+	}
+	.weightRecords{
+	    position: relative;
+	    height: _(400);
+	   background-image: url(../../assets/images/home/recently.png);
+	   background-size: _(710)  _(400);
+	    margin: _(36) 0;
+	    .leftLine,.rightLing{
+	        position: absolute;
+	        width: _(90);
+	        height: _(2);
+	        background-color: #ffffff;
+	        top: _(40);
+	    }
+	    .leftLine{
+	         left: _(136);
+	    }
+	    .rightLing{
+	        right: _(136);
+	    }
+	    .recordsHead{
+	        position: absolute;
+	        width: 100%;
+	        height: _(36);
+	        line-height: _(36);
+	        text-align: center;
+	        color: #ffffff;
+	        font-size: _(36);
+	        top: _(23);
+	        left: 0;
+	    }
+	    .checkRecords{
+	        width: _(38);
+	        height: _(38);
+	        position: absolute;
+	        right: _(20);
+	        top: _(20);
+	        z-index: 5;
+	        background-image: url(../../assets/images/home/checkRecord.png);
+	        background-size: _(38)  _(38);
+	    }
+	}
+	.recordsEchart{
+	    height: _(350);
+	    padding-top: _(30);
+	    background: orange;
+	}
+	.text-box {
+		font-size: _(30);
+		line-height: _(48);
+	}
+}

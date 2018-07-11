@@ -1,0 +1,175 @@
+html, body {
+  background: #f9f9fe; }
+
+.feedback-box {
+  background: #f9f9fe; }
+  .feedback-box .t {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    text-align: center;
+    padding: 0.4rem 0 0.4rem 0;
+    background: #fff; }
+    .feedback-box .t > * {
+      height: 1.6rem;
+      -webkit-box-flex: 1;
+          -ms-flex: 1;
+              flex: 1;
+      padding: 1.2rem 0 0;
+      font-size: 0.4rem;
+      color: #8e8e93; }
+      .feedback-box .t > *.active {
+        color: #f9860b; }
+    .feedback-box .t .jianyi {
+      background: url(../../assets/images/my/jianyi1.png) center top no-repeat;
+      background-size: 1.06667rem; }
+      .feedback-box .t .jianyi.active {
+        background: url(../../assets/images/my/jianyi2.png) center top no-repeat;
+        background-size: 1.06667rem; }
+    .feedback-box .t .tucao {
+      background: url(../../assets/images/my/tucao1.png) center top no-repeat;
+      background-size: 1.06667rem; }
+      .feedback-box .t .tucao.active {
+        background: url(../../assets/images/my/tucao2.png) center top no-repeat;
+        background-size: 1.06667rem; }
+    .feedback-box .t .history {
+      background: url(../../assets/images/my/history1.png) center top no-repeat;
+      background-size: 1.06667rem; }
+      .feedback-box .t .history.active {
+        background: url(../../assets/images/my/history2.png) center top no-repeat;
+        background-size: 1.06667rem; }
+  .feedback-box .main {
+    background: #fff;
+    margin: 0.4rem 0 0;
+    padding: 0.4rem 0.4rem; }
+    .feedback-box .main textarea {
+      height: 2.4rem;
+      border: 0.02667rem solid #e5e5ea;
+      width: 9.2rem;
+      padding: 0.26667rem; }
+    .feedback-box .main input[type="text"] {
+      margin: 0.4rem 0 0;
+      height: 0.90667rem;
+      border: 0.02667rem solid #e5e5ea;
+      width: 9.2rem;
+      padding: 0.26667rem; }
+    .feedback-box .main ::-webkit-input-placeholder {
+      font-size: 0.29333rem; }
+    .feedback-box .main .upload .btn-upload {
+      display: inline-block;
+      height: 2.66667rem;
+      width: 2.66667rem;
+      background: #efeff4 url(../../assets/images/my/add.png) center center no-repeat;
+      background-size: 0.74667rem;
+      padding: 2.13333rem 0 0;
+      color: #c7c7cc;
+      text-align: center;
+      font-size: 0.29333rem;
+      margin: 0.4rem 0 0.8rem;
+      border: 0.01333rem solid #e5e5ea;
+      position: relative; }
+      .feedback-box .main .upload .btn-upload input[type="file"] {
+        height: 2.66667rem;
+        width: 2.66667rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        z-index: 2; }
+      .feedback-box .main .upload .btn-upload img {
+        height: 2.66667rem;
+        width: 2.66667rem;
+        position: absolute;
+        top: 0;
+        left: 0; }
+    .feedback-box .main .upload .t1 {
+      display: inline-block;
+      margin: 0 0 0 0.26667rem;
+      color: #c7c7c7;
+      font-size: 0.29333rem; }
+    .feedback-box .main .btn-save {
+      width: 9.2rem;
+      height: 1.17333rem;
+      background: #f9860b;
+      border-radius: 0.13333rem;
+      color: #fff;
+      text-align: center;
+      font-size: 0.48rem;
+      line-height: 1.17333rem; }
+    .feedback-box .main .b {
+      margin: 0.53333rem 0;
+      text-align: center;
+      color: #8e8e93;
+      font-size: 0.32rem; }
+    .feedback-box .main .problems {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+      -webkit-box-pack: start;
+          -ms-flex-pack: start;
+              justify-content: flex-start; }
+      .feedback-box .main .problems span {
+        height: 0.64rem;
+        min-width: 2.66667rem;
+        text-align: center;
+        border: 0.02667rem solid #e5e5ea;
+        margin: 0 0.4rem 0.4rem 0;
+        line-height: 0.64rem;
+        font-size: 0.32rem;
+        color: #04040f; }
+        .feedback-box .main .problems span.active {
+          color: #f9860b;
+          border-color: #f9860b; }
+    .feedback-box .main .h {
+      padding: 0 0 1.33333rem; }
+      .feedback-box .main .h .item {
+        padding: 0 0 0 1.33333rem;
+        background: url(../../assets/images/my/tucao2.png) left 0.13333rem no-repeat;
+        background-size: 1.06667rem;
+        height: 1.73333rem;
+        position: relative;
+        border-bottom: 0.02667rem solid #e5e5ea;
+        margin: 0 0 0.4rem; }
+        .feedback-box .main .h .item.jianyi {
+          background: url(../../assets/images/my/jianyi2.png) left 0.13333rem no-repeat;
+          background-size: 1.06667rem; }
+        .feedback-box .main .h .item .s1 > * {
+          display: block; }
+        .feedback-box .main .h .item .s1 .a1 {
+          font-size: 0.37333rem;
+          color: #333;
+          height: 0.50667rem; }
+        .feedback-box .main .h .item .s1 .a2 {
+          font-size: 0.32rem;
+          color: #8e8e93;
+          margin: 0.13333rem 0 0;
+          height: 0.37333rem;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: 80%; }
+        .feedback-box .main .h .item .s1 .date {
+          font-size: 0.26667rem;
+          color: #999;
+          margin: 0.10667rem 0 0; }
+        .feedback-box .main .h .item .s2 {
+          position: absolute;
+          right: 0;
+          bottom: 0.4rem;
+          font-size: 0.32rem;
+          color: #04040f; }
+          .feedback-box .main .h .item .s2 .red {
+            color: #ff3b30; }
+      .feedback-box .main .h .no-record {
+        text-align: center;
+        color: #999;
+        margin: 0.66667rem 0 0; }
+
+.btnDisable {
+  background: #ccc !important;
+  pointer-events: none; }

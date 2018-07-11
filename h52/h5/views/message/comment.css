@@ -1,0 +1,74 @@
+[v-cloak] {
+  display: none !important; }
+
+.contentInfor ul {
+  padding: 0; }
+  .contentInfor ul li {
+    padding: 0 0.33333rem;
+    border-bottom: 1px solid #e5e5ea;
+    margin-top: 0.37333rem;
+    padding-bottom: 0.37333rem;
+    list-style: none; }
+    .contentInfor ul li .me {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between; }
+      .contentInfor ul li .me .portrait {
+        width: 1.06667rem;
+        height: 1.06667rem;
+        margin-right: 0.21333rem; }
+        .contentInfor ul li .me .portrait img {
+          width: 1.06667rem;
+          height: 1.06667rem;
+          border-radius: 100%; }
+      .contentInfor ul li .me .comments {
+        width: 7.86667rem;
+        position: relative; }
+        .contentInfor ul li .me .comments .userName {
+          font-size: 0.34667rem;
+          color: #04040f; }
+        .contentInfor ul li .me .comments .feedBackTime {
+          position: absolute;
+          top: 2%;
+          right: 4%;
+          font-size: 0.34667rem;
+          color: #8e8e93; }
+        .contentInfor ul li .me .comments .time {
+          font-size: 0.26667rem;
+          color: #8e8e93;
+          margin: 0.13333rem 0 0.21333rem 0; }
+        .contentInfor ul li .me .comments .myInfro {
+          font-size: 0.37333rem;
+          color: #04040f; }
+        .contentInfor ul li .me .comments .reply {
+          background-color: #f9f9fe;
+          padding: 0.26667rem;
+          -webkit-box-sizing: content-box;
+                  box-sizing: content-box;
+          margin-top: 0.26667rem;
+          position: relative; }
+          .contentInfor ul li .me .comments .reply img {
+            width: 50%; }
+          .contentInfor ul li .me .comments .reply .tr {
+            position: absolute;
+            top: -0.46667rem;
+            left: 0.53333rem;
+            z-index: 2;
+            width: 0px;
+            height: 0px;
+            border-top: 0.24rem solid transparent;
+            border-right: 0.24rem solid transparent;
+            border-bottom: 0.24rem solid #f9f9fe;
+            border-left: 0.24rem solid transparent; }
+          .contentInfor ul li .me .comments .reply .replyInfor {
+            color: #8e8e93;
+            font-size: 0.34667rem;
+            margin-bottom: 0.2rem; }
+            .contentInfor ul li .me .comments .reply .replyInfor img {
+              width: 50%; }
+            .contentInfor ul li .me .comments .reply .replyInfor .replyName {
+              color: #f9860b;
+              line-height: 150%; }

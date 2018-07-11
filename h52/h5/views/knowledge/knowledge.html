@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta charset='utf-8'/>
+    <title>健康知识库</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css">
+    <link rel="stylesheet" type="text/css" href="./knowledge.css">
+      <link rel="stylesheet" type="text/css" href="./dropload.css?v11.1.0">
+    <script type="text/javascript" src="../../assets/js/lib/flexible.js" async></script>
+</head>
+
+<body>
+    <div id="app" class="container" >
+    <page-load :loadstage="!loaded"></page-load>
+    <div v-cloak v-show="loaded">
+        <div class="knowledge-box">
+            <div class="nav1 abcf">
+                <li class="active" code='1'>健康篇</li>
+                <li code='2'>养生篇</li>
+                <li code='3'>营养篇</li>
+            </div>
+            <div class="content-nav">
+            <div class="list"  id="list" style="display: block;">
+                <div class="item" @click='toArtical(item.id)' v-for='item in list' v-cloak>
+                    <div class="img-container" >
+                        <img :src="item.picRealPath" alt="">
+                    </div>
+                    <div class="item-detail">
+                        <div class="title" v-cloak>{{item.title}}</div>
+                        <span class="date" v-cloak>{{item.publishTime}}</span>
+                    </div>
+                </div>
+                <spin :isLoading='showLoading'></spin>
+                  <div class="over" id="over">我们是有底线的</div>
+            </div>
+            <div class="list" id="list1">
+                    <div class="item" @click='toArtical(item.id)' v-for='item in list1' v-cloak>
+                        <div class="img-container" >
+                            <img :src="item.picRealPath" alt="">
+                        </div>
+                        <div class="item-detail">
+                            <div class="title" v-cloak>{{item.title}}</div>
+                            <span class="date" v-cloak>{{item.publishTime | formatDate}}</span>
+                        </div>
+                    </div>
+                    <spin :isLoading='showLoading1'></spin>
+                    <div class="over" id="over1">我们是有底线的</div>
+            </div>
+
+
+                <div class="list" id="list2">
+                        <div class="item" @click='toArtical(item.id)' v-for='item in list2' v-cloak>
+                            <div class="img-container" >
+                                <img :src="item.picRealPath" alt="">
+                            </div>
+                            <div class="item-detail">
+                                <div class="title" v-cloak>{{item.title}}</div>
+                                <span class="date" v-cloak>{{item.publishTime | formatDate}}</span>
+                            </div>
+                        </div>
+                        <spin :isLoading='showLoading2'></spin>
+                        <div class="over" id="over2">我们是有底线的</div>
+                    </div>
+        </div>
+                </div>
+        </div>
+        <footer-bar :index="0"></footer-bar>
+    </div>
+    <script type="text/javascript" src="../../assets/js/require.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="./knowledge.js"></script>
+</body>
+
+</html>

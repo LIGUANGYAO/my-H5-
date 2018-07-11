@@ -1,0 +1,539 @@
+.opacity {
+  -webkit-animation: opacity 0.4s linear;
+  animation: opacity 0.4s linear; }
+
+@-webkit-keyframes opacity {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes opacity {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+.swiper-pagination-bullet-active {
+  opacity: 0.8;
+  background: #f9860b; }
+
+.registrationModel {
+  width: 7.86667rem;
+  height: 9.33333rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 15;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: #ffffff; }
+  .registrationModel .registrationModelHeader {
+    margin-bottom: 0.33333rem; }
+    .registrationModel .registrationModelHeader .registrationHead {
+      height: 1.02667rem;
+      margin-bottom: 0.2rem;
+      background-image: url(../../assets/images/home/bg.png);
+      background-size: 100% 1.02667rem; }
+      .registrationModel .registrationModelHeader .registrationHead p {
+        font-size: 0.34667rem;
+        color: #ffffff;
+        text-align: center;
+        line-height: 1.02667rem;
+        height: 1.02667rem; }
+  .registrationModel #sexDom {
+    height: 2.10667rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin-bottom: 0.2rem; }
+    .registrationModel #sexDom span {
+      color: #333333;
+      font-size: 0.34667rem;
+      padding: 0 0.4rem; }
+    .registrationModel #sexDom .boy {
+      width: 1.48rem;
+      height: 1.92rem;
+      background-image: url(../../assets/images/home/men.png);
+      background-size: 1.48rem 1.92rem;
+      background-repeat: no-repeat; }
+    .registrationModel #sexDom .boy.Active {
+      width: 1.48rem;
+      height: 2.10667rem;
+      background-image: url(../../assets/images/home/menActive.png);
+      background-size: 1.48rem 2.10667rem;
+      background-repeat: no-repeat; }
+    .registrationModel #sexDom .girl {
+      width: 1.48rem;
+      height: 1.92rem;
+      background-image: url(../../assets/images/home/women.png);
+      background-size: 1.48rem 1.92rem;
+      background-repeat: no-repeat; }
+    .registrationModel #sexDom .girl.Active {
+      width: 1.48rem;
+      height: 2.10667rem;
+      background-image: url(../../assets/images/home/womenActive.png);
+      background-size: 1.48rem 2.10667rem;
+      background-repeat: no-repeat; }
+  .registrationModel .stature, .registrationModel .birthdate {
+    text-align: center; }
+    .registrationModel .stature h3, .registrationModel .birthdate h3 {
+      color: #666666;
+      font-size: 0.4rem;
+      font-weight: normal;
+      margin-bottom: 0.13333rem; }
+    .registrationModel .stature input, .registrationModel .birthdate input {
+      background: none;
+      border: none;
+      color: #f88409;
+      font-size: 0.58667rem;
+      height: 0.66667rem;
+      text-align: center;
+      line-height: 0.66667rem;
+      border-bottom: 0.02667rem solid #f88409; }
+  .registrationModel .stature {
+    margin-bottom: 0.42667rem; }
+  .registrationModel .birthdate {
+    margin-bottom: 0.53333rem; }
+  .registrationModel #JS-stature {
+    margin: 0 auto; }
+    .registrationModel #JS-stature input {
+      width: 2.13333rem; }
+  .registrationModel #JS-year {
+    margin: 0 auto; }
+    .registrationModel #JS-year input {
+      width: 3.46667rem; }
+  .registrationModel .secret-world {
+    text-align: center;
+    color: #999999;
+    font-size: 0.29333rem; }
+  .registrationModel .registration-btn-box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    margin-top: 0.33333rem; }
+    .registrationModel .registration-btn-box .registration-btn {
+      height: 0.85333rem;
+      width: 4.02667rem;
+      background: #f9850a;
+      border: 0;
+      border-radius: 0.66667rem;
+      color: #ffffff;
+      text-align: center;
+      line-height: 0.85333rem; }
+
+.bodyFatTitle {
+  font-size: 0.45333rem;
+  color: #333333;
+  text-align: center;
+  margin-top: 0.53333rem; }
+  .bodyFatTitle span {
+    color: #f9860b; }
+
+.bodyFat {
+  padding-top: 0.53333rem;
+  margin-bottom: 0.26667rem; }
+  .bodyFat ul {
+    padding-top: 0.13333rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; }
+    .bodyFat ul li {
+      width: 25%;
+      text-align: center;
+      margin-bottom: 0.2rem; }
+      .bodyFat ul li span.percentage {
+        color: #f9860b;
+        font-size: 0.4rem; }
+      .bodyFat ul li span.titleColor {
+        color: #666666; }
+      .bodyFat ul li span.headerTitle {
+        color: #b2b2b1; }
+      .bodyFat ul li span {
+        font-size: 0.4rem;
+        height: 0.6rem;
+        line-height: 0.6rem;
+        display: block; }
+
+.mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  z-index: 12; }
+
+.userInfo {
+  width: 100%;
+  height: 1.49333rem;
+  margin-top: 0.93333rem;
+  margin-bottom: 0.82667rem; }
+  .userInfo .genderM, .userInfo .genderW {
+    width: 0.53333rem;
+    height: 0.53333rem;
+    position: absolute;
+    top: 2.33333rem;
+    left: 5.86667rem;
+    z-index: 3;
+    background-image: url(../../assets/images/health/sex-icon.png);
+    background-size: 1.06667rem 0.53333rem; }
+  .userInfo .genderW {
+    background-position: 0 0; }
+  .userInfo .genderM {
+    background-position: 0.53333rem 0; }
+  .userInfo .registrationUser {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+    .userInfo .registrationUser .registrationUserBox {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      width: 9.62667rem; }
+      .userInfo .registrationUser .registrationUserBox .year, .userInfo .registrationUser .registrationUserBox .weigth, .userInfo .registrationUser .registrationUserBox .height {
+        width: 3.2rem;
+        text-align: center; }
+        .userInfo .registrationUser .registrationUserBox .year span, .userInfo .registrationUser .registrationUserBox .weigth span, .userInfo .registrationUser .registrationUserBox .height span {
+          display: block;
+          font-size: 0.50667rem;
+          color: #999999; }
+      .userInfo .registrationUser .registrationUserBox span.currentYear, .userInfo .registrationUser .registrationUserBox span.currentWei, .userInfo .registrationUser .registrationUserBox span.currentHeight {
+        color: #f8860a;
+        font-size: 0.58667rem;
+        margin-bottom: 0.32rem; }
+
+.consulting {
+  width: 1.65333rem;
+  height: 1.65333rem;
+  position: fixed;
+  top: 40%;
+  right: 0.13333rem;
+  z-index: 5;
+  cursor: pointer; }
+  .consulting img {
+    width: 1.65333rem;
+    height: 1.65333rem; }
+
+#instructionMast {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 18;
+  display: none; }
+
+.instruction {
+  width: 6.76rem;
+  height: 11.73333rem;
+  position: fixed;
+  background-color: #ffffff;
+  z-index: 20;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: none; }
+  .instruction .close {
+    width: 0.42667rem;
+    height: 0.42667rem;
+    position: absolute;
+    background-image: url(../../assets/images/health/close.png);
+    background-size: 0.42667rem 0.42667rem;
+    top: 0.4rem;
+    right: 0.34667rem;
+    cursor: pointer; }
+  .instruction h4 {
+    font-size: 0.45333rem;
+    text-align: center;
+    padding-top: 0.4rem;
+    margin-bottom: 0.37333rem; }
+  .instruction .instructionInner {
+    padding: 0 0.48rem 0 0.42667rem;
+    color: #666666;
+    font-size: 0.37333rem; }
+    .instruction .instructionInner .adaption {
+      margin-bottom: 0.13333rem;
+      color: #333333; }
+    .instruction .instructionInner ul {
+      margin-bottom: 0.4rem; }
+      .instruction .instructionInner ul li {
+        line-height: 120%; }
+    .instruction .instructionInner .insTitle span {
+      color: #333333; }
+    .instruction .instructionInner .insTitle p {
+      margin-bottom: 0.13333rem;
+      line-height: 120%; }
+
+.bmiBox {
+  margin-top: 0.46667rem;
+  text-align: center; }
+  .bmiBox .bmiWorld {
+    text-align: center;
+    font-size: 0.4rem;
+    margin-bottom: 0.48rem;
+    position: relative; }
+    .bmiBox .bmiWorld .horn {
+      position: absolute;
+      width: 0.4rem;
+      height: 0.4rem;
+      background-image: url(../../assets/images/health/question.png);
+      background-size: 0.4rem 0.4rem;
+      right: 0.53333rem;
+      top: 0.02667rem; }
+  .bmiBox .bmiIntroduce {
+    color: #999999;
+    font-size: 0.37333rem;
+    line-height: 160%; }
+
+.animationBox {
+  margin-top: 1.6rem;
+  margin-bottom: 0.26667rem;
+  height: 2.66667rem;
+  padding-top: 1.46667rem;
+  position: relative; }
+  .animationBox .animationName {
+    position: absolute;
+    width: 1.6rem;
+    height: 0.53333rem;
+    top: -0.66667rem;
+    left: 0;
+    z-index: 3;
+    color: #999999;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; }
+  .animationBox #peoplAnimat {
+    width: 1.06667rem;
+    height: 1.2rem;
+    position: absolute;
+    z-index: 4;
+    top: 0.02667rem;
+    left: 0;
+    background-size: 1.06667rem 1.2rem; }
+  .animationBox .men1 {
+    background-image: url(../../assets/images/health/men1.gif); }
+  .animationBox .men2 {
+    background-image: url(../../assets/images/health/men2.gif); }
+  .animationBox .men3 {
+    background-image: url(../../assets/images/health/men3.gif); }
+  .animationBox .men4 {
+    background-image: url(../../assets/images/health/men4.gif); }
+  .animationBox .women1 {
+    background-image: url(../../assets/images/health/women1.gif); }
+  .animationBox .women2 {
+    background-image: url(../../assets/images/health/women2.gif); }
+  .animationBox .women3 {
+    background-image: url(../../assets/images/health/women3.gif); }
+  .animationBox .women4 {
+    background-image: url(../../assets/images/health/women4.gif); }
+  .animationBox .progress {
+    height: 0.21333rem;
+    width: 100%;
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between; }
+    .animationBox .progress .line {
+      width: 23%;
+      height: 0.21333rem;
+      background-color: #999999;
+      border-radius: 0.13333rem; }
+    .animationBox .progress .progressIner {
+      position: absolute;
+      height: 0.30667rem;
+      width: 0.30667rem;
+      left: 0;
+      top: -0.05333rem;
+      background-color: #ffa343;
+      border-radius: 0.26667rem; }
+  .animationBox .bmiNumber {
+    margin-top: 0.34667rem;
+    margin-bottom: 0.37333rem;
+    font-size: 0.32rem;
+    color: #999999; }
+    .animationBox .bmiNumber span:nth-child(1) {
+      margin-right: 0.33333rem; }
+    .animationBox .bmiNumber span:nth-child(2) {
+      margin-right: 0.46667rem; }
+    .animationBox .bmiNumber span:nth-child(3) {
+      margin-right: 0.33333rem; }
+
+.healthAd {
+  height: 2.66667rem; }
+
+.beautBody {
+  height: 8.26667rem;
+  margin-top: 0.46667rem;
+  background-image: url(../../assets/images/health/infoBg.png);
+  background-size: 9.46667rem 8.24rem;
+  position: relative; }
+  .beautBody .beautWomen, .beautBody .beautMen {
+    width: 2.4rem;
+    height: 6.4rem;
+    background-size: 2.4rem 6.4rem;
+    position: absolute;
+    top: 1.17333rem;
+    left: 3.53333rem;
+    z-index: 3; }
+  .beautBody .beautMen {
+    background-image: url(../../assets/images/health/bodyMen.png); }
+  .beautBody .beautWomen {
+    background-image: url(../../assets/images/health/bodyWomen.png); }
+  .beautBody .beautBodyL, .beautBody .beautBodyR {
+    width: 3.70667rem;
+    height: 4.16rem;
+    position: absolute;
+    top: 1.54667rem;
+    z-index: 4;
+    color: #ffffff;
+    text-align: center; }
+    .beautBody .beautBodyL .headTop, .beautBody .beautBodyR .headTop {
+      font-size: 0.45333rem;
+      margin-bottom: 0.25333rem; }
+  .beautBody .standardT {
+    font-size: 0.37333rem;
+    margin-bottom: 0.26667rem; }
+  .beautBody .standardW, .beautBody .beautW {
+    font-size: 0.4rem;
+    margin-bottom: 0.42667rem; }
+  .beautBody .thirdCirc {
+    font-size: 0.45333rem;
+    margin-bottom: 0.25333rem; }
+  .beautBody .basic {
+    font-size: 0.37333rem; }
+    .beautBody .basic ul li {
+      margin-bottom: 0.13333rem; }
+  .beautBody .beautBodyL {
+    left: 0.26667rem; }
+  .beautBody .beautBodyR {
+    right: 0.26667rem; }
+
+.beautBodyTitle {
+  margin-top: 0.53333rem;
+  margin-bottom: 0.50667rem; }
+  .beautBodyTitle h4 {
+    text-align: center;
+    color: #666666;
+    font-size: 0.46667rem;
+    margin-bottom: 0.4rem; }
+  .beautBodyTitle p {
+    color: #999999;
+    font-size: 0.37333rem;
+    line-height: 170%; }
+
+.foodSuggest {
+  margin-top: 0.53333rem; }
+  .foodSuggest p.foodH {
+    margin-bottom: 0.13333rem;
+    position: relative; }
+    .foodSuggest p.foodH span {
+      font-size: 0.4rem; }
+    .foodSuggest p.foodH i {
+      display: block;
+      font-style: normal;
+      width: 0.50667rem;
+      height: 0.50667rem;
+      position: absolute;
+      top: -0.02667rem;
+      right: 0; }
+      .foodSuggest p.foodH i img {
+        width: 0.50667rem;
+        height: 0.50667rem; }
+  .foodSuggest .suggestR {
+    position: relative;
+    width: 100%;
+    height: 5.06667rem;
+    color: #ffffff; }
+    .foodSuggest .suggestR img {
+      width: 100%;
+      height: 5.06667rem; }
+  .foodSuggest .suggestTitle {
+    width: 100%;
+    height: 1.33333rem;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    color: #ffffff; }
+    .foodSuggest .suggestTitle p {
+      padding: 0.26667rem 0 0 0.26667rem;
+      font-size: 0.34667rem;
+      line-height: 130%; }
+
+.sportSuggest {
+  margin-top: 0.37333rem; }
+  .sportSuggest p.sportH {
+    margin-bottom: 0.13333rem;
+    position: relative; }
+    .sportSuggest p.sportH span {
+      font-size: 0.4rem; }
+    .sportSuggest p.sportH i {
+      display: block;
+      font-style: normal;
+      width: 0.50667rem;
+      height: 0.50667rem;
+      position: absolute;
+      top: -0.02667rem;
+      right: 0; }
+      .sportSuggest p.sportH i img {
+        width: 0.50667rem;
+        height: 0.50667rem; }
+  .sportSuggest .suggestR {
+    position: relative;
+    width: 100%;
+    height: 6.22667rem; }
+    .sportSuggest .suggestR .suggestRTitle {
+      position: absolute;
+      width: 7.86667rem;
+      height: 2.8rem;
+      top: 1.33333rem;
+      left: 0.89333rem;
+      color: #ffffff; }
+      .sportSuggest .suggestR .suggestRTitle p {
+        line-height: 160%;
+        color: #ffffff; }
+      .sportSuggest .suggestR .suggestRTitle p:nth-child(1) {
+        font-size: 0.4rem; }
+      .sportSuggest .suggestR .suggestRTitle p:nth-child(2), .sportSuggest .suggestR .suggestRTitle p:nth-child(2) {
+        font-size: 0.34667rem; }
+    .sportSuggest .suggestR img {
+      width: 100%;
+      height: 6.22667rem; }
+
+.weightAdminister {
+  height: 1.33333rem;
+  width: 8.26667rem;
+  margin: 0 auto;
+  line-height: 1.33333rem;
+  font-size: 0.4rem;
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 2.10667rem;
+  margin-top: 0.8rem;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fa9e19), to(#fb8f11));
+  background: linear-gradient(#fa9e19, #fb8f11);
+  border-radius: 0.66667rem; }

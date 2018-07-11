@@ -1,0 +1,235 @@
+@import "../../assets/sass/base/function/_pxTorem.scss";
+
+
+html, body {
+  background: #f9f9fe;
+}
+
+.feedback-box {
+	background: #f9f9fe;
+	.t {
+		display: flex;
+		flex: 1;
+		text-align: center;
+		padding: _(30) 0 _(30) 0;
+		background: #fff;
+		> * {
+			height: _(120);
+			flex: 1;
+			padding: _(90) 0 0;			
+			font-size: _(30);
+			color: #8e8e93;
+
+			&.active {
+				color: #f9860b;
+			}
+
+		}
+		.jianyi {
+			background: url(../../assets/images/my/jianyi1.png) center top no-repeat;
+			background-size: _(80);
+
+			&.active {
+				background: url(../../assets/images/my/jianyi2.png) center top no-repeat;
+				background-size: _(80);
+
+			}
+		}
+		.tucao {
+			background: url(../../assets/images/my/tucao1.png) center top no-repeat;
+			background-size: _(80);
+
+			&.active {
+				background: url(../../assets/images/my/tucao2.png) center top no-repeat;
+				background-size: _(80);
+
+			}
+		}
+		.history {
+			background: url(../../assets/images/my/history1.png) center top no-repeat;
+			background-size: _(80);
+
+			&.active {
+				background: url(../../assets/images/my/history2.png) center top no-repeat;
+				background-size: _(80);
+
+			}
+		}
+	}
+
+	.main {
+		background: #fff;
+		margin: _(30) 0 0;
+		padding: _(30) _(30);
+		textarea {
+			height: _(180);
+			border: _(2) solid #e5e5ea;
+			width: _(690);
+			padding: _(20);
+
+		}
+		input[type="text"] {
+			margin: _(30) 0 0;
+			height: _(68);
+			border: _(2) solid #e5e5ea;
+			width: _(690);
+			padding: _(20);
+		}
+
+		::-webkit-input-placeholder {
+			font-size: _(22);
+		}
+
+		.upload {
+			.btn-upload {
+				display: inline-block;
+				height: _(200);
+				width: _(200);
+				background: #efeff4 url(../../assets/images/my/add.png) center center no-repeat;
+				background-size: _(56);
+				padding: _(160) 0 0;
+				color: #c7c7cc;
+				text-align: center;
+				font-size: _(22);
+				margin: _(30) 0 _(60);
+				border: _(1) solid #e5e5ea;
+				position: relative;
+
+				input[type="file"] {
+					height: _(200);
+					width: _(200);
+					position: absolute;
+					top: 0;
+					left: 0;
+					opacity: 0;
+					z-index: 2;
+				}
+
+				img {
+					height: _(200);
+					width: _(200);
+					position: absolute;
+					top: 0;
+					left: 0;
+				}
+			}
+
+			.t1 {
+				display: inline-block;
+				margin: 0 0 0 _(20);
+				color: #c7c7c7;
+				font-size: _(22);
+			}
+		}
+
+		.btn-save {
+		  // margin: _(60) auto;
+		  width: _(690);
+		  height: _(88);
+		  background: #f9860b;
+		  border-radius: _(10);
+		  color: #fff;
+		  text-align: center;
+		  font-size: _(36);
+		  line-height: _(88);
+		}
+		
+		.b {
+			margin: _(40) 0;
+			text-align: center;
+			color: #8e8e93;
+			font-size: _(24);
+		}
+		.problems {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: flex-start;
+			span {
+				height: _(48);
+				min-width: _(200);
+				text-align: center;
+				border: _(2) solid #e5e5ea;
+				margin: 0 _(30) _(30) 0;
+				line-height: _(48);
+				font-size: _(24);
+				color: #04040f;
+
+				&.active{
+					color: #f9860b;
+					border-color: #f9860b
+				}
+			}
+		}
+
+		.h {
+			padding: 0 0 _(100);
+
+			#h-list {
+				// min-height: _(400)
+			}
+			.item {
+				padding: 0 0 0 _(100);
+				background: url(../../assets/images/my/tucao2.png) left _(10) no-repeat;
+				background-size: _(80);
+				height: _(130);
+				position: relative;
+				border-bottom: _(2) solid #e5e5ea;
+				margin: 0 0 _(30);
+
+				&.jianyi {
+					background: url(../../assets/images/my/jianyi2.png) left _(10) no-repeat;
+					background-size: _(80);					
+				}
+				.s1 {
+					> * {
+						display: block;
+					}
+
+					.a1 {
+						font-size: _(28);
+						color: #333;
+						height: _(38);
+					}
+					.a2 {
+						font-size: _(24);
+						color: #8e8e93;
+						margin: _(10) 0 0;
+						height: _(28);
+						overflow: hidden;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						width: 80%;
+					}
+					.date {
+						font-size: _(20);
+						color: #999;
+						margin: _(8) 0 0;
+					}
+				}
+
+				.s2 {
+					position: absolute;
+					right: 0;
+					bottom: _(30);
+					font-size: _(24);
+					color: #04040f;
+
+					.red {
+						color: #ff3b30
+					}
+				}
+			}
+
+			.no-record {
+				text-align: center;
+				color: #999;
+				margin: _(50) 0 0;
+			}
+		}
+	}
+}
+
+.btnDisable {
+	background: #ccc !important;
+	pointer-events: none;
+}

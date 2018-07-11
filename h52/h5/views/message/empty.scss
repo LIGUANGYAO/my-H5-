@@ -1,0 +1,40 @@
+
+@import "../../assets/sass/base/function/_pxTorem.scss";//引入sass mixin function等
+
+[v-cloak] {
+    display: none !important; 
+  }
+.header{
+    width: 100%;
+    margin-top: _(240);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: _(150);
+    .image{
+        width: _(158);
+        height: _(200);
+        img{
+            width: _(158);
+            height: _(200);
+        }
+    }
+    .noMeassege{
+        color: #8e8e93;
+        font-size: _(30);
+        margin-top: _(30);
+    }
+}
+
+.goTo{
+   width: _(356);
+   height: _(66);
+   border: _(2) solid #f9860b;
+   text-align: center;
+   line-height: _(66);
+   font-size: _(32);
+   color: #f9860b;
+   margin:0 auto;
+   border-radius: _(5);
+}

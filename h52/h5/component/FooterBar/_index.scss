@@ -1,0 +1,54 @@
+@import "../../assets/sass/base/_fn.scss";//引入sass mixin function等
+
+$barName: "bar";
+.#{$barName}{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 10;
+    width: 100%;
+    height: _(98);
+    background-color:#f9f9fe;
+    position: fixed;
+    border-top: 1px solid #e5e5ea;
+    bottom: 0;
+    left: 0;
+    &>a{
+        position: relative;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: _(73);
+        background-image:url("../../assets/images/footerBar/nav.png");
+        background-size: _(155)  _(72);
+        background-repeat: no-repeat;
+        &.barIndex{
+                width: _(43);          
+        }
+        &.barHealth{
+                width: _(59);
+                background-position: _(-49) 0;
+        }
+        &.barMy{
+                width: _(39);
+                background-position: _(-116) 0;
+        }
+    }
+    &>a.#{$barName}-active{
+        background-image:url("../../assets/images/footerBar/navActive.png");
+        background-size: _(155)  _(72);
+        background-repeat: no-repeat;
+        &.barIndex{
+                width: _(43);  
+        }
+        &.barHealth{
+                width: _(59);
+                background-position: _(-49) 0;
+        }
+        &.barMy{
+                width: _(39);
+                background-position: _(-116) 0;  
+        }
+    }
+}

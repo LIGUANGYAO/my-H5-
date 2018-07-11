@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta charset='utf-8'/>
+    <title>称重打卡</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/js/lib/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/js/lib/bootstrap-datetimepicker/bootstrap-datetimepicker-standalone.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/swiper-3.4.2.min.css?v=v11.1.0">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/iosselect.css?v=v11.1.0">
+
+
+    <link rel="stylesheet" type="text/css" href="../../component/component.css">
+
+    <link rel="stylesheet" type="text/css" href="./card.css">
+    <script type="text/javascript" src="../../assets/js/lib/flexible.js"></script>
+    
+
+    <script>
+    var _hmt = _hmt || [];
+    _hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+    </script>
+</head>
+
+<body>
+    <div id="app" class="container" v-cloak>
+
+    <div class="modal goal" v-show="showGoalModal">
+        <div class="dialog">
+            <div class="title">{{hasGoal? '修改':'制定'}}目标</div>
+            <div class="d1">
+                <div class="d11">没有目标的人, 注定是不会成功的!</div>
+                <div class="d12" :class='{hasWeight: selectedWeight}'>
+                    <div class="e1">
+                        <span class="s1">目标体重</span>
+                        <span class="s2" @click='showWeight'>
+                            <span class="val" v-show='selectedWeight'>{{selectedWeight}}</span><span class="s3" v-show='selectedWeight'>斤</span>
+                            <span class="s4" v-show='!selectedWeight'>设置目标</span>
+                        </span>
+                    </div>
+                    <div class="e1">
+                        <span class="s1">目标周期</span>
+                        <span class="s2" @click='showStage'>
+                            <span class="val">{{selectedDays}}</span>天
+                        </span>
+                    </div>
+                </div>
+                <div class="d13" v-show='showTip'>* 减重过快有损健康, 请重新设定目标</div>
+            </div>
+            <div class="d2" v-show='toThin || toFat'>
+                <div class="e1" v-show='toFat'>请选择你的肥胖类型: </div>
+                <div class="list" v-show='toThin'>
+                    <div class="row">
+                        <span code='3' @click="hmt('完善目标','增肌')">增肌</span>
+                        <span code='2' @click="hmt('完善目标','塑形')">塑形</span>
+                    </div>
+                </div>
+                <div class="list" v-show='toFat'>
+                    <div class="row">
+                        <span class='active' code='5' @click="hmt('完善目标','单纯性肥胖')">单纯性肥胖</span>
+                        <span code='4' @click="hmt('完善目标','遗传性肥胖')">遗传性肥胖</span>
+                    </div>
+                    <div class="row">
+                        <span code='6' @click="hmt('完善目标','腹部性肥胖')">腹部性肥胖</span>
+                        <span code='7' @click="hmt('完善目标','虚胖性肥胖')">虚胖性肥胖</span>
+                    </div>
+                    <div class="row">
+                        <span code='8' @click="hmt('完善目标','水肿性肥胖')">水肿性肥胖</span>
+                        <span code='9' @click="hmt('完善目标','产后性肥胖')">产后性肥胖</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-ok" @click='confirmGoal'>确定</div>
+        </div>
+
+         <!-- <div class="close" @click='closeModal'></div> -->
+    </div>
+
+        <page-load :loadstage="!cardLoaded"></page-load>
+        <div class="card" v-show='cardLoaded'>
+            <div class="t1">
+                坚持打卡<span class="x1">{{manageData.totalCardCount}}</span>天
+            </div>
+
+            <div class="calendar"></div>
+
+            <div class="graphic">
+              <span class="a1">已打卡</span>
+              <span class="a2">目标周期</span>
+            </div>
+            
+            <div v-show='!overStage && !daySign && isSelectToday && !todayDone && lastThree.length' class='x1'>
+                <div class="card-list">
+                  <div class="item" v-for='(item,index) in lastThree' :class="{checked: index == lastThree.length - 1}">
+                    <span class="a1" :style="{visibility: index != 0 ? 'hidden' : 'visible'}">今天</span>
+                    <span class="a2">{{item.createTime}}</span>
+                    <span class="a3">
+                      体重 <span class="b1" :value='item.weight'>{{item.weight | number}}</span> 斤
+                    </span>
+
+                    <span class="btn2" v-show='lastThree.length!=1'></span>
+                  </div>
+                </div>
+            
+
+                <div class="text1" v-show='lastThree.length!=1'>*选择一个体重来打卡吧</div>
+            </div>
+
+
+            <div v-show='!overStage && (!isSelectToday || daySign || todayDone || !lastThree.length)'>
+                <div class="card-list">
+                  <div class="item  checked">
+                    <span class="a1">{{selectedDay}}</span>
+                    <span class="a3" v-if='daySign && daySign.weight'>
+                      体重 <span class="b1">{{daySign.weight  | number }}</span> 斤
+                    </span>
+
+                    <span class="a3" v-show='!daySign|| !daySign.weight'>没有打卡的体重数据</span>
+
+                  </div>
+
+                </div>
+            </div>
+
+
+            <div class="btn-win" @click='addSign' :class='{disable: todayDone }'  v-show='!overStage && lastThree.length'>点击打卡</div>
+            <div class="btn-win" @click='confirm' v-show='overStage'>重设打卡周期</div>
+
+            <!--广告-->
+
+            <div class="ad">
+             <div class="homeAd opacity  swiper-container" v-if="adImgeData2.length" id="swiper-container1" v-cloak>
+                <ul  class="swiper-wrapper">
+                    <li class="swiper-slide" v-for="(v,index) in adImgeData2"  @click="getAdCount(v.id,v.spaceId,'轮播广告一'+index,1,'称重打卡广告')">
+                       <a :href="v.adLink">
+                        <img :src="v.path">
+                       </a>
+                    </li>
+                </ul>
+                <div class="swiper-pagination"></div>
+             </div> 
+             <div class="homeAd opacity  swiper-container" v-if="adImgeData3.length" id="swiper-container2" v-cloak>
+                <ul  class="swiper-wrapper">
+                    <li class="swiper-slide" v-for="(v,index) in adImgeData3"   @click="getAdCount(v.id,v.spaceId,'轮播广告一'+index,2,'称重打卡广告')">
+                       <a :href="v.adLink">
+                           <img :src="v.path">
+                       </a>
+                    </li>
+                </ul>
+                <div class="swiper-pagination"></div>
+             </div> 
+             <div class="homeAd opacity  swiper-container" v-if="adImgeData4.length" id="swiper-container3" v-cloak>
+                <ul  class="swiper-wrapper">
+                    <li class="swiper-slide" v-for="(v,index) in adImgeData4"   @click="getAdCount(v.id,v.spaceId,'轮播广告一'+index,1,'称重打卡广告')">
+                       <a :href="v.adLink">
+                           <img :src="v.path">
+                       </a>
+                    </li>
+                </ul>
+                <div class="swiper-pagination"></div>
+             </div> 
+
+             </div>
+
+             <div class="modal" v-if='showModal'>
+
+                 <div class="dialog">
+                    <div class="a1">
+                     <div class="d2">打卡成功</div>
+                     <div class="score">
+                         获得<b class="value">{{todayGold}}</b>个积分
+                     </div>
+
+                     <div class="d3">下次打卡可获得+<span class="value">{{todayGold+1}}</span>积分</div>
+                     <div class="d4">加油！距离目标体重还剩下{{ Math.abs(manageData.vo.targetWeight - manageData.currentWeight) | number}}斤
+                     <!-- ，长按二维码，免费获取专属体重管理计划。 -->
+                     </div>
+                     </div>
+
+                    <div class="close" @click='closeModal'></div>
+                 </div>
+
+             </div>
+
+
+             <div class="bg x1" v-if='showModifyDlg'></div>
+             <div class="dialog x1" v-if='showModifyDlg'>
+               <div class="section">
+                 <!-- <h3>删除</h3> -->
+                 <p>恭喜, 您的目标周期已全部完成,<br/>是否重新设置目标?</p>
+               </div>
+               <div class="operate">
+                 <b class="btn-cancel" @click='cancelDlg'>不了</b>
+                 <b class="btn-confirm" @click='confirm'>去设置</b>
+               </div>
+             </div>
+        </div>
+
+        <footer-bar :index="0"></footer-bar>
+    </div>
+    <script type="text/javascript" src="../../assets/js/require.js"></script>
+    <script src="../../assets/js/config.js"></script>
+    <script src="./card.js"></script>
+</body>
+
+</html>

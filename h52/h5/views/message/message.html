@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<title>消息中心</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css?v11.1.0">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css?v11.1.0">
+	<link rel="stylesheet" type="text/css" href="./message.css?v11.1.0">
+	<script  type="text/javascript" src="../../assets/js/lib/flexible.js?v11.1.0" async></script>
+</head>
+
+<body>
+
+    <div id="app" class="container">
+       
+      <div class="centerContainer">
+          <ul>
+              <li class="picdomInfo">
+                  <div class="leftIcon">
+                      <span class="num" v-cloak v-if="message.pigdoms>0">{{message.pigdoms}}</span>
+                      <img src="../../assets/images/message/center1.png">
+                  </div>
+                  <div class="rightCloum">
+                      <div class="comment"><span class="commentWorld">评论</span><span class="commentTime" v-cloak>{{picdomInfoCreatTime}}</span></div>
+                      <p class="user" v-cloak><span class="nickname" >{{picdomInfoName?picdomInfoName+'：':''}}</span>{{picdomInfo?'评论了我的内容，快去看看':'暂时没有评论内容'}}</p>
+                  </div>
+              </li>
+              <li class="pigupsInfo">
+                <div class="leftIcon">
+                        <span class="num" v-cloak v-if="message.pigups>0">{{message.pigups}}</span>
+                    <img src="../../assets/images/message/center2.png">
+                </div>
+                <div class="rightCloum">
+                    <div class="comment"><span class="commentWorld">赞</span><span class="commentTime" v-cloak>{{pigupsInfoCreatTime}}</span></div>
+                    <p class="user" v-cloak><span class="nickname">{{pigupsInfoName?pigupsInfoName+'：':''}}</span>{{pigupsInfo?'赞我的内容，快去看看':'暂时没有点赞内容'}}</p>
+                </div>
+            </li>
+                <li class="sysinfos">
+                        <div class="leftIcon">
+                                <span class="num" v-cloak v-if="message.sysinfos>0">{{message.sysinfos}}</span>
+                            <img src="../../assets/images/message/center4.png">
+                        </div>
+                        <div class="rightCloum">
+                            <div class="comment"><span class="commentWorld">系统消息</span><span class="commentTime" v-cloak>{{InfoTime}}</span></div>
+                            <p class="user">通知内容</p>
+                        </div>
+                    </li>
+          </ul>
+      </div>
+      <footer-bar :index="7"></footer-bar>
+    </div>
+    <script type="text/javascript" src="../../assets/js/require.js?v11.1.0"></script>
+    <script src="../../assets/js/config.js?v11.1.0"></script>
+    <script src="./message.js?v11.1.0"></script>
+
+</body>
+</html>

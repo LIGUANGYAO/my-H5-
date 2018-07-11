@@ -1,0 +1,120 @@
+html, body, .container {
+  background-color: #ffffff;
+  max-width: 960px;
+  margin: 0 auto; }
+
+body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "SimHei", sans-serif;
+  overflow-x: hidden;
+  font-size: 14px !important; }
+
+ul, li {
+  list-style: none; }
+
+img {
+  max-width: 100%; }
+
+a {
+  text-decoration: none; }
+
+.clearfix:after {
+  clear: both;
+  content: '.';
+  display: block;
+  height: 0;
+  line-height: 0;
+  overflow: hidden; }
+
+*, :after, :before {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent; }
+
+input[type="tel"], input[type="text"], input[type="password"], textarea {
+  -webkit-appearance: none;
+  border-radius: 0; }
+
+[v-cloak] {
+  display: none !important; }
+
+.freeLine {
+  word-wrap: break-word;
+  word-break: break-all; }
+
+.content {
+  width: 9.46667rem;
+  margin: 0 auto;
+  min-height: 100%;
+  overflow: hidden; }
+
+.ios-select-widget-box header.iosselect-header {
+  background: #f9f9fe;
+  border: none; }
+
+.ios-select-widget-box header.iosselect-header a {
+  color: #8e8e93; }
+
+.ios-select-widget-box.olay > div {
+  background: #fff; }
+
+.ios-select-widget-box ul li.at {
+  color: #000000; }
+
+.hidden {
+  visibility: hidden; }
+
+.line {
+  width: 8.66667rem;
+  height: 1px;
+  margin: 0.6rem auto;
+  background-color: #dddddd; }
+
+.adviceBox {
+  width: 9.46667rem;
+  margin: 0.26667rem auto 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+  .adviceBox .experts {
+    width: 2.8rem;
+    height: 3.6rem; }
+    .adviceBox .experts img {
+      width: 100%;
+      height: auto;
+      border: 0.02667rem solid #0ca6cc; }
+  .adviceBox .expertsInfor {
+    margin-left: 0.26667rem;
+    width: 6.4rem; }
+    .adviceBox .expertsInfor .expertsInforH {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      margin-bottom: 0.4rem; }
+      .adviceBox .expertsInfor .expertsInforH .company {
+        font-size: 0.4rem; }
+      .adviceBox .expertsInfor .expertsInforH .expertsInforBtn {
+        width: 1.46667rem;
+        height: 0.66667rem;
+        background-color: #f9860b;
+        text-align: center;
+        line-height: 0.66667rem;
+        color: #ffffff;
+        font-size: 0.29333rem; }
+    .adviceBox .expertsInfor .physician {
+      margin-bottom: 0.26667rem; }
+      .adviceBox .expertsInfor .physician p {
+        font-size: 0.32rem; }
+    .adviceBox .expertsInfor .hobby p {
+      font-size: 0.32rem;
+      color: #999999;
+      line-height: 150%; }
+      .adviceBox .expertsInfor .hobby p span {
+        color: #333333; }

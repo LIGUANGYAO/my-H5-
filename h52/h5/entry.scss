@@ -1,0 +1,28 @@
+@import "./assets/sass/_entry.scss";//引入sass mixin function等
+
+body {
+	font-size: _(164);
+}
+
+.btn-box {
+	text-align: center;
+}
+.btn {
+	display: inline-block;
+	cursor: pointer;
+	text-align: center;
+}
+.btn1 {
+	background: #f9860b;
+	color: #fff;
+	line-height: _(65);
+	width: _(305);
+	height: _(65);
+	border-radius: _(30);
+	margin: _(63) auto;
+}
+
+.qr-img {
+	width: _(350);
+	margin: _(128) auto;
+}

@@ -1,0 +1,36 @@
+@import "../../assets/sass/_entry.scss";//引入sass mixin function等
+
+
+html, body, .container {
+    background-color: #ffffff;
+    max-width: 960px;
+    height: 100% !important;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.containerCode{
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: relative;
+    img{
+        width: 100%;
+        height: 100%;
+        border:none;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.codeImage{
+   position: absolute;
+   width: _(325);
+   height: _(435);
+   right: _(41);
+   top: _(482);
+   z-index: 2;
+   background-size: _(325)  _(435);
+   background-repeat: no-repeat;
+}
+

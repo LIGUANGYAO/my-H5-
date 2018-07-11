@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta charset='utf-8'/>
+    <title>个人中心</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css?v=v11.1.0">
+    <link rel="stylesheet" type="text/css" href="../../component/component.css">
+
+    <link rel="stylesheet" type="text/css" href="../../assets/css/iosselect.css?v=v11.1.0">
+    <link rel="stylesheet" type="text/css" href="./my.css?v=v11.1.0">
+    <script type="text/javascript" src="../../assets/js/lib/flexible.js?v=v11.1.0"></script>
+
+         <script>  
+        var _hmt = _hmt || [];
+        _hmt.push(['_setAccount', '209e8abccbe388d607aab53c296222c6']);
+      </script>
+</head>
+
+<body>
+    <div id="app" class="container" v-cloak>
+        <page-load :loadstage="!loaded"></page-load>
+        <div v-cloak v-show="loaded">
+            <div class="main" v-show='!isEdit' v-cloak>
+                
+                <div class="top">
+                    <img :src="loaded && (profile.weChatUser.headimgurl || profile.headimgurl || (sex == '女' ? '../../assets/images/my/girl.png' : '../../assets/images/my/boy.png'))" alt="">
+                    <span class="s1">
+                        <span class="name">{{profile.name || profile.weChatUser.nickname}}</span>
+                        <!-- <span class="id">ID:112333</span> -->
+                    </span>
+                    <span class="btn-edit" @click='edit()'>修改资料</span>
+                </div>
+
+                <div class="l1">
+                    <span><span class="s1">{{profile.weight ? ((profile.weight-0).toFixed(1)*2).toFixed(1) + ' 斤' : ''}}</span><span class="s2">体重</span></span>
+                    <span><span class="s1">{{profile.height ? profile.height + 'cm' : ''}}</span><span class="s2">身高</span></span>
+                    <span><span class="s1">{{profile.age==null?'':profile.age+'岁'}}</span><span class="s2">年龄</span></span>
+                    <span><span class="s1">{{profile.genderStr}}</span><span class="s2">性别</span></span>
+                </div>
+
+                <div class="box">
+                    <div class="row r1">
+                        <span class="cell report" @click='toReport'>健康报表 <span class="dot" v-if='profile.noreads'>{{profile.noreads}}</span></span>
+                        <span class="cell">
+                            {{CardVoIs==0||CardVoIs==null?'积分: 0':'积分: ' + CardVoIs}}
+                        </span>
+                    </div>
+                    <div class="row r2">
+                        <span class="cell msg" @click='toMsg'>消息中心 <span class="dot" v-if='msg > 0'>{{msg}}</span></span>
+                        <span class="cell advice" @click='toFeedback'>
+                            建议吐槽
+                        </span>
+                        <span class="cell photo" @click='toPhoto'>
+                            我的美图
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile" v-show='isEdit' v-cloak>
+                <div class="t1">* 注：个人信息填写越准确我们给您的健康建议就越精准哦</div>
+
+                <ul>
+                    <li class='avatar'>
+                        <span class="l">头像</span>
+                        <span class="r">
+                            <img :src="loaded && (profile.weChatUser.headimgurl || profile.headimgurl || (sex == '女' ? '../../assets/images/my/girl.png' : '../../assets/images/my/boy.png'))" alt="">
+                        </span>
+                    </li>
+                    <li>
+                        <span class="l">昵称</span>
+                        <input class="r input" ref='nickname' :value='profile.name || profile.weChatUser.nickname' @click="hmt('我的-修改-昵称')"/>
+                            
+                    </li>
+                    <li>
+                        <span class="l">身高</span>
+                        <span class="r" @click='showHeight' >
+                            {{height ? height + 'CM' : ''}}
+                        </span>
+                    </li>
+                    <li>
+                        <span class="l" >年龄</span>
+                        <span class="r" @click='showAge'>
+                            {{age==null?'':age+'岁'}}
+                        </span>
+                    </li>
+                    <li>
+                        <span class="l">性别</span>
+                        <span class="r" @click='showSex' >
+                            {{sex}}
+                        </span>
+                    </li>
+                </ul>
+
+                <div class="btn-save" @click='updateProfile'>保存</div>
+            </div>
+        </div>
+
+        <div class="bg" v-if='showModifyDlg'></div>
+        <div class="dialog" v-if='showModifyDlg'>
+          <div class="section">
+            <!-- <h3>删除</h3> -->
+            <p>是否修改目标体重？</p>
+          </div>
+          <div class="operate">
+            <b class="btn-cancel" @click='cancelDlg'>不改</b>
+            <b class="btn-confirm" @click='confirm'>去修改</b>
+          </div>
+        </div>
+      
+        <footer-bar :index="5"></footer-bar>
+    </div>
+    <script type="text/javascript" src="../../assets/js/require.js?v=v11.1.0"></script>
+    <script src="../../assets/js/config.js?v=v11.1.0"></script>
+    <script src="./my.js?v=v11.1.0"></script>
+</body>
+
+</html>

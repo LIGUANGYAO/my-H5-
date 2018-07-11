@@ -1,0 +1,230 @@
+
+@import "../../assets/sass/base/function/_pxTorem.scss";//引入sass mixin function等
+@import "../../component/Spin/_index.scss";//底部导航样式
+
+
+.noData{
+    height: _(50);
+    line-height: _(50);
+    text-align: center;
+    font-size: _(30);
+    display: none;
+}
+.downNo{
+    height: _(50);
+    line-height: _(50);
+    text-align: center;
+    font-size: _(30);
+    display: none;
+}
+.over{
+    display: none;
+    height: _(80);
+    line-height: _(80);
+    font-size: _(30);
+    text-align: center;
+    color: #f8860b;
+}
+.load{
+    padding-bottom:  _(130);
+}
+.opacity{
+    -webkit-animation: opacity 0.3s linear;
+    animation: opacity 0.3s linear;
+}
+@-webkit-keyframes opacity {
+    0% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+@keyframes opacity {
+    0% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+
+.pkHead{
+   width: 100%;
+   height: _(430);
+   background-image: url(../../assets/images/pk/pkbg.png);
+   background-size: 100%  _(430);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   .portrait{
+       width: _(190);
+       height: _(190);
+       img{
+           width: _(190);
+           height:  _(190);
+           border-radius: 100%;
+
+           &.dft {
+            padding: _(20);
+            background: #fff;
+           }
+       }
+   }
+   .userName{
+       height: _(34);
+       font-size: _(30);
+       color: #ffffff;
+       margin: _(20) 0;
+   }
+   .beat{
+       font-size: _(34);
+       color: #ffffff;
+   }
+
+   .pkResults{
+       width: 100%;
+       margin-top: _(40);
+       display: flex;
+       justify-content: space-between;
+       color: #ffffff;
+       font-size: _(26);
+       .score{
+           margin-left: _(20);
+       }
+       .part{
+           margin-right: _(20);
+       }
+   }
+}
+
+.pkCrowd{
+    margin-top: _(20);
+    p:nth-child(1){
+        font-size: _(30);
+        margin-bottom: _(20);
+    }
+    p:nth-child(2){
+        font-size: _(26);
+        color: #999999;
+    }
+}
+
+.pkNave{
+//    @include borderBottomAfter($color: #999999,$dpr:2);
+    height: _(50);
+    display: flex;
+    align-items: center;
+    margin-top: _(30);
+    .user,.scoreClum,.like{
+        flex: 1;
+        text-align: center;
+        color: #333333;
+        font-size: _(30);
+    }
+    .user {
+      flex: 2;
+      text-indent: _(48)
+    }
+}
+
+.pkList{
+    li.activeBg{
+        background-color: #DDDDDD;
+    }
+    li{
+        display: flex;
+        height: _(120);
+        align-items: center;
+        padding: 0  _(20);
+        // @include borderBottomAfter($color: #dddddd,$dpr:2);
+        i{
+            width: _(160);
+            height: _(48);
+            margin-right: _(10);
+            font-style: normal;
+            font-size: _(40);
+            display: block;
+            text-align: center;
+            img{
+                width: _(37);
+                height: _(48); 
+            }
+        }
+        .userPortrait{
+            width: _(80);
+            height: _(80);
+            position: relative;
+            margin-right: _(10);
+            .sexMen,.sexWomen{
+                position: absolute;
+                top: _(56);
+                left: _(50);
+                z-index: 3;
+                display: block;
+                width: _(24);
+                height: _(24);
+                
+                background-size: _(24)  _(24);
+            }
+            .sexMen{
+                background-image: url(../../assets/images/pk/sexMen.png);
+
+            }
+            .sexWomen{
+                background-image: url(../../assets/images/pk/sexWomen.png);
+            }
+            img{
+                width: _(80);
+                height: _(80);
+                border-radius: 100%; 
+
+                &.dft {
+                  background: #fff;
+                  padding: _(10);
+                }
+            }
+        }
+
+        .rightClum{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: _(450);
+            margin-right: _(30);
+        }
+        .leftClum{
+            width: _(140);
+            display: flex;
+            justify-content: center;
+        }
+        .userName{
+            color: #333333;
+            font-size: _(26);
+             width: _(120);
+            overflow:hidden; 
+            text-overflow:ellipsis;
+            white-space:nowrap;
+        }
+        .scoreNumber{
+            font-size: _(26);
+            width: _(150);
+            text-align: left;
+            margin-right: _(70);
+        }
+        .pkIcon{
+            width: _(34);
+            height: _(28);
+            margin-right: _(10);
+            img{
+                width: _(34);
+                height: _(28); 
+            }
+        }
+        .goodNumber{
+            color: #f9860b;
+            font-size: _(26);
+        }
+    }
+}
